@@ -42,8 +42,8 @@
     "postversion": "git push --follow-tags"
   },
   "dependencies": {
-    "@fantasticfiasco/expect": "1.*",
-    "debug": "4.*"
+    "@fantasticfiasco/expect": "1.0.4",
+    "debug": "4.2.0"
   },
   "peerDependencies": {
     "axis-discovery-bonjour": "1.* || 2.*",

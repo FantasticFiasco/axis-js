@@ -39,11 +39,11 @@
     "postversion": "git push --follow-tags"
   },
   "dependencies": {
-    "@fantasticfiasco/expect": "1.*",
+    "@fantasticfiasco/expect": "1.0.4",
     "cheerio": "1.0.0-rc.3",
-    "lodash": ">4.17.5",
-    "request": ">2.68.0",
-    "request-promise-native": "1.*"
+    "lodash": "4.17.20",
+    "request": "2.88.2",
+    "request-promise-native": "1.0.9"
   },
   "devDependencies": {
     "@types/cheerio": "0.22.22",

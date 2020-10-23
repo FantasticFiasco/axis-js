@@ -41,9 +41,9 @@
     "merge-dependencies": "node ./build/merge-dependencies.js"
   },
   "dependencies": {
-    "@fantasticfiasco/expect": "1.*",
+    "@fantasticfiasco/expect": "1.0.4",
     "array-flatten": "^2.1.0",
-    "debug": "4.*",
+    "debug": "4.2.0",
     "deep-equal": "^1.0.1",
     "dns-equal": "^1.0.0",
     "dns-packet": "^1.0.1",
