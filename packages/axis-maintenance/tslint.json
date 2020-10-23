@@ -1,0 +1,32 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "max-line-length": [false],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-static-field",
+          "private-instance-field",
+          "protected-instance-field",
+          "public-instance-field",
+          "protected-static-field",
+          "public-static-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "public-static-method",
+          "protected-instance-method",
+          "protected-static-method",
+          "private-instance-method",
+          "private-static-method"
+        ]
+      }
+    ],
+    "no-console": [false],
+    "no-string-literal": false,
+    "object-literal-sort-keys": false,
+    "quotemark": [true, "single"]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "axis-maintenance",
+  "version": "1.1.1",
+  "description": "A Node.js library written in TypeScript capable of running maintenance operations on cameras from Axis Communication.",
+  "keywords": [
+    "axis",
+    "communications",
+    "camera",
+    "device",
+    "maintenance",
+    "restart",
+    "factory default"
+  ],
+  "homepage": "https://github.com/FantasticFiasco/axis-maintenance-js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FantasticFiasco/axis-maintenance-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FantasticFiasco/axis-maintenance-js/issues"
+  },
+  "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
+  "license": "Apache-2.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
+    "prebuild": "yarn clean",
+    "build": "tsc -b",
+    "test": "jest",
+    "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
+    "coverage": "jest --coverage && coveralls < coverage/lcov.info",
+    "prepack": "yarn build",
+    "preversion": "git add ./CHANGELOG.md",
+    "postversion": "git push --follow-tags"
+  },
+  "dependencies": {
+    "@fantasticfiasco/expect": "1.*",
+    "cheerio": "1.0.0-rc.3",
+    "request": "2.*",
+    "request-promise-native": "1.*"
+  },
+  "devDependencies": {
+    "@types/cheerio": "0.22.22",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.10",
+    "@types/request-promise-native": "1.0.17",
+    "coveralls": "3.1.0",
+    "jest": "26.5.3",
+    "prettier": "2.1.2",
+    "rimraf": "3.0.2",
+    "ts-jest": "26.4.1",
+    "tslint": "6.1.3",
+    "typescript": "4.0.3"
+  },
+  "resolutions": {
+    "diff": ">=3.5.0",
+    "handlebars": ">=4.3.0",
+    "js-yaml": ">=3.13.0",
+    "lodash": ">=4.17.13",
+    "minimist": ">=1.2.2",
+    "sshpk": ">=1.13.2"
+  }
+}
