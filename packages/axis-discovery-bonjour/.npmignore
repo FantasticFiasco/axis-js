@@ -1,0 +1,18 @@
+# Start with excluding everything
+*
+
+# Then include only the necessary files
+!lib/**/*.js
+!lib/**/*.d.ts
+!CHANGELOG.md
+!LICENSE
+!package.json
+!README.md
+
+!vendor/**/*.js
+!vendor/**/*.d.ts
+!vendor/**/CHANGELOG.md
+!vendor/**/LICENSE
+!vendor/**/package.json
+!vendor/**/README.md
+

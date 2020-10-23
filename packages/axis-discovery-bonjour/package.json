@@ -1,0 +1,74 @@
+{
+  "name": "axis-discovery-bonjour",
+  "version": "2.0.0",
+  "description": "A Node.js Bonjour client library written in TypeScript capable of searching for Axis Communication cameras.",
+  "keywords": [
+    "axis",
+    "communications",
+    "camera",
+    "device",
+    "discovery",
+    "bonjour",
+    "zero-configuration"
+  ],
+  "homepage": "https://github.com/FantasticFiasco/axis-discovery-bonjour-js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FantasticFiasco/axis-discovery-bonjour-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FantasticFiasco/axis-discovery-bonjour-js/issues"
+  },
+  "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
+  "license": "Apache-2.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
+    "prebuild": "yarn clean",
+    "build": "tsc -b",
+    "prestart": "yarn build",
+    "start": "node ./src/server.js",
+    "test": "jest",
+    "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
+    "coverage": "jest --coverage && coveralls < coverage/lcov.info",
+    "prepack": "yarn build",
+    "preversion": "git add ./CHANGELOG.md",
+    "postversion": "git push --follow-tags",
+    "merge-dependencies": "node ./build/merge-dependencies.js"
+  },
+  "dependencies": {
+    "@fantasticfiasco/expect": "1.*",
+    "array-flatten": "^2.1.0",
+    "debug": "4.*",
+    "deep-equal": "^1.0.1",
+    "dns-equal": "^1.0.0",
+    "dns-packet": "^1.0.1",
+    "dns-txt": "^2.0.2",
+    "multicast-dns-service-types": "^1.1.0",
+    "thunky": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/debug": "4.1.5",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.10",
+    "coveralls": "3.1.0",
+    "jest": "26.5.3",
+    "prettier": "2.1.2",
+    "rimraf": "3.0.2",
+    "ts-jest": "26.4.1",
+    "tslint": "6.1.3",
+    "typescript": "4.0.3"
+  },
+  "resolutions": {
+    "diff": ">=3.5.0",
+    "handlebars": ">=4.3.0",
+    "js-yaml": ">=3.13.0",
+    "lodash": ">=4.17.13",
+    "minimist": ">=1.2.2",
+    "sshpk": ">=1.13.2"
+  }
+}
