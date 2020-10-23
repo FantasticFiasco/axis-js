@@ -44,7 +44,7 @@
     "@fantasticfiasco/expect": "1.0.4",
     "array-flatten": "^2.1.0",
     "debug": "4.2.0",
-    "deep-equal": "^1.0.1",
+    "deep-equal": "^2.0.0",
     "dns-equal": "^1.0.0",
     "dns-packet": "^1.0.1",
     "dns-txt": "^2.0.2",
