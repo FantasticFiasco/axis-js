@@ -55,7 +55,6 @@
     "coveralls": "3.1.0",
     "jest": "26.6.0",
     "nock": "13.0.4",
-    "prettier": "2.1.2",
     "rimraf": "3.0.2",
     "ts-jest": "26.4.1",
     "tslint": "6.1.3",
