@@ -8,6 +8,10 @@
       "paths": ["packages/axis-discovery-bonjour"],
       "packageNames": ["array-flatten", "deep-equal", "dns-equal", "dns-packet", "dns-txt", "multicast-dns-service-types", "thunky"],
       "enabled": false
+    },
+    {
+      "paths": ["packages/axis-discovery-bonjour/vendor"],
+      "enabled": false
     }
   ]
 }
