@@ -53,7 +53,7 @@
     "@types/node": "14.14.2",
     "@types/request-promise-native": "1.0.17",
     "coveralls": "3.1.0",
-    "jest": "26.6.0",
+    "jest": "26.6.1",
     "nock": "13.0.4",
     "rimraf": "3.0.2",
     "ts-jest": "26.4.1",
