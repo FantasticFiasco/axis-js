@@ -1,0 +1,25 @@
+# macOS files
+.DS_Store
+
+# npm packages
+**/node_modules/*
+
+# TypeScript
+**/*.d.ts
+**/*.js.map
+**/*.d.ts.map
+**/tsconfig.tsbuildinfo
+
+# Compiled JavaScript
+src/**/*.js
+test/**/*.js
+
+# Node
+**/npm-*.log*
+**/*.tgz
+
+# Deliverables directory
+lib
+
+# Code coverage
+coverage
