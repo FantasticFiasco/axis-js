@@ -12,9 +12,9 @@
     "multicast-dns-service-types": "^1.1.0"
   },
   "devDependencies": {
-    "after-all": "^2.0.2",
-    "standard": "^7.0.1",
-    "tape": "^4.5.1"
+    "after-all": "2.0.2",
+    "standard": "7.1.2",
+    "tape": "4.13.3"
   },
   "scripts": {
     "test": "standard && tape test/*.js"
