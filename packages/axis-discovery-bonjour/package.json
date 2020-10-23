@@ -49,7 +49,7 @@
     "dns-packet": "^1.0.1",
     "dns-txt": "^2.0.2",
     "multicast-dns-service-types": "^1.1.0",
-    "thunky": "^0.1.0"
+    "thunky": "^1.0.0"
   },
   "devDependencies": {
     "@types/debug": "4.1.5",
