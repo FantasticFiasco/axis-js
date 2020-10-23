@@ -1,9 +1,6 @@
 # macOS files
 .DS_Store
 
-# npm packages
-**/node_modules/*
-
 # TypeScript
 **/*.d.ts
 !vendor/**/*.d.ts
