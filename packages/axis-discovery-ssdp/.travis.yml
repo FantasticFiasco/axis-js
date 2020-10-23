@@ -1,0 +1,32 @@
+language: node_js
+
+node_js:
+  - "node"   # Latest stable Node.js release
+  - "lts/*"  # Latest LTS Node.js release
+
+matrix:
+  fast_finish: true
+
+install:
+- yarn install
+
+script:
+- echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+- if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage; fi
+- if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn test; fi
+- yarn lint
+
+deploy:
+  - provider: npm
+    email: mattias.kindborg@gmail.com
+    api_key:
+      secure: HwEAkKkznHtZhN3+l/76c5bPtw5tEFwWwetQrrTxG3UMV5jkwdN8KPC67bspu7ku8IDdN0EWf1Lhdct/GuxvGutwble5yLOuxY3on4XwQBLrj3l9PjDOIBA4ssCgvSs2NU8AsaBuI8W1PSdv4tACEa1rngcKdyKnIusWXv/txfkbzoFWUZ/Wwt1MJQPyUf/AnZKuBtYihI/vEGKnWwL/WGAHQ+hbZWlFsxJO+xJrgKvkkrOO6VLMvo6k1P0ZC32nYeXIWyJIcZhP95S2z/DZ2ht7EdMnaZ76uplpUKkmg1DSRCi66Zlw3svXZNK5XfuKLhJn3oNIPS053tWxuTYa1wS+EBKmRLYRJwZcLrJ0PcLLtXpMmIYl1QwTyaecSxTmcEf+5Z1drOpejhOJQaWlCZzQXKuyvZDhh4mtC1rK9qpmS4agcqigMdavKGDlWzXjfmjxoRrKR8j2I9vyKFL4kLHVXi51tojy14xu8QJv7IXVAmximpEzQpn9dC4P70Zy/4QfkPtCmNgWvc55CLo6vW1JHAWsyoKGPQYUFgIA+GPwliiOclk94WXnR8SDcNZkcToWqjNT2xPt/P1JL2Bk7OEE46NJnp/0QgeVjCtG9qRVBpy7NO9j4qOS2B6p3w4wLO87R86ukS2uCqn5S7nnpdsb+Y4Jm36dMRja59JcW+4=
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: releases
+    name: Release $TRAVIS_TAG
+    api_key:
+      secure: aSmyYU/xysKmQtwL6uEbLWePwrUJylbByCjNTZNxpLtts3PAxdQBKKZoO9k01FG2FsYlMLwjlnWWk03Apzu7ey2TX31xpSe5/Oep48pZAMsQdSGHyVhDU0wPCThjf16QAWgF4RiSQydYxCAqzrkDreUPcnhd0usPR0D6m57J7MvleGSODGReBIqaVL7srctMgMyWuOphZEFr/P7kjpTBCuTwtUWaT+t36u+VwuXA0I/kGzcRCc3d9quc8kX0GYReM4IO5v9QemrcIswyOcIbmsNdglkSRBil5mOAPEvZfAp1AfQ1ImHbUWDoHa2gH8W+5zynTt1fs+4eN6N59LfXHKVdmHtCJvotF3fyakv7OwvI0Y4C3Nv6gc+gIXJHw6Xp9KTuZE3+jpM4QbbGHl/EAkEjn/ncJDxB6tUfgyRgb9xID8fHMasgVuV4us9ziDnNFjAtmb1VznnGlh/iRYvT1OAYAlY/RTYqvEeHnMaorrhkXk7IeBpzGcPsMCrcCBvLa9PSWFBMMXfLCmUHhZZPlPXLnWo2eMU+e6Zxghq4JFGxkbinVaAse3YJPa41YQ0g5Oaop+sWai3OlS5MMgsggErw7rRgOSsOXflhogY9D6TgbQnfgfds/juBb4AqxtEuMVC/sbZ92HQj9OaQbOdPR8A0Y+WhxSRW4s9qeyHnTcU=
+    on:
+      tags: true
