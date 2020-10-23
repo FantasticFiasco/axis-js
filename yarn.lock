@@ -589,13 +589,6 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.5.tgz#b6ab3bba29e16b821d84e09ecfaded462b816b00"
   integrity sha512-UEyp8LwZ4Dg30kVU2Q3amHHyTn1jEdhCIE59ANed76GaT1Vp76DD3ZWSAxgCrw6wJ0TqeoBpqmfUHiUDPs//HQ==
 
-"@types/request-promise-native@1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@types/request-promise-native/-/request-promise-native-1.0.11.tgz#a6e9505d9ad2348f9f694f07085d021e7870000e"
-  integrity sha512-Mf794yze4sXVd1u5lW548+pZZHnZ1F7fEIs68f6Ahr0CFtukGaXDfoTT777kGAb0ERJxVvmD51vLr1yzE8SYrg==
-  dependencies:
-    "@types/request" "*"
-
 "@types/request-promise-native@1.0.17":
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/@types/request-promise-native/-/request-promise-native-1.0.17.tgz#74a2d7269aebf18b9bdf35f01459cf0a7bfc7fab"
