@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - "node"   # Latest stable Node.js release
+  - "lts/*"  # Latest LTS Node.js release
+
+matrix:
+  fast_finish: true
+
+install:
+  - yarn install
+
+  script:
+  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
