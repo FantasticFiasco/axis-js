@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/cheerio": "0.22.22",
     "@types/jest": "26.0.15",
-    "@types/lodash": "4.14.162",
+    "@types/lodash": "4.14.163",
     "@types/nock": "10.0.3",
     "@types/node": "14.14.5",
     "@types/request-promise-native": "1.0.17",
