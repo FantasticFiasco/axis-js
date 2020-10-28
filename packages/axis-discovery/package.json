@@ -46,8 +46,8 @@
     "debug": "4.2.0"
   },
   "peerDependencies": {
-    "axis-discovery-bonjour": "1.* || 2.*",
-    "axis-discovery-ssdp": "5.* || 6.*"
+    "axis-discovery-bonjour": "2.0.0",
+    "axis-discovery-ssdp": "6.0.0"
   },
   "devDependencies": {
     "@types/debug": "4.1.5",
