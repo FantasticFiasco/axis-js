@@ -16,3 +16,4 @@ script:
   - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn workspaces run coverage; fi
   - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn workspaces run test; fi
   - yarn workspaces run lint
+  - echo temp
