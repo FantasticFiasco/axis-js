@@ -13,4 +13,6 @@ install:
 script:
   - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
   - yarn workspaces run build
-  - yarn workspaces run test
+  - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn workspaces run coverage; fi
+  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn workspaces run test; fi
+  - yarn workspaces run lint
