@@ -7,6 +7,8 @@
     "clean": "rimraf \"./**/*.+(d.ts|js|js.map)\"",
     "prebuild": "yarn clean",
     "build": "tsc",
+    "test": "echo noop",
+    "lint": "echo noop",
     "prestart": "yarn build",
     "start": "node ./sample.js"
   },
