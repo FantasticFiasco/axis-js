@@ -1,5 +1,5 @@
-import { UnknownError } from './..';
-import { Response } from './../shared/Response';
+import { UnknownError } from '..';
+import { Response } from '../shared/Response';
 
 export class RestartResponse extends Response {
     private static readonly SuccessResponse = /restartMessage/i;

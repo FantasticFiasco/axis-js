@@ -1,5 +1,5 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
-import { AccessRights, User } from './../../src';
+import { AccessRights, User } from '../../src';
 import { Generate } from './Generate';
 
 describe('users', () => {

@@ -1,5 +1,5 @@
-import { Connection, Protocol } from './../../../src';
-import { GetParametersRequest } from './../../../src/parameters/request-response/GetParametersRequest';
+import { Connection, Protocol } from '../../../src';
+import { GetParametersRequest } from '../../../src/parameters/request-response/GetParametersRequest';
 
 describe('get parameters request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

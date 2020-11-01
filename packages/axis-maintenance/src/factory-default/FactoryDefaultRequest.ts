@@ -1,5 +1,5 @@
-import { Connection } from './..';
-import { Request } from './../shared/Request';
+import { Connection } from '..';
+import { Request } from '../shared/Request';
 import { FactoryDefaultResponse } from './FactoryDefaultResponse';
 import { FactoryDefaultType } from './FactoryDefaultType';
 

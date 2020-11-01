@@ -1,5 +1,5 @@
-import { AccessRights, Connection, Protocol, User } from './../../../src';
-import { UpdateUserRequest } from './../../../src/user-accounts/request-response/UpdateUserRequest';
+import { AccessRights, Connection, Protocol, User } from '../../../src';
+import { UpdateUserRequest } from '../../../src/user-accounts/request-response/UpdateUserRequest';
 
 describe('update user request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

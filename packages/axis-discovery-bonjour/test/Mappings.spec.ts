@@ -1,4 +1,4 @@
-import { mapFromService } from './../src/Mappings';
+import { mapFromService } from '../src/Mappings';
 import { AxisService } from './Mappings.mock';
 
 describe('Mappings', () => {

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Response } from './../../shared/Response';
+import { Response } from '../../shared/Response';
 
 export class GetParametersResponse extends Response {
     // A parameter has the following format:

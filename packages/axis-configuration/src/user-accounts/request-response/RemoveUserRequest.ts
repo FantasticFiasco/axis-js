@@ -1,5 +1,5 @@
-import { Connection } from './../..';
-import { Request } from './../../shared/Request';
+import { Connection } from '../..';
+import { Request } from '../../shared/Request';
 import { RemoveUserResponse } from './RemoveUserResponse';
 
 export class RemoveUserRequest extends Request {

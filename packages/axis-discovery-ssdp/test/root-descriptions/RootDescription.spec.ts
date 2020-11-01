@@ -1,4 +1,4 @@
-import { RootDescription } from './../../src/root-descriptions/RootDescription';
+import { RootDescription } from '../../src/root-descriptions/RootDescription';
 import { ROOT_DESCRIPTION_DEFAULT_HTTP_PORT, ROOT_DESCRIPTION_REQUIRED_PROPERTIES } from './RootDescription.mock';
 
 describe('RootDescription', () => {

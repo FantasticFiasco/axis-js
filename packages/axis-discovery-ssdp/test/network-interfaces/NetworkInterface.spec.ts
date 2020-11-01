@@ -1,6 +1,6 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-import { getIPv4Addresses } from './../../src/network-interfaces/NetworkInterface';
+import { getIPv4Addresses } from '../../src/network-interfaces/NetworkInterface';
 import {
     NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES,
     NETWORK_INTERFACES_WITH_IPV6_ADDRESSES,

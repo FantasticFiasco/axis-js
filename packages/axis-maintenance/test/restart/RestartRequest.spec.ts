@@ -1,5 +1,5 @@
-import { Connection, Protocol } from './../../src';
-import { RestartRequest } from './../../src/restart/RestartRequest';
+import { Connection, Protocol } from '../../src';
+import { RestartRequest } from '../../src/restart/RestartRequest';
 
 describe('restart request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 5678, 'root', 'pass');

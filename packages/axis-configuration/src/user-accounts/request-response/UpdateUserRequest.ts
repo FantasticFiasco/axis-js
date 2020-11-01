@@ -1,5 +1,5 @@
-import { Connection, User } from './../..';
-import { Request } from './../../shared/Request';
+import { Connection, User } from '../..';
+import { Request } from '../../shared/Request';
 import { Converter } from './Converter';
 import { UpdateUserResponse } from './UpdateUserResponse';
 

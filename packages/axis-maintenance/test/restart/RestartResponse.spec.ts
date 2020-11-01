@@ -1,5 +1,5 @@
-import { UnknownError } from './../../src';
-import { RestartResponse } from './../../src/restart/RestartResponse';
+import { UnknownError } from '../../src';
+import { RestartResponse } from '../../src/restart/RestartResponse';
 
 describe('restart response', () => {
     describe('#assertSuccess', () => {

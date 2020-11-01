@@ -1,6 +1,6 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-import { getIPv4Addresses } from './../src/NetworkInterface';
+import { getIPv4Addresses } from '../src/NetworkInterface';
 import * as mocks from './NetworkInterface.mock';
 
 jest.mock('os');

@@ -1,5 +1,5 @@
-import { UnknownError } from './..';
-import { Response } from './../shared/Response';
+import { UnknownError } from '..';
+import { Response } from '../shared/Response';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
 export class FactoryDefaultResponse extends Response {

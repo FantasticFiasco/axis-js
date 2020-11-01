@@ -1,4 +1,4 @@
-import { AccessRights } from './../../../src';
+import { AccessRights } from '../../../src';
 
 export class GetUsersResponseBuilder {
     private readonly admins: string[] = [];

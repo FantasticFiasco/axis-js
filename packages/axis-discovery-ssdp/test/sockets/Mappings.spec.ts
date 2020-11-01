@@ -1,6 +1,6 @@
-import { mapFromMessage } from './../../src/sockets/Mappings';
-import { Message } from './../../src/sockets/Message';
-import { MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS, NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS } from './../root-descriptions/Mappings.mock';
+import { mapFromMessage } from '../../src/sockets/Mappings';
+import { Message } from '../../src/sockets/Message';
+import { MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS, NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS } from '../root-descriptions/Mappings.mock';
 import { MSEARCH_MESSAGE, MSEARCH_MESSAGE_WITHOUT_MAC_IN_USN, NOTIFY_MESSAGE, NOTIFY_MESSAGE_WITHOUT_MAC_IN_USN } from './Message.mock';
 
 describe('Mappings', () => {

@@ -1,4 +1,4 @@
-import { Device } from './../../src';
+import { Device } from '../../src';
 
 export const DEVICE_WITH_INFORMATION = new Device(
     '192.168.1.102',

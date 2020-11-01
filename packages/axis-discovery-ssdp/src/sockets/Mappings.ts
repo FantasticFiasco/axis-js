@@ -1,4 +1,4 @@
-import { Device } from './..';
+import { Device } from '..';
 import { Message } from './Message';
 
 /**

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { AccessRights, User } from './../..';
-import { Response } from './../../shared/Response';
+import { AccessRights, User } from '../..';
+import { Response } from '../../shared/Response';
 
 export class GetUsersResponse extends Response {
     // A parameter has the following format:
