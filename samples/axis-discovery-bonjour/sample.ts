@@ -1,4 +1,4 @@
-import { Device, Discovery } from './';
+import { Device, Discovery } from 'axis-discovery-bonjour';
 
 const discovery = new Discovery();
 

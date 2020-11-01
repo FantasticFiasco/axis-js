@@ -5,18 +5,9 @@
 **/*.d.ts
 **/*.js.map
 **/*.d.ts.map
-**/tsconfig.tsbuildinfo
 
 # Compiled JavaScript
-src/**/*.js
-test/**/*.js
+**/*.js
 
 # Node
 **/npm-*.log*
-**/*.tgz
-
-# Deliverables directory
-lib
-
-# Code coverage
-coverage
