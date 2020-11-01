@@ -1,5 +1,8 @@
 import { Connection, Protocol, Snapshot } from 'axis-snapshot';
-import { writeFileSync } from 'fs';
+import * as fs from 'fs';
+import { promisify } from 'util';
+
+const writeFile = promisify(fs.writeFile);
 
 (async () => {
     const connection = new Connection(Protocol.Http, '<ip address>', 80, 'root', '<password>');
@@ -10,5 +13,5 @@ import { writeFileSync } from 'fs';
         rotation: 180,
     });
 
-    writeFileSync('snapshot.jpeg', image);
+    await writeFile('snapshot.jpeg', image);
 })();
