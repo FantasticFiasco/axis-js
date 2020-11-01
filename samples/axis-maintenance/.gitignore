@@ -1,0 +1,13 @@
+# macOS files
+.DS_Store
+
+# TypeScript
+**/*.d.ts
+**/*.js.map
+**/*.d.ts.map
+
+# Compiled JavaScript
+**/*.js
+
+# Node
+**/npm-*.log*
