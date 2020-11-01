@@ -1,7 +1,10 @@
 import { Connection, Protocol } from 'axis-configuration';
-import * as parametersSample from './parameters';
-import * as usersSample from './users';
+import * as parameters from './parameters';
+import * as users from './users';
 
-const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'admin', '32naJzkJdZ!7*HK&Dz');
+(async () => {
+    const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'admin', '32naJzkJdZ!7*HK&Dz');
 
-parametersSample.run(connection).then(() => usersSample.run(connection));
+    await parameters.run(connection);
+    await users.run(connection);
+})();
