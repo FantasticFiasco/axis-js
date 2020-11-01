@@ -1,4 +1,4 @@
-import { Message } from './../../src/sockets/Message';
+import { Message } from '../../src/sockets/Message';
 import { MSEARCH_MESSAGE, NOTIFY_MESSAGE } from './Message.mock';
 
 describe('Message', () => {

@@ -1,4 +1,4 @@
-import { DeviceCache } from './../../src/caches/DeviceCache';
+import { DeviceCache } from '../../src/caches/DeviceCache';
 import { DEVICE_WITHOUT_INFORMATION, DEVICE_WITHOUT_MAC_ADDRESS, DEVICE_WITH_INFORMATION } from './DeviceCache.mock';
 
 describe('DeviceCache', () => {

@@ -1,5 +1,5 @@
-import { UnknownError } from './../..';
-import { Response } from './../../shared/Response';
+import { UnknownError } from '../..';
+import { Response } from '../../shared/Response';
 
 export class UpdateUserResponse extends Response {
     private static readonly SuccessResponse = /Modified account .*\./;

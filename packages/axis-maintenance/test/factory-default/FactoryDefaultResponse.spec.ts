@@ -1,5 +1,5 @@
-import { FactoryDefaultType, UnknownError } from './../../src';
-import { FactoryDefaultResponse } from './../../src/factory-default/FactoryDefaultResponse';
+import { FactoryDefaultType, UnknownError } from '../../src';
+import { FactoryDefaultResponse } from '../../src/factory-default/FactoryDefaultResponse';
 
 describe('factory default response', () => {
     describe('#assertSuccess (partial)', () => {

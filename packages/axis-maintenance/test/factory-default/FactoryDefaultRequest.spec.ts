@@ -1,5 +1,5 @@
-import { Connection, FactoryDefaultType, Protocol } from './../../src';
-import { FactoryDefaultRequest } from './../../src/factory-default/FactoryDefaultRequest';
+import { Connection, FactoryDefaultType, Protocol } from '../../src';
+import { FactoryDefaultRequest } from '../../src/factory-default/FactoryDefaultRequest';
 
 describe('factory default request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 5678, 'root', 'pass');

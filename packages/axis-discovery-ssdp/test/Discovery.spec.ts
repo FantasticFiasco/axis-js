@@ -1,6 +1,6 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-import { Device, Discovery } from './../src/';
+import { Device, Discovery } from '../src/';
 import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
 jest.mock('os');

@@ -1,5 +1,5 @@
-import { AccessRights, Connection, Protocol, User } from './../../../src';
-import { AddUserRequest } from './../../../src/user-accounts/request-response/AddUserRequest';
+import { AccessRights, Connection, Protocol, User } from '../../../src';
+import { AddUserRequest } from '../../../src/user-accounts/request-response/AddUserRequest';
 
 describe('add user request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

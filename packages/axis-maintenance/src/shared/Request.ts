@@ -1,6 +1,6 @@
 import * as rp from 'request-promise-native';
 import * as errors from 'request-promise-native/errors';
-import { Connection, RequestError, UnauthorizationError } from './..';
+import { Connection, RequestError, UnauthorizationError } from '..';
 
 export abstract class Request {
     protected constructor(protected readonly connection: Connection) {}

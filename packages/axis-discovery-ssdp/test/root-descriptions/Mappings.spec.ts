@@ -1,5 +1,5 @@
-import { mapFromRootDescription } from './../../src/root-descriptions/Mappings';
-import { RootDescription } from './../../src/root-descriptions/RootDescription';
+import { mapFromRootDescription } from '../../src/root-descriptions/Mappings';
+import { RootDescription } from '../../src/root-descriptions/RootDescription';
 import {
     ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT,
     ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,

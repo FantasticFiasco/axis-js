@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { UpdateParametersError } from './../..';
-import { Response } from './../../shared/Response';
+import { UpdateParametersError } from '../..';
+import { Response } from '../../shared/Response';
 
 export class UpdateParametersResponse extends Response {
     // A success is described by the following response:

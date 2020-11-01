@@ -1,6 +1,6 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
 import * as nock from 'nock';
-import { AccessRights, Connection, Protocol, RequestError, UnauthorizationError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from './../../src';
+import { AccessRights, Connection, Protocol, RequestError, UnauthorizationError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from '../../src';
 import { Generate } from './Generate';
 import { GetUsersResponseBuilder } from './request-response/GetUsersResponseBuilder';
 

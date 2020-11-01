@@ -1,5 +1,5 @@
-import { Connection, Protocol, SnapshotOptions } from './../../src';
-import { JpegRequest } from './../../src/requests/JpegRequest';
+import { Connection, Protocol, SnapshotOptions } from '../../src';
+import { JpegRequest } from '../../src/requests/JpegRequest';
 
 describe('get parameters request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

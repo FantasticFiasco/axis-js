@@ -1,5 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
-import { Connection } from './..';
+import { Connection } from '..';
 import { GetParametersRequest } from './request-response/GetParametersRequest';
 import { UpdateParametersRequest } from './request-response/UpdateParametersRequest';
 

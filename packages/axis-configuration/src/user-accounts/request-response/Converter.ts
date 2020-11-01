@@ -1,5 +1,5 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
-import { AccessRights } from './../..';
+import { AccessRights } from '../..';
 
 export class Converter {
     public static toUserGroups(accessRights: AccessRights, ptz: boolean): string {

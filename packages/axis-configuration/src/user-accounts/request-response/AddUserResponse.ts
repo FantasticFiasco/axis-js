@@ -1,5 +1,5 @@
-import { UnknownError, UserAlreadyExistsError } from './../..';
-import { Response } from './../../shared/Response';
+import { UnknownError, UserAlreadyExistsError } from '../..';
+import { Response } from '../../shared/Response';
 
 export class AddUserResponse extends Response {
     private static readonly SuccessResponse = /Created account .*\./;

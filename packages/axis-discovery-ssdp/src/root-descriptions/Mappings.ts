@@ -1,5 +1,5 @@
-import { Device } from './..';
-import { RootDescription } from './../root-descriptions/RootDescription';
+import { Device } from '..';
+import { RootDescription } from '../root-descriptions/RootDescription';
 
 /**
  * Maps a root description to a device.
