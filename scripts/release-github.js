@@ -51,7 +51,7 @@ const createRelease = async (owner, repo) => {
     console.log(releases);
 };
 
-console.log('[33;1mtest 1[0m');
+console.log('\x1b[33m%s\x1b[0m', 'test 1');
 console.log('\x1b[33;1mtest 2\x1b[0m');
 console.log('\x1b[35m FOOBAR \x1b[0m');
 
