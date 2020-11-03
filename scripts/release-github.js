@@ -1,5 +1,5 @@
 const { Octokit } = require('@octokit/rest');
-const { GIT_TAG, REPO } = require('./travis');
+const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { print, printInColor, YELLOW } = require('./print');
 
 /**
@@ -43,7 +43,7 @@ const parseRepo = () => {
 
 const createRelease = async (owner, repo) => {
     const octokit = new Octokit({
-        auth: process.env.GITHUB_TOKEN,
+        auth: GITHUB_TOKEN,
     });
 
     const release = await octokit.repos.createRelease({
