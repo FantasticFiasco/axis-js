@@ -42,7 +42,9 @@ const parseRepo = () => {
 };
 
 const createRelease = async (owner, repo) => {
-    const octokit = new Octokit();
+    const octokit = new Octokit({
+        auth: process.env.GITHUB_TOKEN,
+    });
 
     const release = await octokit.repos.createRelease({
         owner,

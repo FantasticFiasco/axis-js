@@ -16,6 +16,8 @@ install:
 
 env:
   - TRAVIS_TAG=axis-configuration@100.0.0
+  - GITHUB_TOKEN:
+      secure: "ejVBrQ0j2hOaALPQgUywsHUL3WTSimCXBMdIqDLZ05IjIygNSfl91mnk6r2c2JcLkrANpW3XlF1ffUYQfusQdOLlPyeZ6utrG8agiKmu+planZIIi7RASWoZD3A1a5W/UJ9RiGDLDrnhkDxtm9M0PqLAVuD+VxQCIJ5Wmt4H6w3egOk76dp3ultP3Zwj/wID/5d4UGShhv6WAy6jkpiQ8b0L29ve4dxX131+BVzGBLycRVWe8EiJwX5leYbn/GhUwFN4S7pjU9NtOrKCTEwgUarwWM8XBnppRb/jnIKP34ZY+hRMY8897vtG68TBAsai7Vc6rJr9Qd4qAAZJWkHydeuoaaKnyne1cP7TK96WPyAezZlL17B2hdyQNORnlfHm7OsUnP5Qt68NPQ3JJiUbDHsKwu8DrxVsBrp+YLgJePAvdexh9A3h6gWmzRQJ5AIZVOU7LQOuocjSLB4UhrR37lDcrKm0frnCu6MOWLLdC6XICyrCFD8nmZGquT+YF8/v5yqD5+7xErFPe9+ZcoI6GpJb3dLu3Hk2N1KlrLLkPNOd6gfcFNRQMaNOlJJB/Sqn+aL0AQMduUtpWUJyUaSAGlB+N5CLkPFqjTTwlw7ii143B6AFMcCZhrlkjeHMIgFmtdPWFxecMtk6a+De3HcOrkOtklwevh+o+j8sBKvt6e0="
 
 script:
   # - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
