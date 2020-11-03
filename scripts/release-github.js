@@ -71,5 +71,5 @@ const createRelease = async (owner, repo) => {
     await createRelease(owner, repo);
 })().catch((err) => {
     print(err);
-    process.exit(1);
+    process.exitCode = 1;
 });

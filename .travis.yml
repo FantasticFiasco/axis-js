@@ -18,8 +18,8 @@ env:
   - TRAVIS_TAG=axis-configuration@100.0.0
 
 script:
-  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-  - yarn workspaces run build
-  - yarn workspaces run test
-  - yarn workspaces run lint
+  # - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+  # - yarn workspaces run build
+  # - yarn workspaces run test
+  # - yarn workspaces run lint
   - yarn release
