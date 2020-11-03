@@ -19,13 +19,9 @@ env:
 install:
   - yarn install
 
-jobs:
-  include:
-    - stage: build
-      script:
-        - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-        - yarn workspaces run build
-        - yarn workspaces run test
-        - yarn workspaces run lint
-    - stage: release
-      script: yarn release
+script:
+  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+  - yarn workspaces run build
+  - yarn workspaces run test
+  - yarn workspaces run lint
+  - [-z "${TRAVIS_TAG}"] && yarn release
