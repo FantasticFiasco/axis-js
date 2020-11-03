@@ -24,4 +24,4 @@ script:
   - yarn workspaces run build
   - yarn workspaces run test
   - yarn workspaces run lint
-  - [-z "${TRAVIS_TAG}"] && yarn release
+  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn release; fi
