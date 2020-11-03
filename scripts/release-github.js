@@ -44,20 +44,13 @@ const parseRepo = () => {
 const createRelease = async (owner, repo) => {
     const octokit = new Octokit();
 
-    // const release = await octokit.repos.createRelease({
-    //     owner,
-    //     repo,
-    //     tag_name: GIT_TAG,
-    // });
-
-    // print(release);
-
-    const releases = await octokit.repos.listReleases({
+    const release = await octokit.repos.createRelease({
         owner,
         repo,
+        tag_name: GIT_TAG,
     });
 
-    print(releases);
+    print(release);
 };
 
 (async () => {
