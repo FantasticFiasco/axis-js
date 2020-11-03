@@ -5,19 +5,20 @@ os:
   - osx
 
 node_js:
-  - "node"   # Latest stable Node.js release
-  - "lts/*"  # Latest LTS Node.js release
+  - node   # Latest stable Node.js release
+  - lts/*  # Latest LTS Node.js release
 
 matrix:
   fast_finish: true
-
-install:
-- yarn install
 
 env:
   global:
     # Encrypted variable GITHUB_TOKEN
     secure: e3HkMirnP+Vy1thchzdx0qEB67YZWJFwjZSiUSIr+YhalaVfcFF2jSqkoWDc5DRFIeWmiaYnscaPS8FN4lAFs23EKqDO/H6lOmGxxVIrZMhGtMMTLz7aFcGXfsxorm7pdvQxBlGmc8MQZDnatRKtTJfFpc0ARU3CAhqkjm03varlKkaNpkLOK0bgBNT9MgElD+TJZ/wCjwf1A27lb97adfcjzZSQsNcnN63xj05gvh+RRrKmLJM7wjOFNSr1WMRksHIPrIq+CYKZdwIE1ibDhknzu5uuzLkg+7cjmAzGXWcMfOH3VpmwSZawUF77uMM9OH4G6Qwh4llAcjwT9lBo1LJu8cEw/EoqYQ7U8kd6OViWX7byX+08yi7W/sfcRXWuR717F4Vl7C5NIdGL3K/mZHvey2QGwgSSVOe5s+MBXYzd/NyjfNGhbPYlDL/viA3KVi86g8unzRnyrmpEYDuxinSWvWB4+o2gqsiqDfCPJENW8DEpIHhBcuU4kvbEqh4xyda3q0KaQFAixzdm73Nv36PH+cuYgXayXDwd6X4QDhqUN98FXn+O7mHnpP64wEeWak2vkpTHFvnkpRmKpmWuQJU+YD/VcaXW1pMeygKzw4L2spuvuUsCcA9u31oDTl3p8D+7VookJ6HfiuQjSoIwGTGG/BJV7Wf3BCln6hhxztA=
+
+install:
+  - yarn install
+
 
 script:
   # - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
