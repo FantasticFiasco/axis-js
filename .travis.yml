@@ -19,3 +19,4 @@ script:
   - yarn workspaces run build
   - yarn workspaces run test
   - yarn workspaces run lint
+  - yarn release
