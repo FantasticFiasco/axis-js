@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 const { Octokit } = require('@octokit/rest');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
-const { print, printInColor, YELLOW } = require('./print');
+const { fatal, print, printInColor, YELLOW } = require('./print');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -55,8 +55,6 @@ const pack = (packageName) => {
             }
         });
     });
-
-    const output = print(output);
 };
 
 const createRelease = async (owner, repo, version) => {

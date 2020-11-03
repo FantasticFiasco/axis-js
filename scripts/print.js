@@ -16,6 +16,7 @@ const fatal = (message) => {
 
 module.exports = {
     YELLOW,
+    fatal,
     print,
     printInColor,
 };
