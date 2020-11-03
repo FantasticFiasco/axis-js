@@ -1,6 +1,11 @@
 const { Octokit } = require('@octokit/rest');
 const { GIT_TAG, REPO } = require('./travis');
 
+const printInYellow = (message) => {
+    const yellow = '[33;1m';
+    console.log('\x1b%s%s\x1b[0m', yellow, message);
+};
+
 /**
  * A tagged commit in this monorepo is created using the following format:
  *
@@ -15,13 +20,13 @@ const { GIT_TAG, REPO } = require('./travis');
  */
 const parseGitTag = () => {
     if (!GIT_TAG) {
-        console.log('Skipping a deployment to GitHub Releases because this is not a tagged commit');
+        printInYellow('Skipping a deployment to GitHub Releases because this is not a tagged commit');
         return undefined;
     }
 
     const parts = GIT_TAG.split('@');
     if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
-        console.log('Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
+        printInYellow('Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
         return undefined;
     }
 
@@ -50,10 +55,6 @@ const createRelease = async (owner, repo) => {
 
     console.log(releases);
 };
-
-console.log('\x1b[33;1m%s\x1b[0m', 'test 1');
-console.log('\x1b[33;1mtest 2\x1b[0m');
-console.log('\x1b[35m FOOBAR \x1b[0m');
 
 (async () => {
     const tag = parseGitTag();
