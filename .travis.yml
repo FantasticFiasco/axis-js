@@ -19,10 +19,13 @@ env:
 install:
   - yarn install
 
-
-script:
-  # - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-  # - yarn workspaces run build
-  # - yarn workspaces run test
-  # - yarn workspaces run lint
-  - yarn release
+jobs:
+  include:
+    - stage: build
+      script:
+        - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+        - yarn workspaces run build
+        - yarn workspaces run test
+        - yarn workspaces run lint
+    - stage: release
+      script: yarn release
