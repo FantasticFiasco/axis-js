@@ -1,3 +1,4 @@
+const { exec } = require('child_process');
 const { Octokit } = require('@octokit/rest');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { print, printInColor, YELLOW } = require('./print');
@@ -41,6 +42,23 @@ const parseRepo = () => {
     };
 };
 
+const pack = (packageName) => {
+    return new Promise((resolve, reject) => {
+        exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
+            print(`stdout: ${stdout}`);
+            print(`stderr: ${stderr}`);
+
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+
+    const output = print(output);
+};
+
 const createRelease = async (owner, repo, version) => {
     const octokit = new Octokit({
         auth: GITHUB_TOKEN,
@@ -67,6 +85,7 @@ const main = async () => {
     const { packageName, version } = tag;
     const { owner, repo } = parseRepo();
 
+    await pack(packageName);
     await createRelease(owner, repo, version);
 };
 
