@@ -41,7 +41,7 @@ const parseRepo = () => {
     };
 };
 
-const createRelease = async (owner, repo) => {
+const createRelease = async (owner, repo, version) => {
     const octokit = new Octokit({
         auth: GITHUB_TOKEN,
     });
@@ -50,21 +50,26 @@ const createRelease = async (owner, repo) => {
         owner,
         repo,
         tag_name: GIT_TAG,
+        name: `Release v${version}`,
+        body: 'TODO',
+        draft: true,
     });
 
     print(release);
 };
 
-(async () => {
+const main = async () => {
     const tag = parseGitTag();
     if (!tag) {
         return;
     }
 
+    const { packageName, version } = tag;
     const { owner, repo } = parseRepo();
 
-    await createRelease(owner, repo);
-})().catch((err) => {
-    print(err);
-    process.exitCode = 1;
+    await createRelease(owner, repo, version);
+};
+
+main().catch((err) => {
+    fatal(err);
 });
