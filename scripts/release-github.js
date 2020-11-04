@@ -1,5 +1,6 @@
 // @ts-check
 
+const { readFileSync } = require('fs');
 const { exec } = require('child_process');
 const { Octokit } = require('@octokit/rest');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
@@ -20,13 +21,13 @@ const { fatal, print, printInColor, YELLOW } = require('./print');
 const parseGitTag = () => {
     if (!GIT_TAG) {
         printInColor(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
-        return undefined;
+        return null;
     }
 
     const parts = GIT_TAG.split('@');
     if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
         printInColor(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
-        return undefined;
+        return null;
     }
 
     return {
@@ -50,14 +51,20 @@ const parseRepo = () => {
 const pack = (packageName) => {
     return new Promise((resolve, reject) => {
         exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
-            print(`stdout: ${stdout}`);
-            print(`stderr: ${stderr}`);
-
             if (err) {
                 reject(err);
-            } else {
-                resolve();
+                return;
             }
+
+            const match = /"(\/.*\.tgz)"/.exec(stdout);
+            if (match === null || match.length !== 2) {
+                reject(`stdout from pack does not contain the artifact filename: ${stdout}`);
+                return;
+            }
+
+            resolve({
+                packageFileName: match[1],
+            });
         });
     });
 };
@@ -65,9 +72,10 @@ const pack = (packageName) => {
 /**
  * @param {string} owner
  * @param {string} repo
+ * @param {string} packageFileName
  * @param {string} version
  */
-const createRelease = async (owner, repo, version) => {
+const createRelease = async (owner, repo, packageFileName, version) => {
     const octokit = new Octokit({
         auth: GITHUB_TOKEN,
     });
@@ -81,7 +89,12 @@ const createRelease = async (owner, repo, version) => {
         draft: true,
     });
 
-    print(JSON.stringify(release));
+    await octokit.repos.uploadReleaseAsset({
+        owner,
+        repo,
+        release_id: release.data.id,
+        data: readFileSync(packageFileName),
+    });
 };
 
 const main = async () => {
@@ -93,8 +106,8 @@ const main = async () => {
     const { packageName, version } = tag;
     const { owner, repo } = parseRepo();
 
-    await pack(packageName);
-    await createRelease(owner, repo, version);
+    const { packageFileName } = await pack(packageName);
+    await createRelease(owner, repo, packageFileName, version);
 };
 
 main().catch((err) => {
