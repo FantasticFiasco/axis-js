@@ -56,11 +56,15 @@ const pack = (packageName) => {
                 return;
             }
 
+            print('stdout: ' + stdout);
+
             const match = /"(\/.*\.tgz)"/.exec(stdout);
             if (match === null || match.length !== 2) {
                 reject(`stdout from pack does not contain the artifact filename: ${stdout}`);
                 return;
             }
+
+            print('match: ' + JSON.stringify(match));
 
             resolve({
                 packageFileName: match[1],
@@ -88,6 +92,8 @@ const createRelease = async (owner, repo, packageFileName, version) => {
         body: 'TODO',
         draft: true,
     });
+
+    print('packageFileName: ' + packageFileName);
 
     await octokit.repos.uploadReleaseAsset({
         owner,
