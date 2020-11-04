@@ -94,13 +94,18 @@ const createRelease = async (owner, repo, packageFileName, version) => {
     });
 
     print('packageFileName: ' + packageFileName);
+    print('release_id: ' + release.data.id);
+    print('origin: ' + release.data.upload_url);
 
-    await octokit.repos.uploadReleaseAsset({
+    const uploadReleaseAssetResponse = await octokit.repos.uploadReleaseAsset({
         owner,
         repo,
         release_id: release.data.id,
         data: readFileSync(packageFileName),
+        origin: release.data.upload_url,
     });
+
+    print('uploadReleaseAssetResponse: ' + JSON.stringify(uploadReleaseAssetResponse));
 };
 
 const main = async () => {
