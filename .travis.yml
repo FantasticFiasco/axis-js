@@ -20,8 +20,9 @@ install:
   - yarn install
 
 script:
-  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-  - yarn workspaces run build
-  - yarn workspaces run test
-  - yarn workspaces run lint
-  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn release; fi
+  - echo "$TRAVIS_NODE_VERSION"
+  # - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+  # - yarn workspaces run build
+  # - yarn workspaces run test
+  # - yarn workspaces run lint
+  # - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn release; fi
