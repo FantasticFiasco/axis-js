@@ -20,7 +20,6 @@ install:
   - yarn install
 
 script:
-  - echo hello
   - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
   - yarn workspaces run build
   - yarn workspaces run test
