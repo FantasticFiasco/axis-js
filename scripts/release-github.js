@@ -1,10 +1,10 @@
 // @ts-check
 
 const { readFileSync } = require('fs');
-const { exec } = require('child_process');
 const { Octokit } = require('@octokit/rest');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { fatal, print, printInColor, YELLOW } = require('./print');
+const { pack } = require('./npm');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -46,34 +46,6 @@ const parseRepo = () => {
 };
 
 /**
- * @param {string} packageName
- */
-const pack = (packageName) => {
-    return new Promise((resolve, reject) => {
-        exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-
-            print('stdout: ' + stdout);
-
-            const match = /"(\/.*\.tgz)"/.exec(stdout);
-            if (match === null || match.length !== 2) {
-                reject(`stdout from pack does not contain the artifact filename: ${stdout}`);
-                return;
-            }
-
-            print('match: ' + JSON.stringify(match));
-
-            resolve({
-                packageFileName: match[1],
-            });
-        });
-    });
-};
-
-/**
  * @param {string} owner
  * @param {string} repo
  * @param {string} packageFileName
@@ -95,14 +67,16 @@ const createRelease = async (owner, repo, packageFileName, version) => {
 
     print('packageFileName: ' + packageFileName);
     print('release_id: ' + release.data.id);
-    print('origin: ' + release.data.upload_url);
+    print('upload_url: ' + release.data.upload_url);
 
     const uploadReleaseAssetResponse = await octokit.repos.uploadReleaseAsset({
         owner,
         repo,
         release_id: release.data.id,
+        // name: 'some name',
+        // label: 'some label',
         data: readFileSync(packageFileName),
-        origin: release.data.upload_url,
+        // origin: release.data.upload_url,
     });
 
     print('uploadReleaseAssetResponse: ' + JSON.stringify(uploadReleaseAssetResponse));
