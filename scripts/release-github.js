@@ -73,7 +73,7 @@ const createRelease = async (owner, repo, packageFileName, version) => {
         owner,
         repo,
         release_id: release.data.id,
-        // name: 'some name',
+        name: 'some name',
         // label: 'some label',
         data: readFileSync(packageFileName),
         // origin: release.data.upload_url,
