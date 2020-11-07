@@ -5,6 +5,7 @@ const { Octokit } = require('@octokit/rest');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { fatal, print, printInColor, YELLOW } = require('./print');
 const { pack } = require('./npm');
+const { basename } = require('path');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -73,10 +74,8 @@ const createRelease = async (owner, repo, packageFileName, version) => {
         owner,
         repo,
         release_id: release.data.id,
-        name: 'some name',
-        // label: 'some label',
+        name: basename(packageFileName),
         data: readFileSync(packageFileName),
-        // origin: release.data.upload_url,
     });
 
     print('uploadReleaseAssetResponse: ' + JSON.stringify(uploadReleaseAssetResponse));
