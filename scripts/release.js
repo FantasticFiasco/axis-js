@@ -1,11 +1,9 @@
 // @ts-check
 
-const { readFileSync } = require('fs');
-const { Octokit } = require('@octokit/rest');
-const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
-const { fatal, print, printInColor, YELLOW } = require('./print');
+const { fatal, printInColor, YELLOW } = require('./print');
 const { pack } = require('./npm');
-const { basename } = require('path');
+const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
+const { createRelease, uploadAsset } = require('./github');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -46,41 +44,6 @@ const parseRepo = () => {
     };
 };
 
-/**
- * @param {string} owner
- * @param {string} repo
- * @param {string} packageFileName
- * @param {string} version
- */
-const createRelease = async (owner, repo, packageFileName, version) => {
-    const octokit = new Octokit({
-        auth: GITHUB_TOKEN,
-    });
-
-    const release = await octokit.repos.createRelease({
-        owner,
-        repo,
-        tag_name: GIT_TAG,
-        name: `Release v${version}`,
-        body: 'TODO',
-        draft: true,
-    });
-
-    print('packageFileName: ' + packageFileName);
-    print('release_id: ' + release.data.id);
-    print('upload_url: ' + release.data.upload_url);
-
-    const uploadReleaseAssetResponse = await octokit.repos.uploadReleaseAsset({
-        owner,
-        repo,
-        release_id: release.data.id,
-        name: basename(packageFileName),
-        data: readFileSync(packageFileName),
-    });
-
-    print('uploadReleaseAssetResponse: ' + JSON.stringify(uploadReleaseAssetResponse));
-};
-
 const main = async () => {
     const tag = parseGitTag();
     if (!tag) {
@@ -91,7 +54,10 @@ const main = async () => {
     const { owner, repo } = parseRepo();
 
     const { packageFileName } = await pack(packageName);
-    await createRelease(owner, repo, packageFileName, version);
+
+    // Create GitHub release
+    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, GIT_TAG, version);
+    await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
 };
 
 main().catch((err) => {
