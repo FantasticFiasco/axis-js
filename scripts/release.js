@@ -3,7 +3,7 @@
 const { createRelease, uploadAsset } = require('./github');
 const { fatal, log, YELLOW } = require('./log');
 const { login, logout, pack, publish } = require('./npm');
-const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
+const { GITHUB_TOKEN, GIT_TAG, NPM_TOKEN, REPO } = require('./travis');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -57,7 +57,7 @@ const main = async () => {
     const { packageFileName } = await pack(packageName);
 
     // Publish to npm
-    await login('TODO');
+    await login(NPM_TOKEN);
     await publish(packageFileName);
     await logout();
 
