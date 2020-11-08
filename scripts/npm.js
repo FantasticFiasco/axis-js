@@ -1,7 +1,26 @@
 // @ts-check
 
 const { exec } = require('child_process');
-const { writeFile } = require('fs');
+const { writeFile, rm } = require('fs').promises;
+const { info, error } = require('./print');
+
+const configFileName = '.npmrc';
+
+/**
+ * @param {string} accessToken
+ */
+const login = async (accessToken) => {
+    info('login to npm');
+
+    const content = `//registry.npmjs.org/:_authToken=${accessToken}`;
+    await writeFile(configFileName, content);
+};
+
+const logout = async () => {
+    info('logout from npm');
+
+    await rm(configFileName);
+};
 
 /**
  * @param {string} packageName
@@ -9,8 +28,11 @@ const { writeFile } = require('fs');
  */
 const pack = (packageName) => {
     return new Promise((resolve, reject) => {
+        info(`pack ${packageName}`);
+
         exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
             if (err) {
+                error(stderr);
                 reject(err);
                 return;
             }
@@ -28,13 +50,26 @@ const pack = (packageName) => {
     });
 };
 
-const login = () => {
-    console.log('cwd', process.cwd());
+const publish = (tarball) => {
+    return new Promise((resolve, reject) => {
+        info(`publish ${tarball}`);
+
+        exec(`npm publish ${tarball} --access public`, (err, stdout, stderr) => {
+            if (err) {
+                error(stderr);
+                reject(err);
+                return;
+            }
+
+            info(stdout);
+            resolve();
+        });
+    });
 };
 
-const logout = () => {};
-
 module.exports = {
-    pack,
     login,
+    logout,
+    pack,
+    publish,
 };

@@ -1,7 +1,7 @@
 // @ts-check
 
-const { fatal, printInColor, YELLOW } = require('./print');
-const { login, pack } = require('./npm');
+const { fatal, print, YELLOW } = require('./print');
+const { login, logout, pack, publish } = require('./npm');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { createRelease, uploadAsset } = require('./github');
 
@@ -19,13 +19,13 @@ const { createRelease, uploadAsset } = require('./github');
  */
 const parseGitTag = () => {
     if (!GIT_TAG) {
-        printInColor(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
+        print(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
         return null;
     }
 
     const parts = GIT_TAG.split('@');
     if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
-        printInColor(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
+        print(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
         return null;
     }
 
@@ -45,8 +45,6 @@ const parseRepo = () => {
 };
 
 const main = async () => {
-    login();
-
     const tag = parseGitTag();
     if (!tag) {
         return;
@@ -62,7 +60,9 @@ const main = async () => {
     await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
 
     // Publish to npm
-    login();
+    await login('TODO');
+    await publish(packageFileName);
+    await logout();
 };
 
 main().catch((err) => {
