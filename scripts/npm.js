@@ -30,7 +30,10 @@ const pack = (packageName) => {
     return new Promise((resolve, reject) => {
         info(`npm: pack ${packageName}`);
 
-        exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
+        const cmd = `yarn workspace ${packageName} pack`;
+        info(cmd);
+
+        exec(cmd, (err, stdout, stderr) => {
             info(stdout);
 
             if (err) {
@@ -59,7 +62,10 @@ const publish = (tarball) => {
     return new Promise((resolve, reject) => {
         info(`npm: publish ${tarball}`);
 
-        exec(`npm publish ${tarball} --access public`, (err, stdout, stderr) => {
+        const cmd = `npm publish ${tarball} --access public`;
+        info(cmd);
+
+        exec(cmd, (err, stdout, stderr) => {
             info(stdout);
 
             if (err) {
