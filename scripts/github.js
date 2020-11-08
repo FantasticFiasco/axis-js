@@ -9,8 +9,8 @@ const { info } = require('./log');
  * @param {string} githubToken
  * @param {string} owner
  * @param {string} repo
- * @param {string} packageName
  * @param {string} tagName
+ * @param {string} packageName
  * @param {string} version
  */
 const createRelease = async (githubToken, owner, repo, tagName, packageName, version) => {
@@ -35,7 +35,6 @@ const createRelease = async (githubToken, owner, repo, tagName, packageName, ver
 };
 
 /**
- *
  * @param {string} githubToken
  * @param {string} owner
  * @param {string} repo
