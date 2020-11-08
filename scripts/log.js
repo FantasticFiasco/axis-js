@@ -14,14 +14,14 @@ const info = (message) => {
  * @param {string} message
  */
 const error = (message) => {
-    print(RED, message);
+    log(RED, message);
 };
 
 /**
  * @param {string} message
  */
 const fatal = (message) => {
-    print(RED, message);
+    log(RED, message);
     process.exitCode = 1;
 };
 
@@ -29,7 +29,7 @@ const fatal = (message) => {
  * @param {string} color
  * @param {string} message
  */
-const print = (color, message) => {
+const log = (color, message) => {
     console.log('\x1b%s%s\x1b[0m', color, message);
 };
 
@@ -39,5 +39,5 @@ module.exports = {
     info,
     error,
     fatal,
-    print,
+    log,
 };

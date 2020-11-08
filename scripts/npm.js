@@ -2,9 +2,9 @@
 
 const { exec } = require('child_process');
 const { writeFile, rm } = require('fs').promises;
-const { info, error } = require('./print');
+const { info, error } = require('./log');
 
-const configFileName = '.npmrc';
+const CONFIG_FILENAME = '.npmrc';
 
 /**
  * @param {string} accessToken
@@ -12,14 +12,14 @@ const configFileName = '.npmrc';
 const login = async (accessToken) => {
     info('login to npm');
 
-    const content = `//registry.npmjs.org/:_authToken=${accessToken}`;
-    await writeFile(configFileName, content);
+    const data = `//registry.npmjs.org/:_authToken=${accessToken}`;
+    await writeFile(CONFIG_FILENAME, data);
 };
 
 const logout = async () => {
     info('logout from npm');
 
-    await rm(configFileName);
+    await rm(CONFIG_FILENAME);
 };
 
 /**
@@ -50,11 +50,14 @@ const pack = (packageName) => {
     });
 };
 
+/**
+ * @param {string} tarball
+ */
 const publish = (tarball) => {
     return new Promise((resolve, reject) => {
         info(`publish ${tarball}`);
 
-        exec(`npm publish ${tarball} --access public --dry-run`, (err, stdout, stderr) => {
+        exec(`npm publish ${tarball} --access public`, (err, stdout, stderr) => {
             if (err) {
                 error(stderr);
                 reject(err);

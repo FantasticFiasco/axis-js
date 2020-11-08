@@ -1,8 +1,8 @@
 // @ts-check
 
 const { readFileSync } = require('fs');
-const { Octokit } = require('@octokit/rest');
 const { basename } = require('path');
+const { Octokit } = require('@octokit/rest');
 
 /**
  * @param {string} githubToken

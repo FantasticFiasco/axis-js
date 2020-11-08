@@ -5,8 +5,7 @@
     "samples/*"
   ],
   "scripts": {
-    "release": "yarn release:github",
-    "release:github": "node ./scripts/release.js"
+    "release": "node ./scripts/release.js"
   },
   "devDependencies": {
     "@octokit/rest": "18.0.9",

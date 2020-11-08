@@ -1,9 +1,9 @@
 // @ts-check
 
-const { fatal, print, YELLOW } = require('./print');
+const { createRelease, uploadAsset } = require('./github');
+const { fatal, log, YELLOW } = require('./log');
 const { login, logout, pack, publish } = require('./npm');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
-const { createRelease, uploadAsset } = require('./github');
 
 /**
  * A tagged commit in this monorepo is created using the following format:
@@ -19,13 +19,13 @@ const { createRelease, uploadAsset } = require('./github');
  */
 const parseGitTag = () => {
     if (!GIT_TAG) {
-        print(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
+        log(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
         return null;
     }
 
     const parts = GIT_TAG.split('@');
     if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
-        print(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
+        log(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
         return null;
     }
 
@@ -53,16 +53,17 @@ const main = async () => {
     const { packageName, version } = tag;
     const { owner, repo } = parseRepo();
 
+    // Create npm package
     const { packageFileName } = await pack(packageName);
-
-    // Create GitHub release
-    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, packageName, GIT_TAG, version);
-    await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
 
     // Publish to npm
     await login('TODO');
     await publish(packageFileName);
     await logout();
+
+    // Create GitHub release
+    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, packageName, GIT_TAG, version);
+    await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
 };
 
 main().catch((err) => {
