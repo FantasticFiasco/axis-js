@@ -1,69 +1,76 @@
 // @ts-check
 
-const { createRelease, uploadAsset } = require('./github');
-const { fatal, log, YELLOW } = require('./log');
-const { login, logout, pack, publish } = require('./npm');
-const { GITHUB_TOKEN, GIT_TAG, NPM_TOKEN, REPO } = require('./travis');
+const { exec } = require('child_process');
+const { readdirSync, statSync, existsSync } = require('fs');
+const { join, basename } = require('path');
+const { prompt } = require('inquirer');
+const { info, error, fatal } = require('./log');
 
 /**
- * A tagged commit in this monorepo is created using the following format:
+ * A package is defined by the following criteria:
  *
- *   <package name>@<version>
- *
- * where <package name> is the name of the package (as well as the name of the folder in
- * ./packages), and <version> is the semantic version of the package.
- *
- * The following tag would satisfy the format:
- *
- *   axis-configuration@1.2.3-alpha
+ * - Is located in a sub-directory (non-recursive) of ./packages
+ * - Directory contains a npm package file
  */
-const parseGitTag = () => {
-    if (!GIT_TAG) {
-        log(YELLOW, 'Skipping a deployment to GitHub Releases because this is not a tagged commit');
-        return null;
-    }
+const getPackageNames = () => {
+    const rootPath = './packages';
 
-    const parts = GIT_TAG.split('@');
-    if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
-        log(YELLOW, 'Skipping a deployment to GitHub Releases because the tag does conform to <package name>@<version>');
-        return null;
-    }
+    const packages = readdirSync(rootPath)
+        .map((path) => join(rootPath, path))
+        .filter((path) => statSync(path).isDirectory())
+        .filter((path) => existsSync(join(path, 'package.json')))
+        .map((path) => basename(path));
 
-    return {
-        packageName: parts[0],
-        version: parts[1],
-    };
+    return packages;
 };
 
-const parseRepo = () => {
-    const [owner, repo] = REPO.split('/');
+/**
+ * @param {string} packageName
+ */
+const createRelease = (packageName) => {
+    return new Promise((resolve, reject) => {
+        const cmd = `yarn workspace ${packageName} version`;
+        info(cmd);
 
-    return {
-        owner,
-        repo,
-    };
+        exec(cmd, (err, stdout, stderr) => {
+            info(stdout);
+
+            if (err) {
+                error(stderr);
+                reject(err);
+                return;
+            }
+
+            resolve();
+        });
+    });
 };
 
 const main = async () => {
-    const tag = parseGitTag();
-    if (!tag) {
+    const packageNames = getPackageNames();
+
+    const questions = [
+        {
+            type: 'list',
+            name: 'packageName',
+            message: 'Which package should we release?',
+            choices: packageNames,
+        },
+        {
+            type: 'confirm',
+            name: 'changelogUpdated',
+            message: 'Is package CHANGELOG.md up-to-date?',
+            default: false,
+        },
+    ];
+
+    const answers = await prompt(questions);
+
+    if (!answers.changelogUpdated) {
         return;
     }
 
-    const { packageName, version } = tag;
-    const { owner, repo } = parseRepo();
-
-    // Create npm package
-    const { packageFileName } = await pack(packageName);
-
-    // Publish to npm
-    await login(NPM_TOKEN);
-    await publish(packageFileName);
-    await logout();
-
-    // Create GitHub release
-    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, GIT_TAG, packageName, version);
-    await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
+    await createRelease(answers.package);
 };
 
 main().catch((err) => {

@@ -26,4 +26,4 @@ script:
   - yarn workspaces run build
   - yarn workspaces run test
   - yarn workspaces run lint
-  - if [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then yarn release; fi
+  - if [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then node ./scripts/publish-on-tag.js; fi
