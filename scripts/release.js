@@ -62,7 +62,7 @@ const main = async () => {
     await logout();
 
     // Create GitHub release
-    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, packageName, GIT_TAG, version);
+    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, GIT_TAG, packageName, version);
     await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
 };
 

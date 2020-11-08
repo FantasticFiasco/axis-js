@@ -3,6 +3,7 @@
 const { readFileSync } = require('fs');
 const { basename } = require('path');
 const { Octokit } = require('@octokit/rest');
+const { info } = require('./log');
 
 /**
  * @param {string} githubToken
@@ -12,7 +13,9 @@ const { Octokit } = require('@octokit/rest');
  * @param {string} tagName
  * @param {string} version
  */
-const createRelease = async (githubToken, owner, repo, packageName, tagName, version) => {
+const createRelease = async (githubToken, owner, repo, tagName, packageName, version) => {
+    info(`github: create release from tag ${tagName}`);
+
     const octokit = new Octokit({
         auth: githubToken,
     });
@@ -40,6 +43,8 @@ const createRelease = async (githubToken, owner, repo, packageName, tagName, ver
  * @param {string} assetFileName
  */
 const uploadAsset = async (githubToken, owner, repo, releaseId, assetFileName) => {
+    info(`github: upload asset ${assetFileName}`);
+
     const octokit = new Octokit({
         auth: githubToken,
     });

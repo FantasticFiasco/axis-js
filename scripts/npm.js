@@ -10,14 +10,14 @@ const CONFIG_FILENAME = '.npmrc';
  * @param {string} accessToken
  */
 const login = async (accessToken) => {
-    info('login to npm');
+    info('npm: login');
 
     const data = `//registry.npmjs.org/:_authToken=${accessToken}`;
     await writeFile(CONFIG_FILENAME, data);
 };
 
 const logout = async () => {
-    info('logout from npm');
+    info('npm: logout');
 
     await rm(CONFIG_FILENAME);
 };
@@ -28,9 +28,11 @@ const logout = async () => {
  */
 const pack = (packageName) => {
     return new Promise((resolve, reject) => {
-        info(`pack ${packageName}`);
+        info(`npm: pack ${packageName}`);
 
         exec(`yarn workspace ${packageName} pack`, (err, stdout, stderr) => {
+            info(stdout);
+
             if (err) {
                 error(stderr);
                 reject(err);
@@ -55,16 +57,17 @@ const pack = (packageName) => {
  */
 const publish = (tarball) => {
     return new Promise((resolve, reject) => {
-        info(`publish ${tarball}`);
+        info(`npm: publish ${tarball}`);
 
         exec(`npm publish ${tarball} --access public`, (err, stdout, stderr) => {
+            info(stdout);
+
             if (err) {
                 error(stderr);
                 reject(err);
                 return;
             }
 
-            info(stdout);
             resolve();
         });
     });
