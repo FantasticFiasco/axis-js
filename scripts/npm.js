@@ -54,7 +54,7 @@ const publish = (tarball) => {
     return new Promise((resolve, reject) => {
         info(`publish ${tarball}`);
 
-        exec(`npm publish ${tarball} --access public`, (err, stdout, stderr) => {
+        exec(`npm publish ${tarball} --access public --dry-run`, (err, stdout, stderr) => {
             if (err) {
                 error(stderr);
                 reject(err);
