@@ -1,7 +1,7 @@
 // @ts-check
 
 const { fatal, printInColor, YELLOW } = require('./print');
-const { pack } = require('./npm');
+const { login, pack } = require('./npm');
 const { GITHUB_TOKEN, GIT_TAG, REPO } = require('./travis');
 const { createRelease, uploadAsset } = require('./github');
 
@@ -45,6 +45,8 @@ const parseRepo = () => {
 };
 
 const main = async () => {
+    login();
+
     const tag = parseGitTag();
     if (!tag) {
         return;
@@ -56,8 +58,11 @@ const main = async () => {
     const { packageFileName } = await pack(packageName);
 
     // Create GitHub release
-    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, GIT_TAG, version);
+    const { releaseId } = await createRelease(GITHUB_TOKEN, owner, repo, packageName, GIT_TAG, version);
     await uploadAsset(GITHUB_TOKEN, owner, repo, releaseId, packageFileName);
+
+    // Publish to npm
+    login();
 };
 
 main().catch((err) => {

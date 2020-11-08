@@ -1,6 +1,7 @@
 // @ts-check
 
 const { exec } = require('child_process');
+const { writeFile } = require('fs');
 
 /**
  * @param {string} packageName
@@ -27,6 +28,13 @@ const pack = (packageName) => {
     });
 };
 
+const login = () => {
+    console.log('cwd', process.cwd());
+};
+
+const logout = () => {};
+
 module.exports = {
     pack,
+    login,
 };
