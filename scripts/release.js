@@ -6,71 +6,89 @@ const { join, basename } = require('path');
 const { prompt } = require('inquirer');
 const { info, error, fatal } = require('./log');
 
-/**
- * A package is defined by the following criteria:
- *
- * - Is located in a sub-directory (non-recursive) of ./packages
- * - Directory contains a npm package file
- */
-const getPackageNames = () => {
+const promptForPackage = async () => {
+    // A package is defined by the following criteria:
+    //
+    // - Is located in a sub-directory (non-recursive) of ./packages
+    // - Directory contains a npm package file
     const rootPath = './packages';
-
+    const packageFileName = 'package.json';
     const packages = readdirSync(rootPath)
         .map((path) => join(rootPath, path))
-        .filter((path) => statSync(path).isDirectory())
-        .filter((path) => existsSync(join(path, 'package.json')))
-        .map((path) => basename(path));
+        .filter((path) => existsSync(join(path, packageFileName)))
+        .reduce((result, path) => {
+            const packageName = basename(path);
 
-    return packages;
-};
+            return {
+                ...result,
+                [packageName]: {
+                    packagePath: path,
+                    packageFileName: join(path, packageFileName),
+                },
+            };
+        }, {});
 
-/**
- * @param {string} packageName
- */
-const createRelease = (packageName) => {
-    return new Promise((resolve, reject) => {
-        const cmd = `yarn workspace ${packageName} version`;
-        info(cmd);
-
-        exec(cmd, (err, stdout, stderr) => {
-            info(stdout);
-
-            if (err) {
-                error(stderr);
-                reject(err);
-                return;
-            }
-
-            resolve();
-        });
+    const { packageName } = await prompt({
+        type: 'list',
+        name: 'packageName',
+        message: 'Which package should we release?',
+        choices: Object.keys(packages),
     });
+
+    return packages[packageName];
 };
+
+// const askWhetherChangelogHasBeenUpdated = async () => {
+//     const { proceed } = await prompt({
+//         type: 'confirm',
+//         name: 'proceed',
+//         message: 'Is package CHANGELOG.md up-to-date?',
+//         default: false,
+//     });
+
+//     return proceed;
+// };
+
+// const getPackageNames = () => {
+//     const rootPath = './packages';
+
+//     const packages = readdirSync(rootPath)
+//         .map((path) => join(rootPath, path, 'package.json'))
+//         .filter((path) => existsSync(path))
+//         .reduce((result, path) => {
+//             const packageName = path.split('/')[1];
+//             result[packageName] = {
+//                 version: require(join(__dirname, '..', path)).version,
+//             };
+
+//             return result;
+//         }, {});
+
+//     return packages;
+// };
 
 const main = async () => {
-    const packageNames = getPackageNames();
+    const package = await promptForPackage();
+    // const proceed = askWhetherChangelogHasBeenUpdated();
+    // if (!proceed) {
+    //     return;
+    // }
 
-    const questions = [
-        {
-            type: 'list',
-            name: 'packageName',
-            message: 'Which package should we release?',
-            choices: packageNames,
-        },
-        {
-            type: 'confirm',
-            name: 'changelogUpdated',
-            message: 'Is package CHANGELOG.md up-to-date?',
-            default: false,
-        },
-    ];
+    // const packages = getPackageNames();
 
-    const answers = await prompt(questions);
-
-    if (!answers.changelogUpdated) {
-        return;
-    }
-
-    await createRelease(answers.package);
+    // answers = await prompt([
+    //     {
+    //         type: 'list',
+    //         name: 'packageName',
+    //         message: 'Which package should we release?',
+    //         choices: Object.keys(packages),
+    //     },
+    //     {
+    //         type: 'input',
+    //         name: 'newVersion',
+    //         message: `New version (current is ${packages})`,
+    //     },
+    // ]);
 };
 
 main().catch((err) => {
