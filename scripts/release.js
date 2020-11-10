@@ -1,8 +1,8 @@
 // @ts-check
 
-const { readdirSync, existsSync } = require('fs');
+const { existsSync, readdirSync } = require('fs');
 const { readFile, writeFile } = require('fs').promises;
-const { join, basename } = require('path');
+const { basename, join } = require('path');
 const spawn = require('util').promisify(require('child_process').spawn);
 const { prompt } = require('inquirer');
 const { add, commit, createAnnotatedTag } = require('./git');
