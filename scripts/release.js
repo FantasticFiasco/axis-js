@@ -1,8 +1,8 @@
 // @ts-check
 
-const { exec } = require('child_process');
-const { readdirSync, statSync, existsSync } = require('fs');
+const { readdirSync, existsSync } = require('fs');
 const { join, basename } = require('path');
+const spawn = require('util').promisify(require('child_process').spawn);
 const { prompt } = require('inquirer');
 const { info, error, fatal } = require('./log');
 
@@ -53,59 +53,30 @@ const versionPrompt = async (packagePath) => {
     return newVersion;
 };
 
-// const askWhetherChangelogHasBeenUpdated = async () => {
-//     const { proceed } = await prompt({
-//         type: 'confirm',
-//         name: 'proceed',
-//         message: 'Is package CHANGELOG.md up-to-date?',
-//         default: false,
-//     });
+/**
+ * @param {string} filePath
+ */
+const changelogPrompt = async (filePath) => {
+    const { openChangelog } = await prompt({
+        type: 'confirm',
+        name: 'openChangelog',
+        message: 'Do we need to update CHANGELOG.md?',
+    });
 
-//     return proceed;
-// };
+    if (!openChangelog) {
+        return;
+    }
 
-// const getPackageNames = () => {
-//     const rootPath = './packages';
-
-//     const packages = readdirSync(rootPath)
-//         .map((path) => join(rootPath, path, 'package.json'))
-//         .filter((path) => existsSync(path))
-//         .reduce((result, path) => {
-//             const packageName = path.split('/')[1];
-//             result[packageName] = {
-//                 version: require(join(__dirname, '..', path)).version,
-//             };
-
-//             return result;
-//         }, {});
-
-//     return packages;
-// };
+    const editor = process.env.EDITOR || 'vim';
+    await spawn(editor, [filePath], {
+        stdio: 'inherit',
+    });
+};
 
 const main = async () => {
     const packagePath = await packagePathPrompt();
     const newVersion = await versionPrompt(packagePath);
-    console.log(newVersion);
-    // const proceed = askWhetherChangelogHasBeenUpdated();
-    // if (!proceed) {
-    //     return;
-    // }
-
-    // const packages = getPackageNames();
-
-    // answers = await prompt([
-    //     {
-    //         type: 'list',
-    //         name: 'packageName',
-    //         message: 'Which package should we release?',
-    //         choices: Object.keys(packages),
-    //     },
-    //     {
-    //         type: 'input',
-    //         name: 'newVersion',
-    //         message: `New version (current is ${packages})`,
-    //     },
-    // ]);
+    await changelogPrompt(join(packagePath, 'CHANGELOG.md'));
 };
 
 main().catch((err) => {
