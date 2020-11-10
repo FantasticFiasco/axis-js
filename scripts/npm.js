@@ -1,8 +1,8 @@
 // @ts-check
 
-const { exec } = require('child_process');
 const { writeFile, rm } = require('fs').promises;
-const { info, error } = require('./log');
+const { info } = require('./log');
+const { run } = require('./process');
 
 const CONFIG_FILENAME = '.npmrc';
 
@@ -26,57 +26,36 @@ const logout = async () => {
  * @param {string} packageName
  * @returns {Promise<{packageFileName: string}>}
  */
-const pack = (packageName) => {
-    return new Promise((resolve, reject) => {
-        info(`npm: pack ${packageName}`);
+const pack = async (packageName) => {
+    info(`npm: pack ${packageName}`);
 
-        const cmd = `yarn workspace ${packageName} pack`;
-        info(cmd);
+    const cmd = `yarn workspace ${packageName} pack`;
+    info(cmd);
 
-        exec(cmd, (err, stdout, stderr) => {
-            info(stdout);
+    const stdout = await run(cmd);
+    info(stdout);
 
-            if (err) {
-                error(stderr);
-                reject(err);
-                return;
-            }
+    const match = /"(\/.*\.tgz)"/.exec(stdout);
+    if (match === null || match.length !== 2) {
+        throw new Error(`stdout from pack does not contain the artifact filename: ${stdout}`);
+    }
 
-            const match = /"(\/.*\.tgz)"/.exec(stdout);
-            if (match === null || match.length !== 2) {
-                reject(`stdout from pack does not contain the artifact filename: ${stdout}`);
-                return;
-            }
-
-            resolve({
-                packageFileName: match[1],
-            });
-        });
-    });
+    return {
+        packageFileName: match[1],
+    };
 };
 
 /**
  * @param {string} tarball
  */
-const publish = (tarball) => {
-    return new Promise((resolve, reject) => {
-        info(`npm: publish ${tarball}`);
+const publish = async (tarball) => {
+    info(`npm: publish ${tarball}`);
 
-        const cmd = `npm publish ${tarball} --access public`;
-        info(cmd);
+    const cmd = `npm publish ${tarball} --access public`;
+    info(cmd);
 
-        exec(cmd, (err, stdout, stderr) => {
-            info(stdout);
-
-            if (err) {
-                error(stderr);
-                reject(err);
-                return;
-            }
-
-            resolve();
-        });
-    });
+    const stdout = await run(cmd);
+    info(stdout);
 };
 
 module.exports = {
