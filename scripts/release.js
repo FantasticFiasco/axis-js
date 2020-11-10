@@ -6,7 +6,7 @@ const { join, basename } = require('path');
 const { prompt } = require('inquirer');
 const { info, error, fatal } = require('./log');
 
-const promptForPackage = async () => {
+const packagePrompt = async () => {
     // A package is defined by the following criteria:
     //
     // - Is located in a sub-directory (non-recursive) of ./packages
@@ -36,6 +36,20 @@ const promptForPackage = async () => {
     });
 
     return packages[packageName];
+};
+
+/**
+ * @param {{packagePath: string, packageFileName: string}} package
+ */
+const versionPrompt = async (package) => {
+    const currentVersion = require(join(__dirname, '..', package.packageFileName)).version;
+    const { newVersion } = await prompt({
+        type: 'input',
+        name: 'newVersion',
+        message: `New version (current is ${currentVersion})`,
+    });
+
+    return newVersion;
 };
 
 // const askWhetherChangelogHasBeenUpdated = async () => {
@@ -68,7 +82,9 @@ const promptForPackage = async () => {
 // };
 
 const main = async () => {
-    const package = await promptForPackage();
+    const package = await packagePrompt();
+    const newVersion = await versionPrompt(package);
+    console.log(newVersion);
     // const proceed = askWhetherChangelogHasBeenUpdated();
     // if (!proceed) {
     //     return;
