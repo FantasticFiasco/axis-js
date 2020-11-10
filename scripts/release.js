@@ -1,12 +1,14 @@
 // @ts-check
 
 const { readdirSync, existsSync } = require('fs');
+const { readFile, writeFile } = require('fs').promises;
 const { join, basename } = require('path');
 const spawn = require('util').promisify(require('child_process').spawn);
 const { prompt } = require('inquirer');
-const { info, error, fatal } = require('./log');
+const { add, commit, createAnnotatedTag } = require('./git');
+const { fatal } = require('./log');
 
-const packagePathPrompt = async () => {
+const packageDirPrompt = async () => {
     // A package is defined by the following criteria:
     //
     // - Is located in a sub-directory (non-recursive) of ./packages
@@ -35,10 +37,15 @@ const packagePathPrompt = async () => {
 };
 
 /**
- * @param {string} packagePath
+ * @param {string} packageFilePath
  */
-const versionPrompt = async (packagePath) => {
-    const currentVersion = require(join(__dirname, '..', packagePath, 'package.json')).version;
+const updatePackageVersion = async (packageFilePath) => {
+    packageFilePath = join(__dirname, '..', packageFilePath);
+    let packageData = (await readFile(packageFilePath)).toString();
+
+    const versionRegExp = /("version": ")(.*)(")/;
+    const currentVersion = packageData.match(versionRegExp)[2];
+
     const { newVersion } = await prompt({
         type: 'input',
         name: 'newVersion',
@@ -50,13 +57,14 @@ const versionPrompt = async (packagePath) => {
         },
     });
 
-    return newVersion;
+    packageData = packageData.replace(versionRegExp, `$1${newVersion}$3`);
+    await writeFile(packageFilePath, packageData);
 };
 
 /**
  * @param {string} filePath
  */
-const changelogPrompt = async (filePath) => {
+const updateChangelog = async (filePath) => {
     const { openChangelog } = await prompt({
         type: 'confirm',
         name: 'openChangelog',
@@ -74,9 +82,18 @@ const changelogPrompt = async (filePath) => {
 };
 
 const main = async () => {
-    const packagePath = await packagePathPrompt();
-    const newVersion = await versionPrompt(packagePath);
-    await changelogPrompt(join(packagePath, 'CHANGELOG.md'));
+    const packageDir = await packageDirPrompt();
+
+    const packageFilePath = join(packageDir, 'package.json');
+    await updatePackageVersion(packageFilePath);
+    await add(packageFilePath);
+
+    const changelogFilePath = join(packageDir, 'CHANGELOG.md');
+    await updateChangelog(changelogFilePath);
+    await add(changelogFilePath);
+
+    await commit(`release TODO@TODO`);
+    await createAnnotatedTag(`TODO@TODO`);
 };
 
 main().catch((err) => {
