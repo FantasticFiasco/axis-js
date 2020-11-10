@@ -6,25 +6,21 @@ const { join, basename } = require('path');
 const { prompt } = require('inquirer');
 const { info, error, fatal } = require('./log');
 
-const packagePrompt = async () => {
+const packagePathPrompt = async () => {
     // A package is defined by the following criteria:
     //
     // - Is located in a sub-directory (non-recursive) of ./packages
     // - Directory contains a npm package file
     const rootPath = './packages';
-    const packageFileName = 'package.json';
-    const packages = readdirSync(rootPath)
+    const packagePaths = readdirSync(rootPath)
         .map((path) => join(rootPath, path))
-        .filter((path) => existsSync(join(path, packageFileName)))
+        .filter((path) => existsSync(join(path, 'package.json')))
         .reduce((result, path) => {
             const packageName = basename(path);
 
             return {
                 ...result,
-                [packageName]: {
-                    packagePath: path,
-                    packageFileName: join(path, packageFileName),
-                },
+                [packageName]: path,
             };
         }, {});
 
@@ -32,21 +28,26 @@ const packagePrompt = async () => {
         type: 'list',
         name: 'packageName',
         message: 'Which package should we release?',
-        choices: Object.keys(packages),
+        choices: Object.keys(packagePaths),
     });
 
-    return packages[packageName];
+    return packagePaths[packageName];
 };
 
 /**
- * @param {{packagePath: string, packageFileName: string}} package
+ * @param {string} packagePath
  */
-const versionPrompt = async (package) => {
-    const currentVersion = require(join(__dirname, '..', package.packageFileName)).version;
+const versionPrompt = async (packagePath) => {
+    const currentVersion = require(join(__dirname, '..', packagePath, 'package.json')).version;
     const { newVersion } = await prompt({
         type: 'input',
         name: 'newVersion',
-        message: `New version (current is ${currentVersion})`,
+        message: `New version (current is '${currentVersion}')`,
+        validate: (input) => {
+            // The following RegExp is the official one, copied from their website https://semver.org/
+            const semVer = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+            return semVer.test(input) || 'Please enter a valid semantic version';
+        },
     });
 
     return newVersion;
@@ -82,8 +83,8 @@ const versionPrompt = async (package) => {
 // };
 
 const main = async () => {
-    const package = await packagePrompt();
-    const newVersion = await versionPrompt(package);
+    const packagePath = await packagePathPrompt();
+    const newVersion = await versionPrompt(packagePath);
     console.log(newVersion);
     // const proceed = askWhetherChangelogHasBeenUpdated();
     // if (!proceed) {
