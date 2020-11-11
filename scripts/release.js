@@ -5,10 +5,10 @@ const { readFile, writeFile } = require('fs').promises;
 const { basename, join } = require('path');
 const spawn = require('util').promisify(require('child_process').spawn);
 const { prompt } = require('inquirer');
-const { add, commit, createAnnotatedTag } = require('./git');
+const git = require('./git');
 const { fatal } = require('./log');
 
-const packageDirPrompt = async () => {
+const packagePrompt = async () => {
     // A package is defined by the following criteria:
     //
     // - Is located in a sub-directory (non-recursive) of ./packages
@@ -33,7 +33,10 @@ const packageDirPrompt = async () => {
         choices: Object.keys(packagePaths),
     });
 
-    return packagePaths[packageName];
+    return {
+        name: packageName,
+        dir: packagePaths[packageName],
+    };
 };
 
 /**
@@ -59,6 +62,8 @@ const updatePackageVersion = async (packageFilePath) => {
 
     packageData = packageData.replace(versionRegExp, `$1${newVersion}$3`);
     await writeFile(packageFilePath, packageData);
+
+    return newVersion;
 };
 
 /**
@@ -82,18 +87,18 @@ const updateChangelog = async (filePath) => {
 };
 
 const main = async () => {
-    const packageDir = await packageDirPrompt();
+    const package = await packagePrompt();
 
-    const packageFilePath = join(packageDir, 'package.json');
-    await updatePackageVersion(packageFilePath);
-    await add(packageFilePath);
+    const packageFilePath = join(package.dir, 'package.json');
+    const newVersion = await updatePackageVersion(packageFilePath);
+    await git.add(packageFilePath);
 
-    const changelogFilePath = join(packageDir, 'CHANGELOG.md');
+    const changelogFilePath = join(package.dir, 'CHANGELOG.md');
     await updateChangelog(changelogFilePath);
-    await add(changelogFilePath);
+    await git.add(changelogFilePath);
 
-    await commit(`release TODO@TODO`);
-    await createAnnotatedTag(`TODO@TODO`);
+    await git.commit(`release ${package.name}@${newVersion}`);
+    await git.createAnnotatedTag(`${package.name}@${newVersion}`);
 };
 
 main().catch((err) => {

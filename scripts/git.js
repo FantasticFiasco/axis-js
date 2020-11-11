@@ -31,7 +31,7 @@ const commit = async (msg) => {
  * @param {string} tag
  */
 const createAnnotatedTag = async (tag) => {
-    const cmd = `git tag -a -m "${tag}"`;
+    const cmd = `git tag -a ${tag} -m ${tag}`;
     info(cmd);
 
     const { stdout, stderr } = await exec(cmd);
