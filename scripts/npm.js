@@ -1,7 +1,8 @@
 // @ts-check
 
 const { rm, writeFile } = require('fs').promises;
-const exec = require('util').promisify(require('child_process').exec);
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const { error, info } = require('./log');
 
 const CONFIG_FILENAME = '.npmrc';

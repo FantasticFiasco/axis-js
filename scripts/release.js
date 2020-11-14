@@ -3,7 +3,8 @@
 const { existsSync, readdirSync } = require('fs');
 const { readFile, writeFile } = require('fs').promises;
 const { basename, join } = require('path');
-const spawn = require('util').promisify(require('child_process').spawn);
+const util = require('util');
+const spawn = util.promisify(require('child_process').spawn);
 const { prompt } = require('inquirer');
 const git = require('./git');
 const { fatal } = require('./log');
