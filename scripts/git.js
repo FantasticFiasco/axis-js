@@ -8,7 +8,7 @@ const { info, error } = require('./log');
  * @param {string} filePath
  */
 const add = async (filePath) => {
-    const cmd = `git add ${filePath}`;
+    const cmd = `git add "${filePath}"`;
     info(cmd);
 
     const { stdout, stderr } = await exec(cmd);
@@ -20,7 +20,7 @@ const add = async (filePath) => {
  * @param {string} msg
  */
 const commit = async (msg) => {
-    const cmd = `git commit -m ${msg}`;
+    const cmd = `git commit -m "${msg}"`;
     info(cmd);
 
     const { stdout, stderr } = await exec(cmd);
@@ -32,7 +32,7 @@ const commit = async (msg) => {
  * @param {string} tag
  */
 const createAnnotatedTag = async (tag) => {
-    const cmd = `git tag -a ${tag} -m ${tag}`;
+    const cmd = `git tag -a "${tag}" -m "${tag}"`;
     info(cmd);
 
     const { stdout, stderr } = await exec(cmd);
