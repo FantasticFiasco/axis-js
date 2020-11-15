@@ -1,7 +1,6 @@
 # axis-configuration
 
 [![Build Status](https://travis-ci.com/FantasticFiasco/axis-configuration-js.svg?branch=master)](https://travis-ci.com/FantasticFiasco/axis-configuration-js)
-[![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-configuration-js/badge.svg)](https://coveralls.io/github/FantasticFiasco/axis-configuration-js)
 [![npm version](https://img.shields.io/npm/v/axis-configuration.svg)](https://www.npmjs.com/package/axis-configuration)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-configuration-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-configuration-js)
