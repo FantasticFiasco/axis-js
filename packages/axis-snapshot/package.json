@@ -12,13 +12,13 @@
     "bmp",
     "vapix"
   ],
-  "homepage": "https://github.com/FantasticFiasco/axis-snapshot-js",
+  "homepage": "https://github.com/FantasticFiasco/axis-js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FantasticFiasco/axis-snapshot-js.git"
+    "url": "https://github.com/FantasticFiasco/axis-js.git"
   },
   "bugs": {
-    "url": "https://github.com/FantasticFiasco/axis-snapshot-js/issues"
+    "url": "https://github.com/FantasticFiasco/axis-js/issues"
   },
   "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",

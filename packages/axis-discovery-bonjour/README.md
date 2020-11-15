@@ -9,7 +9,7 @@
 
 A Node.js Bonjour client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
-To also find cameras on the network using SSDP (UPnP), please see [axis-discovery](https://github.com/FantasticFiasco/axis-discovery-js).
+To also find cameras on the network using SSDP (UPnP), please see [axis-discovery](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery).
 
 ## Table of contents
 
