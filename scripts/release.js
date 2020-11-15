@@ -98,6 +98,7 @@ const main = async () => {
 
     await git.commit(`release ${package.name}@${newVersion}`);
     await git.createAnnotatedTag(`${package.name}@${newVersion}`);
+    await git.pushCommitsAndTags();
 };
 
 main().catch((err) => {

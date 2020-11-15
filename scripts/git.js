@@ -40,8 +40,18 @@ const createAnnotatedTag = async (tag) => {
     error(stderr);
 };
 
+const pushCommitsAndTags = async () => {
+    const cmd = 'git push --follow-tags';
+    info(cmd);
+
+    const { stdout, stderr } = await exec(cmd);
+    info(stdout);
+    error(stderr);
+};
+
 module.exports = {
     add,
     commit,
     createAnnotatedTag,
+    pushCommitsAndTags,
 };
