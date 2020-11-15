@@ -5,8 +5,8 @@ os:
   - osx
 
 node_js:
-  - node   # Latest stable Node.js release
   - lts/*  # Latest LTS Node.js release
+  - node   # Latest stable Node.js release
 
 matrix:
   fast_finish: true
@@ -26,4 +26,4 @@ script:
   - yarn workspaces run build
   - yarn workspaces run test
   - yarn workspaces run lint
-  - if [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then node ./scripts/publish-on-tag.js; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then node ./scripts/publish-on-tag.js; fi
