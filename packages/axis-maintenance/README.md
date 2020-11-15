@@ -1,6 +1,5 @@
 # axis-maintenance
 
-[![Build Status](https://travis-ci.com/FantasticFiasco/axis-maintenance-js.svg?branch=master)](https://travis-ci.com/FantasticFiasco/axis-maintenance-js)
 [![npm version](https://img.shields.io/npm/v/axis-maintenance.svg)](https://www.npmjs.com/package/axis-maintenance)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-maintenance-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-maintenance-js)

@@ -1,6 +1,5 @@
 # axis-discovery-ssdp
 
-[![Build Status](https://travis-ci.com/FantasticFiasco/axis-discovery-ssdp-js.svg?branch=master)](https://travis-ci.com/FantasticFiasco/axis-discovery-ssdp-js)
 [![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js)

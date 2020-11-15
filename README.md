@@ -4,9 +4,9 @@
 
 ## Table of contents
 
-- [Family of packages](#family-of-packages)
+- [Packages](#packages)
 
-## Family of packages
+## Packages
 
 The following NPM packages have been created to provide a smooth experience with devices from Axis Communications.
 
