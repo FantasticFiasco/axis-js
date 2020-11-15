@@ -3,11 +3,10 @@
 const { existsSync, readdirSync } = require('fs');
 const { readFile, writeFile } = require('fs').promises;
 const { basename, join } = require('path');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
 const { prompt } = require('inquirer');
 const git = require('./git');
 const { fatal } = require('./log');
+const { exec } = require('./process');
 
 const packagePrompt = async () => {
     // A package is defined by the following criteria:

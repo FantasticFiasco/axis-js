@@ -1,9 +1,8 @@
 // @ts-check
 
 const { rm, writeFile } = require('fs').promises;
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const { error, info } = require('./log');
+const { info } = require('./log');
+const { exec } = require('./process');
 
 const CONFIG_FILENAME = '.npmrc';
 
@@ -30,12 +29,7 @@ const logout = async () => {
 const pack = async (packageName) => {
     info(`npm: pack ${packageName}`);
 
-    const cmd = `yarn workspace ${packageName} pack`;
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    const stdout = await exec(`yarn workspace ${packageName} pack`);
 
     const match = /"(\/.*\.tgz)"/.exec(stdout);
     if (match === null || match.length !== 2) {
@@ -53,12 +47,7 @@ const pack = async (packageName) => {
 const publish = async (tarball) => {
     info(`npm: publish ${tarball}`);
 
-    const cmd = `npm publish ${tarball} --access public`;
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    await exec(`npm publish ${tarball} --access public`);
 };
 
 module.exports = {

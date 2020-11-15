@@ -1,52 +1,30 @@
 // @ts-check
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const { info, error } = require('./log');
+const { exec } = require('./process');
 
 /**
  * @param {string} filePath
  */
 const add = async (filePath) => {
-    const cmd = `git add "${filePath}"`;
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    await exec(`git add "${filePath}"`);
 };
 
 /**
  * @param {string} msg
  */
 const commit = async (msg) => {
-    const cmd = `git commit -m "${msg}"`;
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    await exec(`git commit -m "${msg}"`);
 };
 
 /**
  * @param {string} tag
  */
 const createAnnotatedTag = async (tag) => {
-    const cmd = `git tag -a "${tag}" -m "${tag}"`;
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    await exec(`git tag -a "${tag}" -m "${tag}"`);
 };
 
 const pushCommitsAndTags = async () => {
-    const cmd = 'git push --follow-tags';
-    info(cmd);
-
-    const { stdout, stderr } = await exec(cmd);
-    info(stdout);
-    error(stderr);
+    await exec('git push --follow-tags');
 };
 
 module.exports = {
