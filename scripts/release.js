@@ -4,7 +4,7 @@ const { existsSync, readdirSync } = require('fs');
 const { readFile, writeFile } = require('fs').promises;
 const { basename, join } = require('path');
 const util = require('util');
-const spawn = util.promisify(require('child_process').spawn);
+const exec = util.promisify(require('child_process').exec);
 const { prompt } = require('inquirer');
 const git = require('./git');
 const { fatal } = require('./log');
@@ -81,10 +81,8 @@ const updateChangelog = async (filePath) => {
         return;
     }
 
-    const editor = process.env.EDITOR || 'vim';
-    await spawn(editor, [filePath], {
-        stdio: 'inherit',
-    });
+    const editor = process.platform === 'win32' ? 'notepad' : process.env.EDITOR || 'vim';
+    await exec(`${editor} ${filePath}`);
 };
 
 const main = async () => {
