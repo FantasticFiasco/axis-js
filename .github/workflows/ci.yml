@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-    - run: yarn workspaces run install
+    - run: yarn install
     - run: yarn workspaces run build
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
