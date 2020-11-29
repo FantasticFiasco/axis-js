@@ -5,6 +5,8 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const NPM_TOKEN = process.env.NPM_TOKEN;
 const REPO = process.env.TRAVIS_REPO_SLUG;
 
+console.log('temp', GIT_TAG.length, GITHUB_TOKEN.length, NPM_TOKEN.length, REPO.length);
+
 module.exports = {
     GITHUB_TOKEN,
     NPM_TOKEN,
