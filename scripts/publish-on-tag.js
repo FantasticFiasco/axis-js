@@ -3,7 +3,7 @@
 const { createRelease, uploadAsset } = require('./github');
 const { fatal, log, YELLOW } = require('./log');
 const { login, logout, pack, publish } = require('./npm');
-const { GIT_TAG, GITHUB_TOKEN, NPM_TOKEN, REPO } = require('./travis');
+const { GIT_TAG, GITHUB_TOKEN, NPM_TOKEN, REPO } = require('./github-actions');
 
 /**
  * A tagged commit in this monorepo is created using the following format:

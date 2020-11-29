@@ -18,8 +18,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+    - run: node ./scripts/temp.js
+      with:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     - run: yarn install
     - run: yarn workspaces run build
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
     - run: if [ ${{ matrix.node-version }} == 15.x ]; then node ./scripts/publish-on-tag.js; fi
+      with:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
