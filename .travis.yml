@@ -22,9 +22,9 @@ install:
   - yarn install
 
 script:
+  - node ./scripts/temp.js
   - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
   - yarn workspaces run build
   - yarn workspaces run test
   - yarn workspaces run lint
   - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then node ./scripts/publish-on-tag.js; fi
-  - node ./scripts/temp.js
