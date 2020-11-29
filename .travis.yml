@@ -27,3 +27,4 @@ script:
   - yarn workspaces run test
   - yarn workspaces run lint
   - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$TRAVIS_NODE_VERSION" == "lts/*" ]; then node ./scripts/publish-on-tag.js; fi
+  - node ./scripts/temp.js
