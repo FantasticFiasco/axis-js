@@ -26,5 +26,5 @@ jobs:
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
     - run: if [ ${{ matrix.node-version }} == 15.x ]; then node ./scripts/publish-on-tag.js; fi
-      with:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # with:
+      #   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
