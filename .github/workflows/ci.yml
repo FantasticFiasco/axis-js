@@ -27,7 +27,7 @@ jobs:
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
     - run: node ./scripts/publish-on-tag.js
-      if: matrix.node-version == 15.x
+      if: matrix.node-version == "15.x"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
