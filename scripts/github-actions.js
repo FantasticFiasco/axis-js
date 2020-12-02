@@ -12,7 +12,7 @@ const ref = process.env.GITHUB_REF;
 const GIT_TAG = ref.startsWith(prefix) ? ref.substring(prefix.length) : '';
 
 // Repo slug, e.g. "owner_name/repo_name"
-const REPO = process.env.TRAVIS_REPO_SLUG;
+const REPO = process.env.GITHUB_REPOSITORY;
 
 module.exports = {
     GITHUB_TOKEN,
