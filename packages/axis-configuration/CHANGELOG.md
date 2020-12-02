@@ -6,12 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-## Test
-
-## Test 2
-
-## [2.1.3] - 2020-07-18
-
 ## [2.1.2] - 2020-07-18
 
 ### :policeman: Security
