@@ -2,8 +2,7 @@ name: CI/CD
 
 on:
   push:
-  create:
-    tags:
+    branches:
       - '*'
 
 jobs:
