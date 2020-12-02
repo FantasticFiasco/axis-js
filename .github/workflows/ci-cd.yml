@@ -4,7 +4,7 @@ on:
   push:
   create:
     tags:
-      - "*"
+      - '*'
 
 jobs:
   build:
@@ -26,8 +26,8 @@ jobs:
     - run: yarn workspaces run build
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
-    - run: node ./scripts/publish-on-tag.js
-      if: ${{ matrix.node-version }} == 15.x
+    - run: if [ ${{ matrix.node-version }} == 15.x ]; then node ./scripts/publish-on-tag.js; fi
+      if: startsWith(github.ref, 'refs/tags/')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
