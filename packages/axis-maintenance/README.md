@@ -1,7 +1,5 @@
 # axis-maintenance
 
-[![Build Status](https://travis-ci.com/FantasticFiasco/axis-maintenance-js.svg?branch=master)](https://travis-ci.com/FantasticFiasco/axis-maintenance-js)
-[![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-maintenance-js/badge.svg?branch=master)](https://coveralls.io/github/FantasticFiasco/axis-maintenance-js?branch=master)
 [![npm version](https://img.shields.io/npm/v/axis-maintenance.svg)](https://www.npmjs.com/package/axis-maintenance)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-maintenance-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-maintenance-js)
@@ -13,7 +11,6 @@ A Node.js library written in TypeScript capable of running maintenance operation
 
 - [Super simple to use](#super-simple-to-use)
 - [Installation](#installation)
-- [Family of packages](#family-of-packages)
 - [API](#api)
 - [Credit](#credit)
 
@@ -42,17 +39,6 @@ npm install axis-maintenance
 # or
 yarn add axis-maintenance
 ```
-
-## Family of packages
-
-The following NPM packages have been created to provide a smooth experience with devices from Axis Communications.
-
-- [axis-discovery](https://github.com/FantasticFiasco/axis-discovery-js) - A Node.js client library written in TypeScript capable of searching for Axis Communication cameras using Bonjour and SSDP (UPnP).
-    - [axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-discovery-bonjour-js) - A Node.js Bonjour client library written in TypeScript capable of searching for Axis Communication cameras.
-    - [axis-discovery-ssdp](https://github.com/FantasticFiasco/axis-discovery-ssdp-js) - A Node.js SSDP (UPnP) client library written in TypeScript capable of searching for Axis Communication cameras.
-- [axis-configuration](https://github.com/FantasticFiasco/axis-configuration-js) - A Node.js library written in TypeScript capable of configuring Axis Communication cameras.
-- `axis-maintenance` - This package
-- [axis-snapshot](https://github.com/FantasticFiasco/axis-snapshot-js) - A Node.js library written in TypeScript capable of getting snapshots from Axis Communication cameras.
 
 ## API
 
