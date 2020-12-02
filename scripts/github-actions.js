@@ -1,8 +1,17 @@
 // @ts-check
 
+// GitHub token
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+
+// npm token
 const NPM_TOKEN = process.env.NPM_TOKEN;
-const GIT_TAG = process.env.GIT_TAG;
+
+// git tag
+const prefix = 'refs/tags/';
+const ref = process.env.GITHUB_REF;
+const GIT_TAG = ref.startsWith(prefix) ? ref.substring(prefix.length) : '';
+
+// Repo slug, e.g. "owner_name/repo_name"
 const REPO = process.env.TRAVIS_REPO_SLUG;
 
 module.exports = {
