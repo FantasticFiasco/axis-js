@@ -46,7 +46,7 @@
     "request-promise-native": "1.0.9"
   },
   "devDependencies": {
-    "@types/jest": "26.0.15",
+    "@types/jest": "26.0.16",
     "@types/node": "14.14.10",
     "@types/request-promise-native": "1.0.17",
     "coveralls": "3.1.0",
