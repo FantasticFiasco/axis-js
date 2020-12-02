@@ -18,6 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+    - run: echo "GIT_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - run: node ./scripts/temp.js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
