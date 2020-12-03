@@ -4,7 +4,7 @@
 
 ## Packages
 
-The following NPM packages have been created to provide a smooth experience with devices from Axis Communications.
+The following NPM packages have been created to provide a smooth experience interacting with devices from Axis Communications.
 
 - [axis-configuration](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-configuration) - A Node.js library written in TypeScript capable of configuring Axis Communication cameras.
 - [axis-discovery](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery) - A Node.js client library written in TypeScript capable of searching for Axis Communication cameras using Bonjour and SSDP (UPnP).
