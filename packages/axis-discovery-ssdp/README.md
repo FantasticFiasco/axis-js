@@ -15,7 +15,6 @@ To also find cameras on the network using Bonjour, please see [axis-discovery](h
 - [Installation](#installation)
 - [Who is using it?](#who-is-using-it)
 - [API](#api)
-- [Credit](#credit)
 
 ---
 
@@ -178,9 +177,3 @@ export interface IHttpClient {
     get(url: string): Promise<string>;
 }
 ```
-
-## Credit
-
-Thank you [JetBrains](https://www.jetbrains.com/) for your important initiative to support the open source community with free licenses to your products.
-
-![JetBrains](./design/jetbrains.png)

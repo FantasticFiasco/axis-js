@@ -14,7 +14,6 @@ A Node.js library written in TypeScript capable of configuring [Axis Communicati
 - [Prerequisites](#prerequisites)
 - [Parameters](#parameters)
 - [User accounts](#user-accounts)
-- [Credit](#credit)
 
 ---
 
@@ -202,9 +201,3 @@ class User {
     readonly ptz: boolean;
 }
 ```
-
-## Credit
-
-Thank you [JetBrains](https://www.jetbrains.com/) for your important initiative to support the open source community with free licenses to your products.
-
-![JetBrains](./doc/resources/jetbrains.png)

@@ -12,7 +12,6 @@ A Node.js library written in TypeScript capable of getting snapshots from [Axis 
 - [Super simple to use](#super-simple-to-use)
 - [Installation](#installation)
 - [API](#api)
-- [Credit](#credit)
 
 ---
 
@@ -60,9 +59,3 @@ class Snapshot {
     jpeg(options?: SnapshotOptions): Promise<Buffer>;
 }
 ```
-
-## Credit
-
-Thank you [JetBrains](https://www.jetbrains.com/) for your important initiative to support the open source community with free licenses to your products.
-
-![JetBrains](./doc/resources/jetbrains.png)

@@ -12,7 +12,6 @@ A Node.js library written in TypeScript capable of running maintenance operation
 - [Super simple to use](#super-simple-to-use)
 - [Installation](#installation)
 - [API](#api)
-- [Credit](#credit)
 
 ---
 
@@ -75,9 +74,3 @@ class Maintenance {
     factoryDefault(type: FactoryDefaultType): Promise<void>;
 }
 ```
-
-## Credit
-
-Thank you [JetBrains](https://www.jetbrains.com/) for your important initiative to support the open source community with free licenses to your products.
-
-![JetBrains](./doc/resources/jetbrains.png)

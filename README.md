@@ -2,10 +2,6 @@
 
 ![Build Status](https://github.com/FantasticFiasco/axis-js/workflows/CI/CD/badge.svg)
 
-## Table of contents
-
-- [Packages](#packages)
-
 ## Packages
 
 The following NPM packages have been created to provide a smooth experience with devices from Axis Communications.
@@ -16,3 +12,9 @@ The following NPM packages have been created to provide a smooth experience with
     - [axis-discovery-ssdp](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery-ssdp) - A Node.js SSDP (UPnP) client library written in TypeScript capable of searching for Axis Communication cameras.
 - [axis-maintenance](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-maintenance) - A Node.js library written in TypeScript capable of running maintenance operations on cameras from Axis Communication.
 - [axis-snapshot](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-snapshot) - A Node.js library written in TypeScript capable of getting snapshots from Axis Communication cameras.
+
+## Credit
+
+Thank you [JetBrains](https://www.jetbrains.com/) for your important initiative to support the open source community with free licenses to your products.
+
+![JetBrains](./assets/jetbrains.png)
