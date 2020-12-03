@@ -1,6 +1,6 @@
 # axis-js
 
-[![Build Status](https://travis-ci.com/FantasticFiasco/axis-js.svg?branch=master)](https://travis-ci.com/FantasticFiasco/axis-js)
+![Build Status](https://github.com/FantasticFiasco/axis-js/workflows/CI/CD/badge.svg)
 
 ## Table of contents
 
