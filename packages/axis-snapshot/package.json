@@ -41,7 +41,8 @@
     "postversion": "git push --follow-tags"
   },
   "dependencies": {
-    "@fantasticfiasco/expect": "1.0.4"
+    "@fantasticfiasco/expect": "1.0.4",
+    "got": "11.8.1"
   },
   "devDependencies": {
     "@types/jest": "26.0.19",
