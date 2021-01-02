@@ -1,5 +1,3 @@
-import * as rp from 'request-promise-native';
-import * as errors from 'request-promise-native/errors';
 import { Connection } from '..';
 import { RequestError, UnauthorizedError } from '../errors';
 
