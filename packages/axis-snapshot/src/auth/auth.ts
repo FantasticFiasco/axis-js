@@ -52,17 +52,12 @@ const noAuth = async (url: string): Promise<{ error: HTTPError; res: undefined }
     }
 };
 
-interface BasicAuthChallenge {
-    type: 'Basic';
-    // TODO: Realm?
-}
-
 interface DigestAuthChallenge {
     type: 'Digest';
     realm: string;
     qop?: string;
     nonce: string;
-    opaque: string;
+    opaque?: string;
     algorithm?: string;
 }
 
@@ -70,30 +65,36 @@ const parseChallenge = (wwwAuthenticate: string): BasicAuthChallenge | DigestAut
     const typeStopIndex = wwwAuthenticate.indexOf(' ');
     const type = wwwAuthenticate.substring(0, typeStopIndex);
 
+    const params = wwwAuthenticate
+        .substring(typeStopIndex)
+        .split(',')
+        .map((param) => {
+            const index = param.indexOf('=');
+            const name = param.substring(0, index).trim();
+            const value = param
+                .substring(index + 1)
+                .trim()
+                .replace(/"/g, '');
+            return {
+                name,
+                value,
+            };
+        });
+
     if (type === 'Basic') {
+        const realm = params.find((param) => param.name === 'realm')?.value;
+        if (realm === undefined) {
+            throw new Error('Digest challenge has no realm');
+        }
+
         const challenge: BasicAuthChallenge = {
             type,
+            realm,
         };
         return challenge;
     }
 
     if (type === 'Digest') {
-        const params = wwwAuthenticate
-            .substring(typeStopIndex)
-            .split(',')
-            .map((param) => {
-                const index = param.indexOf('=');
-                const name = param.substring(0, index).trim();
-                const value = param
-                    .substring(index + 1)
-                    .trim()
-                    .replace(/"/g, '');
-                return {
-                    name,
-                    value,
-                };
-            });
-
         const realm = params.find((param) => param.name === 'realm')?.value;
         if (realm === undefined) {
             throw new Error('Digest challenge has no realm');
@@ -107,9 +108,6 @@ const parseChallenge = (wwwAuthenticate: string): BasicAuthChallenge | DigestAut
         }
 
         const opaque = params.find((param) => param.name === 'opaque')?.value;
-        if (opaque === undefined) {
-            throw new Error('Digest challenge has no opaque');
-        }
 
         const algorithm = params.find((param) => param.name === 'algorithm')?.value;
 
@@ -178,10 +176,13 @@ const digestAuth = async (
 
     // If the qop directive's value is "auth" or "auth-int", then compute the response as follows:
     //   response = MD5(HA1:nonce:nonceCount:cnonce:qop:HA2)
-    const response = createHash('md5').update(`${ha1}:${challenge.nonce}:00000001:0a4f113b:${challenge.qop}:${ha2}`).digest('hex');
-    const auth = `Digest username="${username}", realm="${challenge.realm}", nonce="${challenge.nonce}", uri="${parse(url).path}", qop=${
-        challenge.qop
-    }, nc=00000001, cnonce="0a4f113b", response="${response}", opaque="${challenge.opaque}"`;
+    // TODO: Respect if qop is specified, see wikipedia
+    const response = createHash('md5').update(`${ha1}:${challenge.nonce}:${ha2}`).digest('hex');
+
+    // TODO: opaque?
+    // TODO: qop?
+
+    const auth = `Digest username="${username}", realm="${challenge.realm}", nonce="${challenge.nonce}", uri="${parse(url).path}", response="${response}"`;
 
     try {
         const res = await got(url, {
@@ -189,6 +190,7 @@ const digestAuth = async (
                 Authorization: auth,
             },
         });
+
         return {
             error: undefined,
             res,
