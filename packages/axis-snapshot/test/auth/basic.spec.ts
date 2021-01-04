@@ -3,10 +3,10 @@ import { Challenge, generateAuthorizationHeader } from '../../src/auth/basic';
 describe('#generateAuthorizationHeader should', () => {
     test('generate correct header value', () => {
         // Arrange
-        const testCases: { username: string; password: string; expected: string }[] = [
-            { username: 'root', password: 'pass', expected: 'Basic cm9vdDpwYXNz' },
-            { username: 'guest', password: 'guest', expected: 'Basic Z3Vlc3Q6Z3Vlc3Q=' },
-            { username: 'Jane', password: 'Doe', expected: 'Basic SmFuZTpEb2U=' },
+        const testCases: { username: string; password: string; want: string }[] = [
+            { username: 'root', password: 'pass', want: 'Basic cm9vdDpwYXNz' },
+            { username: 'guest', password: 'guest', want: 'Basic Z3Vlc3Q6Z3Vlc3Q=' },
+            { username: 'Jane', password: 'Doe', want: 'Basic SmFuZTpEb2U=' },
         ];
 
         const challenge: Challenge = {
@@ -14,12 +14,12 @@ describe('#generateAuthorizationHeader should', () => {
             realm: 'test',
         };
 
-        for (const { username, password, expected } of testCases) {
+        for (const { username, password, want } of testCases) {
             // Act
-            const value = generateAuthorizationHeader(username, password, challenge);
+            const got = generateAuthorizationHeader(username, password, challenge);
 
             // Assert
-            expect(value).toBe(expected);
+            expect(got).toBe(want);
         }
     });
 });

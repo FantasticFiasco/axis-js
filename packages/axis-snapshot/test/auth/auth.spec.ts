@@ -11,26 +11,26 @@ const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
 describe('#get should', () => {
     test('succeed given no authentication', async () => {
         // Act
-        const res = await get(NO_AUTH_URL, '', '');
+        const got = await get(NO_AUTH_URL, '', '');
 
         // Assert
-        expect(res!.body).toBeDefined();
+        expect(got!.body).toBeDefined();
     });
 
     test('succeed given basic authentication', async () => {
         // Act
-        const res = await get(BASIC_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(BASIC_AUTH_URL, USERNAME, PASSWORD);
 
         // Assert
-        expect(res!.body).toBeDefined();
+        expect(got!.body).toBeDefined();
     });
 
     test('succeed given digest authentication', async () => {
         // Act
-        const res = await get(DIGEST_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(DIGEST_AUTH_URL, USERNAME, PASSWORD);
 
         // Assert
-        expect(res!.body).toBeDefined();
+        expect(got!.body).toBeDefined();
     });
 
     test('throw error given invalid credentials', async () => {

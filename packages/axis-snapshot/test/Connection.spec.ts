@@ -6,30 +6,30 @@ describe('connection', () => {
     describe('#ctor(protocol, ...)', () => {
         test('should return connection without options', () => {
             // Act
-            const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
+            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
 
             // Assert
-            expect(connection.options?.agent).toBeUndefined();
+            expect(got.options?.agent).toBeUndefined();
         });
 
         test('should return connection with http agent options', () => {
             // Act
-            const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
+            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
                 agent: new HttpAgent(),
             });
 
             // Assert
-            expect(connection.options?.agent).toBeDefined();
+            expect(got.options?.agent).toBeDefined();
         });
 
         test('should return connection with https agent options', () => {
             // Act
-            const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
+            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
                 agent: new HttpsAgent(),
             });
 
             // Assert
-            expect(connection.options?.agent).toBeDefined();
+            expect(got.options?.agent).toBeDefined();
         });
     });
 });

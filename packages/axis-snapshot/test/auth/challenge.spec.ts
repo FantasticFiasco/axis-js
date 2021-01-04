@@ -8,11 +8,11 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Basic realm="test"';
 
         // Act
-        const challenge = parse(wwwAuthenticate) as BasicChallenge;
+        const got = parse(wwwAuthenticate) as BasicChallenge;
 
         // Assert
-        expect(challenge.type).toBe('Basic');
-        expect(challenge.realm).toBe('test');
+        expect(got.type).toBe('Basic');
+        expect(got.realm).toBe('test');
     });
 
     test('successfully parse bare minimum digest auth challenge', () => {
@@ -20,15 +20,15 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Digest realm="test", nonce="some-nonce"';
 
         // Act
-        const challenge = parse(wwwAuthenticate) as DigestChallenge;
+        const got = parse(wwwAuthenticate) as DigestChallenge;
 
         // Assert
-        expect(challenge.type).toBe('Digest');
-        expect(challenge.realm).toBe('test');
-        expect(challenge.nonce).toBe('some-nonce');
-        expect(challenge.qop).toBeUndefined();
-        expect(challenge.opaque).toBeUndefined();
-        expect(challenge.algorithm).toBeUndefined();
+        expect(got.type).toBe('Digest');
+        expect(got.realm).toBe('test');
+        expect(got.nonce).toBe('some-nonce');
+        expect(got.qop).toBeUndefined();
+        expect(got.opaque).toBeUndefined();
+        expect(got.algorithm).toBeUndefined();
     });
 
     test('successfully parse full digest auth challenge', () => {
@@ -36,15 +36,15 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Digest realm="test", nonce="some-nonce", algorithm=MD5, qop="auth", opaque="some-opaque"';
 
         // Act
-        const challenge = parse(wwwAuthenticate) as DigestChallenge;
+        const got = parse(wwwAuthenticate) as DigestChallenge;
 
         // Assert
-        expect(challenge.type).toBe('Digest');
-        expect(challenge.realm).toBe('test');
-        expect(challenge.nonce).toBe('some-nonce');
-        expect(challenge.qop).toBe('auth');
-        expect(challenge.opaque).toBe('some-opaque');
-        expect(challenge.algorithm).toBe('MD5');
+        expect(got.type).toBe('Digest');
+        expect(got.realm).toBe('test');
+        expect(got.nonce).toBe('some-nonce');
+        expect(got.qop).toBe('auth');
+        expect(got.opaque).toBe('some-opaque');
+        expect(got.algorithm).toBe('MD5');
     });
 
     test('throw error given unsupported auth protocol', () => {
