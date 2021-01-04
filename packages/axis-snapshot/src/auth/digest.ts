@@ -1,13 +1,13 @@
 import { createHash } from 'crypto';
 import { parse } from 'url';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface Challenge {
     type: 'Digest';
     realm: string;
     nonce: string;
     qop?: string;
-    opaque?: string; // TODO: What is this?
+    opaque?: string;
     algorithm?: string;
 }
 
@@ -49,7 +49,7 @@ export const generateAuthorizationHeader = (url: string, username: string, passw
 };
 
 export const cnonce = (): string => {
-    return uuidv4().replace(/-/g, '');
+    return uuid().replace(/-/g, '');
 };
 
 const md5 = (value: string): string => {

@@ -88,6 +88,22 @@ describe('#generateAuthorizationHeader should', () => {
             expect(value).toBe(format(expectedFormat, nonce, cnonce));
         }
     });
+
+    test('throw error given qop="auth" without cnonce', () => {
+        const challenge: Challenge = {
+            type: 'Digest',
+            realm: 'test',
+            nonce: 'some-nonce',
+            qop: 'auth',
+            algorithm: 'MD5',
+        };
+
+        // Act
+        const fn = () => generateAuthorizationHeader('/some/path/', 'guest', 'guest', challenge);
+
+        // Assert
+        expect(fn).toThrow();
+    });
 });
 
 describe('#cnonce should', () => {
