@@ -7,7 +7,7 @@ export interface Challenge {
     realm: string;
     nonce: string;
     qop?: string;
-    opaque?: string;
+    opaque?: string; // TODO: What is this?
     algorithm?: string;
 }
 

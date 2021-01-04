@@ -1,0 +1,63 @@
+import { Challenge as BasicChallenge } from './basic';
+import { Challenge as DigestChallenge } from './digest';
+
+export const parse = (wwwAuthenticateHeaderValue: string): BasicChallenge | DigestChallenge => {
+    const challenge = toChallenge(wwwAuthenticateHeaderValue);
+
+    if (challenge.type === 'Basic') {
+        return {
+            type: challenge.type,
+            realm: challenge.mustGet('realm'),
+        };
+    }
+
+    if (challenge.type === 'Digest') {
+        return {
+            type: challenge.type,
+            realm: challenge.mustGet('realm'),
+            nonce: challenge.mustGet('nonce'),
+            qop: challenge.get('qop'),
+            opaque: challenge.get('opaque'),
+            algorithm: challenge.get('algorithm'),
+        };
+    }
+
+    throw new Error(`Auth protocol ${challenge.type} is not supported`);
+};
+
+const toChallenge = (wwwAuthenticateHeaderValue: string): Challenge => {
+    const typeStopIndex = wwwAuthenticateHeaderValue.indexOf(' ');
+    const type = wwwAuthenticateHeaderValue.substring(0, typeStopIndex);
+    const params = wwwAuthenticateHeaderValue
+        .substring(typeStopIndex)
+        .split(',')
+        .reduce((map, param) => {
+            const separatorIndex = param.indexOf('=');
+            const name = param.substring(0, separatorIndex).trim();
+            const value = param
+                .substring(separatorIndex + 1)
+                .trim()
+                .replace(/"/g, '');
+
+            map.set(name, value);
+            return map;
+        }, new Map<string, string>());
+
+    return new Challenge(type, params);
+};
+
+class Challenge {
+    constructor(public readonly type: string, private readonly params: Map<string, string>) {}
+
+    get = (name: string): string | undefined => {
+        return this.params.get(name);
+    };
+
+    mustGet = (name: string): string => {
+        const value = this.params.get(name);
+        if (value === undefined) {
+            throw new Error(`Challenge does not have required parameter "${name}"`);
+        }
+        return value;
+    };
+}
