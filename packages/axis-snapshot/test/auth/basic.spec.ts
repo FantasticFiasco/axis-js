@@ -16,10 +16,10 @@ describe('#generateAuthorizationHeader should', () => {
 
         for (const { username, password, expected } of testCases) {
             // Act
-            const headerValue = generateAuthorizationHeader(username, password, challenge);
+            const value = generateAuthorizationHeader(username, password, challenge);
 
             // Assert
-            expect(headerValue).toBe(expected);
+            expect(value).toBe(expected);
         }
     });
 });
