@@ -6,22 +6,22 @@ describe('#generateAuthorizationHeader should', () => {
         // Arrange
         const testCases: { username: string; password: string; nonce: string; expectedFormat: string }[] = [
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: '39b906c02e023c76feb985e6ec12bb76',
-                expectedFormat: 'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", response="d26409f3b345be8b3f740c021a6fdd64"',
+                expectedFormat: 'Digest username="root", realm="test", nonce="%s", uri="/some/path/", response="a6898ea71d67e0d764174a1f333c0e19"',
             },
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: '54c3bc1a33d9cb84e8323d2fa1e54cf9',
-                expectedFormat: 'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", response="d0e3dbcf6d211f7318a6a814213cf703"',
+                expectedFormat: 'Digest username="root", realm="test", nonce="%s", uri="/some/path/", response="f5a67de97c76c277fc4981aa0ca8ce2c"',
             },
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: '6aa024318133309310d5e10e1db2d725',
-                expectedFormat: 'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", response="8f127ca65e712a95cc0d7216158d00ea"',
+                expectedFormat: 'Digest username="root", realm="test", nonce="%s", uri="/some/path/", response="67bfdb07461d580e3b28c4e5d1ff10dd"',
             },
         ];
 
@@ -44,31 +44,31 @@ describe('#generateAuthorizationHeader should', () => {
         // Arrange
         const testCases: { username: string; password: string; nonce: string; cnonce: string; expectedFormat: string }[] = [
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: '8XVCURG4BQA=6435528d523e61526313ab3e9385cbc07c0a1552',
                 cnonce: 'MWE0MzZiOWZmZmNiZGJiMGIwYjQ1OTI4ZTVkYTA5NDg=',
                 expectedFormat:
-                    'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
-                    'nc=00000001, qop=auth, response="a9a08205fe5b46aa0b62771d506d1e27", algorithm=MD5',
+                    'Digest username="root", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
+                    'nc=00000001, qop=auth, response="0a57a9b78ce8d12c50d62b6c1159081f", algorithm=MD5',
             },
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: 'rHAuaBK4BQA=d1b9a9e3ded6d9ba6882ecd7e39c8bd9203c9b30',
                 cnonce: 'NzRhMDM3YWEwNjA2ZWVmMmFhNzExMTQ3OTI4Y2QxMWI=',
                 expectedFormat:
-                    'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
-                    'nc=00000001, qop=auth, response="504021e0b12a1274731d45a8b14383d8", algorithm=MD5',
+                    'Digest username="root", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
+                    'nc=00000001, qop=auth, response="9e296a7a118dbf518513740e84771aec", algorithm=MD5',
             },
             {
-                username: 'guest',
-                password: 'guest',
+                username: 'root',
+                password: 'pass',
                 nonce: '/USrbhK4BQA=b2bcdc7e4677c71e124bef471140f6e120fe2f0f',
                 cnonce: 'NmUxZDQzNTFlMTNiMzc5NTJmMTQ5YzM0OTQ1ZTJhNWU=',
                 expectedFormat:
-                    'Digest username="guest", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
-                    'nc=00000001, qop=auth, response="5e4715e6de3f8025e73bc615ef5d4953", algorithm=MD5',
+                    'Digest username="root", realm="test", nonce="%s", uri="/some/path/", cnonce="%s", ' +
+                    'nc=00000001, qop=auth, response="6538081edea0369a86766a54177f1a4d", algorithm=MD5',
             },
         ];
 
@@ -99,7 +99,7 @@ describe('#generateAuthorizationHeader should', () => {
         };
 
         // Act
-        const fn = () => generateAuthorizationHeader('/some/path/', 'guest', 'guest', challenge);
+        const fn = () => generateAuthorizationHeader('/some/path/', 'root', 'pass', challenge);
 
         // Assert
         expect(fn).toThrow();
