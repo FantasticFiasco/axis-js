@@ -11,30 +11,29 @@ export interface Challenge {
     algorithm?: string;
 }
 
-export const generateAuthorizationHeader = (url: string, username: string, password: string, challenge: Challenge): string => {
+export const generateAuthorizationHeader = (url: string, username: string, password: string, challenge: Challenge, cnonce?: string): string => {
     if (challenge.algorithm !== undefined && challenge.algorithm !== 'MD5') {
         throw new Error(`Unsupported digest algorithm: ${challenge.algorithm}`);
     }
     if (challenge.qop !== undefined && challenge.qop !== 'auth') {
         throw new Error(`Unsupported digest qop: ${challenge.qop}`);
     }
+    if (challenge.qop === 'auth' && cnonce === undefined) {
+        throw new Error('Digest argument error: cnonce must be specified when qop="auth"');
+    }
 
     const path = parse(url).path;
     const ha1 = md5(`${username}:${challenge.realm}:${password}`);
     const ha2 = md5(`GET:${path}`);
 
-    const response =
-        challenge.qop === 'auth'
-            ? md5(`${ha1}:${challenge.nonce}:00000001:MWE0MzZiOWZmZmNiZGJiMGIwYjQ1OTI4ZTVkYTA5NDg=:auth:${ha2}`)
-            : md5(`${ha1}:${challenge.nonce}:${ha2}`);
+    const response = challenge.qop === 'auth' ? md5(`${ha1}:${challenge.nonce}:00000001:${cnonce}:auth:${ha2}`) : md5(`${ha1}:${challenge.nonce}:${ha2}`);
 
     const params: string[] = [`username="${username}"`, `realm="${challenge.realm}"`, `nonce="${challenge.nonce}"`, `uri="${path}"`];
 
-    // TODO: If cnonce
-    params.push('cnonce="MWE0MzZiOWZmZmNiZGJiMGIwYjQ1OTI4ZTVkYTA5NDg="');
-
-    // TODO: If nc
-    params.push('nc=00000001');
+    if (cnonce !== undefined) {
+        params.push(`cnonce="${cnonce}"`);
+        params.push('nc=00000001');
+    }
 
     if (challenge.qop !== undefined) {
         params.push(`qop=${challenge.qop}`);

@@ -47,20 +47,43 @@ describe('#generateAuthorizationHeader should', () => {
 
     test('generate correct header value given algorithm=MD5 qop="auth"', () => {
         // Arrange
-        const testCases: { username: string; password: string; nonce: string; expected: string }[] = [
+        const testCases: { username: string; password: string; nonce: string; cnonce: string; expected: string }[] = [
             {
                 username: 'guest',
                 password: 'guest',
                 nonce: '8XVCURG4BQA=6435528d523e61526313ab3e9385cbc07c0a1552',
+                cnonce: 'MWE0MzZiOWZmZmNiZGJiMGIwYjQ1OTI4ZTVkYTA5NDg=',
                 expected:
                     'Digest username="guest", realm="AXIS_ACCC8EF987AE", ' +
                     'nonce="8XVCURG4BQA=6435528d523e61526313ab3e9385cbc07c0a1552", ' +
                     'uri="/axis-cgi/jpg/image.cgi", cnonce="MWE0MzZiOWZmZmNiZGJiMGIwYjQ1OTI4ZTVkYTA5NDg=", ' +
                     'nc=00000001, qop=auth, response="e3a01dbc6e1d7b1ca85634ed1492cf76", algorithm=MD5',
             },
+            {
+                username: 'guest',
+                password: 'guest',
+                nonce: 'rHAuaBK4BQA=d1b9a9e3ded6d9ba6882ecd7e39c8bd9203c9b30',
+                cnonce: 'NzRhMDM3YWEwNjA2ZWVmMmFhNzExMTQ3OTI4Y2QxMWI=',
+                expected:
+                    'Digest username="guest", realm="AXIS_ACCC8EF987AE", ' +
+                    'nonce="rHAuaBK4BQA=d1b9a9e3ded6d9ba6882ecd7e39c8bd9203c9b30", ' +
+                    'uri="/axis-cgi/jpg/image.cgi", cnonce="NzRhMDM3YWEwNjA2ZWVmMmFhNzExMTQ3OTI4Y2QxMWI=", ' +
+                    'nc=00000001, qop=auth, response="12181777353f1fa6264aed445a363045", algorithm=MD5',
+            },
+            {
+                username: 'guest',
+                password: 'guest',
+                nonce: '/USrbhK4BQA=b2bcdc7e4677c71e124bef471140f6e120fe2f0f',
+                cnonce: 'NmUxZDQzNTFlMTNiMzc5NTJmMTQ5YzM0OTQ1ZTJhNWU=',
+                expected:
+                    'Digest username="guest", realm="AXIS_ACCC8EF987AE", ' +
+                    'nonce="/USrbhK4BQA=b2bcdc7e4677c71e124bef471140f6e120fe2f0f", ' +
+                    'uri="/axis-cgi/jpg/image.cgi", cnonce="NmUxZDQzNTFlMTNiMzc5NTJmMTQ5YzM0OTQ1ZTJhNWU=", ' +
+                    'nc=00000001, qop=auth, response="3c86a08a7f8289bb9738b119d144b538", algorithm=MD5',
+            },
         ];
 
-        for (const { username, password, nonce, expected } of testCases) {
+        for (const { username, password, nonce, cnonce, expected } of testCases) {
             const challenge: Challenge = {
                 type: 'Digest',
                 realm: 'AXIS_ACCC8EF987AE',
@@ -70,7 +93,7 @@ describe('#generateAuthorizationHeader should', () => {
             };
 
             // Act
-            const headerValue = generateAuthorizationHeader('/axis-cgi/jpg/image.cgi', username, password, challenge);
+            const headerValue = generateAuthorizationHeader('/axis-cgi/jpg/image.cgi', username, password, challenge, cnonce);
 
             // Assert
             expect(headerValue).toBe(expected);
