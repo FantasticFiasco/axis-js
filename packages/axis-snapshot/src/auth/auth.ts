@@ -52,15 +52,6 @@ const noAuth = async (url: string): Promise<{ error: HTTPError; res: undefined }
     }
 };
 
-interface DigestAuthChallenge {
-    type: 'Digest';
-    realm: string;
-    qop?: string;
-    nonce: string;
-    opaque?: string;
-    algorithm?: string;
-}
-
 const parseChallenge = (wwwAuthenticate: string): BasicAuthChallenge | DigestAuthChallenge => {
     const typeStopIndex = wwwAuthenticate.indexOf(' ');
     const type = wwwAuthenticate.substring(0, typeStopIndex);

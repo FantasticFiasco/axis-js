@@ -4,6 +4,11 @@ export interface Challenge {
 }
 
 export const generateAuthorizationHeader = (username: string, password: string, challenge: Challenge): string => {
-    const credentials = Buffer.from(`${username}:${password}`).toString('base64');
+    const credentials = base64(`${username}:${password}`);
     return `${challenge.type} ${credentials}`;
+};
+
+const base64 = (value: string): string => {
+    const buffer = Buffer.from(value);
+    return buffer.toString('base64');
 };
