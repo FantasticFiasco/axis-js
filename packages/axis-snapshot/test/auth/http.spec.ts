@@ -1,5 +1,5 @@
 import { HTTPError } from 'got';
-import { get } from '../../src/auth/auth';
+import { get } from '../../src/auth/http';
 
 const USERNAME = 'guest';
 const PASSWORD = 'guest';
@@ -14,7 +14,8 @@ describe('#get should', () => {
         const got = await get(NO_AUTH_URL, '', '');
 
         // Assert
-        expect(got!.body).toBeDefined();
+        expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBeDefined();
     });
 
     test('succeed given basic authentication', async () => {
@@ -22,7 +23,8 @@ describe('#get should', () => {
         const got = await get(BASIC_AUTH_URL, USERNAME, PASSWORD);
 
         // Assert
-        expect(got!.body).toBeDefined();
+        expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBeDefined();
     });
 
     test('succeed given digest authentication', async () => {
@@ -30,7 +32,8 @@ describe('#get should', () => {
         const got = await get(DIGEST_AUTH_URL, USERNAME, PASSWORD);
 
         // Assert
-        expect(got!.body).toBeDefined();
+        expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBeDefined();
     });
 
     test('throw error given invalid credentials', async () => {
