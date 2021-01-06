@@ -9,7 +9,7 @@ export abstract class Request {
     protected async get(url: string): Promise<Buffer> {
         try {
             const res = await get(url, this.connection.username, this.connection.password, this.connection.options?.agent);
-            return Buffer.from(res.body);
+            return res.body;
         } catch (error) {
             if (error instanceof got.HTTPError && error.response.statusCode === 401) {
                 throw new UnauthorizedError();

@@ -5,13 +5,14 @@ import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
 
-export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): CancelableRequest<Response<string>> => {
-    return client(url, username, password, agent).get(url);
+export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): CancelableRequest<Response<Buffer>> => {
+    return client(url, username, password, agent).get<Buffer>(url);
 };
 
 export const client = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): Got => {
     return got.extend({
         agent: createAgent(agent),
+        responseType: 'buffer',
         hooks: {
             afterResponse: [
                 (res, retryWithMergedOptions) => {
