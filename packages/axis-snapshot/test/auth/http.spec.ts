@@ -1,5 +1,7 @@
 import { HTTPError } from 'got';
-import { get } from '../../src/auth/http';
+import { Agent as HttpAgent } from 'http';
+import { Agent as HttpsAgent } from 'https';
+import { client, get } from '../../src/auth/http';
 
 const USERNAME = 'guest';
 const PASSWORD = 'guest';
@@ -55,5 +57,29 @@ describe('#get should', () => {
                 expect((error as HTTPError).response.statusCode).toBe(401);
             }
         }
+    });
+});
+
+describe('#client should', () => {
+    test('respect http agent', () => {
+        // Arrange
+        const agent = new HttpAgent({ keepAlive: true });
+
+        // Act
+        const got = client(NO_AUTH_URL, '', '', agent);
+
+        // Assert
+        expect((got.defaults.options.agent as any).http).toBe(agent);
+    });
+
+    test('respect https agent', () => {
+        // Arrange
+        const agent = new HttpsAgent({ keepAlive: true });
+
+        // Act
+        const got = client(NO_AUTH_URL, '', '', agent);
+
+        // Assert
+        expect((got.defaults.options.agent as any).http).toBe(agent);
     });
 });

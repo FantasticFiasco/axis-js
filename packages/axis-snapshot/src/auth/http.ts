@@ -1,16 +1,17 @@
-import got, { Response } from 'got';
+import got from 'got';
+import { Agent as HttpAgent } from 'http';
+import { Agent as HttpsAgent } from 'https';
 import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
 
-// TODO: Use agent if supplied
-
-export const get = async (url: string, username: string, password: string): Promise<Response<string> | undefined> => {
-    return client(url, username, password).get(url);
+export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent) => {
+    return client(url, username, password, agent).get(url);
 };
 
-const client = (url: string, username: string, password: string) =>
-    got.extend({
+export const client = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent) => {
+    return got.extend({
+        agent: createAgent(agent),
         hooks: {
             afterResponse: [
                 (res, retryWithMergedOptions) => {
@@ -48,3 +49,11 @@ const client = (url: string, username: string, password: string) =>
             ],
         },
     });
+};
+
+const createAgent = (agent?: HttpAgent | HttpsAgent): { http?: HttpAgent; https?: HttpsAgent } => {
+    return {
+        http: agent instanceof HttpAgent ? agent : undefined,
+        https: agent instanceof HttpsAgent ? agent : undefined,
+    };
+};
