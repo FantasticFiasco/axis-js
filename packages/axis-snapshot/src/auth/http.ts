@@ -1,15 +1,15 @@
-import got from 'got';
+import got, { CancelableRequest, Got, Response } from 'got';
 import { Agent as HttpAgent } from 'http';
 import { Agent as HttpsAgent } from 'https';
 import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
 
-export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent) => {
+export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): CancelableRequest<Response<string>> => {
     return client(url, username, password, agent).get(url);
 };
 
-export const client = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent) => {
+export const client = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): Got => {
     return got.extend({
         agent: createAgent(agent),
         hooks: {
