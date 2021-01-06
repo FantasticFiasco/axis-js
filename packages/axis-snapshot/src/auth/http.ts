@@ -37,7 +37,13 @@ export const client = (url: string, username: string, password: string, agent?: 
                             break;
 
                         case 'Digest':
-                            updatedOptions.headers.authorization = digest.generateAuthorizationHeader(url, username, password, challenge);
+                            updatedOptions.headers.authorization = digest.generateAuthorizationHeader(
+                                url,
+                                username,
+                                password,
+                                challenge,
+                                challenge.qop === 'auth' ? digest.cnonce() : undefined
+                            );
                             break;
 
                         default:
