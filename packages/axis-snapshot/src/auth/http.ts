@@ -1,42 +1,50 @@
-import { Response } from 'got';
+import got, { Response } from 'got';
+import * as basic from './basic';
+import { parse } from './challenge';
+import * as digest from './digest';
+
+// TODO: Use agent if supplied
 
 export const get = async (url: string, username: string, password: string): Promise<Response<string> | undefined> => {
-    throw new Error('Not implemented');
-    // let wwwAuthenticate: string | string[] | undefined;
-
-    // // Send request without authentication
-    // try {
-    //     const res = await got.get(url);
-    //     return res;
-    // } catch (error) {
-    //     if (!(error instanceof HTTPError)) {
-    //         throw error;
-    //     }
-
-    //     if (error.response.statusCode !== 401) {
-    //         throw error;
-    //     }
-
-    //     wwwAuthenticate = error.response.headers['wwwAuthenticate'];
-    //     if (wwwAuthenticate === undefined) {
-    //         throw error;
-    //     }
-    // }
-
-    // const challenge = parse(wwwAuthenticate);
-
-    // switch (challenge.type) {
-    //     case 'Basic':
-    //         ({ error, res } = await basicAuth(url, username, password));
-    //         break;
-
-    //     case 'Digest':
-    //         ({ error, res } = await digestAuth(url, username, password, challenge));
-    //         break;
-    // }
-
-    // if (error !== undefined) {
-    //     throw error;
-    // }
-    // return res;
+    return client(url, username, password).get(url);
 };
+
+const client = (url: string, username: string, password: string) =>
+    got.extend({
+        hooks: {
+            afterResponse: [
+                (res, retryWithMergedOptions) => {
+                    if (res.statusCode !== 401) {
+                        return res;
+                    }
+
+                    const wwwAuthenticate = res.headers['www-authenticate'];
+                    if (wwwAuthenticate === undefined) {
+                        return res;
+                    }
+
+                    const updatedOptions = {
+                        headers: {
+                            authorization: '',
+                        },
+                    };
+
+                    const challenge = parse(wwwAuthenticate);
+                    switch (challenge.type) {
+                        case 'Basic':
+                            updatedOptions.headers.authorization = basic.generateAuthorizationHeader(username, password, challenge);
+                            break;
+
+                        case 'Digest':
+                            updatedOptions.headers.authorization = digest.generateAuthorizationHeader(url, username, password, challenge);
+                            break;
+
+                        default:
+                            return res;
+                    }
+
+                    return retryWithMergedOptions(updatedOptions);
+                },
+            ],
+        },
+    });
