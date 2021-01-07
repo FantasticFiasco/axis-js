@@ -13,7 +13,7 @@ export interface Challenge {
     algorithm?: string;
 }
 
-export const createAuthorizationHeader = (method: string, url: string, username: string, password: string, challenge: Challenge, cnonce?: string): string => {
+export const createHeader = (method: string, url: string, username: string, password: string, challenge: Challenge, cnonce?: string): string => {
     if (challenge.algorithm !== undefined && challenge.algorithm !== 'MD5') {
         throw new Error(`Unsupported digest algorithm: ${challenge.algorithm}`);
     }

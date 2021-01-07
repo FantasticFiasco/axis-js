@@ -34,11 +34,11 @@ export const client = (method: string, url: string, username: string, password: 
                     const challenge = parse(wwwAuthenticate);
                     switch (challenge.type) {
                         case basic.BASIC:
-                            updatedOptions.headers.authorization = basic.createAuthorizationHeader(username, password, challenge);
+                            updatedOptions.headers.authorization = basic.createHeader(username, password, challenge);
                             break;
 
                         case digest.DIGEST:
-                            updatedOptions.headers.authorization = digest.createAuthorizationHeader(
+                            updatedOptions.headers.authorization = digest.createHeader(
                                 method,
                                 url,
                                 username,

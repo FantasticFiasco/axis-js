@@ -1,4 +1,4 @@
-import { BASIC, Challenge, createAuthorizationHeader } from '../../src/auth/basic';
+import { BASIC, Challenge, createHeader } from '../../src/auth/basic';
 
 describe('#generateAuthorizationHeader should', () => {
     test('generate correct header value', () => {
@@ -16,7 +16,7 @@ describe('#generateAuthorizationHeader should', () => {
 
         for (const { username, password, want } of testCases) {
             // Act
-            const got = createAuthorizationHeader(username, password, challenge);
+            const got = createHeader(username, password, challenge);
 
             // Assert
             expect(got).toBe(want);
