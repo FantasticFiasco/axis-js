@@ -7,20 +7,20 @@ describe('factory default request', () => {
     describe('#url (partial)', () => {
         test('should return URL', () => {
             // Act
-            const request = new FactoryDefaultRequest(connection, FactoryDefaultType.Partial);
+            const got = new FactoryDefaultRequest(connection, FactoryDefaultType.Partial);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/factorydefault.cgi`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/factorydefault.cgi`);
         });
     });
 
     describe('#url (hard)', () => {
         test('should return URL', () => {
             // Act
-            const request = new FactoryDefaultRequest(connection, FactoryDefaultType.Hard);
+            const got = new FactoryDefaultRequest(connection, FactoryDefaultType.Hard);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/hardfactorydefault.cgi`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/hardfactorydefault.cgi`);
         });
     });
 });
