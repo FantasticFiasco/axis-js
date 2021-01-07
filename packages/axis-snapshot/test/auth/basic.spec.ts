@@ -1,6 +1,6 @@
 import { BASIC, Challenge, createHeader } from '../../src/auth/basic';
 
-describe('#generateAuthorizationHeader should', () => {
+describe('#createHeader should', () => {
     test('generate correct header value', () => {
         // Arrange
         const testCases: { username: string; password: string; want: string }[] = [

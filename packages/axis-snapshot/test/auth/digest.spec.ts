@@ -1,7 +1,7 @@
 import { format } from 'util';
 import { Challenge, cnonce, createHeader, DIGEST } from '../../src/auth/digest';
 
-describe('#generateAuthorizationHeader should', () => {
+describe('#createHeader should', () => {
     test('generate correct header value given bare minimum challenge', () => {
         // Arrange
         const testCases: { username: string; password: string; nonce: string; wantFormat: string }[] = [
