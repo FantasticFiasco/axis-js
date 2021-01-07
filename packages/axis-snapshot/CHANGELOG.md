@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :dizzy: Changed
+
+- [BREAKING CHANGE] Removed properties `statusCode`, `cause` and `response` from `RequestError`
+
 ## [1.0.0] - 2020-10-22
 
 ### :zap: Added
