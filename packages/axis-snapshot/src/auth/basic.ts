@@ -3,7 +3,7 @@ export interface Challenge {
     realm: string;
 }
 
-export const generateAuthorizationHeader = (username: string, password: string, challenge: Challenge): string => {
+export const createAuthorizationHeader = (username: string, password: string, challenge: Challenge): string => {
     const credentials = base64(`${username}:${password}`);
     return `${challenge.type} ${credentials}`;
 };

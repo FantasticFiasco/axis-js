@@ -1,5 +1,5 @@
 import { format } from 'util';
-import { Challenge, cnonce, generateAuthorizationHeader } from '../../src/auth/digest';
+import { Challenge, cnonce, createAuthorizationHeader } from '../../src/auth/digest';
 
 describe('#generateAuthorizationHeader should', () => {
     test('generate correct header value given bare minimum challenge', () => {
@@ -33,7 +33,7 @@ describe('#generateAuthorizationHeader should', () => {
             };
 
             // Act
-            const got = generateAuthorizationHeader('https://some-url.com/some/path/', username, password, challenge);
+            const got = createAuthorizationHeader('https://some-url.com/some/path/', username, password, challenge);
 
             // Assert
             expect(got).toBe(format(wantFormat, nonce));
@@ -82,7 +82,7 @@ describe('#generateAuthorizationHeader should', () => {
             };
 
             // Act
-            const value = generateAuthorizationHeader('/some/path/', username, password, challenge, cnonce);
+            const value = createAuthorizationHeader('/some/path/', username, password, challenge, cnonce);
 
             // Assert
             expect(value).toBe(format(wantFormat, nonce, cnonce));
@@ -99,7 +99,7 @@ describe('#generateAuthorizationHeader should', () => {
         };
 
         // Act
-        const fn = () => generateAuthorizationHeader('/some/path/', 'root', 'pass', challenge);
+        const fn = () => createAuthorizationHeader('/some/path/', 'root', 'pass', challenge);
 
         // Assert
         expect(fn).toThrow();
