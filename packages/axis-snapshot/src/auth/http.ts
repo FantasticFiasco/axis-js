@@ -33,11 +33,11 @@ export const client = (url: string, username: string, password: string, agent?: 
 
                     const challenge = parse(wwwAuthenticate);
                     switch (challenge.type) {
-                        case 'Basic':
+                        case basic.BASIC:
                             updatedOptions.headers.authorization = basic.createAuthorizationHeader(username, password, challenge);
                             break;
 
-                        case 'Digest':
+                        case digest.DIGEST:
                             updatedOptions.headers.authorization = digest.createAuthorizationHeader(
                                 url,
                                 username,

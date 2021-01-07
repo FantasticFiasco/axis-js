@@ -1,4 +1,4 @@
-import { Challenge, createAuthorizationHeader } from '../../src/auth/basic';
+import { BASIC, Challenge, createAuthorizationHeader } from '../../src/auth/basic';
 
 describe('#generateAuthorizationHeader should', () => {
     test('generate correct header value', () => {
@@ -10,7 +10,7 @@ describe('#generateAuthorizationHeader should', () => {
         ];
 
         const challenge: Challenge = {
-            type: 'Basic',
+            type: BASIC,
             realm: 'test',
         };
 

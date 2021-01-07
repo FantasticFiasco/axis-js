@@ -1,3 +1,5 @@
+export const BASIC = 'Basic';
+
 export interface Challenge {
     type: 'Basic';
     realm: string;

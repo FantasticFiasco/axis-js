@@ -1,17 +1,17 @@
-import { Challenge as BasicChallenge } from './basic';
-import { Challenge as DigestChallenge } from './digest';
+import * as basic from './basic';
+import * as digest from './digest';
 
-export const parse = (wwwAuthenticateHeaderValue: string): BasicChallenge | DigestChallenge => {
-    const challenge = toChallenge(wwwAuthenticateHeaderValue);
+export const parse = (wwwAuthenticateHeader: string): basic.Challenge | digest.Challenge => {
+    const challenge = toChallenge(wwwAuthenticateHeader);
 
-    if (challenge.type === 'Basic') {
+    if (challenge.type === basic.BASIC) {
         return {
             type: challenge.type,
             realm: challenge.mustGet('realm'),
         };
     }
 
-    if (challenge.type === 'Digest') {
+    if (challenge.type === digest.DIGEST) {
         return {
             type: challenge.type,
             realm: challenge.mustGet('realm'),

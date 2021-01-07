@@ -1,5 +1,5 @@
 import { format } from 'util';
-import { Challenge, cnonce, createAuthorizationHeader } from '../../src/auth/digest';
+import { Challenge, cnonce, createAuthorizationHeader, DIGEST } from '../../src/auth/digest';
 
 describe('#generateAuthorizationHeader should', () => {
     test('generate correct header value given bare minimum challenge', () => {
@@ -27,7 +27,7 @@ describe('#generateAuthorizationHeader should', () => {
 
         for (const { username, password, nonce, wantFormat } of testCases) {
             const challenge: Challenge = {
-                type: 'Digest',
+                type: DIGEST,
                 realm: 'test',
                 nonce,
             };
@@ -74,7 +74,7 @@ describe('#generateAuthorizationHeader should', () => {
 
         for (const { username, password, nonce, cnonce, wantFormat } of testCases) {
             const challenge: Challenge = {
-                type: 'Digest',
+                type: DIGEST,
                 realm: 'test',
                 nonce,
                 qop: 'auth',
@@ -91,7 +91,7 @@ describe('#generateAuthorizationHeader should', () => {
 
     test('throw error given qop="auth" without cnonce', () => {
         const challenge: Challenge = {
-            type: 'Digest',
+            type: DIGEST,
             realm: 'test',
             nonce: 'some-nonce',
             qop: 'auth',

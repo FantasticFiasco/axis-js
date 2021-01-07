@@ -2,6 +2,8 @@ import { createHash } from 'crypto';
 import { parse } from 'url';
 import { v4 as uuid } from 'uuid';
 
+export const DIGEST = 'Digest';
+
 export interface Challenge {
     type: 'Digest';
     realm: string;

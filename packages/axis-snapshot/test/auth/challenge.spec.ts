@@ -1,6 +1,6 @@
-import { Challenge as BasicChallenge } from '../../src/auth/basic';
+import * as basic from '../../src/auth/basic';
 import { parse } from '../../src/auth/challenge';
-import { Challenge as DigestChallenge } from '../../src/auth/digest';
+import * as digest from '../../src/auth/digest';
 
 describe('#parse should', () => {
     test('successfully parse basic auth challenge', () => {
@@ -8,10 +8,10 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Basic realm="test"';
 
         // Act
-        const got = parse(wwwAuthenticate) as BasicChallenge;
+        const got = parse(wwwAuthenticate) as basic.Challenge;
 
         // Assert
-        expect(got.type).toBe('Basic');
+        expect(got.type).toBe(basic.BASIC);
         expect(got.realm).toBe('test');
     });
 
@@ -20,10 +20,10 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Digest realm="test", nonce="some-nonce"';
 
         // Act
-        const got = parse(wwwAuthenticate) as DigestChallenge;
+        const got = parse(wwwAuthenticate) as digest.Challenge;
 
         // Assert
-        expect(got.type).toBe('Digest');
+        expect(got.type).toBe(digest.DIGEST);
         expect(got.realm).toBe('test');
         expect(got.nonce).toBe('some-nonce');
         expect(got.qop).toBeUndefined();
@@ -36,10 +36,10 @@ describe('#parse should', () => {
         const wwwAuthenticate = 'Digest realm="test", nonce="some-nonce", algorithm=MD5, qop="auth", opaque="some-opaque"';
 
         // Act
-        const got = parse(wwwAuthenticate) as DigestChallenge;
+        const got = parse(wwwAuthenticate) as digest.Challenge;
 
         // Assert
-        expect(got.type).toBe('Digest');
+        expect(got.type).toBe(digest.DIGEST);
         expect(got.realm).toBe('test');
         expect(got.nonce).toBe('some-nonce');
         expect(got.qop).toBe('auth');
