@@ -1,6 +1,6 @@
 import { HTTPError } from 'got';
-import { Agent as HttpAgent } from 'http';
-import { Agent as HttpsAgent } from 'https';
+import * as http from 'http';
+import * as https from 'https';
 import { client, get } from '../../src/auth/http';
 
 const USERNAME = 'guest';
@@ -64,7 +64,7 @@ describe('#get should', () => {
 describe('#client should', () => {
     test('respect http agent', () => {
         // Arrange
-        const agent = new HttpAgent({ keepAlive: true });
+        const agent = new http.Agent({ keepAlive: true });
 
         // Act
         const got = client('GET', NO_AUTH_URL, '', '', agent);
@@ -75,7 +75,7 @@ describe('#client should', () => {
 
     test('respect https agent', () => {
         // Arrange
-        const agent = new HttpsAgent({ keepAlive: true });
+        const agent = new https.Agent({ keepAlive: true });
 
         // Act
         const got = client('GET', NO_AUTH_URL, '', '', agent);
