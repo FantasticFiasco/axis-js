@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :dizzy: Changed
 
+- [BREAKING CHANGE] Removed properties `statusCode`, `cause` and `response` from `RequestError`
 - [BREAKING CHANGE] Renamed `UnauthorizationError` to `UnauthorizedError`
 
 ## [1.1.1] - 2020-05-12
