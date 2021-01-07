@@ -81,6 +81,6 @@ describe('#client should', () => {
         const got = client('GET', NO_AUTH_URL, '', '', agent);
 
         // Assert
-        expect((got.defaults.options.agent as any).http).toBe(agent);
+        expect((got.defaults.options.agent as any).https).toBe(agent);
     });
 });
