@@ -10,10 +10,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Viewer, false);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer`);
         });
 
         test('should return URL when updating to viewer access and PTZ control', () => {
@@ -21,10 +21,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Viewer, true);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz`);
         });
 
         test('should return URL when updating to operator access', () => {
@@ -32,12 +32,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Operator, false);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer`
-            );
+            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer`);
         });
 
         test('should return URL when updating to operator access and PTZ control', () => {
@@ -45,10 +43,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Operator, true);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz`
             );
         });
@@ -58,10 +56,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Administrator, false);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer`
             );
         });
@@ -71,10 +69,10 @@ describe('update user request', () => {
             const user = new User('John', 'password', AccessRights.Administrator, true);
 
             // Act
-            const request = new UpdateUserRequest(connection, user);
+            const got = new UpdateUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz`
             );
         });

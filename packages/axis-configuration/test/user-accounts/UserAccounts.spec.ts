@@ -188,13 +188,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Viewer);
-            expect(users[0].ptz).toBe(false);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Viewer);
+            expect(got[0].ptz).toBe(false);
         });
 
         test('should get user with viewer and PTZ access', async () => {
@@ -206,13 +206,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Viewer);
-            expect(users[0].ptz).toBe(true);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Viewer);
+            expect(got[0].ptz).toBe(true);
         });
 
         test('should get user with operator access', async () => {
@@ -224,13 +224,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Operator);
-            expect(users[0].ptz).toBe(false);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Operator);
+            expect(got[0].ptz).toBe(false);
         });
 
         test('should get user with operator and PTZ access', async () => {
@@ -242,13 +242,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Operator);
-            expect(users[0].ptz).toBe(true);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Operator);
+            expect(got[0].ptz).toBe(true);
         });
 
         test('should get user with administrator access', async () => {
@@ -260,13 +260,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Administrator);
-            expect(users[0].ptz).toBe(false);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
+            expect(got[0].ptz).toBe(false);
         });
 
         test('should get user with administrator and PTZ access', async () => {
@@ -278,13 +278,13 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(1);
-            expect(users[0].name).toBe('Joe');
-            expect(users[0].accessRights).toBe(AccessRights.Administrator);
-            expect(users[0].ptz).toBe(true);
+            expect(got.length).toBe(1);
+            expect(got[0].name).toBe('Joe');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
+            expect(got[0].ptz).toBe(true);
         });
 
         test('should get users', async () => {
@@ -298,22 +298,22 @@ describe('users', () => {
                 .reply(200, responseBuilder.build());
 
             // Act
-            const users = await userAccounts.getAll();
+            const got = await userAccounts.getAll();
 
             // Assert
-            expect(users.length).toBe(3);
+            expect(got.length).toBe(3);
 
-            expect(users[0].name).toBe('Jane');
-            expect(users[0].accessRights).toBe(AccessRights.Administrator);
-            expect(users[0].ptz).toBe(true);
+            expect(got[0].name).toBe('Jane');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
+            expect(got[0].ptz).toBe(true);
 
-            expect(users[1].name).toBe('Franck');
-            expect(users[1].accessRights).toBe(AccessRights.Operator);
-            expect(users[1].ptz).toBe(false);
+            expect(got[1].name).toBe('Franck');
+            expect(got[1].accessRights).toBe(AccessRights.Operator);
+            expect(got[1].ptz).toBe(false);
 
-            expect(users[2].name).toBe('Joe');
-            expect(users[2].accessRights).toBe(AccessRights.Viewer);
-            expect(users[2].ptz).toBe(true);
+            expect(got[2].name).toBe('Joe');
+            expect(got[2].accessRights).toBe(AccessRights.Viewer);
+            expect(got[2].ptz).toBe(true);
         });
 
         test('should throw exception if device is unresponsive', async () => {

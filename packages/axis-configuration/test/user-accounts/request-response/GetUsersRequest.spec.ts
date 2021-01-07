@@ -7,10 +7,10 @@ describe('get users request', () => {
     describe('#url', () => {
         test('should return URL when getting all users', () => {
             // Act
-            const request = new GetUsersRequest(connection);
+            const got = new GetUsersRequest(connection);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=get`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=get`);
         });
     });
 });

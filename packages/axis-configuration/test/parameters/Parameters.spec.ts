@@ -21,10 +21,10 @@ describe('parameters', () => {
                 .reply(200, `root.${name}=${value}`);
 
             // Act
-            const root = await parameters.get(name);
+            const got = await parameters.get(name);
 
             // Assert
-            expect(root[name]).toBe(value);
+            expect(got[name]).toBe(value);
         });
 
         test('should get multiple parameters', async () => {
@@ -39,11 +39,11 @@ describe('parameters', () => {
                 .reply(200, `root.${name1}=${value1}\r\nroot.${name2}=${value2}`);
 
             // Act
-            const root = await parameters.get(name1, name2);
+            const got = await parameters.get(name1, name2);
 
             // Assert
-            expect(root[name1]).toBe(value1);
-            expect(root[name2]).toBe(value2);
+            expect(got[name1]).toBe(value1);
+            expect(got[name2]).toBe(value2);
         });
 
         test('should trim single parameter', async () => {
@@ -56,10 +56,10 @@ describe('parameters', () => {
                 .reply(200, ` root.${name} = ${value} `);
 
             // Act
-            const root = await parameters.get(name);
+            const got = await parameters.get(name);
 
             // Assert
-            expect(root[name]).toBe(value);
+            expect(got[name]).toBe(value);
         });
 
         test('should trim multiple parameters', async () => {
@@ -74,11 +74,11 @@ describe('parameters', () => {
                 .reply(200, ` root.${name1} = ${value1} \r\n root.${name2} = ${value2} `);
 
             // Act
-            const root = await parameters.get(name1, name2);
+            const got = await parameters.get(name1, name2);
 
             // Assert
-            expect(root[name1]).toBe(value1);
-            expect(root[name2]).toBe(value2);
+            expect(got[name1]).toBe(value1);
+            expect(got[name2]).toBe(value2);
         });
 
         test('should not get single unknown parameter', async () => {
@@ -90,10 +90,10 @@ describe('parameters', () => {
                 .reply(200, `# Error: Error -1 getting param in group '${name}'\r\n`);
 
             // Act
-            const root = await parameters.get(name);
+            const got = await parameters.get(name);
 
             // Assert
-            expect(root[name]).toBeFalsy();
+            expect(got[name]).toBeFalsy();
         });
 
         test('should not get multiple unknown parameters', async () => {
@@ -106,11 +106,11 @@ describe('parameters', () => {
                 .reply(200, `# Error: Error -1 getting param in group '${name1}'\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
 
             // Act
-            const root = await parameters.get(name1, name2);
+            const got = await parameters.get(name1, name2);
 
             // Assert
-            expect(root[name1]).toBeFalsy();
-            expect(root[name2]).toBeFalsy();
+            expect(got[name1]).toBeFalsy();
+            expect(got[name2]).toBeFalsy();
         });
 
         test('should get a mixture of known and unknown parameters', async () => {
@@ -124,11 +124,11 @@ describe('parameters', () => {
                 .reply(200, `root.${name1}=${value1}\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
 
             // Act
-            const root = await parameters.get(name1, name2);
+            const got = await parameters.get(name1, name2);
 
             // Assert
-            expect(root[name1]).toBe(value1);
-            expect(root[name2]).toBeFalsy();
+            expect(got[name1]).toBe(value1);
+            expect(got[name2]).toBeFalsy();
         });
 
         test('should throw exception if no parameter is specified', async () => {

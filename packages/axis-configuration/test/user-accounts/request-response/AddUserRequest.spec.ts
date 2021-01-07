@@ -10,10 +10,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Viewer, false);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer&comment=${user.name}`
             );
         });
@@ -23,10 +23,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Viewer, true);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz&comment=${user.name}`
             );
         });
@@ -36,10 +36,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Operator, false);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer&comment=${user.name}`
             );
         });
@@ -49,10 +49,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Operator, true);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz&comment=${user.name}`
             );
         });
@@ -62,10 +62,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Administrator, false);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer&comment=${user.name}`
             );
         });
@@ -75,10 +75,10 @@ describe('add user request', () => {
             const user = new User('John', 'password', AccessRights.Administrator, true);
 
             // Act
-            const request = new AddUserRequest(connection, user);
+            const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(request.url).toBe(
+            expect(got.url).toBe(
                 `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz&comment=${user.name}`
             );
         });
