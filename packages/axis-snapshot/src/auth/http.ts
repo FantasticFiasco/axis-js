@@ -6,10 +6,10 @@ import { parse } from './challenge';
 import * as digest from './digest';
 
 export const get = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): CancelableRequest<Response<Buffer>> => {
-    return client(url, username, password, agent).get<Buffer>(url);
+    return client('GET', url, username, password, agent).get<Buffer>(url);
 };
 
-export const client = (url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): Got => {
+export const client = (method: string, url: string, username: string, password: string, agent?: HttpAgent | HttpsAgent): Got => {
     return got.extend({
         agent: createAgent(agent),
         responseType: 'buffer',
@@ -39,6 +39,7 @@ export const client = (url: string, username: string, password: string, agent?: 
 
                         case digest.DIGEST:
                             updatedOptions.headers.authorization = digest.createAuthorizationHeader(
+                                method,
                                 url,
                                 username,
                                 password,

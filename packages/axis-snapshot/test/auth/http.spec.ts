@@ -67,7 +67,7 @@ describe('#client should', () => {
         const agent = new HttpAgent({ keepAlive: true });
 
         // Act
-        const got = client(NO_AUTH_URL, '', '', agent);
+        const got = client('GET', NO_AUTH_URL, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).http).toBe(agent);
@@ -78,7 +78,7 @@ describe('#client should', () => {
         const agent = new HttpsAgent({ keepAlive: true });
 
         // Act
-        const got = client(NO_AUTH_URL, '', '', agent);
+        const got = client('GET', NO_AUTH_URL, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).http).toBe(agent);
