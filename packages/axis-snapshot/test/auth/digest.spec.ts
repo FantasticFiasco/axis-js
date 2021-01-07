@@ -2,7 +2,7 @@ import { format } from 'util';
 import { Challenge, cnonce, createHeader, DIGEST } from '../../src/auth/digest';
 
 describe('#createHeader should', () => {
-    test('generate correct header value given bare minimum challenge', () => {
+    test('generate correct value given bare minimum challenge', () => {
         // Arrange
         const testCases: { username: string; password: string; nonce: string; wantFormat: string }[] = [
             {
@@ -40,7 +40,7 @@ describe('#createHeader should', () => {
         }
     });
 
-    test('generate correct header value given algorithm=MD5 and qop="auth"', () => {
+    test('generate correct value given algorithm=MD5 and qop="auth"', () => {
         // Arrange
         const testCases: { username: string; password: string; nonce: string; cnonce: string; wantFormat: string }[] = [
             {
