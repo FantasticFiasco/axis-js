@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- Replaced deprecated dependency [request](https://github.com/request/request) with [got](https://github.com/sindresorhus/got)
+
 ## [2.1.2] - 2020-07-18
 
 ### :policeman: Security
