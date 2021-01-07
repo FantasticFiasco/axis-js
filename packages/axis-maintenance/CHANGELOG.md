@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :dizzy: Changed
+
+- [BREAKING CHANGE] Renamed `UnauthorizationError` to `UnauthorizedError`
+
 ## [1.1.1] - 2020-05-12
 
 ### :syringe: Fixed
