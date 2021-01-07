@@ -25,10 +25,10 @@ export const parse = (wwwAuthenticateHeader: string): basic.Challenge | digest.C
     throw new Error(`Auth protocol ${challenge.type} is not supported`);
 };
 
-const toChallenge = (wwwAuthenticateHeaderValue: string): Challenge => {
-    const typeStopIndex = wwwAuthenticateHeaderValue.indexOf(' ');
-    const type = wwwAuthenticateHeaderValue.substring(0, typeStopIndex);
-    const params = wwwAuthenticateHeaderValue
+const toChallenge = (wwwAuthenticateHeader: string): Challenge => {
+    const typeStopIndex = wwwAuthenticateHeader.indexOf(' ');
+    const type = wwwAuthenticateHeader.substring(0, typeStopIndex);
+    const params = wwwAuthenticateHeader
         .substring(typeStopIndex)
         .split(',')
         .reduce((map, param) => {
