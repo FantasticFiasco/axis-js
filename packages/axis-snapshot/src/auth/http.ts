@@ -1,4 +1,4 @@
-import got, { CancelableRequest, Got, Response } from 'got';
+import got, { Agents, CancelableRequest, Got, Response } from 'got';
 import * as http from 'http';
 import * as https from 'https';
 import * as basic from './basic';
@@ -59,7 +59,7 @@ export const client = (method: string, url: string, username: string, password: 
     });
 };
 
-const createAgent = (agent?: http.Agent | https.Agent): { http?: http.Agent; https?: https.Agent } => {
+const createAgent = (agent?: http.Agent | https.Agent): Agents => {
     return {
         http: agent instanceof http.Agent ? agent : undefined,
         https: agent instanceof https.Agent ? agent : undefined,
