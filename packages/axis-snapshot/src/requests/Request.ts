@@ -1,6 +1,6 @@
 import * as got from 'got';
 import { Connection } from '..';
-import { get } from '../auth/http';
+import { get } from '../auth';
 import { RequestError, UnauthorizedError } from '../errors';
 
 export abstract class Request {
