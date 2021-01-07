@@ -8,15 +8,15 @@ describe('Mappings', () => {
             const service = new AxisService(['192.168.1.102', '169.254.129.36'], 'Lobby', 80, 'ACCC8E270AD8');
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeDefined();
-            expect(actual!.address).toBe('192.168.1.102');
-            expect(actual!.linkLocalAddress).toBe('169.254.129.36');
-            expect(actual!.port).toBe(80);
-            expect(actual!.macAddress).toBe('ACCC8E270AD8');
-            expect(actual!.friendlyName).toBe('Lobby');
+            expect(got).toBeDefined();
+            expect(got!.address).toBe('192.168.1.102');
+            expect(got!.linkLocalAddress).toBe('169.254.129.36');
+            expect(got!.port).toBe(80);
+            expect(got!.macAddress).toBe('ACCC8E270AD8');
+            expect(got!.friendlyName).toBe('Lobby');
         });
 
         test('should not map service without addressses', () => {
@@ -24,10 +24,10 @@ describe('Mappings', () => {
             const service = new AxisService([], 'Lobby', 80, 'ACCC8E270AD8');
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
 
         test('should not map service without address', () => {
@@ -40,10 +40,10 @@ describe('Mappings', () => {
             );
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
 
         test('should not map service without link local address', () => {
@@ -56,10 +56,10 @@ describe('Mappings', () => {
             );
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
 
         test('should map service with MAC address in lower letters', () => {
@@ -67,11 +67,11 @@ describe('Mappings', () => {
             const service = new AxisService(['192.168.1.102', '169.254.129.36'], 'Lobby', 80, 'accc8e270ad8');
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeDefined();
-            expect(actual!.macAddress).toBe('ACCC8E270AD8');
+            expect(got).toBeDefined();
+            expect(got!.macAddress).toBe('ACCC8E270AD8');
         });
 
         test('should not map service without MAC address', () => {
@@ -79,10 +79,10 @@ describe('Mappings', () => {
             const service = new AxisService(['192.168.1.102', '169.254.129.36'], 'Lobby', 80, undefined);
 
             // Act
-            const actual = mapFromService(service);
+            const got = mapFromService(service);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
     });
 });

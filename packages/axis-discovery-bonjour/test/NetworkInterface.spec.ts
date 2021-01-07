@@ -14,10 +14,10 @@ describe('NetworkInterface', () => {
             osMock.networkInterfaces.mockReturnValue(mocks.NETWORK_INTERFACE_WITH_TWO_ADDRESSES);
 
             // Act
-            const addresses = getIPv4Addresses();
+            const got = getIPv4Addresses();
 
             // Assert
-            expect(addresses).toEqual(['1.1.1.1', '2.2.2.2']);
+            expect(got).toEqual(['1.1.1.1', '2.2.2.2']);
         });
 
         test('should return addresses from multiple network interfaces', () => {
@@ -25,10 +25,10 @@ describe('NetworkInterface', () => {
             osMock.networkInterfaces.mockReturnValue(mocks.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
             // Act
-            const addresses = getIPv4Addresses();
+            const got = getIPv4Addresses();
 
             // Assert
-            expect(addresses).toEqual(['1.1.1.1', '2.2.2.2']);
+            expect(got).toEqual(['1.1.1.1', '2.2.2.2']);
         });
 
         test('should not return internal addresses', () => {
@@ -36,10 +36,10 @@ describe('NetworkInterface', () => {
             osMock.networkInterfaces.mockReturnValue(mocks.NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
 
             // Act
-            const addresses = getIPv4Addresses();
+            const got = getIPv4Addresses();
 
             // Assert
-            expect(Object.keys(addresses)).toHaveLength(0);
+            expect(Object.keys(got)).toHaveLength(0);
         });
 
         test('should not return IPv6 addresses', () => {
@@ -47,10 +47,10 @@ describe('NetworkInterface', () => {
             osMock.networkInterfaces.mockReturnValue(mocks.NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
 
             // Act
-            const addresses = getIPv4Addresses();
+            const got = getIPv4Addresses();
 
             // Assert
-            expect(Object.keys(addresses)).toHaveLength(0);
+            expect(Object.keys(got)).toHaveLength(0);
         });
 
         test('should not fail on systems without network interfaces', () => {
@@ -58,10 +58,10 @@ describe('NetworkInterface', () => {
             osMock.networkInterfaces.mockReturnValue(mocks.NO_NETWORK_INTERFACES);
 
             // Act
-            const addresses = getIPv4Addresses();
+            const got = getIPv4Addresses();
 
             // Assert
-            expect(Object.keys(addresses)).toHaveLength(0);
+            expect(Object.keys(got)).toHaveLength(0);
         });
     });
 });
