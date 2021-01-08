@@ -11,7 +11,7 @@ describe('update parameter response', () => {
             response.assertSuccess();
         });
 
-        test('throw error given update fails', () => {
+        test('throw error given updating one parameter fails', () => {
             // Arrange
             const response = new UpdateParametersResponse("# Error: Error setting 'some value' to 'root.Some.Parameter'!");
 
@@ -23,6 +23,23 @@ describe('update parameter response', () => {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
                 expect(error?.parameterNames).toStrictEqual(['root.Some.Parameter']);
+            }
+        });
+
+        test('throw error given updating multiple parameters fail', () => {
+            // Arrange
+            const response = new UpdateParametersResponse(
+                "# Error: Error setting 'some value' to 'root.Some.Parameter'!\n# Error: Error setting 'some other value' to 'root.Some.Other.Parameter'!"
+            );
+
+            try {
+                // Act
+                response.assertSuccess();
+                throw new Error('This exception should not be thrown');
+            } catch (error) {
+                // Assert
+                expect(error).toBeInstanceOf(UpdateParametersError);
+                expect(error?.parameterNames).toStrictEqual(['root.Some.Parameter', 'root.Some.Other.Parameter']);
             }
         });
     });
