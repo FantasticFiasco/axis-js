@@ -43,7 +43,7 @@ export const client = (method: string, url: string, username: string, password: 
                                 username,
                                 password,
                                 challenge,
-                                challenge.qop === 'auth' ? digest.cnonce() : undefined
+                                challenge.qop === 'auth' ? digest.createCnonce() : undefined
                             );
                             break;
 
