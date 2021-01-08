@@ -50,7 +50,7 @@ export const createHeader = (method: string, url: string, username: string, pass
     return `${challenge.type} ${params.join(', ')}`;
 };
 
-export const cnonce = (): string => {
+export const createCnonce = (): string => {
     return uuid().replace(/-/g, '');
 };
 

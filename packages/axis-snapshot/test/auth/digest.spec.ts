@@ -1,5 +1,5 @@
 import { format } from 'util';
-import { Challenge, cnonce, createHeader, DIGEST } from '../../src/auth/digest';
+import { Challenge, createCnonce, createHeader, DIGEST } from '../../src/auth/digest';
 
 describe('#createHeader should', () => {
     test('generate correct value given bare minimum challenge', () => {
@@ -106,10 +106,10 @@ describe('#createHeader should', () => {
     });
 });
 
-describe('#cnonce should', () => {
+describe('#createCnonce should', () => {
     test('only contain hex characters', () => {
         // Act
-        const got = cnonce();
+        const got = createCnonce();
 
         // Assert
         expect(got).toMatch(/^(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f)+$/);
@@ -117,7 +117,7 @@ describe('#cnonce should', () => {
 
     test('be of length 32', () => {
         // Act
-        const got = cnonce();
+        const got = createCnonce();
 
         // Assert
         expect(got.length).toBe(32);
