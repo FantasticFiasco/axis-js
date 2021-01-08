@@ -1,3 +1,3 @@
 export * from './RequestError';
-export * from './UnauthorizationError';
+export * from './UnauthorizedError';
 export * from './UnknownError';

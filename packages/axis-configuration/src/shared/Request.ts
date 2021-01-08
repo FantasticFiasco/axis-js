@@ -1,4 +1,4 @@
-import { Connection, RequestError, UnauthorizationError } from './';
+import { Connection, RequestError, UnauthorizedError } from './';
 
 export abstract class Request {
     protected constructor(protected readonly connection: Connection) {}
@@ -27,7 +27,7 @@ export abstract class Request {
     private handleStatusCodeError(error: Error) {
         if (error instanceof errors.StatusCodeError) {
             if (error.statusCode === 401) {
-                throw new UnauthorizationError();
+                throw new UnauthorizedError();
             }
 
             throw new RequestError(error.message, error.statusCode, undefined, error.error, error.response);

@@ -1,6 +1,6 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
 import * as nock from 'nock';
-import { AccessRights, Connection, Protocol, RequestError, UnauthorizationError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from '../../src';
+import { AccessRights, Connection, Protocol, RequestError, UnauthorizedError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from '../../src';
 import { Generate } from './Generate';
 import { GetUsersResponseBuilder } from './request-response/GetUsersResponseBuilder';
 
@@ -167,7 +167,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizationError);
+                expect(error).toBeInstanceOf(UnauthorizedError);
             }
         });
     });
@@ -344,7 +344,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizationError);
+                expect(error).toBeInstanceOf(UnauthorizedError);
             }
         });
     });
@@ -490,7 +490,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizationError);
+                expect(error).toBeInstanceOf(UnauthorizedError);
             }
         });
     });
@@ -555,7 +555,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizationError);
+                expect(error).toBeInstanceOf(UnauthorizedError);
             }
         });
     });
