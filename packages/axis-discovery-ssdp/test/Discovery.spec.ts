@@ -1,6 +1,6 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-import { Device, Discovery } from '../src/';
+import { Device } from '../src/Device';
 import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
 jest.mock('os');
@@ -8,7 +8,6 @@ jest.mock('dgram');
 
 describe('Discovery', () => {
     const osMock = mocked(os);
-    let discovery: Discovery;
 
     beforeEach(() => {
         // Mock os
@@ -16,14 +15,12 @@ describe('Discovery', () => {
 
         // Reset manual mocks
         jest.requireMock('dgram').mockReset();
-
-        // Create discovery
-        discovery = new Discovery();
     });
 
     describe('#start', () => {
         test('should not send M-SEARCH messages', async () => {
             // Act
+            const discovery = await createDiscovery();
             await discovery.start();
 
             // Assert
@@ -35,6 +32,7 @@ describe('Discovery', () => {
     describe('#search', () => {
         test('should send M-SEARCH messages', async () => {
             // Arrange
+            const discovery = await createDiscovery();
             await discovery.start();
 
             // Act
@@ -49,6 +47,7 @@ describe('Discovery', () => {
     describe('#stop', () => {
         test('should close sockets', async () => {
             // Arrange
+            const discovery = await createDiscovery();
             await discovery.start();
 
             // Act
@@ -60,9 +59,9 @@ describe('Discovery', () => {
         });
     });
 
-    test('#addListener', () => {
+    test('#addListener', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -74,9 +73,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(1);
     });
 
-    test('#on', () => {
+    test('#on', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -88,9 +87,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(1);
     });
 
-    test('#once', () => {
+    test('#once', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -103,9 +102,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(1);
     });
 
-    test('#removeListener', () => {
+    test('#removeListener', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -117,9 +116,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(0);
     });
 
-    test('#off', () => {
+    test('#off', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -131,9 +130,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(0);
     });
 
-    test('#removeAllListeners', () => {
+    test('#removeAllListeners', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
 
         // Act
@@ -145,9 +144,9 @@ describe('Discovery', () => {
         expect(fn.mock.calls.length).toBe(0);
     });
 
-    test('#getMaxListeners/#setMaxListeners', () => {
+    test('#getMaxListeners/#setMaxListeners', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const expected = 42;
 
         // Act
@@ -159,9 +158,9 @@ describe('Discovery', () => {
         expect(got).toBe(expected);
     });
 
-    test('#listenerCount', () => {
+    test('#listenerCount', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
         const fn = jest.fn();
         const expected = 2;
 
@@ -172,9 +171,9 @@ describe('Discovery', () => {
         expect(got).toBe(expected);
     });
 
-    test('#prependListener', () => {
+    test('#prependListener', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
 
         let got = '';
         const fn1 = jest.fn(() => (got += '1'));
@@ -190,9 +189,9 @@ describe('Discovery', () => {
         expect(got).toBe('12');
     });
 
-    test('#prependOnceListener', () => {
+    test('#prependOnceListener', async () => {
         // Arrange
-        const discovery = new Discovery();
+        const discovery = await createDiscovery();
 
         let got = '';
         const fn1 = jest.fn(() => (got += '1'));
@@ -214,9 +213,9 @@ describe('Discovery', () => {
     });
 
     describe('#eventNames', () => {
-        test('no listeners', () => {
+        test('no listeners', async () => {
             // Arrange
-            const discovery = new Discovery();
+            const discovery = await createDiscovery();
 
             // Act
             const got = discovery.eventNames();
@@ -225,9 +224,9 @@ describe('Discovery', () => {
             expect([...got]).toStrictEqual([]);
         });
 
-        test('one listener to one event', () => {
+        test('one listener to one event', async () => {
             // Arrange
-            const discovery = new Discovery();
+            const discovery = await createDiscovery();
             const fn = jest.fn();
 
             // Act
@@ -237,9 +236,9 @@ describe('Discovery', () => {
             expect([...got]).toStrictEqual(['hello']);
         });
 
-        test('one listener to two event', () => {
+        test('one listener to two event', async () => {
             // Arrange
-            const discovery = new Discovery();
+            const discovery = await createDiscovery();
             const fn = jest.fn();
 
             // Act
@@ -250,6 +249,15 @@ describe('Discovery', () => {
         });
     });
 });
+
+// A bit of 'the chicken and the egg' here. We are forced to dynamically import 'Discovery', since
+// importing the class will trigger 'got' to load, and that will, down the line, trigger a call to
+// 'os.networkInterfaces()' which in these tests is a mocked package, and which hasn't been
+// initialized before the imports are executed.
+const createDiscovery = async () => {
+    const module = await import('../src/Discovery');
+    return new module.Discovery();
+};
 
 const mockedDevice = () => {
     return new Device('', 0, '', '', '', '', '', '');
