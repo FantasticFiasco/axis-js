@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { AccessRights, User } from '../..';
 import { Response } from '../../shared/Response';
 

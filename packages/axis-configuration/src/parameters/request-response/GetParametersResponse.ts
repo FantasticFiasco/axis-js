@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Response } from '../../shared/Response';
 
 export class GetParametersResponse extends Response {

@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Connection } from '../..';
 import { Request } from '../../shared/Request';
 import { UpdateParametersResponse } from './UpdateParametersResponse';

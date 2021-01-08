@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { UpdateParametersError } from '../..';
 import { Response } from '../../shared/Response';
 
