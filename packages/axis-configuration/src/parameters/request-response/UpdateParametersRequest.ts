@@ -17,14 +17,12 @@ export class UpdateParametersRequest extends Request {
     }
 
     public get url(): string {
-        const parameterArguments = _.reduce(
-            this.parameters,
-            (result: string, value: string, name: string) => {
-                return `${result}&${name}=${value}`;
-            },
-            ''
-        );
+        const parameterArguments = Object.keys(this.parameters)
+            .map((name) => {
+                return name + '=' + this.parameters[name];
+            })
+            .join('&');
 
-        return `${this.connection.url}/axis-cgi/param.cgi?action=update${parameterArguments}`;
+        return `${this.connection.url}/axis-cgi/param.cgi?action=update&${parameterArguments}`;
     }
 }
