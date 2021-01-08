@@ -1,44 +1,24 @@
-import * as rp from 'request-promise-native';
-import * as errors from 'request-promise-native/errors';
-import { Connection, RequestError, UnauthorizationError } from '..';
+import * as got from 'got';
+import { Connection, RequestError, UnauthorizedError } from '..';
+import { get } from '../auth';
 
 export abstract class Request {
     protected constructor(protected readonly connection: Connection) {}
 
     protected async get(url: string): Promise<string> {
-        const options: rp.RequestPromiseOptions = {
-            auth: {
-                user: this.connection.username,
-                pass: this.connection.password,
-                sendImmediately: false,
-            },
-            agent: this.connection.options?.agent,
-        };
-
         try {
-            return await rp.get(url, options);
+            const res = await get(url, this.connection.username, this.connection.password, this.connection.options?.agent);
+            return res.body;
         } catch (error) {
-            this.handleStatusCodeError(error);
-            this.handleRequestError(error);
+            if (error instanceof got.HTTPError && error.response.statusCode === 401) {
+                throw new UnauthorizedError();
+            }
+            if (error instanceof got.RequestError) {
+                throw new RequestError(error.message, error.code, error);
+            }
 
             // Fallback
             throw error;
-        }
-    }
-
-    private handleStatusCodeError(error: any) {
-        if (error instanceof errors.StatusCodeError) {
-            if (error.statusCode === 401) {
-                throw new UnauthorizationError();
-            }
-
-            throw new RequestError(error.message, error.statusCode, undefined, error.error, error.response);
-        }
-    }
-
-    private handleRequestError(error: errors.RequestError) {
-        if (error instanceof errors.RequestError) {
-            throw new RequestError(error.message, undefined, error.cause, error.error, error.response);
         }
     }
 }

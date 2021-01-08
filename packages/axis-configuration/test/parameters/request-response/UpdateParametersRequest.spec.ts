@@ -12,10 +12,10 @@ describe('update parameters request', () => {
             };
 
             // Act
-            const request = new UpdateParametersRequest(connection, parameters);
+            const got = new UpdateParametersRequest(connection, parameters);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby`);
         });
 
         test('should return URL when updating multiple parameters', () => {
@@ -26,10 +26,10 @@ describe('update parameters request', () => {
             };
 
             // Act
-            const request = new UpdateParametersRequest(connection, parameters);
+            const got = new UpdateParametersRequest(connection, parameters);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby`);
         });
     });
 });

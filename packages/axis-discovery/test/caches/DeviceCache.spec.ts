@@ -8,10 +8,10 @@ describe('DeviceCache', () => {
             const subject = new DeviceCache();
 
             // Act
-            const actual = subject.update(DEVICE_WITHOUT_INFORMATION);
+            const got = subject.update(DEVICE_WITHOUT_INFORMATION);
 
             // Assert
-            expect(actual).toEqual(DEVICE_WITHOUT_INFORMATION);
+            expect(got).toEqual(DEVICE_WITHOUT_INFORMATION);
         });
 
         test('should return device when cache hit holds more information', () => {
@@ -19,10 +19,10 @@ describe('DeviceCache', () => {
             const subject = new DeviceCache(DEVICE_WITH_INFORMATION);
 
             // Act
-            const actual = subject.update(DEVICE_WITHOUT_INFORMATION);
+            const got = subject.update(DEVICE_WITHOUT_INFORMATION);
 
             // Assert
-            expect(actual).toEqual(DEVICE_WITH_INFORMATION);
+            expect(got).toEqual(DEVICE_WITH_INFORMATION);
         });
 
         test('should return device when cache hit holds less information', () => {
@@ -30,10 +30,10 @@ describe('DeviceCache', () => {
             const subject = new DeviceCache(DEVICE_WITHOUT_INFORMATION);
 
             // Act
-            const actual = subject.update(DEVICE_WITH_INFORMATION);
+            const got = subject.update(DEVICE_WITH_INFORMATION);
 
             // Assert
-            expect(actual).toEqual(DEVICE_WITH_INFORMATION);
+            expect(got).toEqual(DEVICE_WITH_INFORMATION);
         });
 
         test('should return device when cache hit holds identical information', () => {
@@ -41,10 +41,10 @@ describe('DeviceCache', () => {
             const subject = new DeviceCache(DEVICE_WITHOUT_INFORMATION);
 
             // Act
-            const actual = subject.update(DEVICE_WITHOUT_INFORMATION);
+            const got = subject.update(DEVICE_WITHOUT_INFORMATION);
 
             // Assert
-            expect(actual).toEqual(DEVICE_WITHOUT_INFORMATION);
+            expect(got).toEqual(DEVICE_WITHOUT_INFORMATION);
         });
 
         test('should fail when device has no MAC address', () => {

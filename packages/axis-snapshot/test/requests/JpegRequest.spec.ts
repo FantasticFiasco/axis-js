@@ -7,10 +7,10 @@ describe('get parameters request', () => {
     describe('#url', () => {
         test('should return URL without options', () => {
             // Act
-            const request = new JpegRequest(connection);
+            const got = new JpegRequest(connection);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi`);
         });
 
         test('should return URL with empty options', () => {
@@ -18,10 +18,10 @@ describe('get parameters request', () => {
             const options: SnapshotOptions = {};
 
             // Act
-            const request = new JpegRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi`);
         });
 
         test('should return URL with falsy JavaScript values', () => {
@@ -33,49 +33,49 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const request = new JpegRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?compression=0&rotation=0&squarepixel=0`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?compression=0&rotation=0&squarepixel=0`);
         });
 
         test('should return URL with single option', () => {
             // Arrange
-            const testCases: { options: SnapshotOptions; expectedQueryString: string }[] = [
-                { options: { resolution: '320x240' }, expectedQueryString: 'resolution=320x240' },
-                { options: { camera: 1 }, expectedQueryString: 'camera=1' },
-                { options: { camera: 'quad' }, expectedQueryString: 'camera=quad' },
-                { options: { compression: 50 }, expectedQueryString: 'compression=50' },
-                { options: { rotation: 180 }, expectedQueryString: 'rotation=180' },
-                { options: { palette: 'Axis' }, expectedQueryString: 'palette=Axis' },
-                { options: { squarepixel: 1 }, expectedQueryString: 'squarepixel=1' },
+            const testCases: { options: SnapshotOptions; wantQueryString: string }[] = [
+                { options: { resolution: '320x240' }, wantQueryString: 'resolution=320x240' },
+                { options: { camera: 1 }, wantQueryString: 'camera=1' },
+                { options: { camera: 'quad' }, wantQueryString: 'camera=quad' },
+                { options: { compression: 50 }, wantQueryString: 'compression=50' },
+                { options: { rotation: 180 }, wantQueryString: 'rotation=180' },
+                { options: { palette: 'Axis' }, wantQueryString: 'palette=Axis' },
+                { options: { squarepixel: 1 }, wantQueryString: 'squarepixel=1' },
             ];
 
-            for (const { options, expectedQueryString } of testCases) {
+            for (const { options, wantQueryString } of testCases) {
                 // Act
-                const request = new JpegRequest(connection, options);
+                const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${expectedQueryString}`);
+                expect(got.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
         test('should return URL with multiple options', () => {
             // Arrange
-            const testCases: { options: SnapshotOptions; expectedQueryString: string }[] = [
-                { options: { resolution: '320x240', camera: 1 }, expectedQueryString: 'resolution=320x240&camera=1' },
-                { options: { camera: 1, compression: 50 }, expectedQueryString: 'camera=1&compression=50' },
-                { options: { compression: 50, rotation: 180 }, expectedQueryString: 'compression=50&rotation=180' },
-                { options: { rotation: 180, palette: 'Axis' }, expectedQueryString: 'rotation=180&palette=Axis' },
-                { options: { palette: 'Axis', squarepixel: 1 }, expectedQueryString: 'palette=Axis&squarepixel=1' },
+            const testCases: { options: SnapshotOptions; wantQueryString: string }[] = [
+                { options: { resolution: '320x240', camera: 1 }, wantQueryString: 'resolution=320x240&camera=1' },
+                { options: { camera: 1, compression: 50 }, wantQueryString: 'camera=1&compression=50' },
+                { options: { compression: 50, rotation: 180 }, wantQueryString: 'compression=50&rotation=180' },
+                { options: { rotation: 180, palette: 'Axis' }, wantQueryString: 'rotation=180&palette=Axis' },
+                { options: { palette: 'Axis', squarepixel: 1 }, wantQueryString: 'palette=Axis&squarepixel=1' },
             ];
 
-            for (const { options, expectedQueryString } of testCases) {
+            for (const { options, wantQueryString } of testCases) {
                 // Act
-                const request = new JpegRequest(connection, options);
+                const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${expectedQueryString}`);
+                expect(got.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
@@ -86,10 +86,10 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const request = new JpegRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(() => request.url).toThrow();
+            expect(() => got.url).toThrow();
         });
 
         test('should throw error when palette option is an empty string', () => {
@@ -99,10 +99,10 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const request = new JpegRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(() => request.url).toThrow();
+            expect(() => got.url).toThrow();
         });
     });
 });

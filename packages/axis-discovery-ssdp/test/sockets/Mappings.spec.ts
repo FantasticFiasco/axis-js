@@ -10,16 +10,16 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(NOTIFY_MESSAGE));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual!.address).toBe('192.168.1.102');
-            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
-            expect(actual!.friendlyName).toBeFalsy();
-            expect(actual!.modelName).toBeFalsy();
-            expect(actual!.modelDescription).toBeFalsy();
-            expect(actual!.modelNumber).toBeFalsy();
-            expect(actual!.presentationURL).toBeFalsy();
+            expect(got!.address).toBe('192.168.1.102');
+            expect(got!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got!.friendlyName).toBeFalsy();
+            expect(got!.modelName).toBeFalsy();
+            expect(got!.modelDescription).toBeFalsy();
+            expect(got!.modelNumber).toBeFalsy();
+            expect(got!.presentationURL).toBeFalsy();
         });
 
         test('should map Notify messages and convert MAC address to uppercase', () => {
@@ -27,10 +27,10 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got!.macAddress!).toBe('ACCC8E270AD8');
         });
 
         test('should not map Notify messages without MAC in USN', () => {
@@ -38,10 +38,10 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(NOTIFY_MESSAGE_WITHOUT_MAC_IN_USN));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
 
         test('should map M-Search messages', () => {
@@ -49,16 +49,16 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(MSEARCH_MESSAGE));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual!.address).toBe('192.168.1.102');
-            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
-            expect(actual!.friendlyName).toBeFalsy();
-            expect(actual!.modelName).toBeFalsy();
-            expect(actual!.modelDescription).toBeFalsy();
-            expect(actual!.modelNumber).toBeFalsy();
-            expect(actual!.presentationURL).toBeFalsy();
+            expect(got!.address).toBe('192.168.1.102');
+            expect(got!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got!.friendlyName).toBeFalsy();
+            expect(got!.modelName).toBeFalsy();
+            expect(got!.modelDescription).toBeFalsy();
+            expect(got!.modelNumber).toBeFalsy();
+            expect(got!.presentationURL).toBeFalsy();
         });
 
         test('should map M-Search messages and convert MAC address to uppercase', () => {
@@ -66,10 +66,10 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got!.macAddress!).toBe('ACCC8E270AD8');
         });
 
         test('should not map M-Search messages without MAC in USN', () => {
@@ -77,10 +77,10 @@ describe('Mappings', () => {
             const message = new Message('192.168.1.102', Buffer.from(MSEARCH_MESSAGE_WITHOUT_MAC_IN_USN));
 
             // Act
-            const actual = mapFromMessage(message);
+            const got = mapFromMessage(message);
 
             // Assert
-            expect(actual).toBeFalsy();
+            expect(got).toBeFalsy();
         });
     });
 });

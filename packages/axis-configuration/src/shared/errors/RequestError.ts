@@ -1,5 +1,3 @@
-import * as http from 'http';
-
 /**
  * Error thrown when a request fail.
  */
@@ -10,21 +8,13 @@ export class RequestError extends Error {
          */
         message: string | undefined,
         /**
-         * The HTTP status code.
+         * The error code, like `ECONNREFUSED`.
          */
-        readonly statusCode: number | undefined,
-        /**
-         * The cause of the error.
-         */
-        readonly cause: any | undefined,
+        readonly code: string | undefined,
         /**
          * The error.
          */
-        readonly error: any,
-        /**
-         * The response.
-         */
-        readonly response: http.IncomingMessage
+        readonly error: unknown
     ) {
         super(message);
     }

@@ -10,10 +10,10 @@ describe('remove user request', () => {
             const username = 'John';
 
             // Act
-            const request = new RemoveUserRequest(connection, username);
+            const got = new RemoveUserRequest(connection, username);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=remove&user=${username}`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=remove&user=${username}`);
         });
     });
 });

@@ -7,10 +7,10 @@ describe('restart request', () => {
     describe('#url', () => {
         test('should return URL', () => {
             // Act
-            const request = new RestartRequest(connection);
+            const got = new RestartRequest(connection);
 
             // Assert
-            expect(request.url).toBe(`${connection.url}/axis-cgi/restart.cgi`);
+            expect(got.url).toBe(`${connection.url}/axis-cgi/restart.cgi`);
         });
     });
 });
