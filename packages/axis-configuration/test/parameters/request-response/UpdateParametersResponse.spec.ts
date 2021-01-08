@@ -29,7 +29,10 @@ describe('update parameter response', () => {
         test('throw error given updating multiple parameters fail', () => {
             // Arrange
             const response = new UpdateParametersResponse(
-                "# Error: Error setting 'some value' to 'root.Some.Parameter'!\n# Error: Error setting 'some other value' to 'root.Some.Other.Parameter'!"
+                [
+                    "# Error: Error setting 'some value' to 'root.Some.Parameter'!",
+                    "# Error: Error setting 'some other value' to 'root.Some.Other.Parameter'!",
+                ].join('\n')
             );
 
             try {
