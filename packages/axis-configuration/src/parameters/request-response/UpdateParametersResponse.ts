@@ -6,7 +6,7 @@ export class UpdateParametersResponse extends Response {
     // OK
     private static readonly SuccessResponse = /OK/;
     // An error is described in the following format:
-    // # Error: Error -1 getting param in group '[PARAMETER]'
+    // # Error: Error setting '[VALUE]' to '[PARAMETER]'!
     private static readonly ParameterErrorResponse = /# Error: Error setting '(.*)' to '(.*)'!/;
 
     constructor(response: string) {
@@ -19,19 +19,16 @@ export class UpdateParametersResponse extends Response {
         }
 
         const parameterErrors = this.response.split('\n');
-        const parameterErrorNames = _.reduce(
-            parameterErrors,
-            (result: string[], parameter: string) => {
-                const match = UpdateParametersResponse.ParameterErrorResponse.exec(parameter);
 
-                if (match) {
-                    result.push(match[1]);
-                }
+        const parameterErrorNames = parameterErrors.reduce<string[]>((result, parameter) => {
+            const match = UpdateParametersResponse.ParameterErrorResponse.exec(parameter);
 
-                return result;
-            },
-            []
-        );
+            if (match) {
+                result.push(match[1]);
+            }
+
+            return result;
+        }, []);
 
         throw new UpdateParametersError(parameterErrorNames);
     }
