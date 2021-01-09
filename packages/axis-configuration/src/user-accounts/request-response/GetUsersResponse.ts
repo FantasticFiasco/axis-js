@@ -28,23 +28,33 @@ export class GetUsersResponse extends Response {
         const parameters = this.parseParameters();
 
         const administrators = parameters['admin'];
-
-        const operators = parameters['operator']
-            // Remove users that also are administrators
-            .filter((user) => !administrators.includes(user));
-
-        const viewers = parameters['viewer']
-            // Remove users that also are administrators or operators
-            .filter((user) => !administrators.includes(user) || !operators.includes(user));
+        const operators = parameters['operator'];
+        const viewers = parameters['viewer'];
 
         // Users with PTZ control
-        const ptz = parameters['ptz'];
+        const usersWithPtz = parameters['ptz'];
 
-        return [
-            ...this.createUsers(administrators, AccessRights.Administrator, ptz),
-            ...this.createUsers(operators, AccessRights.Operator, ptz),
-            ...this.createUsers(viewers, AccessRights.Viewer, ptz),
-        ];
+        const users: User[] = [];
+
+        for (const userName of parameters['digusers']) {
+            let accessRights: AccessRights | undefined;
+
+            if (administrators.includes(userName)) {
+                accessRights = AccessRights.Administrator;
+            } else if (operators.includes(userName)) {
+                accessRights = AccessRights.Operator;
+            } else if (viewers.includes(userName)) {
+                accessRights = AccessRights.Viewer;
+            } else {
+                continue;
+            }
+
+            const ptz = usersWithPtz.includes(userName);
+
+            users.push(new User(userName, undefined, accessRights, ptz));
+        }
+
+        return users;
     }
 
     private parseParameters(): { [name: string]: string[] } {
@@ -62,12 +72,5 @@ export class GetUsersResponse extends Response {
 
             return result;
         }, {});
-    }
-
-    private createUsers(names: string[], accessRights: AccessRights, usersWithPtz: string[]): User[] {
-        return names.map((name) => {
-            const ptz = usersWithPtz.includes(name);
-            return new User(name, undefined, accessRights, ptz);
-        });
     }
 }
