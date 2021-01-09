@@ -1,6 +1,6 @@
 import { AccessRights, User } from '../../../src';
 import { GetUsersResponse } from '../../../src/user-accounts/request-response/GetUsersResponse';
-import { ROOT, ROOT_AND_ANOTHER_ADMINISTRATOR, ROOT_AND_ANOTHER_OPERATOR, ROOT_AND_ANOTHER_VIEWER } from './GetUsersResponse.mock';
+import { ROOT, ROOT_AND_JOHN_THE_ADMINISTRATOR, ROOT_AND_JOHN_THE_OPERATOR, ROOT_AND_JOHN_THE_VIEWER } from './GetUsersResponse.mock';
 
 describe('get users response', () => {
     describe('#users should ', () => {
@@ -18,7 +18,7 @@ describe('get users response', () => {
 
         test('return root and John as administrators', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_ANOTHER_ADMINISTRATOR);
+            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_ADMINISTRATOR);
 
             // Act
             const got = response.users;
@@ -30,7 +30,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as operator', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_ANOTHER_OPERATOR);
+            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_OPERATOR);
 
             // Act
             const got = response.users;
@@ -42,7 +42,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as viewer', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_ANOTHER_VIEWER);
+            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_VIEWER);
 
             // Act
             const got = response.users;

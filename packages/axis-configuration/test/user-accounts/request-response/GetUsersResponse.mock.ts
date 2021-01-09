@@ -153,7 +153,7 @@ streamcontrol=""
 nogroup=""
 digusers="root"`;
 
-export const ROOT_AND_ANOTHER_ADMINISTRATOR = `root=""
+export const ROOT_AND_JOHN_THE_ADMINISTRATOR = `root=""
 daemon=""
 bin=""
 sys=""
@@ -308,7 +308,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_ANOTHER_OPERATOR = `root=""
+export const ROOT_AND_JOHN_THE_OPERATOR = `root=""
 daemon=""
 bin=""
 sys=""
@@ -463,7 +463,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_ANOTHER_VIEWER = `root=""
+export const ROOT_AND_JOHN_THE_VIEWER = `root=""
 daemon=""
 bin=""
 sys=""
