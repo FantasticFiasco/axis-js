@@ -2,7 +2,14 @@ import { ExpectationError } from '@fantasticfiasco/expect';
 import * as nock from 'nock';
 import { AccessRights, Connection, Protocol, RequestError, UnauthorizedError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from '../../src';
 import { Generate } from './Generate';
-import { GetUsersResponseBuilder } from './request-response/GetUsersResponseBuilder';
+import {
+    ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ,
+    ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ,
+    ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ,
+    ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ,
+    ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ,
+    ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ,
+} from './request-response/GetUsersResponse.mock';
 
 describe('users', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
@@ -173,147 +180,118 @@ describe('users', () => {
     });
 
     describe('#getAll', () => {
-        let responseBuilder: GetUsersResponseBuilder;
-
-        beforeEach(() => {
-            responseBuilder = new GetUsersResponseBuilder();
-        });
-
         test('should get user with viewer access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Viewer, false);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
-            expect(got[0].accessRights).toBe(AccessRights.Viewer);
-            expect(got[0].ptz).toBe(false);
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
+            expect(got[0].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Viewer);
+            expect(got[1].ptz).toBe(false);
         });
 
         test('should get user with viewer and PTZ access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Viewer, true);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
-            expect(got[0].accessRights).toBe(AccessRights.Viewer);
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
             expect(got[0].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Viewer);
+            expect(got[1].ptz).toBe(true);
         });
 
         test('should get user with operator access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Operator, false);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
-            expect(got[0].accessRights).toBe(AccessRights.Operator);
-            expect(got[0].ptz).toBe(false);
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
+            expect(got[0].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Operator);
+            expect(got[1].ptz).toBe(false);
         });
 
         test('should get user with operator and PTZ access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Operator, true);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
-            expect(got[0].accessRights).toBe(AccessRights.Operator);
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
+            expect(got[0].accessRights).toBe(AccessRights.Administrator);
             expect(got[0].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Operator);
+            expect(got[1].ptz).toBe(true);
         });
 
         test('should get user with administrator access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Administrator, false);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
             expect(got[0].accessRights).toBe(AccessRights.Administrator);
-            expect(got[0].ptz).toBe(false);
+            expect(got[0].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Administrator);
+            expect(got[1].ptz).toBe(false);
         });
 
         test('should get user with administrator and PTZ access', async () => {
             // Arrange
-            responseBuilder.addUser('Joe', AccessRights.Administrator, true);
-
             nock(connection.url)
                 .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
+                .reply(200, ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ);
 
             // Act
             const got = await userAccounts.getAll();
 
             // Assert
-            expect(got.length).toBe(1);
-            expect(got[0].name).toBe('Joe');
+            expect(got.length).toBe(2);
+            expect(got[0].name).toBe('root');
             expect(got[0].accessRights).toBe(AccessRights.Administrator);
             expect(got[0].ptz).toBe(true);
-        });
-
-        test('should get users', async () => {
-            // Arrange
-            responseBuilder.addUser('Jane', AccessRights.Administrator, true);
-            responseBuilder.addUser('Franck', AccessRights.Operator, false);
-            responseBuilder.addUser('Joe', AccessRights.Viewer, true);
-
-            nock(connection.url)
-                .get(/pwdgrp.cgi\?action=get/)
-                .reply(200, responseBuilder.build());
-
-            // Act
-            const got = await userAccounts.getAll();
-
-            // Assert
-            expect(got.length).toBe(3);
-
-            expect(got[0].name).toBe('Jane');
-            expect(got[0].accessRights).toBe(AccessRights.Administrator);
-            expect(got[0].ptz).toBe(true);
-
-            expect(got[1].name).toBe('Franck');
-            expect(got[1].accessRights).toBe(AccessRights.Operator);
-            expect(got[1].ptz).toBe(false);
-
-            expect(got[2].name).toBe('Joe');
-            expect(got[2].accessRights).toBe(AccessRights.Viewer);
-            expect(got[2].ptz).toBe(true);
+            expect(got[1].name).toBe('John');
+            expect(got[1].accessRights).toBe(AccessRights.Administrator);
+            expect(got[1].ptz).toBe(true);
         });
 
         test('should throw exception if device is unresponsive', async () => {

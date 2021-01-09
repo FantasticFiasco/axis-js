@@ -6,7 +6,7 @@ export class UpdateParametersResponse extends Response {
     // OK
     private static readonly SuccessResponse = /OK/;
     // An error is described in the following format:
-    // # Error: Error setting '[VALUE]' to '[PARAMETER]'!
+    // # Error: Error setting '[PARAMETER]' to '[VALUE]'!
     private static readonly ParameterErrorResponse = /# Error: Error setting '(.*)' to '(.*)'!/;
 
     constructor(response: string) {
