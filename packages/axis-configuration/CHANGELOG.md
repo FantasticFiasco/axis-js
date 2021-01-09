@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [BREAKING CHANGE] Removed properties `statusCode`, `cause` and `response` from `RequestError`
 - [BREAKING CHANGE] Renamed `UnauthorizationError` to `UnauthorizedError`
 
+### :syringe: Fixed
+
+- [#66](https://github.com/FantasticFiasco/axis-js/issues/66) Getting users returned more users than expected
+
 ## [2.1.2] - 2020-07-18
 
 ### :policeman: Security
