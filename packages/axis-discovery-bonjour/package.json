@@ -26,6 +26,12 @@
   "engines": {
     "node": ">=6.0.0"
   },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "vendor/**/*.js",
+    "vendor/**/*.d.ts"
+  ],
   "scripts": {
     "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
     "prebuild": "yarn clean",
