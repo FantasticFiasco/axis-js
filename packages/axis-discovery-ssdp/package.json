@@ -1,6 +1,6 @@
 {
   "name": "axis-discovery-ssdp",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "A Node.js SSDP (UPnP) client library written in TypeScript capable of searching for Axis Communication cameras.",
   "keywords": [
     "axis",
