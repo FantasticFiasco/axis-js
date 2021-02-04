@@ -56,7 +56,7 @@
   "devDependencies": {
     "@types/debug": "4.1.5",
     "@types/jest": "26.0.20",
-    "@types/node": "14.14.22",
+    "@types/node": "14.14.24",
     "axis-discovery-bonjour": "2.0.0",
     "axis-discovery-ssdp": "6.0.0",
     "coveralls": "3.1.0",
