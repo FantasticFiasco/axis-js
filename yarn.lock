@@ -284,6 +284,11 @@
   resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.0.4.tgz#1297a1190ba012c722ac97c6e047493b6eaa2d57"
   integrity sha512-5weWuu+v6bAC2qc4RH6vjYdLrqv0gS/fkZ51UdIvfwuSJk+758eLOY31cGQVt+H6Hs5IvOCLHwgTY02CkLUVSw==
 
+"@fantasticfiasco/expect@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.1.0.tgz#d3cf830738a1529c1842cfb83e6ef5448b7e725a"
+  integrity sha512-pJRNTqulworBtafonFU5DR5lQe40AKLrR5uZYdy64hHqkVjJNbxSgT6W5w7YPmdylaiGO6wmyCtV/KE07KZogw==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
