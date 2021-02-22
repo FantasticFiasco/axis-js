@@ -279,7 +279,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fantasticfiasco/expect@1.*", "@fantasticfiasco/expect@1.0.4":
+"@fantasticfiasco/expect@1.*":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.0.4.tgz#1297a1190ba012c722ac97c6e047493b6eaa2d57"
   integrity sha512-5weWuu+v6bAC2qc4RH6vjYdLrqv0gS/fkZ51UdIvfwuSJk+758eLOY31cGQVt+H6Hs5IvOCLHwgTY02CkLUVSw==
@@ -972,15 +972,6 @@ axis-maintenance@1.1.1:
     cheerio "1.0.0-rc.3"
     request "2.*"
     request-promise-native "1.*"
-
-axis-snapshot@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/axis-snapshot/-/axis-snapshot-1.0.0.tgz#e9f0efb173deacbf4a226e44cfde2185d62fbb72"
-  integrity sha512-CeLtT6k50u8YofavkZAhNcfBOE3PuHLSsZM+d3oXSCR4qZAVQqA821orhgTwzg7EvkyOfpQmlhnijoiiDHBsXQ==
-  dependencies:
-    "@fantasticfiasco/expect" "1.0.4"
-    request "2.88.2"
-    request-promise-native "1.0.9"
 
 babel-jest@^26.6.3:
   version "26.6.3"
@@ -3794,7 +3785,7 @@ request-promise-core@1.1.4:
   dependencies:
     lodash "^4.17.19"
 
-request-promise-native@1.*, request-promise-native@1.0.9, request-promise-native@^1.0.8:
+request-promise-native@1.*, request-promise-native@^1.0.8:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/request-promise-native/-/request-promise-native-1.0.9.tgz#e407120526a5efdc9a39b28a5679bf47b9d9dc28"
   integrity sha512-wcW+sIUiWnKgNY0dqCpOZkUbF/I+YPi+f09JZIDa39Ec+q82CpSYniDp+ISgTTbKmnpJWASeJBPZmoxH84wt3g==
@@ -3803,7 +3794,7 @@ request-promise-native@1.*, request-promise-native@1.0.9, request-promise-native
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@2.*, request@2.88.2, request@>2.68.0, request@^2.88.2:
+request@2.*, request@>2.68.0, request@^2.88.2:
   version "2.88.2"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
   integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
