@@ -963,16 +963,6 @@ axis-configuration@2.1.2:
     request ">2.68.0"
     request-promise-native "1.*"
 
-axis-discovery-ssdp@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/axis-discovery-ssdp/-/axis-discovery-ssdp-6.0.0.tgz#e88e810efe4e0b0d7ffd3e5f3e5d44384dce1006"
-  integrity sha512-/u2yfnDM3+K9fYzRCeyzVxbiaSsYUD5G+Q3arlAvw5jb+hOg/ZpU+c09XI3ucWyt7Je5r2jSriMmQXGh5Us24g==
-  dependencies:
-    "@fantasticfiasco/expect" "1.*"
-    debug "4.*"
-    request ">2.68.0"
-    xml2js "0.*"
-
 axis-maintenance@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/axis-maintenance/-/axis-maintenance-1.1.1.tgz#7218914c8ed25f2000b40aed79d751c700770b47"
@@ -1508,7 +1498,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-debug@4.*, debug@4.3.1:
+debug@4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -4682,7 +4672,7 @@ xml-name-validator@^3.0.0:
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
 
-xml2js@0.*, xml2js@0.4.23:
+xml2js@0.4.23:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.23.tgz#a0c69516752421eb2ac758ee4d4ccf58843eac66"
   integrity sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug==
