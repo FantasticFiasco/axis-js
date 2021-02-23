@@ -952,17 +952,6 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axis-configuration@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/axis-configuration/-/axis-configuration-2.1.2.tgz#f95a5b8ef9826233e6c4438b2e30bd1400bdbef2"
-  integrity sha512-+IHGTSeq/jnia/6bzRp3Ky3zyfHPsnO2cW8hZw3azylk9qUCzIM5J7/3WwJqHtIt7CIiv0y8SrKFessw9ZBVUA==
-  dependencies:
-    "@fantasticfiasco/expect" "1.*"
-    cheerio "1.0.0-rc.3"
-    lodash ">4.17.5"
-    request ">2.68.0"
-    request-promise-native "1.*"
-
 axis-maintenance@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/axis-maintenance/-/axis-maintenance-1.1.1.tgz#7218914c8ed25f2000b40aed79d751c700770b47"
@@ -3153,7 +3142,7 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@4.x, lodash@>4.17.5, lodash@>=4.17.19, lodash@^4.15.0, lodash@^4.17.19:
+lodash@4.x, lodash@>=4.17.19, lodash@^4.15.0, lodash@^4.17.19:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -3794,7 +3783,7 @@ request-promise-native@1.*, request-promise-native@^1.0.8:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@2.*, request@>2.68.0, request@^2.88.2:
+request@2.*, request@^2.88.2:
   version "2.88.2"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
   integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
