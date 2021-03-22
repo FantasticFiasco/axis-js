@@ -24,11 +24,11 @@ import * as axis from 'axis-discovery';
 
 const discovery = new axis.Discovery();
 
-discovery.onHello((device: axis.Device) => {
+discovery.on('hello', (device: axis.Device) => {
     console.log(`Hello from ${device.address}`);
 });
 
-discovery.onGoodbye((device: axis.Device) => {
+discovery.on('goodbye', (device: axis.Device) => {
     console.log(`Goodbye from ${device.address}`);
 });
 
