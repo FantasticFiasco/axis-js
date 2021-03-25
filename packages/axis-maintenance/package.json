@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@types/cheerio": "0.22.28",
-    "@types/jest": "26.0.21",
+    "@types/jest": "26.0.22",
     "@types/node": "14.14.36",
     "coveralls": "3.1.0",
     "jest": "26.6.3",
