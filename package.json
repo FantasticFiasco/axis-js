@@ -8,7 +8,7 @@
     "release": "node ./scripts/release.js"
   },
   "devDependencies": {
-    "@octokit/rest": "18.3.5",
+    "@octokit/rest": "18.4.0",
     "inquirer": "8.0.0",
     "prettier": "2.2.1"
   },
