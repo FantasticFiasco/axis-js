@@ -18,6 +18,6 @@
   "devDependencies": {
     "@types/node": "14.14.37",
     "rimraf": "3.0.2",
-    "typescript": "4.2.3"
+    "typescript": "4.2.4"
   }
 }
