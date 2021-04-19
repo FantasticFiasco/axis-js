@@ -18,7 +18,7 @@
     "js-yaml": "4.1.0",
     "lodash": "4.17.21",
     "minimist": ">=1.2.2",
-    "node-notifier": ">=8.0.1",
+    "node-notifier": "9.0.1",
     "sshpk": ">=1.13.2",
     "y18n": ">=4.0.1"
   }
