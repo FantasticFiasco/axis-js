@@ -14,9 +14,9 @@
   },
   "resolutions": {
     "diff": ">=3.5.0",
-    "handlebars": "4.7.7",
-    "js-yaml": "4.1.0",
-    "lodash": "4.17.21",
+    "handlebars": ">=4.3.0",
+    "js-yaml": ">=3.13.1",
+    "lodash": ">=4.17.19",
     "minimist": ">=1.2.2",
     "node-notifier": ">=8.0.1",
     "sshpk": ">=1.13.2",

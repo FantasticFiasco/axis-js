@@ -1,17 +1,16 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>FantasticFiasco/renovate-config"
-  ],
-  "packageRules": [
-    {
-      "paths": ["packages/axis-discovery-bonjour"],
-      "packageNames": ["array-flatten", "deep-equal", "dns-equal", "dns-packet", "dns-txt", "multicast-dns-service-types", "thunky"],
-      "enabled": false
-    },
-    {
-      "paths": ["packages/axis-discovery-bonjour/vendor"],
-      "enabled": false
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["github>FantasticFiasco/renovate-config"],
+    "packageRules": [
+        {
+            "paths": ["packages/axis-discovery-bonjour"],
+            "packageNames": ["array-flatten", "deep-equal", "dns-equal", "dns-packet", "dns-txt", "multicast-dns-service-types", "thunky"],
+            "enabled": false
+        },
+        {
+            "paths": ["packages/axis-discovery-bonjour/vendor"],
+            "enabled": false
+        }
+    ],
+    "ignoreDeps": ["diff", "handlebars", "js-yaml", "lodash", "minimist", "node-notifier", "sshpk", "y18n"]
 }
