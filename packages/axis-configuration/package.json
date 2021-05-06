@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
-    "cheerio": "1.0.0-rc.6",
+    "cheerio": "1.0.0-rc.9",
     "got": "11.8.2"
   },
   "devDependencies": {
