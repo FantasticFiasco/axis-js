@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@octokit/rest": "18.5.3",
-    "inquirer": "8.0.0",
+    "inquirer": "8.1.0",
     "prettier": "2.3.0"
   },
   "resolutions": {
