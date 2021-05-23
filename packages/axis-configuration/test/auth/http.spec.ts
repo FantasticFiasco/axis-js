@@ -7,14 +7,13 @@ import { WebServer } from './web-server';
 const USERNAME = 'guest';
 const PASSWORD = 'guest';
 
-const BASIC_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Basic/';
 const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
 
 let webServer: WebServer;
 
 beforeAll(async () => {
     webServer = new WebServer();
-    await webServer.listen();
+    await webServer.listen('127.0.0.1', 0);
 });
 
 afterAll(async () => {
@@ -33,10 +32,11 @@ describe('#get should', () => {
 
     test('succeed given basic authentication', async () => {
         // Act
-        const got = await get(BASIC_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(webServer.basicAuthUri, webServer.username, webServer.password);
 
         // Assert
         expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBe('Success');
     });
 
     // TODO: This test is flaky
@@ -52,8 +52,8 @@ describe('#get should', () => {
         // Arrange
         const testCases: { url: string; username: string; password: string }[] = [
             // Basic auth
-            { url: BASIC_AUTH_URL, username: USERNAME, password: 'invalid password' },
-            { url: BASIC_AUTH_URL, username: 'invalid username', password: PASSWORD },
+            { url: webServer.basicAuthUri, username: webServer.username, password: 'invalid password' },
+            { url: webServer.basicAuthUri, username: 'invalid username', password: webServer.password },
             // Digest auth
             { url: DIGEST_AUTH_URL, username: USERNAME, password: 'invalid password' },
             { url: DIGEST_AUTH_URL, username: 'invalid-username', password: PASSWORD },
