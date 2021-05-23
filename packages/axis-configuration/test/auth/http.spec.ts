@@ -2,6 +2,7 @@ import { HTTPError } from 'got';
 import * as http from 'http';
 import * as https from 'https';
 import { client, get } from '../../src/auth/http';
+import { WebServer } from './web-server';
 
 const USERNAME = 'guest';
 const PASSWORD = 'guest';
@@ -9,6 +10,17 @@ const PASSWORD = 'guest';
 const NO_AUTH_URL = 'https://www.google.com';
 const BASIC_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Basic/';
 const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
+
+let webServer: WebServer;
+
+beforeAll(async () => {
+    webServer = new WebServer();
+    await webServer.listen();
+});
+
+afterAll(async () => {
+    await webServer.close();
+});
 
 describe('#get should', () => {
     test('succeed given no authentication', async () => {
