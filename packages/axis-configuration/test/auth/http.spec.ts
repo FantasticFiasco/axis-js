@@ -4,11 +4,6 @@ import * as https from 'https';
 import { client, get } from '../../src/auth/http';
 import { WebServer } from './web-server';
 
-const USERNAME = 'guest';
-const PASSWORD = 'guest';
-
-const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
-
 let webServer: WebServer;
 
 beforeAll(async () => {
@@ -39,10 +34,9 @@ describe('#get should', () => {
         expect(got?.body).toBe('Success');
     });
 
-    // TODO: This test is flaky
-    test.skip('succeed given digest authentication', async () => {
+    test('succeed given digest authentication', async () => {
         // Act
-        const got = await get(DIGEST_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(webServer.digestAuthUri, webServer.username, webServer.password);
 
         // Assert
         expect(got?.statusCode).toBe(200);
@@ -55,8 +49,8 @@ describe('#get should', () => {
             { url: webServer.basicAuthUri, username: webServer.username, password: 'invalid password' },
             { url: webServer.basicAuthUri, username: 'invalid username', password: webServer.password },
             // Digest auth
-            { url: DIGEST_AUTH_URL, username: USERNAME, password: 'invalid password' },
-            { url: DIGEST_AUTH_URL, username: 'invalid-username', password: PASSWORD },
+            { url: webServer.digestAuthUri, username: webServer.username, password: 'invalid password' },
+            { url: webServer.digestAuthUri, username: 'invalid-username', password: webServer.password },
         ];
 
         for (const { url, username, password } of testCases) {

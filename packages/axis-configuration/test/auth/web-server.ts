@@ -17,11 +17,16 @@ export class WebServer {
         return `http://${this.address}:${this.port}/basic-auth`;
     }
 
+    get digestAuthUri(): string {
+        return `http://${this.address}:${this.port}/digest-auth`;
+    }
+
     listen(address: string, port: number): Promise<void> {
         const app = express();
 
         app.get('/guest', this.handleGuest);
         app.get('/basic-auth', this.handleBasicAuth);
+        app.get('/digest-auth', this.handleDigestAuth);
 
         return new Promise((resolve) => {
             this.server = app.listen(port, address, () => {
@@ -69,5 +74,9 @@ export class WebServer {
         }
 
         res.send('Success');
+    };
+
+    private handleDigestAuth = (_: express.Request, res: express.Response) => {
+        res.status(401).send();
     };
 }
