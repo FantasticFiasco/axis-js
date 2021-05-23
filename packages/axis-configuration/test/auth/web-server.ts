@@ -10,11 +10,15 @@ export class WebServer {
     address?: string;
     port?: number;
 
+    get guestUri(): string {
+        return `http://${this.address}:${this.port}/guest`;
+    }
+
     listen(): Promise<void> {
         const app = express();
 
-        app.get('/', (_: express.Request, res: express.Response) => {
-            res.send('Hello World!');
+        app.get('/guest', (_: express.Request, res: express.Response) => {
+            res.send('Success');
         });
 
         return new Promise((resolve) => {

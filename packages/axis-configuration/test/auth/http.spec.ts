@@ -7,7 +7,6 @@ import { WebServer } from './web-server';
 const USERNAME = 'guest';
 const PASSWORD = 'guest';
 
-const NO_AUTH_URL = 'https://www.google.com';
 const BASIC_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Basic/';
 const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
 
@@ -25,10 +24,11 @@ afterAll(async () => {
 describe('#get should', () => {
     test('succeed given no authentication', async () => {
         // Act
-        const got = await get(NO_AUTH_URL, '', '');
+        const got = await get(webServer.guestUri, '', '');
 
         // Assert
         expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBe('Success');
     });
 
     test('succeed given basic authentication', async () => {
@@ -79,7 +79,7 @@ describe('#client should', () => {
         const agent = new http.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', NO_AUTH_URL, '', '', agent);
+        const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).http).toBe(agent);
@@ -90,7 +90,7 @@ describe('#client should', () => {
         const agent = new https.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', NO_AUTH_URL, '', '', agent);
+        const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).https).toBe(agent);
