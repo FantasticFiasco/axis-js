@@ -2,35 +2,41 @@ import { HTTPError } from 'got';
 import * as http from 'http';
 import * as https from 'https';
 import { client, get } from '../../src/auth/http';
+import { WebServer } from './web-server';
 
-const USERNAME = 'guest';
-const PASSWORD = 'guest';
+let webServer: WebServer;
 
-const NO_AUTH_URL = 'https://www.google.com';
-const BASIC_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Basic/';
-const DIGEST_AUTH_URL = 'https://jigsaw.w3.org/HTTP/Digest/';
+beforeAll(async () => {
+    webServer = new WebServer();
+    await webServer.listen('127.0.0.1', 0);
+});
+
+afterAll(async () => {
+    await webServer.close();
+});
 
 describe('#get should', () => {
     test('succeed given no authentication', async () => {
         // Act
-        const got = await get(NO_AUTH_URL, '', '');
+        const got = await get(webServer.guestUri, '', '');
 
         // Assert
         expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBe('Success');
     });
 
     test('succeed given basic authentication', async () => {
         // Act
-        const got = await get(BASIC_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(webServer.basicAuthUri, webServer.username, webServer.password);
 
         // Assert
         expect(got?.statusCode).toBe(200);
+        expect(got?.body).toBe('Success');
     });
 
-    // TODO: This test is flaky
-    test.skip('succeed given digest authentication', async () => {
+    test('succeed given digest authentication', async () => {
         // Act
-        const got = await get(DIGEST_AUTH_URL, USERNAME, PASSWORD);
+        const got = await get(webServer.digestAuthUri, webServer.username, webServer.password);
 
         // Assert
         expect(got?.statusCode).toBe(200);
@@ -40,11 +46,11 @@ describe('#get should', () => {
         // Arrange
         const testCases: { url: string; username: string; password: string }[] = [
             // Basic auth
-            { url: BASIC_AUTH_URL, username: USERNAME, password: 'invalid password' },
-            { url: BASIC_AUTH_URL, username: 'invalid username', password: PASSWORD },
+            { url: webServer.basicAuthUri, username: webServer.username, password: 'invalid password' },
+            { url: webServer.basicAuthUri, username: 'invalid username', password: webServer.password },
             // Digest auth
-            { url: DIGEST_AUTH_URL, username: USERNAME, password: 'invalid password' },
-            { url: DIGEST_AUTH_URL, username: 'invalid-username', password: PASSWORD },
+            { url: webServer.digestAuthUri, username: webServer.username, password: 'invalid password' },
+            { url: webServer.digestAuthUri, username: 'invalid-username', password: webServer.password },
         ];
 
         for (const { url, username, password } of testCases) {
@@ -67,7 +73,7 @@ describe('#client should', () => {
         const agent = new http.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', NO_AUTH_URL, '', '', agent);
+        const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).http).toBe(agent);
@@ -78,7 +84,7 @@ describe('#client should', () => {
         const agent = new https.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', NO_AUTH_URL, '', '', agent);
+        const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as any).https).toBe(agent);
