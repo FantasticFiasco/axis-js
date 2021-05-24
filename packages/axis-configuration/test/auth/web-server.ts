@@ -1,5 +1,7 @@
 import * as express from 'express';
 import { AddressInfo, Server } from 'net';
+import * as passport from 'passport';
+import { BasicStrategy } from 'passport-http';
 
 export class WebServer {
     private server?: Server;
@@ -24,8 +26,14 @@ export class WebServer {
     listen(address: string, port: number): Promise<void> {
         const app = express();
 
-        app.get('/guest', this.handleGuest);
-        app.get('/basic-auth', this.handleBasicAuth);
+        passport.use(
+            new BasicStrategy((username, password, done) => {
+                done(null, username === this.username && password === this.password);
+            })
+        );
+
+        app.get('/guest', this.successResponse);
+        app.get('/basic-auth', passport.authenticate('basic', { session: false }), this.successResponse);
         app.get('/digest-auth', this.handleDigestAuth);
 
         return new Promise((resolve) => {
@@ -54,39 +62,11 @@ export class WebServer {
         });
     }
 
-    private handleGuest = (_: express.Request, res: express.Response) => {
-        res.send('Success');
-    };
-
-    private handleBasicAuth = (req: express.Request, res: express.Response) => {
-        const header = req.headers.authorization;
-
-        if (!header || !header.startsWith('Basic ')) {
-            res.status(401).header('www-authenticate', 'Basic realm="AXIS_0123456789AB"').send();
-            return;
-        }
-
-        const { username, password } = this.decryptBasicAuth(header);
-
-        if (username !== this.username || password !== this.password) {
-            res.status(401).send();
-            return;
-        }
-
+    private successResponse = (_: express.Request, res: express.Response) => {
         res.send('Success');
     };
 
     private handleDigestAuth = (_: express.Request, res: express.Response) => {
         res.status(401).send();
-    };
-
-    private decryptBasicAuth = (authorizationHeader: string) => {
-        const token = authorizationHeader.replace(/^Basic /, '');
-        const credentials = Buffer.from(token, 'base64').toString();
-        const [username, password] = credentials.split(':');
-        return {
-            username,
-            password,
-        };
     };
 }
