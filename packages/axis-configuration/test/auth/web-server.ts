@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { AddressInfo, Server } from 'net';
 import * as passport from 'passport';
-import { BasicStrategy } from 'passport-http';
+import { BasicStrategy, DigestStrategy } from 'passport-http';
 
 export class WebServer {
     private server?: Server;
@@ -32,9 +32,26 @@ export class WebServer {
             })
         );
 
+        passport.use(
+            new DigestStrategy(
+                {
+                    realm: 'AXIS_0123456789AB',
+                    algorithm: 'MD5',
+                    qop: 'auth',
+                },
+                (username, done) => {
+                    if (username != this.username) {
+                        return done(null, false);
+                    }
+
+                    done(null, true, this.password);
+                }
+            )
+        );
+
         app.get('/guest', this.successResponse);
         app.get('/basic-auth', passport.authenticate('basic', { session: false }), this.successResponse);
-        app.get('/digest-auth', this.handleDigestAuth);
+        app.get('/digest-auth', passport.authenticate('digest', { session: false }), this.successResponse);
 
         return new Promise((resolve) => {
             this.server = app.listen(port, address, () => {
@@ -64,9 +81,5 @@ export class WebServer {
 
     private successResponse = (_: express.Request, res: express.Response) => {
         res.send('Success');
-    };
-
-    private handleDigestAuth = (_: express.Request, res: express.Response) => {
-        res.status(401).send();
     };
 }
