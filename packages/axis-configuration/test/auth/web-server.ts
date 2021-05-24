@@ -66,7 +66,7 @@ export class WebServer {
             return;
         }
 
-        const [username, password] = Buffer.from(header.replace('Basic ', ''), 'base64').toString().split(':');
+        const { username, password } = this.decryptBasicAuth(header);
 
         if (username !== this.username || password !== this.password) {
             res.status(401).send();
@@ -78,5 +78,15 @@ export class WebServer {
 
     private handleDigestAuth = (_: express.Request, res: express.Response) => {
         res.status(401).send();
+    };
+
+    private decryptBasicAuth = (authorizationHeader: string) => {
+        const token = authorizationHeader.replace(/^Basic /, '');
+        const credentials = Buffer.from(token, 'base64').toString();
+        const [username, password] = credentials.split(':');
+        return {
+            username,
+            password,
+        };
     };
 }
