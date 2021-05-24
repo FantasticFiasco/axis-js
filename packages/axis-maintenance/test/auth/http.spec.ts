@@ -22,7 +22,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got?.statusCode).toBe(200);
-        expect(got?.body).toBe('Success');
+        expect(got?.body.toString()).toBe('Success');
     });
 
     test('succeed given basic authentication', async () => {
@@ -31,7 +31,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got?.statusCode).toBe(200);
-        expect(got?.body).toBe('Success');
+        expect(got?.body.toString()).toBe('Success');
     });
 
     test('succeed given digest authentication', async () => {
@@ -40,6 +40,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got?.statusCode).toBe(200);
+        expect(got?.body.toString()).toBe('Success');
     });
 
     test('throw error given invalid credentials', async () => {
