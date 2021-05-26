@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :syringe: Changed
+
+- [BREAKING CHANGE] Deprecate Node.js 13 and below
+
 ## [6.0.1] - 2021-01-10
 
 ### :policeman: Security
