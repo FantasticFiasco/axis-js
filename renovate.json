@@ -3,6 +3,10 @@
     "extends": ["github>FantasticFiasco/renovate-config"],
     "packageRules": [
         {
+            "matchPackagePatterns": ["jest"],
+            "groupName": "Jest packages"
+        },
+        {
             "paths": ["packages/axis-discovery-bonjour"],
             "packageNames": ["array-flatten", "deep-equal", "dns-equal", "dns-packet", "dns-txt", "multicast-dns-service-types", "thunky"],
             "enabled": false
