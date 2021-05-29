@@ -60,7 +60,7 @@
     "axis-discovery-bonjour": "2.0.0",
     "axis-discovery-ssdp": "6.0.1",
     "coveralls": "3.1.0",
-    "jest": "27.0.1",
+    "jest": "27.0.2",
     "rimraf": "3.0.2",
     "ts-jest": "27.0.1",
     "tslint": "6.1.3",
