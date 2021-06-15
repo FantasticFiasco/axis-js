@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Security vulnerability in transient dependency `normalize-url`
 
-### :syringe: Changed
+### :dizzy: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js 13 and below
 

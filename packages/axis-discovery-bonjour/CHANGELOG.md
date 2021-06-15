@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-### :syringe: Changed
+### :dizzy: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js 13 and below
 
