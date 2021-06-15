@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [3.0.0] - 2021-06-15
+
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `css-what`
