@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `normalize-url`
+
 ### :syringe: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js 13 and below

@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :policeman: Security
 
+- Security vulnerability in transient dependency `css-what`
 - Security vulnerability in transient dependency `normalize-url`
 
 ### :syringe: Changed
