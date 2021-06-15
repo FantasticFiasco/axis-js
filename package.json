@@ -21,6 +21,7 @@
     "lodash": ">=4.17.19",
     "minimist": ">=1.2.2",
     "node-notifier": ">=8.0.1",
+    "normalize-url": ">=4.5.1",
     "sshpk": ">=1.13.2",
     "y18n": ">=4.0.1"
   }
