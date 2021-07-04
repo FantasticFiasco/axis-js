@@ -57,7 +57,7 @@
     "coveralls": "3.1.1",
     "express": "4.17.1",
     "jest": "27.0.6",
-    "nock": "13.1.0",
+    "nock": "13.1.1",
     "passport": "0.4.1",
     "passport-http": "0.3.0",
     "rimraf": "3.0.2",
