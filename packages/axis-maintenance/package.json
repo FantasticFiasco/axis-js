@@ -47,7 +47,7 @@
     "got": "11.8.2"
   },
   "devDependencies": {
-    "@types/cheerio": "0.22.29",
+    "@types/cheerio": "0.22.30",
     "@types/jest": "26.0.23",
     "@types/node": "14.17.4",
     "coveralls": "3.1.1",
