@@ -22,6 +22,7 @@
     "minimist": ">=1.2.2",
     "node-notifier": ">=8.0.1",
     "normalize-url": ">=4.5.1",
+    "path-parse": ">=1.0.7",
     "sshpk": ">=1.13.2",
     "y18n": ">=4.0.1"
   }
