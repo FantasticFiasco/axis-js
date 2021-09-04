@@ -221,7 +221,7 @@ describe('parameters', () => {
             } catch (error) {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
-                expect(error.parameterNames).toEqual([name]);
+                expect((error as UpdateParametersError).parameterNames).toEqual([name]);
             }
         });
 
@@ -243,7 +243,7 @@ describe('parameters', () => {
             } catch (error) {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
-                expect(error.parameterNames).toEqual([name1, name2]);
+                expect((error as UpdateParametersError).parameterNames).toEqual([name1, name2]);
             }
         });
 
@@ -263,7 +263,7 @@ describe('parameters', () => {
             } catch (error) {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
-                expect(error.parameterNames).toEqual([name]);
+                expect((error as UpdateParametersError).parameterNames).toEqual([name]);
             }
         });
 

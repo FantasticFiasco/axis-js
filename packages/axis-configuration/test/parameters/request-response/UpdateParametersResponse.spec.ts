@@ -22,7 +22,7 @@ describe('update parameter response', () => {
             } catch (error) {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
-                expect(error?.parameterNames).toStrictEqual(['root.Some.Parameter']);
+                expect((error as UpdateParametersError).parameterNames).toStrictEqual(['root.Some.Parameter']);
             }
         });
 
@@ -42,7 +42,7 @@ describe('update parameter response', () => {
             } catch (error) {
                 // Assert
                 expect(error).toBeInstanceOf(UpdateParametersError);
-                expect(error?.parameterNames).toStrictEqual(['root.Some.Parameter', 'root.Some.Other.Parameter']);
+                expect((error as UpdateParametersError).parameterNames).toStrictEqual(['root.Some.Parameter', 'root.Some.Other.Parameter']);
             }
         });
     });
