@@ -17,7 +17,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         check-latest: true
     - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-    - run: yarn install
+    - run: yarn install --immutable --immutable-cache
     - run: yarn workspaces run build
     - run: yarn workspaces run test
     - run: yarn workspaces run lint
