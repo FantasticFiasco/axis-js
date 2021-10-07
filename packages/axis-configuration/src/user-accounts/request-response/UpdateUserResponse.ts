@@ -8,7 +8,7 @@ export class UpdateUserResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         const body = this.html('body').html();
 
         if (body === null) {

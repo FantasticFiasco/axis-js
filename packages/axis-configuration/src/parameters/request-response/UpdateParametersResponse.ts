@@ -13,7 +13,7 @@ export class UpdateParametersResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         if (UpdateParametersResponse.SuccessResponse.test(this.response)) {
             return;
         }
