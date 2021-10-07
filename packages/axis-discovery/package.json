@@ -37,7 +37,7 @@
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
-    "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
+    "lint": "eslint . --ext .ts",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
     "prepack": "yarn build",
     "preversion": "git add ./CHANGELOG.md",
