@@ -147,7 +147,7 @@ export class Discovery implements EventEmitter {
      * Returns a copy of the array of listeners for the event named eventName.
      * @param eventName The name of the event.
      */
-    // tslint:disable-next-line:ban-types
+    // eslint-disable-next-line @typescript-eslint/ban-types
     listeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.listeners(eventName);
     }
@@ -157,7 +157,7 @@ export class Discovery implements EventEmitter {
      * wrappers (such as those created by once()).
      * @param eventName The name of the event.
      */
-    // tslint:disable-next-line:ban-types
+    // eslint-disable-next-line @typescript-eslint/ban-types
     rawListeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.rawListeners(eventName);
     }
