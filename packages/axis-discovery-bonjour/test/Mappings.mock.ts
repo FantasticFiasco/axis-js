@@ -15,20 +15,25 @@ export class AxisService extends events.EventEmitter implements bonjour.Service 
 
     addresses: string[];
     name: string;
-    type: string = 'axis-video';
+    type = 'axis-video';
     subtypes: string[] = [];
-    protocol: string = 'tcp';
+    protocol = 'tcp';
     port: number;
-    published: boolean = true;
+    published = true;
 
     get fqdn(): string {
         return `${this.name}._axis-video._tcp.local'`;
     }
 
     get host(): string {
-        return `axis-${this.macAddress!.toLowerCase()}.local`;
+        if (!this.macAddress) {
+            throw new Error('Mock service was created without any MAC address');
+        }
+
+        return `axis-${this.macAddress.toLowerCase()}.local`;
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     get txt(): Object {
         if (this.macAddress) {
             return {
@@ -39,6 +44,9 @@ export class AxisService extends events.EventEmitter implements bonjour.Service 
         return {};
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-empty-function
     stop(_: () => any): void {}
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     start(): void {}
 }

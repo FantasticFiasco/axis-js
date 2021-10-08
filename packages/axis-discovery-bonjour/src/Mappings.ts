@@ -30,18 +30,23 @@ export function mapFromService(service: bonjour.Service): Device | undefined {
 
 const linkLocalPrefix = '169.254';
 
-function getAddresses(service: any): string[] | undefined {
-    if (!service.addresses || service.addresses instanceof Array === false) {
+function getAddresses(service: unknown): string[] | undefined {
+    const serviceWithAddresses = service as { addresses?: Array<undefined> };
+    if (!serviceWithAddresses.addresses || serviceWithAddresses.addresses instanceof Array === false) {
         return undefined;
     }
 
-    for (const address of service.addresses) {
+    const addresses: string[] = [];
+
+    for (const address of serviceWithAddresses.addresses) {
         if (typeof address !== 'string') {
             return undefined;
         }
+
+        addresses.push(address);
     }
 
-    return service.addresses;
+    return addresses;
 }
 
 function getAddress(addresses: string[]): string | undefined {
@@ -52,10 +57,11 @@ function getLinkLocalAddress(addresses: string[]): string | undefined {
     return addresses.find((address) => address.startsWith(linkLocalPrefix));
 }
 
-function getMacAddress(service: any): string | undefined {
-    if (!service.txt || !service.txt.macaddress || typeof service.txt.macaddress !== 'string') {
+function getMacAddress(service: unknown): string | undefined {
+    const serviceWithMacAddress = service as { txt?: { macaddress: unknown } };
+    if (!serviceWithMacAddress.txt || !serviceWithMacAddress.txt.macaddress || typeof serviceWithMacAddress.txt.macaddress !== 'string') {
         return undefined;
     }
 
-    return service.txt.macaddress;
+    return serviceWithMacAddress.txt.macaddress;
 }

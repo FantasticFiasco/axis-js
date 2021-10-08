@@ -12,11 +12,11 @@ describe('Mappings', () => {
 
             // Assert
             expect(got).toBeDefined();
-            expect(got!.address).toBe('192.168.1.102');
-            expect(got!.linkLocalAddress).toBe('169.254.129.36');
-            expect(got!.port).toBe(80);
-            expect(got!.macAddress).toBe('ACCC8E270AD8');
-            expect(got!.friendlyName).toBe('Lobby');
+            expect(got?.address).toBe('192.168.1.102');
+            expect(got?.linkLocalAddress).toBe('169.254.129.36');
+            expect(got?.port).toBe(80);
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
+            expect(got?.friendlyName).toBe('Lobby');
         });
 
         test('should not map service without addressses', () => {
@@ -71,7 +71,7 @@ describe('Mappings', () => {
 
             // Assert
             expect(got).toBeDefined();
-            expect(got!.macAddress).toBe('ACCC8E270AD8');
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
         });
 
         test('should not map service without MAC address', () => {

@@ -26,7 +26,7 @@ export class Discovery implements EventEmitter {
      * Start listen for device advertisements on all network interface
      * addresses.
      */
-    public start() {
+    public start(): void {
         expect.toNotExist(this.bonjour, 'Discovery has already been started');
         expect.toNotExist(this.browser, 'Discovery has already been started');
 
@@ -38,7 +38,7 @@ export class Discovery implements EventEmitter {
     /**
      * Stop listening for device advertisements.
      */
-    public stop() {
+    public stop(): void {
         expect.toExist(this.bonjour, 'Discovery has not been started');
         expect.toExist(this.browser, 'Discovery has not been started');
 
@@ -50,12 +50,14 @@ export class Discovery implements EventEmitter {
     /**
      * Triggers a new search for devices on the network.
      */
-    public search() {
+    public search(): void {
         expect.toExist(this.browser, 'Discovery has not been started');
 
         log('Discovery#search');
 
-        this.browser!.update();
+        if (this.browser) {
+            this.browser.update();
+        }
     }
 
     /**
@@ -143,6 +145,7 @@ export class Discovery implements EventEmitter {
      * Returns a copy of the array of listeners for the event named eventName.
      * @param eventName The name of the event.
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     listeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.listeners(eventName);
     }
@@ -152,6 +155,7 @@ export class Discovery implements EventEmitter {
      * wrappers (such as those created by once()).
      * @param eventName The name of the event.
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     rawListeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.rawListeners(eventName);
     }
@@ -234,6 +238,7 @@ export class Discovery implements EventEmitter {
 
         // The type definitions are not in sync with the fork of Bonjour I am
         // depending on, that's why we have to go to the dark side
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const untypedBonjour: any = bonjour;
         this.bonjour = untypedBonjour({ interface: addresses }) as bonjour.Bonjour;
 
@@ -243,12 +248,16 @@ export class Discovery implements EventEmitter {
     }
 
     private teardown() {
-        this.browser!.removeAllListeners('up');
-        this.browser!.removeAllListeners('down');
-        this.browser!.stop();
-        this.browser = undefined;
+        if (this.browser) {
+            this.browser.removeAllListeners('up');
+            this.browser.removeAllListeners('down');
+            this.browser.stop();
+            this.browser = undefined;
+        }
 
-        this.bonjour!.destroy();
-        this.bonjour = undefined;
+        if (this.bonjour) {
+            this.bonjour.destroy();
+            this.bonjour = undefined;
+        }
     }
 }
