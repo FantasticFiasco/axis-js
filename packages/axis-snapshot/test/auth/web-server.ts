@@ -55,8 +55,8 @@ export class WebServer {
 
         return new Promise((resolve) => {
             this.server = app.listen(port, address, () => {
-                this.address = (this.server!.address() as AddressInfo)!.address;
-                this.port = (this.server!.address() as AddressInfo)!.port;
+                this.address = (this.server?.address() as AddressInfo).address;
+                this.port = (this.server?.address() as AddressInfo).port;
 
                 resolve();
             });
