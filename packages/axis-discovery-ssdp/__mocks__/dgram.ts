@@ -1,10 +1,10 @@
 import { EventEmitter } from 'events';
 
-interface SocketOptions {
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface SocketOptions {}
 
-interface RemoteInfo {
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface RemoteInfo {}
 
 export let socketBindCallCount: number;
 export let socketCloseCallCount: number;
@@ -25,7 +25,14 @@ class Socket extends EventEmitter {
         }
     }
 
-    send(_msg: string | Uint8Array, _offset: number, _length: number, _port?: number, _address?: string, callback?: (error: Error | null, bytes: number) => void): void {
+    send(
+        _msg: string | Uint8Array,
+        _offset: number,
+        _length: number,
+        _port?: number,
+        _address?: string,
+        callback?: (error: Error | null, bytes: number) => void
+    ): void {
         socketSendCallCount++;
         if (callback) {
             callback(null, 0);
@@ -33,11 +40,12 @@ class Socket extends EventEmitter {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function createSocket(_options: SocketOptions, _callback?: (msg: Buffer, rinfo: RemoteInfo) => void): Socket {
     return new Socket();
 }
 
-export function mockReset() {
+export function mockReset(): void {
     socketBindCallCount = 0;
     socketCloseCallCount = 0;
     socketSendCallCount = 0;

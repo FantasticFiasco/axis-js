@@ -1,4 +1,3 @@
-import * as expect from '@fantasticfiasco/expect';
 import { AddressInfo } from 'net';
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
@@ -17,22 +16,24 @@ export class NotifySocket extends SocketBase {
         super();
     }
 
-    protected onListening() {
-        expect.toExist(this.socket, 'Notify socket has never been started');
+    protected onListening(): void {
+        if (!this.socket) {
+            throw new Error('Notify socket has never been started');
+        }
 
-        log('NotifySocket#onListening - %s:%d', (this.socket!.address() as AddressInfo).address, (this.socket!.address() as AddressInfo).port);
+        log('NotifySocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
 
         for (const address of this.addresses) {
             log('NotifySocket#onListening - add membership to %s', address);
             try {
-                this.socket!.addMembership(SSDP_MULTICAST_ADDRESS, address);
+                this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
             } catch (error) {
                 log('NotifySocket#onListening - %o', error);
             }
         }
     }
 
-    protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {
+    protected onMessage(messageBuffer: Buffer, remote: AddressInfo): void {
         const message = new Message(remote.address, messageBuffer);
 
         if (message.method !== 'NOTIFY * HTTP/1.1' || message.nt !== 'urn:axis-com:service:BasicService:1') {
@@ -47,10 +48,12 @@ export class NotifySocket extends SocketBase {
     }
 
     protected bind(): Promise<void> {
-        expect.toExist(this.socket, 'Notify socket has never been started');
-
         return new Promise<void>((resolve) => {
-            this.socket!.bind(SSDP_PORT, undefined, () => resolve());
+            if (!this.socket) {
+                throw new Error('Notify socket has never been started');
+            }
+
+            this.socket.bind(SSDP_PORT, undefined, () => resolve());
         });
     }
 }

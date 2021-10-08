@@ -13,13 +13,13 @@ describe('Mappings', () => {
             const got = mapFromMessage(message);
 
             // Assert
-            expect(got!.address).toBe('192.168.1.102');
-            expect(got!.macAddress!).toBe('ACCC8E270AD8');
-            expect(got!.friendlyName).toBeFalsy();
-            expect(got!.modelName).toBeFalsy();
-            expect(got!.modelDescription).toBeFalsy();
-            expect(got!.modelNumber).toBeFalsy();
-            expect(got!.presentationURL).toBeFalsy();
+            expect(got?.address).toBe('192.168.1.102');
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
+            expect(got?.friendlyName).toBeFalsy();
+            expect(got?.modelName).toBeFalsy();
+            expect(got?.modelDescription).toBeFalsy();
+            expect(got?.modelNumber).toBeFalsy();
+            expect(got?.presentationURL).toBeFalsy();
         });
 
         test('should map Notify messages and convert MAC address to uppercase', () => {
@@ -30,7 +30,7 @@ describe('Mappings', () => {
             const got = mapFromMessage(message);
 
             // Assert
-            expect(got!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
         });
 
         test('should not map Notify messages without MAC in USN', () => {
@@ -52,13 +52,13 @@ describe('Mappings', () => {
             const got = mapFromMessage(message);
 
             // Assert
-            expect(got!.address).toBe('192.168.1.102');
-            expect(got!.macAddress!).toBe('ACCC8E270AD8');
-            expect(got!.friendlyName).toBeFalsy();
-            expect(got!.modelName).toBeFalsy();
-            expect(got!.modelDescription).toBeFalsy();
-            expect(got!.modelNumber).toBeFalsy();
-            expect(got!.presentationURL).toBeFalsy();
+            expect(got?.address).toBe('192.168.1.102');
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
+            expect(got?.friendlyName).toBeFalsy();
+            expect(got?.modelName).toBeFalsy();
+            expect(got?.modelDescription).toBeFalsy();
+            expect(got?.modelNumber).toBeFalsy();
+            expect(got?.presentationURL).toBeFalsy();
         });
 
         test('should map M-Search messages and convert MAC address to uppercase', () => {
@@ -69,7 +69,7 @@ describe('Mappings', () => {
             const got = mapFromMessage(message);
 
             // Assert
-            expect(got!.macAddress!).toBe('ACCC8E270AD8');
+            expect(got?.macAddress).toBe('ACCC8E270AD8');
         });
 
         test('should not map M-Search messages without MAC in USN', () => {

@@ -28,7 +28,7 @@ describe('RootDescription', () => {
             const got = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            expect(got.modelDescription!).toBe('AXIS M1014 Fixed Network Camera');
+            expect(got.modelDescription).toBe('AXIS M1014 Fixed Network Camera');
         });
 
         test('should not return model description if missing', async () => {
@@ -56,7 +56,7 @@ describe('RootDescription', () => {
             const got = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            expect(got.modelNumber!).toBe('M1014');
+            expect(got.modelNumber).toBe('M1014');
         });
 
         test('should not return model number if missing', async () => {
@@ -74,7 +74,7 @@ describe('RootDescription', () => {
             const got = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            expect(got.macAddress!).toBe('ACCC8E270AD8');
+            expect(got.macAddress).toBe('ACCC8E270AD8');
         });
 
         test('should not return MAC address if missing', async () => {
@@ -92,7 +92,7 @@ describe('RootDescription', () => {
             const got = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            expect(got.presentationUrl!).toBe('http://192.168.1.102:80/');
+            expect(got.presentationUrl).toBe('http://192.168.1.102:80/');
         });
 
         test('should not return presentation URL if missing', async () => {

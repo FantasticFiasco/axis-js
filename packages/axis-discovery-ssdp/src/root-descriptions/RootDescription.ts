@@ -1,7 +1,34 @@
 import { parseString } from 'xml2js';
 
+interface Data {
+    ['root']: {
+        ['device']: {
+            [0]: {
+                ['friendlyName']: {
+                    [0]: string;
+                };
+                ['modelDescription']?: {
+                    [0]: string;
+                };
+                ['modelName']: {
+                    [0]: string;
+                };
+                ['modelNumber']?: {
+                    [0]: string;
+                };
+                ['serialNumber']?: {
+                    [0]: string;
+                };
+                ['presentationURL']?: {
+                    [0]: string;
+                };
+            };
+        };
+    };
+}
+
 export class RootDescription {
-    private constructor(readonly remoteAddress: string, private readonly rootDescription: any) {}
+    private constructor(readonly remoteAddress: string, private readonly rootDescription: Data) {}
 
     public static parse(remoteAddress: string, xml: string): Promise<RootDescription> {
         return new Promise<RootDescription>((resolve, reject) => {
@@ -47,7 +74,7 @@ export class RootDescription {
             return undefined;
         }
 
-        return this.rootDescription['root']['device'][0]['serialNumber'][0]!.toUpperCase();
+        return this.rootDescription['root']['device'][0]['serialNumber'][0].toUpperCase();
     }
 
     public get presentationUrl(): string | undefined {

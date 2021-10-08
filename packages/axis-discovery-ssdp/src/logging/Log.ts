@@ -1,6 +1,6 @@
 import * as debug from 'debug';
 
-export function log(formatter: any, ...args: any[]) {
+export function log(formatter: unknown, ...args: unknown[]): void {
     logger(formatter, ...args);
 }
 

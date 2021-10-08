@@ -1,4 +1,3 @@
-import * as expect from '@fantasticfiasco/expect';
 import { AddressInfo } from 'net';
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
@@ -42,13 +41,15 @@ export class MSearchSocket extends SocketBase {
         });
     }
 
-    protected onListening() {
-        expect.toExist(this.socket, 'M-SEARCH socket has never been started');
+    protected onListening(): void {
+        if (!this.socket) {
+            throw new Error('M-SEARCH socket has never been started');
+        }
 
-        log('MSearchSocket#onListening - %s:%d', (this.socket!.address() as AddressInfo).address, (this.socket!.address() as AddressInfo).port);
+        log('MSearchSocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
     }
 
-    protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {
+    protected onMessage(messageBuffer: Buffer, remote: AddressInfo): void {
         const message = new Message(remote.address, messageBuffer);
 
         if (message.method !== 'HTTP/1.1 200 OK') {
@@ -59,10 +60,12 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected bind(): Promise<void> {
-        expect.toExist(this.socket, 'M-SEARCH socket has never been started');
+        return new Promise<void>((resolve) => {
+            if (!this.socket) {
+                throw new Error('M-SEARCH socket has never been started');
+            }
 
-        return new Promise<void>((resove) => {
-            this.socket!.bind(undefined, this.address, () => resove());
+            this.socket.bind(undefined, this.address, () => resolve());
         });
     }
 }

@@ -51,13 +51,12 @@ export class Discovery implements EventEmitter {
      * Triggers a new search for devices on the network.
      */
     public search(): void {
-        expect.toExist(this.browser, 'Discovery has not been started');
+        if (!this.browser) {
+            throw new Error('Discovery has not been started');
+        }
 
         log('Discovery#search');
-
-        if (this.browser) {
-            this.browser.update();
-        }
+        this.browser.update();
     }
 
     /**
