@@ -8,7 +8,7 @@ export class RestartResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         if (RestartResponse.SuccessResponse.test(this.response)) {
             return;
         }
