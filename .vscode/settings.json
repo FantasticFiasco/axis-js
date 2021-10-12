@@ -2,18 +2,6 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
-  "files.exclude": {
-    "**/*.js": {
-      "when": "$(basename).ts"
-    },
-    "**/*.d.ts": {
-      "when": "$(basename).ts"
-    },
-    "**/*.js.map": true,
-    "**/*.d.ts.map": true
-  },
-  "spellright.language": ["en", "English (American)"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
