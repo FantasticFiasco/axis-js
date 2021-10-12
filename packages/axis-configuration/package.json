@@ -32,7 +32,7 @@
   "scripts": {
     "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
     "prebuild": "yarn clean",
-    "build": "tsc -b",
+    "build": "tsc",
     "prestart": "yarn build",
     "start": "node ./src/server.js",
     "test": "jest",
