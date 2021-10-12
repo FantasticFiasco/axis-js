@@ -2,16 +2,17 @@
 
 [![npm version](https://img.shields.io/npm/v/axis-snapshot.svg)](https://www.npmjs.com/package/axis-snapshot)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-snapshot-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-snapshot-js)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-snapshot-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-snapshot-js?type=dev)
 
 A Node.js library written in TypeScript capable of getting snapshots from [Axis Communication](http://www.axis.com) cameras.
 
 ## Table of contents
 
-- [Super simple to use](#super-simple-to-use)
-- [Installation](#installation)
-- [API](#api)
+- [axis-snapshot](#axis-snapshot)
+  - [Table of contents](#table-of-contents)
+  - [Super simple to use](#super-simple-to-use)
+  - [Installation](#installation)
+  - [API](#api)
+    - [`Snapshot`](#snapshot)
 
 ---
 

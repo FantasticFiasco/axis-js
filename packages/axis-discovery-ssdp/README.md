@@ -2,8 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js?type=dev)
 
 A Node.js SSDP (UPnP) client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
@@ -11,10 +9,15 @@ To also find cameras on the network using Bonjour, please see [axis-discovery](h
 
 ## Table of contents
 
-- [Super simple to use](#super-simple-to-use)
-- [Installation](#installation)
-- [Who is using it?](#who-is-using-it)
-- [API](#api)
+- [axis-discovery-ssdp](#axis-discovery-ssdp)
+  - [Table of contents](#table-of-contents)
+  - [Super simple to use](#super-simple-to-use)
+  - [Installation](#installation)
+  - [Who is using it?](#who-is-using-it)
+  - [API](#api)
+    - [`Discovery`](#discovery)
+    - [`Device`](#device)
+    - [`Options`](#options)
 
 ---
 

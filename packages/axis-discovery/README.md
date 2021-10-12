@@ -2,8 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/axis-discovery.svg)](https://www.npmjs.com/package/axis-discovery)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-js)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-js?type=dev)
 
 A Node.js client library written in TypeScript capable of searching for Axis Communication cameras using Bonjour and SSDP (UPnP).
 
@@ -11,9 +9,13 @@ It utilizes [axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-js/
 
 ## Table of contents
 
-- [Super simple to use](#super-simple-to-use)
-- [Installation](#installation)
-- [API](#api)
+- [axis-discovery](#axis-discovery)
+  - [Table of contents](#table-of-contents)
+  - [Super simple to use](#super-simple-to-use)
+  - [Installation](#installation)
+  - [API](#api)
+    - [`Discovery`](#discovery)
+    - [`Device`](#device)
 
 ---
 

@@ -2,16 +2,17 @@
 
 [![npm version](https://img.shields.io/npm/v/axis-maintenance.svg)](https://www.npmjs.com/package/axis-maintenance)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-maintenance-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-maintenance-js)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-maintenance-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-maintenance-js?type=dev)
 
 A Node.js library written in TypeScript capable of running maintenance operations on cameras from [Axis Communication](http://www.axis.com).
 
 ## Table of contents
 
-- [Super simple to use](#super-simple-to-use)
-- [Installation](#installation)
-- [API](#api)
+- [axis-maintenance](#axis-maintenance)
+  - [Table of contents](#table-of-contents)
+  - [Super simple to use](#super-simple-to-use)
+  - [Installation](#installation)
+  - [API](#api)
+    - [`Maintenance`](#maintenance)
 
 ---
 

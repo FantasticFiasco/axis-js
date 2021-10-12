@@ -2,18 +2,21 @@
 
 [![npm version](https://img.shields.io/npm/v/axis-configuration.svg)](https://www.npmjs.com/package/axis-configuration)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-configuration-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-configuration-js)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-configuration-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-configuration-js?type=dev)
 
 A Node.js library written in TypeScript capable of configuring [Axis Communication](http://www.axis.com) cameras.
 
 ## Table of contents
 
-- [Super simple to use](#super-simple-to-use)
-- [Installation](#installation)
-- [Prerequisites](#prerequisites)
-- [Parameters](#parameters)
-- [User accounts](#user-accounts)
+- [axis-configuration](#axis-configuration)
+  - [Table of contents](#table-of-contents)
+  - [Super simple to use](#super-simple-to-use)
+  - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Parameters](#parameters)
+    - [`Parameters`](#parameters-1)
+  - [User accounts](#user-accounts)
+    - [`UserAccounts`](#useraccounts)
+    - [`User`](#user)
 
 ---
 
