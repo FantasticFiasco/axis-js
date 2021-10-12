@@ -47,11 +47,9 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
+    "axis-discovery-bonjour": "2.0.0",
+    "axis-discovery-ssdp": "7.0.0",
     "debug": "4.3.2"
-  },
-  "peerDependencies": {
-    "axis-discovery-bonjour": "1.* || 2.*",
-    "axis-discovery-ssdp": "5.* || 6.*"
   },
   "devDependencies": {
     "@types/debug": "4.1.7",
