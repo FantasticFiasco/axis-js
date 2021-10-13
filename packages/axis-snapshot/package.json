@@ -22,17 +22,17 @@
   },
   "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",
-  "main": "./lib/index.js",
-  "types": "./lib/index",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "engines": {
     "node": ">=14.0.0"
   },
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts"
+    "src/**/*.js",
+    "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./src/server.js",
     "test": "jest",
