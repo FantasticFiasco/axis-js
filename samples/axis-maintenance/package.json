@@ -4,7 +4,7 @@
   "private": true,
   "main": "sample.js",
   "scripts": {
-    "clean": "rimraf \"./**/*.+(d.ts|js|js.map)\"",
+    "clean": "rimraf \"./**/*.+(d.ts|d.ts.map|js|js.map)\"",
     "prebuild": "yarn clean",
     "build": "tsc",
     "test": "echo noop",

@@ -31,7 +31,7 @@
     "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./coverage",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",

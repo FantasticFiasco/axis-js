@@ -33,7 +33,7 @@
     "vendor/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./coverage",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./src/server.js",
     "test": "jest",
