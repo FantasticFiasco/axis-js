@@ -1,7 +1,13 @@
-name: CI/CD
+name: axis-configuration
 
 on:
-  push
+  push:
+    paths:
+      - "./packages/axis-configuration"
+
+defaults:
+  run:
+    working-directory: "./packages/axis-configuration"
 
 jobs:
   build:
@@ -18,9 +24,9 @@ jobs:
         check-latest: true
     - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
     - run: yarn install --immutable --immutable-cache
-    - run: yarn workspaces run build
-    - run: yarn workspaces run test
-    - run: yarn workspaces run lint
+    - run: yarn build
+    - run: yarn test
+    - run: yarn lint
     - run: if [ ${{ matrix.node-version }} == 14.x ]; then node ./scripts/publish-on-tag.js; fi
       if: startsWith(github.ref, 'refs/tags/')
       env:
