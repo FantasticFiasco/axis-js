@@ -43,7 +43,8 @@
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
     "cheerio": "1.0.0-rc.10",
-    "got": "11.8.2"
+    "got": "11.8.2",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/cheerio": "0.22.30",
@@ -52,6 +53,7 @@
     "@types/nock": "10.0.3",
     "@types/node": "14.17.15",
     "@types/passport-http": "0.3.9",
+    "@types/uuid": "8.3.1",
     "coveralls": "3.1.1",
     "express": "4.17.1",
     "jest": "27.0.6",
