@@ -1,4 +1,4 @@
-import { Connection, Parameters } from 'axis-configuration';
+import { Connection, Parameters } from '../src';
 
 const networkBonjour = 'Network.Bonjour';
 const networkBonjourFriendlyName = 'Network.Bonjour.FriendlyName';
