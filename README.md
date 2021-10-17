@@ -1,7 +1,5 @@
 # axis-js
 
-![Build Status](https://github.com/FantasticFiasco/axis-js/workflows/CI/CD/badge.svg)
-
 ## Packages
 
 The following NPM packages have been created to provide a smooth experience interacting with devices from Axis Communications.
