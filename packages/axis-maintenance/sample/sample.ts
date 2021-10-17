@@ -1,4 +1,4 @@
-import { Connection, FactoryDefaultType, Maintenance, Protocol } from 'axis-maintenance';
+import { Connection, FactoryDefaultType, Maintenance, Protocol } from '../src';
 
 (async () => {
     const connection = new Connection(Protocol.Http, '<ip address>', 80, 'root', '<password>');
