@@ -1,9 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn workspaces run build",
-    "test": "yarn workspaces run test",
-    "lint": "yarn workspaces run lint",
     "release": "node ./scripts/release.js"
   },
   "devDependencies": {
