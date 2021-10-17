@@ -48,13 +48,13 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
+    "@types/express": "4.17.13",
     "@types/jest": "27.0.2",
     "@types/node": "14.17.15",
-    "@types/passport-http": "^0.3.9",
+    "@types/passport-http": "0.3.9",
     "@types/uuid": "8.3.1",
     "coveralls": "3.1.1",
-    "express": "^4.17.1",
+    "express": "4.17.1",
     "jest": "27.2.5",
     "passport": "0.4.1",
     "passport-http": "0.3.0",
