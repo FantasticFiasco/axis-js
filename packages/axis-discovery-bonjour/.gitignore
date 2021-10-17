@@ -9,6 +9,7 @@
 **/tsconfig.tsbuildinfo
 
 # Transpiled JavaScript
+sample/**/*.js
 src/**/*.js
 test/**/*.js
 
