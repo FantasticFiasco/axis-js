@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/axis-discovery-bonjour.yml"
-      - "packages/axis-discovery-bonjour"
+      - "packages/axis-discovery-bonjour/**"
   workflow_dispatch:
 
 defaults:

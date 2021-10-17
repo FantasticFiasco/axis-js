@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/axis-discovery-ssdp.yml"
-      - "packages/axis-discovery-ssdp"
+      - "packages/axis-discovery-ssdp/**"
   workflow_dispatch:
 
 defaults:

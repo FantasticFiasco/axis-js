@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/axis-snapshot.yml"
-      - "packages/axis-snapshot"
+      - "packages/axis-snapshot/**"
   workflow_dispatch:
 
 defaults:

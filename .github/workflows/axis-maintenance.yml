@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/axis-maintenance.yml"
-      - "packages/axis-maintenance"
+      - "packages/axis-maintenance/**"
   workflow_dispatch:
 
 defaults:

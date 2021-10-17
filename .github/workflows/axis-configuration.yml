@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/axis-configuration.yml"
-      - "packages/axis-configuration"
+      - "packages/axis-configuration/**"
   workflow_dispatch:
 
 defaults:
