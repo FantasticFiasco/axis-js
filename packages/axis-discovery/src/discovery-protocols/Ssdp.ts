@@ -37,7 +37,7 @@ export class Ssdp implements IDiscoveryProtocol {
         }
     }
 
-    public onHello(callback: (device: Device) => void) {
+    public onHello(callback: (device: Device) => void): void {
         this.discovery.on('hello', (ssdpDevice: ssdp.Device) => {
             const device = this.mapToDevice(ssdpDevice);
             if (device) {
@@ -48,7 +48,7 @@ export class Ssdp implements IDiscoveryProtocol {
         });
     }
 
-    public onGoodbye(callback: (device: Device) => void) {
+    public onGoodbye(callback: (device: Device) => void): void {
         this.discovery.on('goodbye', (ssdpDevice: ssdp.Device) => {
             const device = this.mapToDevice(ssdpDevice);
             if (device) {

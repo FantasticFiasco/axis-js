@@ -58,11 +58,13 @@ export class Discovery implements EventEmitter {
      * Triggers a new search for devices on the network.
      */
     public async search(): Promise<void> {
-        expect.toExist(this.sockets, 'Discovery has not been started');
+        if (!this.sockets) {
+            throw new Error('Discovery has not been started');
+        }
 
         log('Discovery#search');
 
-        for (const socket of this.sockets!) {
+        for (const socket of this.sockets) {
             if (socket instanceof MSearchSocket) {
                 await socket.search();
             }
@@ -154,7 +156,7 @@ export class Discovery implements EventEmitter {
      * Returns a copy of the array of listeners for the event named eventName.
      * @param eventName The name of the event.
      */
-    // tslint:disable-next-line:ban-types
+    // eslint-disable-next-line @typescript-eslint/ban-types
     listeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.listeners(eventName);
     }
@@ -164,7 +166,7 @@ export class Discovery implements EventEmitter {
      * wrappers (such as those created by once()).
      * @param eventName The name of the event.
      */
-    // tslint:disable-next-line:ban-types
+    // eslint-disable-next-line @typescript-eslint/ban-types
     rawListeners<E extends keyof Events>(eventName: E): Function[] {
         return this.eventEmitter.rawListeners(eventName);
     }
@@ -225,27 +227,29 @@ export class Discovery implements EventEmitter {
         log('Discovery#setup - interface addresses: %o', addresses);
 
         // Passive SSDP
-        await this.setupSocket(new NotifySocket(addresses));
+        await this.setupSocket(this.sockets, new NotifySocket(addresses));
 
         // Active SSDP
         for (const address of addresses) {
-            await this.setupSocket(new MSearchSocket(address));
+            await this.setupSocket(this.sockets, new MSearchSocket(address));
         }
     }
 
-    private async setupSocket(socket: SocketBase): Promise<void> {
-        this.sockets!.push(socket);
+    private async setupSocket(sockets: SocketBase[], socket: SocketBase): Promise<void> {
+        sockets.push(socket);
         socket.on('hello', (message: Message) => this.onHelloMessage(message));
         socket.on('goodbye', (message: Message) => this.onGoodbyeMessage(message));
         await socket.start();
     }
 
     private async teardown(): Promise<void> {
-        for (const socket of this.sockets!) {
-            this.teardownSocket(socket);
-        }
+        if (this.sockets) {
+            for (const socket of this.sockets) {
+                this.teardownSocket(socket);
+            }
 
-        this.sockets = undefined;
+            this.sockets = undefined;
+        }
     }
 
     private async teardownSocket(socket: SocketBase): Promise<void> {

@@ -12,7 +12,7 @@ export class GetUsersResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         // No errors are reported in the response body, thus no action is needed here
     }
 

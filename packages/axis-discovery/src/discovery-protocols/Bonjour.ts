@@ -46,14 +46,14 @@ export class Bonjour implements IDiscoveryProtocol {
         });
     }
 
-    public onHello(callback: (device: Device) => void) {
+    public onHello(callback: (device: Device) => void): void {
         this.discovery.on('hello', (bonjourDevice: bonjour.Device) => {
             const device = this.mapToDevice(bonjourDevice);
             callback(device);
         });
     }
 
-    public onGoodbye(callback: (device: Device) => void) {
+    public onGoodbye(callback: (device: Device) => void): void {
         this.discovery.on('goodbye', (bonjourDevice: bonjour.Device) => {
             const device = this.mapToDevice(bonjourDevice);
             callback(device);

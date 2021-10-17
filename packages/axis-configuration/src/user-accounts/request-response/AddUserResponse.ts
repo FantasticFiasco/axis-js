@@ -9,7 +9,7 @@ export class AddUserResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         const body: string | null = this.html('body').html();
 
         if (body === null) {

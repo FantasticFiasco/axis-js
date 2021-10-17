@@ -25,10 +25,12 @@ export abstract class SocketBase extends EventEmitter {
      * Stop listen for advertisements.
      */
     public stop(): Promise<void> {
-        expect.toExist(this.socket, 'Socket has never been started');
-
         return new Promise<void>((resolve) => {
-            this.socket!.close(() => resolve());
+            if (!this.socket) {
+                throw new Error('Socket has never been started');
+            }
+
+            this.socket.close(() => resolve());
         });
     }
 
@@ -38,7 +40,7 @@ export abstract class SocketBase extends EventEmitter {
 
     protected abstract bind(): Promise<void>;
 
-    protected onError(error: Error) {
+    protected onError(error: Error): void {
         log('SocketBase#onError - %o', error);
     }
 }

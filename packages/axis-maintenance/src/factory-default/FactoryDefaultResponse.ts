@@ -10,7 +10,7 @@ export class FactoryDefaultResponse extends Response {
         super(response);
     }
 
-    public assertSuccess() {
+    public assertSuccess(): void {
         if (this.type === FactoryDefaultType.Partial) {
             this.assertPartialTypeSuccess();
         } else {

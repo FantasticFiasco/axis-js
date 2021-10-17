@@ -77,7 +77,7 @@ describe('#client should', () => {
         const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
-        expect((got.defaults.options.agent as any).http).toBe(agent);
+        expect((got.defaults.options.agent as { http: http.Agent }).http).toBe(agent);
     });
 
     test('respect https agent', () => {
@@ -88,6 +88,6 @@ describe('#client should', () => {
         const got = client('GET', webServer.guestUri, '', '', agent);
 
         // Assert
-        expect((got.defaults.options.agent as any).https).toBe(agent);
+        expect((got.defaults.options.agent as { https: https.Agent }).https).toBe(agent);
     });
 });
