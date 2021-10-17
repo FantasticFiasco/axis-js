@@ -3,3 +3,6 @@
 
 # yarn logs
 yarn-error.log
+
+# macos files
+.DS_Store
