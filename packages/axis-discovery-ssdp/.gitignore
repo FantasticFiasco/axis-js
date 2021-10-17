@@ -9,6 +9,7 @@
 
 # Transpiled JavaScript
 __mocks__/**/*.js
+sample/**/*.js
 src/**/*.js
 test/**/*.js
 

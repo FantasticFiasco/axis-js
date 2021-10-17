@@ -1,4 +1,4 @@
-import { Device, Discovery } from 'axis-discovery-ssdp';
+import { Device, Discovery } from '../src';
 
 (async () => {
     const discovery = new Discovery();
