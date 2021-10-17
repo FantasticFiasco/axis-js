@@ -1,5 +1,6 @@
 # axis-configuration
 
+[![axis-configuration](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-configuration.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-configuration.yml)
 [![npm version](https://img.shields.io/npm/v/axis-configuration.svg)](https://www.npmjs.com/package/axis-configuration)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 

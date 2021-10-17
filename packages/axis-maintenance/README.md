@@ -1,5 +1,6 @@
 # axis-maintenance
 
+[![axis-maintenance](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-maintenance.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-maintenance.yml)
 [![npm version](https://img.shields.io/npm/v/axis-maintenance.svg)](https://www.npmjs.com/package/axis-maintenance)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 
