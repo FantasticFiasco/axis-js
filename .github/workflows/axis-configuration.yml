@@ -3,11 +3,13 @@ name: axis-configuration
 on:
   push:
     paths:
-      - "./packages/axis-configuration"
+      - ".github/workflows/axis-configuration.yml"
+      - "packages/axis-configuration"
+  workflow_dispatch:
 
 defaults:
   run:
-    working-directory: "./packages/axis-configuration"
+    working-directory: "packages/axis-configuration"
 
 jobs:
   build:
