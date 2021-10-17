@@ -22,21 +22,19 @@
   },
   "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",
-  "main": "./lib/index.js",
-  "types": "./lib/index",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "engines": {
     "node": ">=14.0.0"
   },
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts"
+    "src/**/*.js",
+    "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
-    "prebuild": "yarn clean",
-    "build": "tsc -b",
-    "prestart": "yarn build",
-    "start": "node ./src/server.js",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "build": "yarn clean && tsc",
+    "start": "yarn build && node ./sample/index.js",
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
@@ -50,11 +48,16 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "27.0.1",
     "@types/node": "14.17.15",
+    "@types/passport-http": "^0.3.9",
     "@types/uuid": "8.3.1",
     "coveralls": "3.1.1",
+    "express": "^4.17.1",
     "jest": "27.0.6",
+    "passport": "0.4.1",
+    "passport-http": "0.3.0",
     "rimraf": "3.0.2",
     "ts-jest": "27.0.5",
     "tslint": "6.1.3",

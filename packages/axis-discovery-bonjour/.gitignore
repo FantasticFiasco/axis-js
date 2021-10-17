@@ -8,16 +8,14 @@
 **/*.d.ts.map
 **/tsconfig.tsbuildinfo
 
-# Compiled JavaScript
+# Transpiled JavaScript
+sample/**/*.js
 src/**/*.js
 test/**/*.js
 
 # Node
 **/npm-*.log*
 **/*.tgz
-
-# Deliverables directory
-/lib
 
 # Code coverage
 coverage

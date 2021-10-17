@@ -1,5 +1,6 @@
 # axis-discovery-ssdp
 
+[![axis-discovery-ssdp](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-ssdp.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-ssdp.yml)
 [![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 

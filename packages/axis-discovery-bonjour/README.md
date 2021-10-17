@@ -1,5 +1,6 @@
 # axis-discovery-bonjour
 
+[![axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-bonjour.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-bonjour.yml)
 [![npm version](https://img.shields.io/npm/v/axis-discovery-bonjour.svg)](https://www.npmjs.com/package/axis-discovery-bonjour)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 

@@ -20,21 +20,19 @@
   },
   "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",
-  "main": "./lib/index.js",
-  "types": "./lib/index",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "engines": {
     "node": ">=14.0.0"
   },
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts"
+    "src/**/*.js",
+    "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
-    "prebuild": "yarn clean",
-    "build": "tsc -b",
-    "prestart": "yarn build",
-    "start": "node ./src/server.js",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "build": "yarn clean && tsc",
+    "start": "yarn build && node ./sample/index.js",
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
@@ -45,7 +43,8 @@
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
     "cheerio": "1.0.0-rc.10",
-    "got": "11.8.2"
+    "got": "11.8.2",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/cheerio": "0.22.30",
@@ -54,6 +53,7 @@
     "@types/nock": "10.0.3",
     "@types/node": "14.17.15",
     "@types/passport-http": "0.3.9",
+    "@types/uuid": "8.3.1",
     "coveralls": "3.1.1",
     "express": "4.17.1",
     "jest": "27.0.6",

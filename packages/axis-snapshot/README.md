@@ -1,5 +1,6 @@
 # axis-snapshot
 
+[![axis-snapshot](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-snapshot.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-snapshot.yml)
 [![npm version](https://img.shields.io/npm/v/axis-snapshot.svg)](https://www.npmjs.com/package/axis-snapshot)
 [![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 
