@@ -58,7 +58,7 @@
     "coveralls": "3.1.1",
     "eslint": "7.32.0",
     "express": "4.17.1",
-    "jest": "27.2.5",
+    "jest": "27.3.1",
     "passport": "0.4.1",
     "passport-http": "0.3.0",
     "rimraf": "3.0.2",
