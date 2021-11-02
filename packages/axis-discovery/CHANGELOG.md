@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :dizzy: Changed
 
-- [BREAKING CHANGE] Deprecate Node.js 13 and below
+- [BREAKING CHANGE] Deprecate Node.js 15 and below
 - [BREAKING CHANGE] Peer dependencies [axis-discovery-bonjour](https://www.npmjs.com/package/axis-discovery-bonjour) and [axis-discovery-ssdp](https://www.npmjs.com/package/axis-discovery-ssdp) where changed into dependencies
 
 ## [2.0.0] - 2020-10-12
