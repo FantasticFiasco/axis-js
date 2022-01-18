@@ -60,7 +60,7 @@
     "eslint": "8.3.0",
     "express": "4.17.2",
     "jest": "27.4.7",
-    "nock": "13.2.1",
+    "nock": "13.2.2",
     "passport": "0.5.2",
     "passport-http": "0.3.0",
     "rimraf": "3.0.2",
