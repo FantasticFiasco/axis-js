@@ -7,7 +7,16 @@ import { RequestError, UnauthorizedError } from './errors';
  * Abstract class describing a HTTP request.
  */
 export abstract class Request {
-    protected constructor(protected readonly connection: Connection) {}
+    /**
+     * Initializes a new instance of the class.
+     * @param connection The connection description to the device.
+     */
+    protected constructor(
+        /**
+         * Gets the connection description to the device.
+         */
+        protected readonly connection: Connection
+    ) {}
 
     /**
      * Sends a HTTP GET request to a device.

@@ -6,7 +6,16 @@ import * as cheerio from 'cheerio';
 export abstract class Response {
     private internalHtml?: cheerio.Root;
 
-    protected constructor(protected readonly response: string) {}
+    /**
+     * Initializes a new instance of the class.
+     * @param response The HTTP response.
+     */
+    protected constructor(
+        /**
+         * Gets the HTTP response.
+         */
+        protected readonly response: string
+    ) {}
 
     /**
      * Returns void given valid response, otherwise throws an error.
