@@ -11,6 +11,5 @@ export const createHeader = (username: string, password: string, challenge: Chal
 };
 
 const base64 = (value: string): string => {
-    const buffer = Buffer.from(value);
-    return buffer.toString('base64');
+    return Buffer.from(value).toString('base64');
 };

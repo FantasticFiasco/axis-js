@@ -6,6 +6,7 @@ export enum Protocol {
      * Hypertext Transfer Protocol (HTTP).
      */
     Http,
+
     /**
      * HTTP over Transport Layer Security (TLS).
      */

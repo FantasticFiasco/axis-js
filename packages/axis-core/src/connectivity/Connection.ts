@@ -16,30 +16,21 @@ export interface Options {
  * Class describing a connection to a device.
  */
 export class Connection {
+    /**
+     * Initializes a new instance of the class.
+     * @param protocol The protocol to use when creating the connection.
+     * @param address The address or hostname of the device.
+     * @param port The port of the device.
+     * @param username The username.
+     * @param password The password.
+     * @param options The options for the connection to the device.
+     */
     constructor(
-        /**
-         * The protocol to use when creating the connection.
-         */
         public readonly protocol: Protocol,
-        /**
-         * The address or hostname of the device.
-         */
         public readonly address: string,
-        /**
-         * The port of the device.
-         */
         public readonly port: number,
-        /**
-         * The username.
-         */
         public readonly username: string,
-        /**
-         * The password.
-         */
         public readonly password: string,
-        /**
-         * The options for the connection to the device.
-         */
         public readonly options?: Options
     ) {}
 

@@ -1,13 +1,9 @@
-import got, { Agents, CancelableRequest, Got, Response } from 'got';
+import got, { Agents, Got } from 'got';
 import * as http from 'http';
 import * as https from 'https';
 import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
-
-export const get = (url: string, username: string, password: string, agent?: http.Agent | https.Agent): CancelableRequest<Response<string>> => {
-    return client('GET', url, username, password, agent).get<string>(url);
-};
 
 export const client = (method: string, url: string, username: string, password: string, agent?: http.Agent | https.Agent): Got => {
     return got.extend({
