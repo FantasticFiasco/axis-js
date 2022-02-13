@@ -2,17 +2,23 @@
  * Error thrown when a request fail.
  */
 export class RequestError extends Error {
+    /**
+     * Initializes a new instance of the class.
+     * @param message The error message.
+     * @param code The error code, like `ECONNREFUSED`.
+     * @param error The error.
+     */
     constructor(
         /**
-         * The error message.
+         * Gets the error message.
          */
         message: string | undefined,
         /**
-         * The error code, like `ECONNREFUSED`.
+         * Gets the error code, like `ECONNREFUSED`.
          */
         readonly code: string | undefined,
         /**
-         * The error.
+         * Gets the error.
          */
         readonly error: unknown
     ) {

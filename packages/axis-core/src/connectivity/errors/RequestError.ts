@@ -4,21 +4,21 @@
 export class RequestError extends Error {
     /**
      * Initializes a new instance of the class.
-     * @param error
-     * @param message
-     * @param code
+     * @param error The error.
+     * @param message The error message.
+     * @param code The error code, like `ECONNREFUSED`.
      */
     constructor(
         /**
-         * The error.
+         * Gets the error.
          */
         readonly error: unknown,
         /**
-         * The error message.
+         * Gets the error message.
          */
         message?: string,
         /**
-         * The error code, like `ECONNREFUSED`.
+         * Gets the error code, like `ECONNREFUSED`.
          */
         readonly code?: string
     ) {

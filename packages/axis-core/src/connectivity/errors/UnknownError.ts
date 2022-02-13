@@ -4,11 +4,11 @@
 export class UnknownError extends Error {
     /**
      * Initializes a new instance of the class.
-     * @param message
+     * @param message The error message.
      */
     constructor(
         /**
-         * The error message.
+         * Gets the error message.
          */
         message: string
     ) {

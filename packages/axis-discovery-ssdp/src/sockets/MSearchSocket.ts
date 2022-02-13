@@ -13,7 +13,7 @@ export class MSearchSocket extends SocketBase {
      * Initializes a new instance of the class.
      * @param address The network address to listen for M-SEARCH responses on.
      */
-    constructor(private address: string) {
+    constructor(private readonly address: string) {
         super();
     }
 

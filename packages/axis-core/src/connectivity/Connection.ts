@@ -26,11 +26,29 @@ export class Connection {
      * @param options The options for the connection to the device.
      */
     constructor(
+        /**
+         * Gets the protocol to use when creating the connection.
+         */
         public readonly protocol: Protocol,
+        /**
+         * Gets the address or hostname of the device.
+         */
         public readonly address: string,
+        /**
+         * Gets the port of the device.
+         */
         public readonly port: number,
+        /**
+         * Gets the username.
+         */
         public readonly username: string,
+        /**
+         * Gets the password.
+         */
         public readonly password: string,
+        /**
+         * Gets the options for the connection to the device.
+         */
         public readonly options?: Options
     ) {}
 

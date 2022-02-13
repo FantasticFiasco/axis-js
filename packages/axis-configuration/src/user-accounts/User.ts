@@ -15,20 +15,20 @@ export class User {
      */
     constructor(
         /**
-         * The user account name (1-14 characters). Valid characters are a-z, A-Z and 0-9.
+         * Gets the user account name (1-14 characters). Valid characters are a-z, A-Z and 0-9.
          */
         readonly name: string,
         /**
-         * The unencrypted password (1-64 characters) for the account. ASCII characters from
+         * Gwts the unencrypted password (1-64 characters) for the account. ASCII characters from
          * character code 32 to 126 are valid.
          */
         readonly password: string | undefined,
         /**
-         * The access rights for the user.
+         * Gets the access rights for the user.
          */
         readonly accessRights: AccessRights,
         /**
-         * Whether user has access rights for PTZ control.
+         * Gets whether user has access rights for PTZ control.
          */
         readonly ptz: boolean
     ) {
