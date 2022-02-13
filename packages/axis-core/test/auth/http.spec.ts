@@ -1,7 +1,5 @@
 import { HTTPError } from 'got';
-import * as http from 'http';
-import * as https from 'https';
-import { client, get } from '../../src/auth/http';
+import { get } from '../../src/auth/http';
 import { WebServer } from './web-server';
 
 let webServer: WebServer;
@@ -65,29 +63,5 @@ describe('#get should', () => {
                 expect((error as HTTPError).response.statusCode).toBe(401);
             }
         }
-    });
-});
-
-describe('#client should', () => {
-    test('respect http agent', () => {
-        // Arrange
-        const agent = new http.Agent({ keepAlive: true });
-
-        // Act
-        const got = client('GET', webServer.guestUri, '', '', agent);
-
-        // Assert
-        expect((got.defaults.options.agent as { http: http.Agent }).http).toBe(agent);
-    });
-
-    test('respect https agent', () => {
-        // Arrange
-        const agent = new https.Agent({ keepAlive: true });
-
-        // Act
-        const got = client('GET', webServer.guestUri, '', '', agent);
-
-        // Assert
-        expect((got.defaults.options.agent as { https: https.Agent }).https).toBe(agent);
     });
 });
