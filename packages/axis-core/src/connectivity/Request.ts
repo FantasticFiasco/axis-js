@@ -1,6 +1,6 @@
 import * as got from 'got';
+import { Connection, RequestError, UnauthorizedError } from '.';
 import { get } from '../auth';
-import { Connection, RequestError, UnauthorizedError } from './';
 
 export abstract class Request {
     protected constructor(protected readonly connection: Connection) {}

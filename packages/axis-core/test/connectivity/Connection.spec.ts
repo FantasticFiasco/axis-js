@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
-import { Connection, Protocol } from '../../src';
+import { Connection, Protocol } from '../../src/connectivity';
 
 describe('connection', () => {
     describe('#ctor(protocol, ...)', () => {
