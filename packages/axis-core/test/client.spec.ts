@@ -1,5 +1,5 @@
 import { HTTPError } from 'got';
-import { get } from '../../src/auth/http';
+import { get } from '../src/client';
 import { WebServer } from './web-server';
 
 let webServer: WebServer;

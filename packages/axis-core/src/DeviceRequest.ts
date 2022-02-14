@@ -1,12 +1,12 @@
 import * as got from 'got';
-import { get } from './auth';
+import { get } from './client';
 import { Connection } from './Connection';
 import { RequestError, UnauthorizedError } from './errors';
 
 /**
  * Abstract class describing a HTTP request.
  */
-export abstract class Request {
+export abstract class DeviceRequest {
     /**
      * Initializes a new instance of the class.
      * @param connection The connection description to the device.
