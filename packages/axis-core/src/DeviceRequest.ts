@@ -20,10 +20,11 @@ export abstract class DeviceRequest {
 
     /**
      * Sends a HTTP GET request to a device.
+     * @param relativePath The relative path.
      */
-    protected async get(path: string): Promise<Buffer> {
+    protected async get(relativePath: string): Promise<Buffer> {
         try {
-            const res = await get(this.connection, path);
+            const res = await get(this.connection, relativePath);
             return res.body;
         } catch (error) {
             if (error instanceof got.HTTPError && error.response.statusCode === 401) {
