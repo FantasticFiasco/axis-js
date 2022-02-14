@@ -1,5 +1,5 @@
 import * as got from 'got';
-import { get } from '../auth';
+import { get } from './auth';
 import { Connection } from './Connection';
 import { RequestError, UnauthorizedError } from './errors';
 
