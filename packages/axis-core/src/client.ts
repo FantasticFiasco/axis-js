@@ -1,11 +1,18 @@
-import * as http from 'http';
-import * as https from 'https';
+import { Connection, Response } from '.';
 import { client } from './auth/client';
-import { Response } from './Response';
 
 /**
  * Send a HTTP GET request to the device.
  */
-export const get = (url: string, username: string, password: string, agent?: http.Agent | https.Agent): Promise<Response> => {
-    return client('GET', url, username, password, agent).get<Buffer>(url);
+export const get = (connection: Connection, path: string): Promise<Response> => {
+    const url = connection.url + formatPath(path);
+    return client('GET', url, connection.username, connection.password, connection?.options?.agent).get<Buffer>(url);
+};
+
+const formatPath = (path: string): string => {
+    if (path.startsWith('/')) {
+        return path;
+    }
+
+    return '/' + path;
 };
