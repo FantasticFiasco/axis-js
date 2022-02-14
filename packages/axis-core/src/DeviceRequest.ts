@@ -21,9 +21,9 @@ export abstract class DeviceRequest {
     /**
      * Sends a HTTP GET request to a device.
      */
-    protected async get(url: string): Promise<Buffer> {
+    protected async get(path: string): Promise<Buffer> {
         try {
-            const res = await get(url, this.connection.username, this.connection.password, this.connection.options?.agent);
+            const res = await get(this.connection, path);
             return res.body;
         } catch (error) {
             if (error instanceof got.HTTPError && error.response.statusCode === 401) {
