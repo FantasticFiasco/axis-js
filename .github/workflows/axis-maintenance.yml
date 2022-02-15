@@ -30,7 +30,7 @@ jobs:
     - run: yarn test
     - run: yarn lint
     - run: if [ ${{ matrix.node-version }} == 16.x ]; then node ./scripts/publish-on-tag.js; fi
-      if: startsWith(github.ref, 'refs/tags/')
+      if: startsWith(github.ref, 'refs/tags/axis-maintenance@')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
