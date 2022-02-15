@@ -1,6 +1,6 @@
 {
   "name": "axis-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Node.js library written in TypeScript containing shared behavior for the other packages, e.g. code handling communication and authentication with Axis Communication cameras.",
   "keywords": [
     "axis",
