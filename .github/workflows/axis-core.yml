@@ -3,7 +3,6 @@ name: axis-core
 on:
   push:
     branches:
-      - "**"
     paths:
       - ".github/workflows/axis-core.yml"
       - "packages/axis-core/**"
