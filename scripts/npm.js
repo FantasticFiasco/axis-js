@@ -1,22 +1,22 @@
 // @ts-check
 
-const { rm, writeFile } = require('fs').promises;
-const { info } = require('./log');
-const { exec } = require('./process');
+import { rm, writeFile } from 'fs/promises';
+import { info } from './log';
+import { exec } from './process';
 
 const CONFIG_FILENAME = '.npmrc';
 
 /**
  * @param {string} accessToken
  */
-const login = async (accessToken) => {
+export const login = async (accessToken) => {
     info('npm: login');
 
     const data = `//registry.npmjs.org/:_authToken=${accessToken}`;
     await writeFile(CONFIG_FILENAME, data);
 };
 
-const logout = async () => {
+export const logout = async () => {
     info('npm: logout');
 
     await rm(CONFIG_FILENAME);
@@ -26,7 +26,7 @@ const logout = async () => {
  * @param {string} packageName
  * @returns {Promise<{packageFileName: string}>}
  */
-const pack = async (packageName) => {
+export const pack = async (packageName) => {
     info(`npm: pack ${packageName}`);
 
     const stdout = await exec(`yarn workspace ${packageName} pack`);
@@ -44,15 +44,8 @@ const pack = async (packageName) => {
 /**
  * @param {string} tarball
  */
-const publish = async (tarball) => {
+export const publish = async (tarball) => {
     info(`npm: publish ${tarball}`);
 
     await exec(`npm publish ${tarball} --access public`);
-};
-
-module.exports = {
-    login,
-    logout,
-    pack,
-    publish,
 };

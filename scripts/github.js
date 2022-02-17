@@ -1,9 +1,9 @@
 // @ts-check
 
-const { readFileSync } = require('fs');
-const { basename } = require('path');
-const { Octokit } = require('@octokit/rest');
-const { info } = require('./log');
+import { Octokit } from '@octokit/rest';
+import { readFileSync } from 'fs';
+import { basename } from 'path';
+import { info } from './log';
 
 /**
  * @param {string} githubToken
@@ -13,7 +13,7 @@ const { info } = require('./log');
  * @param {string} packageName
  * @param {string} version
  */
-const createRelease = async (githubToken, owner, repo, tagName, packageName, version) => {
+export const createRelease = async (githubToken, owner, repo, tagName, packageName, version) => {
     info(`github: create release from tag ${tagName}`);
 
     const octokit = new Octokit({
@@ -41,7 +41,7 @@ const createRelease = async (githubToken, owner, repo, tagName, packageName, ver
  * @param {number} releaseId
  * @param {string} assetFileName
  */
-const uploadAsset = async (githubToken, owner, repo, releaseId, assetFileName) => {
+export const uploadAsset = async (githubToken, owner, repo, releaseId, assetFileName) => {
     info(`github: upload asset ${assetFileName}`);
 
     const octokit = new Octokit({
@@ -53,11 +53,6 @@ const uploadAsset = async (githubToken, owner, repo, releaseId, assetFileName) =
         repo,
         release_id: releaseId,
         name: basename(assetFileName),
-        data: readFileSync(assetFileName),
+        data: readFileSync(assetFileName).toString(),
     });
-};
-
-module.exports = {
-    createRelease,
-    uploadAsset,
 };
