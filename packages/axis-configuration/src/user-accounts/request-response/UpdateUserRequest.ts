@@ -1,9 +1,9 @@
-import { Connection, User } from '../..';
-import { Request } from '../../shared/Request';
+import { Connection, DeviceRequest } from 'axis-core';
+import { User } from '../..';
 import { Converter } from './Converter';
 import { UpdateUserResponse } from './UpdateUserResponse';
 
-export class UpdateUserRequest extends Request {
+export class UpdateUserRequest extends DeviceRequest {
     constructor(connection: Connection, private readonly user: User) {
         super(connection);
     }
@@ -11,7 +11,7 @@ export class UpdateUserRequest extends Request {
     public async send(): Promise<UpdateUserResponse> {
         const response = await this.get(this.url);
 
-        return new UpdateUserResponse(response);
+        return new UpdateUserResponse(response.toString());
     }
 
     public get url(): string {

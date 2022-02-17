@@ -25,9 +25,13 @@ export abstract class DeviceResponse {
     /**
      * Returns the body of the HTML response.
      */
-    protected get body(): string {
+    protected get body(): string | null {
         if (!this.internalHtml) {
-            this.internalHtml = cheerio.load(this.response);
+            try {
+                this.internalHtml = cheerio.load(this.response);
+            } catch (err) {
+                return null;
+            }
         }
 
         return this.internalHtml.html('body');

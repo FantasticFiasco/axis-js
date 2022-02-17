@@ -1,9 +1,8 @@
 import { Connection } from '..';
-import { Request } from '../shared/Request';
 import { FactoryDefaultResponse } from './FactoryDefaultResponse';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
-export class FactoryDefaultRequest extends Request {
+export class FactoryDefaultRequest extends DeviceRequest {
     constructor(connection: Connection, private readonly type: FactoryDefaultType) {
         super(connection);
     }

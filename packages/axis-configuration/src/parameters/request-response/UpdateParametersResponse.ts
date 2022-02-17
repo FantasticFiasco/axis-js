@@ -1,7 +1,7 @@
+import { DeviceResponse } from 'axis-core';
 import { UpdateParametersError } from '../..';
-import { Response } from '../../shared/Response';
 
-export class UpdateParametersResponse extends Response {
+export class UpdateParametersResponse extends DeviceResponse {
     // A success is described by the following response:
     // OK
     private static readonly SuccessResponse = /OK/;

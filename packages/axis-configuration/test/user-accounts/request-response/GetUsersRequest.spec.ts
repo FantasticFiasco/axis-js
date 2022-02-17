@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { GetUsersRequest } from '../../../src/user-accounts/request-response/GetUsersRequest';
 
 describe('get users request', () => {

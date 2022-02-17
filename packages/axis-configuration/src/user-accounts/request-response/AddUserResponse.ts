@@ -1,7 +1,7 @@
-import { UnknownError, UserAlreadyExistsError } from '../..';
-import { Response } from '../../shared/Response';
+import { DeviceResponse, UnknownError } from 'axis-core';
+import { UserAlreadyExistsError } from '../..';
 
-export class AddUserResponse extends Response {
+export class AddUserResponse extends DeviceResponse {
     private static readonly SuccessResponse = /Created account .*\./;
     private static readonly UserAlreadyExistsResponse = /Error: this user name already exists, consult the system log file/;
 
@@ -10,7 +10,7 @@ export class AddUserResponse extends Response {
     }
 
     public assertSuccess(): void {
-        const body: string | null = this.html('body').html();
+        const body: string | null = this.body;
 
         if (body === null) {
             throw new UnknownError('No HTML in response body');

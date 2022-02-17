@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { GetParametersRequest } from '../../../src/parameters/request-response/GetParametersRequest';
 
 describe('get parameters request', () => {

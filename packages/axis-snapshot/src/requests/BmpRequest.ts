@@ -1,9 +1,8 @@
 import { Connection } from '../Connection';
 import { SnapshotOptions } from '../SnapshotOptions';
 import { toQueryString } from './convert';
-import { Request } from './Request';
 
-export class BmpRequest extends Request {
+export class BmpRequest extends DeviceRequest {
     constructor(connection: Connection, private readonly options?: SnapshotOptions) {
         super(connection);
     }

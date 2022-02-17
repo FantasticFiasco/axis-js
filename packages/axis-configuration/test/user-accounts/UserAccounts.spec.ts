@@ -1,6 +1,7 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
+import { Connection, Protocol, RequestError, UnauthorizedError, UnknownError } from 'axis-core';
 import * as nock from 'nock';
-import { AccessRights, Connection, Protocol, RequestError, UnauthorizedError, UnknownError, User, UserAccounts, UserAlreadyExistsError } from '../../src';
+import { AccessRights, User, UserAccounts, UserAlreadyExistsError } from '../../src';
 import { Generate } from './Generate';
 import {
     ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ,

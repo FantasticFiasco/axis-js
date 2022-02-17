@@ -1,8 +1,7 @@
 import { Connection } from '..';
-import { Request } from '../shared/Request';
 import { RestartResponse } from './RestartResponse';
 
-export class RestartRequest extends Request {
+export class RestartRequest extends DeviceRequest {
     constructor(connection: Connection) {
         super(connection);
     }

@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { RemoveUserRequest } from '../../../src/user-accounts/request-response/RemoveUserRequest';
 
 describe('remove user request', () => {

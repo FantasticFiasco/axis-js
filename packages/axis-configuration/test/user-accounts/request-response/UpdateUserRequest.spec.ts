@@ -1,4 +1,5 @@
-import { AccessRights, Connection, Protocol, User } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
+import { AccessRights, User } from '../../../src';
 import { UpdateUserRequest } from '../../../src/user-accounts/request-response/UpdateUserRequest';
 
 describe('update user request', () => {

@@ -1,5 +1,6 @@
 import * as expect from '@fantasticfiasco/expect';
-import { Connection, User } from '..';
+import { Connection } from 'axis-core';
+import { User } from '..';
 import { AddUserRequest } from './request-response/AddUserRequest';
 import { GetUsersRequest } from './request-response/GetUsersRequest';
 import { RemoveUserRequest } from './request-response/RemoveUserRequest';

@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
+    "axis-core": "0.0.10",
     "cheerio": "1.0.0-rc.10",
     "got": "11.8.3",
     "uuid": "8.3.2"

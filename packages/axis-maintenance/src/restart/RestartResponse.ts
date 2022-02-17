@@ -1,7 +1,6 @@
 import { UnknownError } from '..';
-import { Response } from '../shared/Response';
 
-export class RestartResponse extends Response {
+export class RestartResponse extends DeviceResponse {
     private static readonly SuccessResponse = /restartMessage/i;
 
     constructor(response: string) {

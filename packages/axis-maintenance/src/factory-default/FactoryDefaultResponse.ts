@@ -1,8 +1,7 @@
 import { UnknownError } from '..';
-import { Response } from '../shared/Response';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
-export class FactoryDefaultResponse extends Response {
+export class FactoryDefaultResponse extends DeviceResponse {
     private static readonly SuccessResponsePartialType = /factoryMessage/i;
     private static readonly SuccessResponseHardType = /factoryMessage2/i;
 
