@@ -3,16 +3,17 @@ name: axis-core
 on:
   push:
     branches:
+      - "**"
     paths:
-      - ".github/workflows/axis-core.yml"
-      - "packages/axis-core/**"
+      - .github/workflows/axis-core.yml
+      - packages/axis-core/**
     tags:
       - axis-core@**
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: "packages/axis-core"
+    working-directory: packages/axis-core
 
 jobs:
   build:
@@ -36,10 +37,10 @@ jobs:
         if [ ${{ matrix.node-version }} == 16.x ]; then
           pushd ../..
           yarn install --immutable --immutable-cache
-          cat ./scripts/publish-on-tag.js
+          node ./scripts/publish-on-tag.js
           popd
         fi
-      # if: startsWith(github.ref, 'refs/tags/')
+      if: startsWith(github.ref, 'refs/tags/')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
