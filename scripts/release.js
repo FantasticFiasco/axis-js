@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'fs/promises';
 import inquirer from 'inquirer'; // Currently no ESM support
 import { basename, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import git from './git.js';
+import { add, commit, createAnnotatedTag, pushCommitsAndTags } from './git.js';
 import { fatal } from './log.js';
 import { exec } from './process.js';
 
@@ -92,15 +92,15 @@ const main = async () => {
 
     const packageFilePath = join(p.dir, 'package.json');
     const newVersion = await updatePackageVersion(packageFilePath);
-    await git.add(packageFilePath);
+    await add(packageFilePath);
 
     const changelogFilePath = join(p.dir, 'CHANGELOG.md');
     await updateChangelog(changelogFilePath);
-    await git.add(changelogFilePath);
+    await add(changelogFilePath);
 
-    await git.commit(`release ${p.name}@${newVersion}`);
-    await git.createAnnotatedTag(`${p.name}@${newVersion}`);
-    await git.pushCommitsAndTags();
+    await commit(`release ${p.name}@${newVersion}`);
+    await createAnnotatedTag(`${p.name}@${newVersion}`);
+    await pushCommitsAndTags();
 };
 
 main().catch((err) => {
