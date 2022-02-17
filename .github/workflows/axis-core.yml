@@ -6,8 +6,8 @@ on:
     paths:
       - ".github/workflows/axis-core.yml"
       - "packages/axis-core/**"
-    tags:
-      - axis-core@**
+    # tags:
+    #   - axis-core@**
   workflow_dispatch:
 
 defaults:
