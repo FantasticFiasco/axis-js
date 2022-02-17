@@ -1,16 +1,18 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "cSpell.words": [
-    "cnonce"
-  ]
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "cSpell.words": ["cnonce"],
+    "yaml.validate": true,
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow": ["/.github/workflows/*"]
+    }
 }
