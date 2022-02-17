@@ -1,12 +1,12 @@
 // @ts-check
 
-const { existsSync, readdirSync } = require('fs');
-const { readFile, writeFile } = require('fs').promises;
-const { basename, join } = require('path');
-const { prompt } = require('inquirer');
-const git = require('./git');
-const { fatal } = require('./log');
-const { exec } = require('./process');
+import { existsSync, readdirSync } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
+import { prompt } from 'inquirer';
+import { basename, join } from 'path';
+import * as git from './git';
+import { fatal } from './log';
+import { exec } from './process';
 
 const packagePrompt = async () => {
     // A package is defined by the following criteria:
@@ -55,7 +55,8 @@ const updatePackageVersion = async (packageFilePath) => {
         message: `New version (current is '${currentVersion}')`,
         validate: (input) => {
             // The following RegExp is the official one, copied from their website https://semver.org/
-            const semVer = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+            const semVer =
+                /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
             return semVer.test(input) || 'Please enter a valid semantic version';
         },
     });
@@ -85,18 +86,18 @@ const updateChangelog = async (filePath) => {
 };
 
 const main = async () => {
-    const package = await packagePrompt();
+    const p = await packagePrompt();
 
-    const packageFilePath = join(package.dir, 'package.json');
+    const packageFilePath = join(p.dir, 'package.json');
     const newVersion = await updatePackageVersion(packageFilePath);
     await git.add(packageFilePath);
 
-    const changelogFilePath = join(package.dir, 'CHANGELOG.md');
+    const changelogFilePath = join(p.dir, 'CHANGELOG.md');
     await updateChangelog(changelogFilePath);
     await git.add(changelogFilePath);
 
-    await git.commit(`release ${package.name}@${newVersion}`);
-    await git.createAnnotatedTag(`${package.name}@${newVersion}`);
+    await git.commit(`release ${p.name}@${newVersion}`);
+    await git.createAnnotatedTag(`${p.name}@${newVersion}`);
     await git.pushCommitsAndTags();
 };
 

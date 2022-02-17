@@ -1,13 +1,15 @@
 // @ts-check
 
-const { info, error } = require('./log');
-const util = require('util');
-const execAsync = util.promisify(require('child_process').exec);
+import { exec as internalExec } from 'child_process';
+import util from 'util';
+import { error, info } from './log';
+
+const execAsync = util.promisify(internalExec);
 
 /**
  * @param {string} cmd
  */
-const exec = async (cmd) => {
+export const exec = async (cmd) => {
     info(`exec: ${cmd}`);
 
     const { stdout, stderr } = await execAsync(cmd);
