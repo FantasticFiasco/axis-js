@@ -1,8 +1,8 @@
 // @ts-check
 
 import { rm, writeFile } from 'fs/promises';
-import { info } from './log';
-import { exec } from './process';
+import { info } from './log.js';
+import { exec } from './process.js';
 
 const CONFIG_FILENAME = '.npmrc';
 

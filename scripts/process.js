@@ -2,7 +2,7 @@
 
 import { exec as internalExec } from 'child_process';
 import util from 'util';
-import { error, info } from './log';
+import { error, info } from './log.js';
 
 const execAsync = util.promisify(internalExec);
 
@@ -21,8 +21,4 @@ export const exec = async (cmd) => {
     }
 
     return stdout;
-};
-
-module.exports = {
-    exec,
 };
