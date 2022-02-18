@@ -13,7 +13,7 @@ describe('remove user request', () => {
             const got = new RemoveUserRequest(connection, username);
 
             // Assert
-            expect(got.relativePath).toBe('/axis-cgi/pwdgrp.cgi?action=remove&user=${username}');
+            expect(got.relativePath).toBe(`/axis-cgi/pwdgrp.cgi?action=remove&user=${username}`);
         });
     });
 });

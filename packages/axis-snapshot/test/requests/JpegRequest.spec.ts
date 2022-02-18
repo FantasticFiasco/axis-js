@@ -57,7 +57,7 @@ describe('get parameters request', () => {
                 const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe('/axis-cgi/jpg/image.cgi?${wantQueryString}');
+                expect(got.relativePath).toBe(`/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
@@ -76,7 +76,7 @@ describe('get parameters request', () => {
                 const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe('/axis-cgi/jpg/image.cgi?${wantQueryString}');
+                expect(got.relativePath).toBe(`/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
