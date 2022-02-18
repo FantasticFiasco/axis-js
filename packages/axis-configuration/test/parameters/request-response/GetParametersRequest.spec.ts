@@ -10,7 +10,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&responseformat=rfc');
         });
 
         test('should return URL when getting single parameter', () => {
@@ -18,7 +18,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network.UPnP.FriendlyName');
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&group=Network.UPnP.FriendlyName&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network.UPnP.FriendlyName&responseformat=rfc');
         });
 
         test('should return URL when getting multiple parameters', () => {
@@ -26,9 +26,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network.UPnP.FriendlyName', 'Properties.API.HTTP.Version');
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/param.cgi?action=list&group=Network.UPnP.FriendlyName,Properties.API.HTTP.Version&responseformat=rfc`
-            );
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network.UPnP.FriendlyName,Properties.API.HTTP.Version&responseformat=rfc');
         });
 
         test('should return URL when getting single group', () => {
@@ -36,7 +34,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network');
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&group=Network&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network&responseformat=rfc');
         });
 
         test('should return URL when getting multiple groups', () => {
@@ -44,7 +42,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network', 'Properties');
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&group=Network,Properties&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network,Properties&responseformat=rfc');
         });
 
         test('should return URL when getting single group with wildcard', () => {
@@ -52,7 +50,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network.*.FriendlyName');
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&group=Network.*.FriendlyName&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network.*.FriendlyName&responseformat=rfc');
         });
 
         test('should return URL when getting multiple groups with wildcards', () => {
@@ -60,7 +58,7 @@ describe('get parameters request', () => {
             const got = new GetParametersRequest(connection, 'Network.*.FriendlyName', 'Properties.API.*.Version');
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=list&group=Network.*.FriendlyName,Properties.API.*.Version&responseformat=rfc`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=list&group=Network.*.FriendlyName,Properties.API.*.Version&responseformat=rfc');
         });
     });
 });

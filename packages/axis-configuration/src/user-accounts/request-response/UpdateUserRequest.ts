@@ -9,14 +9,15 @@ export class UpdateUserRequest extends DeviceRequest {
     }
 
     public async send(): Promise<UpdateUserResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
         return new UpdateUserResponse(response.toString());
     }
 
-    public get url(): string {
-        return `${this.connection.url}/axis-cgi/pwdgrp.cgi?action=update&user=${this.user.name}&pwd=${
-            this.user.password
-        }&grp=users&sgrp=${Converter.toUserGroups(this.user.accessRights, this.user.ptz)}`;
+    public get relativePath(): string {
+        return `/axis-cgi/pwdgrp.cgi?action=update&user=${this.user.name}&pwd=${this.user.password}&grp=users&sgrp=${Converter.toUserGroups(
+            this.user.accessRights,
+            this.user.ptz
+        )}`;
     }
 }

@@ -8,14 +8,12 @@ export class FactoryDefaultRequest extends DeviceRequest {
     }
 
     public async send(): Promise<FactoryDefaultResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
         return new FactoryDefaultResponse(response.toString(), this.type);
     }
 
-    public get url(): string {
-        return this.type === FactoryDefaultType.Partial
-            ? `${this.connection.url}/axis-cgi/factorydefault.cgi`
-            : `${this.connection.url}/axis-cgi/hardfactorydefault.cgi`;
+    public get relativePath(): string {
+        return this.type === FactoryDefaultType.Partial ? '/axis-cgi/factorydefault.cgi' : '/axis-cgi/hardfactorydefault.cgi';
     }
 }

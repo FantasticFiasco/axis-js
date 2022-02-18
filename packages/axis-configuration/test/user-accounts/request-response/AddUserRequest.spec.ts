@@ -14,9 +14,7 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer&comment=${user.name}`
-            );
+            expect(got.relativePath).toBe('/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer&comment=${user.name}');
         });
 
         test('should return URL when adding user with viewer access and PTZ control', () => {
@@ -27,8 +25,8 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz&comment=${user.name}`
+            expect(got.relativePath).toBe(
+                '/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz&comment=${user.name}'
             );
         });
 
@@ -40,8 +38,8 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer&comment=${user.name}`
+            expect(got.relativePath).toBe(
+                '/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer&comment=${user.name}'
             );
         });
 
@@ -53,8 +51,8 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz&comment=${user.name}`
+            expect(got.relativePath).toBe(
+                '/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz&comment=${user.name}'
             );
         });
 
@@ -66,8 +64,8 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer&comment=${user.name}`
+            expect(got.relativePath).toBe(
+                '/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer&comment=${user.name}'
             );
         });
 
@@ -79,8 +77,8 @@ describe('add user request', () => {
             const got = new AddUserRequest(connection, user);
 
             // Assert
-            expect(got.url).toBe(
-                `${connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz&comment=${user.name}`
+            expect(got.relativePath).toBe(
+                '/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz&comment=${user.name}'
             );
         });
     });

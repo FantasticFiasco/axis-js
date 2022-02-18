@@ -10,7 +10,7 @@ describe('get users request', () => {
             const got = new GetUsersRequest(connection);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=get`);
+            expect(got.).toBe('/axis-cgi/pwdgrp.cgi?action=get');
         });
     });
 });

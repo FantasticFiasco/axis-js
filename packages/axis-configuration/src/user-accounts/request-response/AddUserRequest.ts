@@ -9,13 +9,13 @@ export class AddUserRequest extends DeviceRequest {
     }
 
     public async send(): Promise<AddUserResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
         return new AddUserResponse(response.toString());
     }
 
-    public get url(): string {
-        return `${this.connection.url}/axis-cgi/pwdgrp.cgi?action=add&user=${this.user.name}&pwd=${this.user.password}&grp=users&sgrp=${Converter.toUserGroups(
+    public get relativePath(): string {
+        return `/axis-cgi/pwdgrp.cgi?action=add&user=${this.user.name}&pwd=${this.user.password}&grp=users&sgrp=${Converter.toUserGroups(
             this.user.accessRights,
             this.user.ptz
         )}&comment=${this.user.name}`;

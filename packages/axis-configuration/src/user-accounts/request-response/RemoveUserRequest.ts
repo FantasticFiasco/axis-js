@@ -7,12 +7,12 @@ export class RemoveUserRequest extends DeviceRequest {
     }
 
     public async send(): Promise<RemoveUserResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
         return new RemoveUserResponse(response.toString());
     }
 
-    public get url(): string {
-        return `${this.connection.url}/axis-cgi/pwdgrp.cgi?action=remove&user=${this.username}`;
+    public get relativePath(): string {
+        return `/axis-cgi/pwdgrp.cgi?action=remove&user=${this.username}`;
     }
 }
