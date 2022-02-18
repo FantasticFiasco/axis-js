@@ -57,7 +57,7 @@ describe('get parameters request', () => {
                 const got = new BmpRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp?${wantQueryString}');
+                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
             }
         });
 
@@ -76,7 +76,7 @@ describe('get parameters request', () => {
                 const got = new BmpRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp?${wantQueryString}');
+                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
             }
         });
 
