@@ -1,4 +1,4 @@
-import { UnknownError } from '../../src';
+import { UnknownError } from 'axis-core';
 import { RestartResponse } from '../../src/restart/RestartResponse';
 
 describe('restart response', () => {

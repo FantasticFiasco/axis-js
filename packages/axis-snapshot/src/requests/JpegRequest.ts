@@ -1,4 +1,4 @@
-import { Connection } from '../Connection';
+import { Connection, DeviceRequest } from 'axis-core';
 import { SnapshotOptions } from '../SnapshotOptions';
 import { toQueryString } from './convert';
 

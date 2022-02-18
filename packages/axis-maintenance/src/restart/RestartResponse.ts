@@ -1,4 +1,4 @@
-import { UnknownError } from '..';
+import { DeviceResponse, UnknownError } from "axis-core";
 
 export class RestartResponse extends DeviceResponse {
     private static readonly SuccessResponse = /restartMessage/i;
@@ -12,7 +12,7 @@ export class RestartResponse extends DeviceResponse {
             return;
         }
 
-        let body: string | null = this.html('body').html();
+        let body: string | null = this.body;
 
         if (body !== null) {
             body = body.trim();

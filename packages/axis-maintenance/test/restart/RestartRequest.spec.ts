@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../src';
+import { Connection, Protocol } from 'axis-core';
 import { RestartRequest } from '../../src/restart/RestartRequest';
 
 describe('restart request', () => {

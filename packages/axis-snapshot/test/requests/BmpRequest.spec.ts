@@ -1,4 +1,5 @@
-import { Connection, Protocol, SnapshotOptions } from '../../src';
+import { Connection, Protocol } from 'axis-core';
+import { SnapshotOptions } from '../../src';
 import { BmpRequest } from '../../src/requests/BmpRequest';
 
 describe('get parameters request', () => {

@@ -1,4 +1,4 @@
-import { Connection } from '..';
+import { Connection, DeviceRequest } from 'axis-core';
 import { FactoryDefaultResponse } from './FactoryDefaultResponse';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
@@ -10,7 +10,7 @@ export class FactoryDefaultRequest extends DeviceRequest {
     public async send(): Promise<FactoryDefaultResponse> {
         const response = await this.get(this.url);
 
-        return new FactoryDefaultResponse(response, this.type);
+        return new FactoryDefaultResponse(response.toString(), this.type);
     }
 
     public get url(): string {

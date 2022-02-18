@@ -32,7 +32,7 @@
     "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "clean": "rimraf \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
+    "axis-core": "0.0.11",
     "got": "11.8.3",
     "uuid": "8.3.2"
   },

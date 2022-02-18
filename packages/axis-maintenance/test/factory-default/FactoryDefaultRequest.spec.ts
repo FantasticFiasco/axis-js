@@ -1,4 +1,5 @@
-import { Connection, FactoryDefaultType, Protocol } from '../../src';
+import { Connection, Protocol } from 'axis-core';
+import { FactoryDefaultType } from '../../src';
 import { FactoryDefaultRequest } from '../../src/factory-default/FactoryDefaultRequest';
 
 describe('factory default request', () => {

@@ -1,7 +1,7 @@
+import { Connection } from 'axis-core';
 import { FactoryDefaultType } from './factory-default';
 import { FactoryDefaultRequest } from './factory-default/FactoryDefaultRequest';
 import { RestartRequest } from './restart/RestartRequest';
-import { Connection } from './shared';
 
 /**
  * Class responsible for running maintenance operations on devices from Axis Communication.

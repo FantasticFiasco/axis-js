@@ -1,4 +1,4 @@
-import { Connection } from '..';
+import { Connection, DeviceRequest } from 'axis-core';
 import { RestartResponse } from './RestartResponse';
 
 export class RestartRequest extends DeviceRequest {
@@ -9,7 +9,7 @@ export class RestartRequest extends DeviceRequest {
     public async send(): Promise<RestartResponse> {
         const response = await this.get(this.url);
 
-        return new RestartResponse(response);
+        return new RestartResponse(response.toString());
     }
 
     public get url(): string {
