@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-snapshot
 
 [![axis-snapshot](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-snapshot.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-snapshot.yml)
@@ -6,20 +7,19 @@
 
 A Node.js library written in TypeScript capable of getting snapshots from [Axis Communication](http://www.axis.com) cameras.
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-snapshot](#axis-snapshot)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [API](#api)
-    - [`Snapshot`](#snapshot)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [API](#api)
+  - [`Snapshot`](#snapshot)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 import { writeFileSync } from 'fs';
 import { Connection, Protocol, Snapshot } from 'axis-snapshot';
 
@@ -44,7 +44,7 @@ yarn add axis-snapshot
 
 The `Snapshot` class is the main class in the package. With it you take [BMP](https://wikipedia.org/wiki/BMP_file_format) and [JPEG](https://en.wikipedia.org/wiki/JPEG) snapshots given that the operations are supported by the camera.
 
-```javascript
+```typescript
 class Snapshot {
     /**
      * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.

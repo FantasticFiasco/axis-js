@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-configuration
 
 [![axis-configuration](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-configuration.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-configuration.yml)
@@ -6,24 +7,23 @@
 
 A Node.js library written in TypeScript capable of configuring [Axis Communication](http://www.axis.com) cameras.
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-configuration](#axis-configuration)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Parameters](#parameters)
-    - [`Parameters`](#parameters-1)
-  - [User accounts](#user-accounts)
-    - [`UserAccounts`](#useraccounts)
-    - [`User`](#user)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Parameters](#parameters)
+  - [`Parameters`](#parameters-1)
+- [User accounts](#user-accounts)
+  - [`UserAccounts`](#useraccounts)
+  - [`User`](#user)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'root', '32naJzkJdZ!7*HK&Dz');
 
 //// Parameters
@@ -93,7 +93,7 @@ The HTTP-based Axis camera interface called VAPIX® provides the functionality f
 
 The `Parameters` class exposes parameter related operations on the camera. With it you can read and write parameters. Please note that the parameters you can read and write depend on the access rights of the user you specify to carry out these operations.
 
-```javascript
+```typescript
 /**
  * Class responsible getting and setting non-dynamic parameter values. Non-dynamic parameters are
  * pre-configured and already exist in your Axis product. A non-dynamic parameter has one or more
@@ -131,7 +131,7 @@ The HTTP-based AXIS camera interface called VAPIX® provides the functionality f
 
 The `UserAccounts` class exposes all user account related operations on the camera. With it you can add, read, update and remove user accounts. Please note that you need an existing user with administrator access rights to carry out these operations.
 
-```javascript
+```typescript
 /**
  * Class responsible for adding a new user account with password and group membership, modify the
  * information and remove a user account.
@@ -178,7 +178,7 @@ class UserAccounts {
 
 The `User` class is a immutable description of a user account on the camera.
 
-```javascript
+```typescript
 /**
  * Class describing a user.
  */

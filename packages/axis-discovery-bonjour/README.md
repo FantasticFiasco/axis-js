@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-discovery-bonjour
 
 [![axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-bonjour.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-bonjour.yml)
@@ -8,21 +9,20 @@ A Node.js Bonjour client library written in TypeScript capable of searching for 
 
 To also find cameras on the network using SSDP (UPnP), please see [axis-discovery](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery).
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-discovery-bonjour](#axis-discovery-bonjour)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [API](#api)
-    - [`Discovery`](#discovery)
-    - [`Device`](#device)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [API](#api)
+  - [`Discovery`](#discovery)
+  - [`Device`](#device)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 import * as bonjour from 'axis-discovery-bonjour';
 
 const discovery = new bonjour.Discovery();
@@ -53,7 +53,7 @@ yarn add axis-discovery-bonjour
 
 The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network.
 
-```javascript
+```typescript
 class Discovery implements EventEmitter {
     /**
      * Start listen for device advertisements on all network interface
@@ -89,7 +89,7 @@ class Discovery implements EventEmitter {
 
 The `Device` class is a immutable description of a camera on the network.
 
-```javascript
+```typescript
 /**
  * Class describing a device on the network.
  */
