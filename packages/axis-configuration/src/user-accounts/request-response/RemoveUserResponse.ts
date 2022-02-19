@@ -8,7 +8,7 @@ export class RemoveUserResponse extends DeviceResponse {
     }
 
     public assertSuccess(): void {
-        const body = this.body;
+        const body: string | null = this.body;
 
         if (body === null) {
             throw new UnknownError('No HTML in response body');
