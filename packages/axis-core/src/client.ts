@@ -1,5 +1,6 @@
-import { Connection, Response } from '.';
 import { client } from './auth/client';
+import { Connection } from './Connection';
+import { Response } from './Response';
 
 /**
  * Send a HTTP GET request to the device.
