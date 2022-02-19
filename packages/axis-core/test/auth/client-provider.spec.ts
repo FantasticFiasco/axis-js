@@ -1,14 +1,14 @@
 import * as http from 'http';
 import * as https from 'https';
-import { client } from '../../src/auth/client';
+import { clientProvider } from '../../src/auth/client-provider';
 
-describe('#client should', () => {
+describe('#clientProvider should', () => {
     test('respect http agent', () => {
         // Arrange
         const agent = new http.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', 'https://github.com/FantasticFiasco/axis-js', '', '', agent);
+        const got = clientProvider('GET', 'https://github.com/FantasticFiasco/axis-js', '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as { http: http.Agent }).http).toBe(agent);
@@ -19,7 +19,7 @@ describe('#client should', () => {
         const agent = new https.Agent({ keepAlive: true });
 
         // Act
-        const got = client('GET', 'https://github.com/FantasticFiasco/axis-js', '', '', agent);
+        const got = clientProvider('GET', 'https://github.com/FantasticFiasco/axis-js', '', '', agent);
 
         // Assert
         expect((got.defaults.options.agent as { https: https.Agent }).https).toBe(agent);

@@ -5,7 +5,7 @@ import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
 
-export const client = (method: string, url: string, username: string, password: string, agent?: http.Agent | https.Agent): Got => {
+export const clientProvider = (method: string, url: string, username: string, password: string, agent?: http.Agent | https.Agent): Got => {
     return got.extend({
         agent: createAgent(agent),
         hooks: {
