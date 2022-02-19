@@ -106,7 +106,7 @@ interface Options {
 
 ### `get`
 
-The function `get` sends a HTTP/HTTPS GET request over the network to a camera described by the `connection` parameter.
+The function `get` sends a HTTP GET request over the network to a camera described by the `connection` parameter.
 
 The function automatically authenticates with the camera using either [Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) or [Digest access authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), depending on the camera configuration.
 
