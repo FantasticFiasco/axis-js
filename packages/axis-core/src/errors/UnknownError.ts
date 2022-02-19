@@ -8,7 +8,7 @@ export class UnknownError extends Error {
      */
     constructor(
         /**
-         * Gets the error message.
+         * The error message.
          */
         message: string
     ) {
