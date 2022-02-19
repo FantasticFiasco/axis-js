@@ -35,8 +35,8 @@ describe('#get should', () => {
         const got = await get(connection, relativePath);
 
         // Assert
-        expect(got?.statusCode).toBe(200);
-        expect(got?.body.toString()).toBe('Success');
+        expect(got.statusCode).toBe(200);
+        expect(got.body.toString()).toBe('Success');
     });
 
     test('succeed given digest authentication', async () => {
@@ -47,8 +47,8 @@ describe('#get should', () => {
         const got = await get(connection, relativePath);
 
         // Assert
-        expect(got?.statusCode).toBe(200);
-        expect(got?.body.toString()).toBe('Success');
+        expect(got.statusCode).toBe(200);
+        expect(got.body.toString()).toBe('Success');
     });
 
     test('throw error given invalid credentials', async () => {
