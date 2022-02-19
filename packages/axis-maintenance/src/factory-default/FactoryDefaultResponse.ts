@@ -1,8 +1,7 @@
-import { UnknownError } from '..';
-import { Response } from '../shared/Response';
+import { DeviceResponse, UnknownError } from 'axis-core';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
-export class FactoryDefaultResponse extends Response {
+export class FactoryDefaultResponse extends DeviceResponse {
     private static readonly SuccessResponsePartialType = /factoryMessage/i;
     private static readonly SuccessResponseHardType = /factoryMessage2/i;
 
@@ -35,7 +34,7 @@ export class FactoryDefaultResponse extends Response {
     }
 
     private throwUnknownError() {
-        let body: string | null = this.html('body').html();
+        let body: string | null = this.body;
 
         if (body !== null) {
             body = body.trim();

@@ -1,6 +1,7 @@
+import { Connection, Protocol } from 'axis-core';
 import * as fs from 'fs';
 import { promisify } from 'util';
-import { Connection, Protocol, Snapshot } from '../src';
+import { Snapshot } from '../src';
 
 const writeFile = promisify(fs.writeFile);
 

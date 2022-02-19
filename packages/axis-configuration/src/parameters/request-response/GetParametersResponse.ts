@@ -1,6 +1,6 @@
-import { Response } from '../../shared/Response';
+import { DeviceResponse } from 'axis-core';
 
-export class GetParametersResponse extends Response {
+export class GetParametersResponse extends DeviceResponse {
     // A parameter has the following format:
     // [NAME]=[VALUE]
     private static readonly ParameterSuccessResponse = /(?:root\.)?(\S*)\s*=\s*(.*)\s*$/;

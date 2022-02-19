@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { UpdateParametersRequest } from '../../../src/parameters/request-response/UpdateParametersRequest';
 
 describe('update parameters request', () => {
@@ -15,7 +15,7 @@ describe('update parameters request', () => {
             const got = new UpdateParametersRequest(connection, parameters);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby');
         });
 
         test('should return URL when updating multiple parameters', () => {
@@ -29,7 +29,7 @@ describe('update parameters request', () => {
             const got = new UpdateParametersRequest(connection, parameters);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby`);
+            expect(got.relativePath).toBe('/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby');
         });
     });
 });

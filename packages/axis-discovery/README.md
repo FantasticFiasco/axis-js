@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-discovery
 
 [![axis-discovery](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery.yml)
@@ -8,21 +9,20 @@ A Node.js client library written in TypeScript capable of searching for Axis Com
 
 It utilizes [axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery-bonjour) and [axis-discovery-ssdp](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery-ssdp) for discovery, and aggregates the information provided by the protocols into a convenient way for clients to find cameras on the network.
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-discovery](#axis-discovery)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [API](#api)
-    - [`Discovery`](#discovery)
-    - [`Device`](#device)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [API](#api)
+  - [`Discovery`](#discovery)
+  - [`Device`](#device)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 import * as axis from 'axis-discovery';
 
 const discovery = new axis.Discovery();
@@ -55,7 +55,7 @@ yarn add axis-discovery axis-discovery-bonjour axis-discovery-ssdp
 
 The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network.
 
-```javascript
+```typescript
 class Discovery {
     /**
      * Start listen for device advertisements on all network interface
@@ -91,7 +91,7 @@ class Discovery {
 
 The `Device` class is a immutable description of a camera on the network.
 
-```javascript
+```typescript
 class Device {
     /**
      * Gets the address.

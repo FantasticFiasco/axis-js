@@ -1,6 +1,6 @@
 // @ts-check
 
-import { exec } from './process';
+import { exec } from './process.js';
 
 /**
  * @param {string} filePath

@@ -1,4 +1,5 @@
-import { Connection, Protocol, SnapshotOptions } from '../../src';
+import { Connection, Protocol } from 'axis-core';
+import { SnapshotOptions } from '../../src';
 import { BmpRequest } from '../../src/requests/BmpRequest';
 
 describe('get parameters request', () => {
@@ -10,7 +11,7 @@ describe('get parameters request', () => {
             const got = new BmpRequest(connection);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/bitmap/image.bmp`);
+            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp');
         });
 
         test('should return URL with empty options', () => {
@@ -21,7 +22,7 @@ describe('get parameters request', () => {
             const got = new BmpRequest(connection, options);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/bitmap/image.bmp`);
+            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp');
         });
 
         test('should return URL with falsy JavaScript values', () => {
@@ -36,7 +37,7 @@ describe('get parameters request', () => {
             const got = new BmpRequest(connection, options);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/bitmap/image.bmp?compression=0&rotation=0&squarepixel=0`);
+            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp?compression=0&rotation=0&squarepixel=0');
         });
 
         test('should return URL with single option', () => {
@@ -56,7 +57,7 @@ describe('get parameters request', () => {
                 const got = new BmpRequest(connection, options);
 
                 // Assert
-                expect(got.url).toBe(`${connection.url}/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
+                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
             }
         });
 
@@ -75,7 +76,7 @@ describe('get parameters request', () => {
                 const got = new BmpRequest(connection, options);
 
                 // Assert
-                expect(got.url).toBe(`${connection.url}/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
+                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
             }
         });
 
@@ -89,7 +90,7 @@ describe('get parameters request', () => {
             const got = new BmpRequest(connection, options);
 
             // Assert
-            expect(() => got.url).toThrow();
+            expect(() => got.relativePath).toThrow();
         });
 
         test('should throw error when palette option is an empty string', () => {
@@ -102,7 +103,7 @@ describe('get parameters request', () => {
             const got = new BmpRequest(connection, options);
 
             // Assert
-            expect(() => got.url).toThrow();
+            expect(() => got.relativePath).toThrow();
         });
     });
 });

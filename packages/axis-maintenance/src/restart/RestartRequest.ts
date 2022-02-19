@@ -1,19 +1,18 @@
-import { Connection } from '..';
-import { Request } from '../shared/Request';
+import { Connection, DeviceRequest } from 'axis-core';
 import { RestartResponse } from './RestartResponse';
 
-export class RestartRequest extends Request {
+export class RestartRequest extends DeviceRequest {
     constructor(connection: Connection) {
         super(connection);
     }
 
     public async send(): Promise<RestartResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
-        return new RestartResponse(response);
+        return new RestartResponse(response.toString());
     }
 
-    public get url(): string {
-        return `${this.connection.url}/axis-cgi/restart.cgi`;
+    public get relativePath(): string {
+        return '/axis-cgi/restart.cgi';
     }
 }

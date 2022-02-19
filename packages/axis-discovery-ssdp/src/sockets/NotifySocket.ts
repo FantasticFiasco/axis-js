@@ -9,6 +9,7 @@ import { SocketBase } from './SocketBase';
  */
 export class NotifySocket extends SocketBase {
     /**
+     * Initializes a new instance of the class.
      * @param addresses The network addresses to listen for NOTIFY
      * advertisements on.
      */

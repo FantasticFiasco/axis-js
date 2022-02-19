@@ -1,4 +1,5 @@
-import { FactoryDefaultType, UnknownError } from '../../src';
+import { UnknownError } from 'axis-core';
+import { FactoryDefaultType } from '../../src';
 import { FactoryDefaultResponse } from '../../src/factory-default/FactoryDefaultResponse';
 
 describe('factory default response', () => {

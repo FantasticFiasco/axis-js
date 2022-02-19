@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { RemoveUserRequest } from '../../../src/user-accounts/request-response/RemoveUserRequest';
 
 describe('remove user request', () => {
@@ -13,7 +13,7 @@ describe('remove user request', () => {
             const got = new RemoveUserRequest(connection, username);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=remove&user=${username}`);
+            expect(got.relativePath).toBe(`/axis-cgi/pwdgrp.cgi?action=remove&user=${username}`);
         });
     });
 });

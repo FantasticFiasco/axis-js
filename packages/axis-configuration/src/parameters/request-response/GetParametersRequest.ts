@@ -1,9 +1,8 @@
-import { Connection } from '../..';
-import { Request } from '../../shared/Request';
+import { Connection, DeviceRequest } from 'axis-core';
 import { Converter } from './Converter';
 import { GetParametersResponse } from './GetParametersResponse';
 
-export class GetParametersRequest extends Request {
+export class GetParametersRequest extends DeviceRequest {
     private readonly parameterGroups: string[];
 
     constructor(connection: Connection, ...parameterGroups: string[]) {
@@ -12,12 +11,12 @@ export class GetParametersRequest extends Request {
     }
 
     public async send(): Promise<GetParametersResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
-        return new GetParametersResponse(response);
+        return new GetParametersResponse(response.toString());
     }
 
-    public get url(): string {
-        return `${this.connection.url}/axis-cgi/param.cgi?action=list${Converter.toGroup(this.parameterGroups)}&responseformat=rfc`;
+    public get relativePath(): string {
+        return `/axis-cgi/param.cgi?action=list${Converter.toGroup(this.parameterGroups)}&responseformat=rfc`;
     }
 }

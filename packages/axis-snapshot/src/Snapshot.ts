@@ -1,4 +1,4 @@
-import { Connection } from './Connection';
+import { Connection } from 'axis-core';
 import { BmpRequest } from './requests/BmpRequest';
 import { JpegRequest } from './requests/JpegRequest';
 import { SnapshotOptions } from './SnapshotOptions';

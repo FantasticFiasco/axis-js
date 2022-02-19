@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-maintenance
 
 [![axis-maintenance](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-maintenance.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-maintenance.yml)
@@ -6,20 +7,19 @@
 
 A Node.js library written in TypeScript capable of running maintenance operations on cameras from [Axis Communication](http://www.axis.com).
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-maintenance](#axis-maintenance)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [API](#api)
-    - [`Maintenance`](#maintenance)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [API](#api)
+  - [`Maintenance`](#maintenance)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'root', '32naJzkJdZ!7*HK&Dz');
 const maintenance = new Maintenance(connection);
 
@@ -47,7 +47,7 @@ yarn add axis-maintenance
 
 The `Maintenance` class is the main class in the package. With it you can start maintenance operations on a camera.
 
-```javascript
+```typescript
 /**
  * Class responsible for running maintenance operations on devices from Axis Communication.
  */

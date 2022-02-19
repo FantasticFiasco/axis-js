@@ -1,7 +1,6 @@
-import { UnknownError } from '../..';
-import { Response } from '../../shared/Response';
+import { DeviceResponse, UnknownError } from 'axis-core';
 
-export class RemoveUserResponse extends Response {
+export class RemoveUserResponse extends DeviceResponse {
     private static readonly SuccessResponse = /Removed account .*\./;
 
     constructor(response: string) {
@@ -9,7 +8,7 @@ export class RemoveUserResponse extends Response {
     }
 
     public assertSuccess(): void {
-        const body = this.html('body').html();
+        const body: string | null = this.body;
 
         if (body === null) {
             throw new UnknownError('No HTML in response body');

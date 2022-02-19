@@ -1,6 +1,7 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
+import { Connection, Protocol, RequestError, UnauthorizedError } from 'axis-core';
 import * as nock from 'nock';
-import { Connection, Parameters, Protocol, RequestError, UnauthorizedError, UpdateParametersError } from '../../src';
+import { Parameters, UpdateParametersError } from '../../src';
 
 describe('parameters', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

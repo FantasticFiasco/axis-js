@@ -1,9 +1,9 @@
 // @ts-check
 
-import { createRelease, uploadAsset } from './github';
-import { GITHUB_TOKEN, GIT_TAG, NPM_TOKEN, REPO } from './github-actions';
-import { fatal, log, YELLOW } from './log';
-import { login, logout, pack, publish } from './npm';
+import { GITHUB_TOKEN, GIT_TAG, NPM_TOKEN, REPO } from './github-actions.js';
+import { createRelease, uploadAsset } from './github.js';
+import { fatal, log, YELLOW } from './log.js';
+import { login, logout, pack, publish } from './npm.js';
 
 /**
  * A tagged commit in this monorepo is created using the following format:

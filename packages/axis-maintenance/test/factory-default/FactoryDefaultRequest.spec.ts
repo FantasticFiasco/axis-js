@@ -1,4 +1,5 @@
-import { Connection, FactoryDefaultType, Protocol } from '../../src';
+import { Connection, Protocol } from 'axis-core';
+import { FactoryDefaultType } from '../../src';
 import { FactoryDefaultRequest } from '../../src/factory-default/FactoryDefaultRequest';
 
 describe('factory default request', () => {
@@ -10,7 +11,7 @@ describe('factory default request', () => {
             const got = new FactoryDefaultRequest(connection, FactoryDefaultType.Partial);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/factorydefault.cgi`);
+            expect(got.relativePath).toBe('/axis-cgi/factorydefault.cgi');
         });
     });
 
@@ -20,7 +21,7 @@ describe('factory default request', () => {
             const got = new FactoryDefaultRequest(connection, FactoryDefaultType.Hard);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/hardfactorydefault.cgi`);
+            expect(got.relativePath).toBe('/axis-cgi/hardfactorydefault.cgi');
         });
     });
 });

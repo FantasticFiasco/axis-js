@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../src';
+import { Connection, Protocol } from 'axis-core';
 import { RestartRequest } from '../../src/restart/RestartRequest';
 
 describe('restart request', () => {
@@ -10,7 +10,7 @@ describe('restart request', () => {
             const got = new RestartRequest(connection);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/restart.cgi`);
+            expect(got.relativePath).toBe('/axis-cgi/restart.cgi');
         });
     });
 });

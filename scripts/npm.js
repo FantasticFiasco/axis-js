@@ -1,8 +1,8 @@
 // @ts-check
 
 import { rm, writeFile } from 'fs/promises';
-import { info } from './log';
-import { exec } from './process';
+import { info } from './log.js';
+import { exec } from './process.js';
 
 const CONFIG_FILENAME = '.npmrc';
 
@@ -29,7 +29,7 @@ export const logout = async () => {
 export const pack = async (packageName) => {
     info(`npm: pack ${packageName}`);
 
-    const stdout = await exec(`yarn workspace ${packageName} pack`);
+    const stdout = await exec(`yarn --cwd ./packages/${packageName} pack`);
 
     const match = /"(\/.*\.tgz)"/.exec(stdout);
     if (match === null || match.length !== 2) {

@@ -3,7 +3,7 @@
 import { Octokit } from '@octokit/rest';
 import { readFileSync } from 'fs';
 import { basename } from 'path';
-import { info } from './log';
+import { info } from './log.js';
 
 /**
  * @param {string} githubToken

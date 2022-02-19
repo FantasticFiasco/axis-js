@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../src';
+import { Connection, Protocol } from 'axis-core';
 import * as parameters from './parameters';
 import * as users from './users';
 

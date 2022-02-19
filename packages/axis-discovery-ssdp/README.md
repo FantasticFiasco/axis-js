@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # axis-discovery-ssdp
 
 [![axis-discovery-ssdp](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-ssdp.yml/badge.svg)](https://github.com/FantasticFiasco/axis-js/actions/workflows/axis-discovery-ssdp.yml)
@@ -8,23 +9,22 @@ A Node.js SSDP (UPnP) client library written in TypeScript capable of searching 
 
 To also find cameras on the network using Bonjour, please see [axis-discovery](https://github.com/FantasticFiasco/axis-js/tree/master/packages/axis-discovery).
 
+<!-- omit in toc -->
 ## Table of contents
 
-- [axis-discovery-ssdp](#axis-discovery-ssdp)
-  - [Table of contents](#table-of-contents)
-  - [Super simple to use](#super-simple-to-use)
-  - [Installation](#installation)
-  - [Who is using it?](#who-is-using-it)
-  - [API](#api)
-    - [`Discovery`](#discovery)
-    - [`Device`](#device)
-    - [`Options`](#options)
+- [Super simple to use](#super-simple-to-use)
+- [Installation](#installation)
+- [Who is using it?](#who-is-using-it)
+- [API](#api)
+  - [`Discovery`](#discovery)
+  - [`Device`](#device)
+  - [`Options`](#options)
 
 ---
 
 ## Super simple to use
 
-```javascript
+```typescript
 import * as ssdp from 'axis-discovery-ssdp';
 
 const discovery = new ssdp.Discovery();
@@ -59,7 +59,7 @@ The application [Searchlight](https://fantasticfiasco.github.io/searchlight/) is
 
 The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network.
 
-```javascript
+```typescript
 class Discovery {
     /**
      * Initializes a new instance of the class.
@@ -101,7 +101,7 @@ class Discovery {
 
 The `Device` class is a immutable description of a camera on the network.
 
-```javascript
+```typescript
 class Device {
     /**
      * Gets the address.
@@ -153,7 +153,7 @@ class Device {
 
 The `Options` class can be specified to configure SSDP discovery.
 
-```javascript
+```typescript
 /**
  * The SSDP discovery options.
  */

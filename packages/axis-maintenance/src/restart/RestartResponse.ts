@@ -1,7 +1,6 @@
-import { UnknownError } from '..';
-import { Response } from '../shared/Response';
+import { DeviceResponse, UnknownError } from "axis-core";
 
-export class RestartResponse extends Response {
+export class RestartResponse extends DeviceResponse {
     private static readonly SuccessResponse = /restartMessage/i;
 
     constructor(response: string) {
@@ -13,7 +12,7 @@ export class RestartResponse extends Response {
             return;
         }
 
-        let body: string | null = this.html('body').html();
+        let body: string | null = this.body;
 
         if (body !== null) {
             body = body.trim();

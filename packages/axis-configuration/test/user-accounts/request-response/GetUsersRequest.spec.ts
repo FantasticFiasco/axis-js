@@ -1,4 +1,4 @@
-import { Connection, Protocol } from '../../../src';
+import { Connection, Protocol } from 'axis-core';
 import { GetUsersRequest } from '../../../src/user-accounts/request-response/GetUsersRequest';
 
 describe('get users request', () => {
@@ -10,7 +10,7 @@ describe('get users request', () => {
             const got = new GetUsersRequest(connection);
 
             // Assert
-            expect(got.url).toBe(`${connection.url}/axis-cgi/pwdgrp.cgi?action=get`);
+            expect(got.relativePath).toBe('/axis-cgi/pwdgrp.cgi?action=get');
         });
     });
 });

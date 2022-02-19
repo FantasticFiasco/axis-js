@@ -2,11 +2,12 @@
 
 import { existsSync, readdirSync } from 'fs';
 import { readFile, writeFile } from 'fs/promises';
-import { prompt } from 'inquirer';
-import { basename, join } from 'path';
-import * as git from './git';
-import { fatal } from './log';
-import { exec } from './process';
+import inquirer from 'inquirer'; // Currently no ESM support
+import { basename, dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { add, commit, createAnnotatedTag, pushCommitsAndTags } from './git.js';
+import { fatal } from './log.js';
+import { exec } from './process.js';
 
 const packagePrompt = async () => {
     // A package is defined by the following criteria:
@@ -26,7 +27,7 @@ const packagePrompt = async () => {
             };
         }, {});
 
-    const { packageName } = await prompt({
+    const { packageName } = await inquirer.prompt({
         type: 'list',
         name: 'packageName',
         message: 'Which package should we release?',
@@ -43,13 +44,14 @@ const packagePrompt = async () => {
  * @param {string} packageFilePath
  */
 const updatePackageVersion = async (packageFilePath) => {
-    packageFilePath = join(__dirname, '..', packageFilePath);
+    const currentFileDirName = dirname(fileURLToPath(import.meta.url));
+    packageFilePath = join(currentFileDirName, '..', packageFilePath);
     let packageData = (await readFile(packageFilePath)).toString();
 
     const versionRegExp = /("version": ")(.*)(")/;
     const currentVersion = packageData.match(versionRegExp)[2];
 
-    const { newVersion } = await prompt({
+    const { newVersion } = await inquirer.prompt({
         type: 'input',
         name: 'newVersion',
         message: `New version (current is '${currentVersion}')`,
@@ -71,7 +73,7 @@ const updatePackageVersion = async (packageFilePath) => {
  * @param {string} filePath
  */
 const updateChangelog = async (filePath) => {
-    const { openChangelog } = await prompt({
+    const { openChangelog } = await inquirer.prompt({
         type: 'confirm',
         name: 'openChangelog',
         message: 'Do we need to update CHANGELOG.md?',
@@ -90,15 +92,15 @@ const main = async () => {
 
     const packageFilePath = join(p.dir, 'package.json');
     const newVersion = await updatePackageVersion(packageFilePath);
-    await git.add(packageFilePath);
+    await add(packageFilePath);
 
     const changelogFilePath = join(p.dir, 'CHANGELOG.md');
     await updateChangelog(changelogFilePath);
-    await git.add(changelogFilePath);
+    await add(changelogFilePath);
 
-    await git.commit(`release ${p.name}@${newVersion}`);
-    await git.createAnnotatedTag(`${p.name}@${newVersion}`);
-    await git.pushCommitsAndTags();
+    await commit(`release ${p.name}@${newVersion}`);
+    await createAnnotatedTag(`${p.name}@${newVersion}`);
+    await pushCommitsAndTags();
 };
 
 main().catch((err) => {

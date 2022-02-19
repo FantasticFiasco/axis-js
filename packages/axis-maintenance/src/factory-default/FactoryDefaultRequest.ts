@@ -1,22 +1,19 @@
-import { Connection } from '..';
-import { Request } from '../shared/Request';
+import { Connection, DeviceRequest } from 'axis-core';
 import { FactoryDefaultResponse } from './FactoryDefaultResponse';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
-export class FactoryDefaultRequest extends Request {
+export class FactoryDefaultRequest extends DeviceRequest {
     constructor(connection: Connection, private readonly type: FactoryDefaultType) {
         super(connection);
     }
 
     public async send(): Promise<FactoryDefaultResponse> {
-        const response = await this.get(this.url);
+        const response = await this.get(this.relativePath);
 
-        return new FactoryDefaultResponse(response, this.type);
+        return new FactoryDefaultResponse(response.toString(), this.type);
     }
 
-    public get url(): string {
-        return this.type === FactoryDefaultType.Partial
-            ? `${this.connection.url}/axis-cgi/factorydefault.cgi`
-            : `${this.connection.url}/axis-cgi/hardfactorydefault.cgi`;
+    public get relativePath(): string {
+        return this.type === FactoryDefaultType.Partial ? '/axis-cgi/factorydefault.cgi' : '/axis-cgi/hardfactorydefault.cgi';
     }
 }
