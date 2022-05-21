@@ -1,5 +1,4 @@
 import * as os from 'os';
-import { mocked } from 'ts-jest/utils';
 import { Device } from '../src/Device';
 import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
@@ -7,7 +6,7 @@ jest.mock('os');
 jest.mock('dgram');
 
 describe('Discovery', () => {
-    const osMock = mocked(os);
+    const osMock = jest.mocked(os);
 
     beforeEach(() => {
         // Mock os

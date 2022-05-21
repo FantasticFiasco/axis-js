@@ -1,5 +1,4 @@
 import * as os from 'os';
-import { mocked } from 'ts-jest/utils';
 import { getIPv4Addresses } from '../../src/network-interfaces/NetworkInterface';
 import {
     NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES,
@@ -13,7 +12,7 @@ jest.mock('os');
 
 describe('NetworkInterface', () => {
     describe('#getIPv4Addresses', () => {
-        const osMock = mocked(os);
+        const osMock = jest.mocked(os);
 
         test('should return addresses from one network interface', () => {
             // Arrange
