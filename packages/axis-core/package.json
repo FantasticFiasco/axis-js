@@ -41,7 +41,7 @@
     "postversion": "git push --follow-tags"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.11",
+    "cheerio": "1.0.0-rc.12",
     "got": "11.8.5",
     "uuid": "8.3.2"
   },
