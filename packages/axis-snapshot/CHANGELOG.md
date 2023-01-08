@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - [BREAKING CHANGE] Deprecate Node.js 15 and below
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `json5`
+- Security vulnerability in transient dependency `minimatch`
+- Security vulnerability in transient dependency `qs`
+
 ## [3.0.0] - 2021-06-15
 
 ### :policeman: Security

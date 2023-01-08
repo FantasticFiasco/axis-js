@@ -11,6 +11,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [BREAKING CHANGE] Deprecate Node.js 15 and below
 - [BREAKING CHANGE] Peer dependencies [axis-discovery-bonjour](https://www.npmjs.com/package/axis-discovery-bonjour) and [axis-discovery-ssdp](https://www.npmjs.com/package/axis-discovery-ssdp) where changed into dependencies
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `json5`
+- Security vulnerability in transient dependency `minimatch`
+- Security vulnerability in transient dependency `qs`
+
 ## [2.0.0] - 2020-10-12
 
 ### :dizzy: Changed
