@@ -33,6 +33,7 @@
   "scripts": {
     "clean": "rimraf \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
+    "start": "yarn build && node ./sample/index.js",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
