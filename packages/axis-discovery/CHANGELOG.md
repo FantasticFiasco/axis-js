@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-01-08
+
 ### :dizzy: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js 15 and below
