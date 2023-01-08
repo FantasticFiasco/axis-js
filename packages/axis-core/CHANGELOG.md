@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-01-08
+
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `json5`
