@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `http-cache-semantics`
+
 ## [5.0.1] - 2023-01-08
 
 ### :syringe: Changed
