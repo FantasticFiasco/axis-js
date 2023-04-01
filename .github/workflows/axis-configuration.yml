@@ -30,7 +30,7 @@ jobs:
         check-latest: true
     - run: yarn install --immutable --immutable-cache
     - run: yarn build
-    - run: yarn test
+    - run: yarn test:coverage
     - run: yarn lint
     - uses: codecov/codecov-action@v3
       if: matrix.node-version == '16.x'
