@@ -36,7 +36,7 @@
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --collectCoverageFrom='./src/**/*.js'",
     "lint": "eslint . --ext .ts",
     "prepack": "yarn build",
     "preversion": "git add ./CHANGELOG.md",
