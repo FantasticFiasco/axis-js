@@ -3,7 +3,7 @@ name: axis-discovery
 on:
   push:
     branches:
-      - "**"
+      - '**'
     paths:
       - .github/workflows/axis-discovery.yml
       - packages/axis-discovery/**
@@ -28,7 +28,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         check-latest: true
-    - run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
     - run: yarn install --immutable --immutable-cache
     - run: yarn build
     - run: yarn test

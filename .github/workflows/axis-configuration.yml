@@ -28,7 +28,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         check-latest: true
-    - run: echo -e '$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)'
     - run: yarn install --immutable --immutable-cache
     - run: yarn build
     - run: yarn test
@@ -36,7 +35,7 @@ jobs:
     - uses: codecov/codecov-action@v3
       if: matrix.node-version == '16.x'
       with:
-        flag-name: axis-configuration
+        flags: axis-configuration
     - run: |
         if [ ${{ matrix.node-version }} == 16.x ]; then
           pushd ../..
