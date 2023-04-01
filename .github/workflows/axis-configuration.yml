@@ -34,7 +34,7 @@ jobs:
     - run: yarn test
     - run: yarn lint
     - uses: codecov/codecov-action@v3
-      if: matrix.node-version == 16.x
+      if: matrix.node-version == "16.x"
       with:
         flag-name: axis-configuration
     - run: |
