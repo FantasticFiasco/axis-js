@@ -6,9 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [8.0.1] - 2023-04-16
+
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `http-cache-semantics`
+- Security vulnerability in transient dependency `xml2js`
 
 ## [8.0.0] - 2023-01-08
 
