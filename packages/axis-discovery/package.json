@@ -1,6 +1,6 @@
 {
   "name": "axis-discovery",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A Node.js client library written in TypeScript capable of searching for Axis Communication cameras using Bonjour and SSDP (UPnP).",
   "keywords": [
     "axis",
