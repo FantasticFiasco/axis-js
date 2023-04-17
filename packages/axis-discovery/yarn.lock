@@ -1261,15 +1261,15 @@ axis-discovery-bonjour@3.0.0:
     multicast-dns-service-types "^1.1.0"
     thunky "^0.1.0"
 
-axis-discovery-ssdp@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/axis-discovery-ssdp/-/axis-discovery-ssdp-8.0.0.tgz#65b186b365af06d3337e8dbc85bbe6c55c11f33f"
-  integrity sha512-siWkiGsoO6YNzt2Mpw4H15+Kxc3fszSk2A9QiJp+9LKf/yMlGj6FlkZdt0BexDMHMUseAUQKHBnIIGcBFYXC1Q==
+axis-discovery-ssdp@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/axis-discovery-ssdp/-/axis-discovery-ssdp-8.0.1.tgz#00fa7ecc53b805ad9205b26fb00f3a127f726d43"
+  integrity sha512-1yqgkvWCcyAyxceE971HbYFI7ZO9ut4FUSG+VBYrO5PIaoS3Uz0DoZ67+AoJwTULGIZq7jdTj+ZziMy/DpTb8g==
   dependencies:
     "@fantasticfiasco/expect" "1.1.0"
     debug "4.3.4"
     got "11.8.6"
-    xml2js "0.4.23"
+    xml2js "0.5.0"
 
 babel-jest@^29.5.0:
   version "29.5.0"
@@ -3819,10 +3819,10 @@ write-file-atomic@^4.0.2:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.7"
 
-xml2js@0.4.23:
-  version "0.4.23"
-  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.23.tgz#a0c69516752421eb2ac758ee4d4ccf58843eac66"
-  integrity sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug==
+xml2js@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.5.0.tgz#d9440631fbb2ed800203fad106f2724f62c493b7"
+  integrity sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~11.0.0"

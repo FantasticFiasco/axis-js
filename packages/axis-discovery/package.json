@@ -46,7 +46,7 @@
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
     "axis-discovery-bonjour": "3.0.0",
-    "axis-discovery-ssdp": "8.0.0",
+    "axis-discovery-ssdp": "8.0.1",
     "debug": "4.3.4"
   },
   "devDependencies": {
