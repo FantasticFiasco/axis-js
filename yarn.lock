@@ -97,10 +97,10 @@
     node-fetch "^2.6.7"
     universal-user-agent "^6.0.0"
 
-"@octokit/rest@19.0.8":
-  version "19.0.8"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-19.0.8.tgz#db1e67cb66018859fde2c6c3a49eb5c55dc04d92"
-  integrity sha512-/PKrzqn+zDzXKwBMwLI2IKrvk8yv8cedJOdcmxrjR3gmu6UIzURhP5oQj+4qkn7+uQi1gg7QqV4SqlaQ1HYW1Q==
+"@octokit/rest@19.0.9":
+  version "19.0.9"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-19.0.9.tgz#3d10e8b9ddd3b1a9d6af51495712325e71147bd1"
+  integrity sha512-JcXmyeFTtXPoINyrvTlpxWqgs/4yshHAfcukOvwTBRpJP35A5AfZDA87CbEt/uWJ+Olgph42d9jWI+TKzwizwQ==
   dependencies:
     "@octokit/core" "^4.1.0"
     "@octokit/plugin-paginate-rest" "^6.1.0"
