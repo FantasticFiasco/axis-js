@@ -30,7 +30,7 @@
     "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "clean": "rimraf --glob \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
@@ -54,7 +54,7 @@
     "eslint": "8.43.0",
     "jest": "29.5.0",
     "nock": "13.3.1",
-    "rimraf": "3.0.2",
+    "rimraf": "5.0.1",
     "ts-jest": "29.1.0",
     "typescript": "5.1.3"
   },
