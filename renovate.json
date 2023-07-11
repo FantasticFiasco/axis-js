@@ -9,16 +9,6 @@
         {
             "matchPackagePatterns": ["jest"],
             "groupName": "Jest packages"
-        },
-        {
-            "paths": ["packages/axis-discovery-bonjour"],
-            "packageNames": ["array-flatten", "deep-equal", "dns-equal", "dns-packet", "dns-txt", "multicast-dns-service-types", "thunky"],
-            "enabled": false
-        },
-        {
-            "paths": ["packages/axis-discovery-bonjour/vendor"],
-            "enabled": false
         }
-    ],
-    "ignoreDeps": ["diff", "handlebars", "js-yaml", "lodash", "minimist", "node-notifier", "sshpk", "y18n"]
+    ]
 }
