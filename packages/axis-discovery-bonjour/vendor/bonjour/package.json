@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "array-flatten": "^2.1.0",
+    "array-flatten": "^3.0.0",
     "deep-equal": "^2.0.0",
     "dns-equal": "^1.0.0",
     "dns-txt": "^2.0.2",
