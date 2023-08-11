@@ -50,7 +50,7 @@
     "debug": "4.3.4",
     "deep-equal": "^2.0.0",
     "dns-equal": "^1.0.0",
-    "dns-packet": "^1.0.1",
+    "dns-packet": "^5.0.0",
     "dns-txt": "^2.0.2",
     "multicast-dns-service-types": "^1.1.0",
     "thunky": "^1.0.0"
