@@ -10,5 +10,6 @@
             "matchPackagePatterns": ["jest"],
             "groupName": "Jest packages"
         }
-    ]
+    ],
+    "ignoreDeps": ["array-flatten", "dns-packet", "standard"]
 }
