@@ -43,7 +43,7 @@
   "dependencies": {
     "cheerio": "1.0.0-rc.12",
     "got": "11.8.6",
-    "uuid": "9.0.0"
+    "uuid": "9.0.1"
   },
   "devDependencies": {
     "@types/cheerio": "0.22.32",
