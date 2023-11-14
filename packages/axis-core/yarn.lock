@@ -1032,10 +1032,10 @@
   dependencies:
     undici-types "~5.26.4"
 
-"@types/passport-http@0.3.10":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@types/passport-http/-/passport-http-0.3.10.tgz#dede6cbf9d75c853134a026d879f6bededb7faba"
-  integrity sha512-/QvcXAyamDdIohnZ8bqZtrpl9RhvEjDqVx0tDudDXf8eZCHH9yzYYmTiFDb7qIyK2Ae3Ke2yNbf8h7dwwGbuQQ==
+"@types/passport-http@0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@types/passport-http/-/passport-http-0.3.11.tgz#6977ed7f6f734f8887966ef3d7e52d828d927412"
+  integrity sha512-FO0rDRYtuha9m2ZgRx5+jrgrrkAnUzgzdItFI0dwKBC6k9pArK677Gtan67u6+Qah2nXVP3M1uZ5p90SpBT5Zg==
   dependencies:
     "@types/express" "*"
     "@types/passport" "*"
