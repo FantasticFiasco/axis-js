@@ -48,7 +48,7 @@
     "xml2js": "0.6.2"
   },
   "devDependencies": {
-    "@types/debug": "4.1.11",
+    "@types/debug": "4.1.12",
     "@types/jest": "29.5.8",
     "@types/node": "20.9.0",
     "@types/xml2js": "0.4.14",
