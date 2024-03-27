@@ -56,7 +56,7 @@
     "nock": "13.5.4",
     "rimraf": "5.0.5",
     "ts-jest": "29.1.2",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   },
   "resolutions": {
     "json-schema": ">=0.4.0",
