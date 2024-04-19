@@ -32,7 +32,7 @@ jobs:
     - run: yarn install --immutable --immutable-cache
     - run: yarn build
     - run: yarn test
-    - run: yarn lint
+    - run: ESLINT_USE_FLAT_CONFIG=false yarn lint
     - run: |
         if [ ${{ matrix.node-version }} == 16.x ]; then
           pushd ../..
