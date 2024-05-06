@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- [#806](https://github.com/FantasticFiasco/axis-js/pull/806) Security vulnerability in transient dependency `ip`
+
 ## [3.0.1] - 2023-04-17
 
 ### :policeman: Security
