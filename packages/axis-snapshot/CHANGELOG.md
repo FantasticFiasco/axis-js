@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `http-cache-semantics`
+- [#807](https://github.com/FantasticFiasco/axis-js/pull/807) Security vulnerability in transient dependency `@babel/traverse`
 
 ## [4.0.0] - 2023-01-08
 
