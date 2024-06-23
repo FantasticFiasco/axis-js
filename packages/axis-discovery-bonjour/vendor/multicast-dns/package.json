@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "standard": "5.4.1",
-    "tape": "5.8.0"
+    "tape": "5.8.1"
   },
   "repository": {
     "type": "git",
