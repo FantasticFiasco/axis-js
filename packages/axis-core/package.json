@@ -61,7 +61,7 @@
     "passport": "0.7.0",
     "passport-http": "0.3.0",
     "rimraf": "5.0.9",
-    "ts-jest": "29.2.0",
+    "ts-jest": "29.2.1",
     "typescript": "5.5.3"
   },
   "resolutions": {
