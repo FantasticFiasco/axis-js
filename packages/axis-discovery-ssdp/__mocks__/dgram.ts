@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface SocketOptions {}
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface RemoteInfo {}
 
 export let socketBindCallCount: number;
