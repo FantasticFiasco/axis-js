@@ -29,7 +29,7 @@ export abstract class DeviceResponse {
         if (!this.internalHtml) {
             try {
                 this.internalHtml = cheerio.load(this.response);
-            } catch (err) {
+            } catch {
                 return null;
             }
         }
