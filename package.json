@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@octokit/rest": "20.1.1",
-    "inquirer": "10.2.2",
+    "inquirer": "11.0.1",
     "prettier": "3.3.3"
   }
 }
