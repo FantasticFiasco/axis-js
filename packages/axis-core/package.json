@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "cheerio": "1.0.0",
-    "got": "11.8.6",
+    "got": "14.4.2",
     "uuid": "10.0.0"
   },
   "devDependencies": {
