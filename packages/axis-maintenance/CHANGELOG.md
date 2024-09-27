@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :syringe: Changed
+
+- [BREAKING CHANGE] Deprecate Node.js v19 and below
+
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `http-cache-semantics`
