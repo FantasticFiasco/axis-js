@@ -1,4 +1,3 @@
-import { HTTPError } from 'got';
 import { URL } from 'url';
 import { Connection, get, Protocol } from '../src';
 import { WebServer } from './web-server';
@@ -23,8 +22,8 @@ describe('#get should', () => {
         const got = await get(connection, relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
     test('succeed given basic authentication', async () => {
@@ -35,8 +34,8 @@ describe('#get should', () => {
         const got = await get(connection, relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
     test('succeed given digest authentication', async () => {
@@ -47,8 +46,8 @@ describe('#get should', () => {
         const got = await get(connection, relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
     test('throw error given invalid credentials', async () => {
@@ -66,14 +65,8 @@ describe('#get should', () => {
             const { connection, relativePath } = parseUrl(url, username, password);
 
             // Act
-            try {
-                await get(connection, relativePath);
-                throw new Error('This exception should not be thrown');
-            } catch (error) {
-                // Assert
-                expect(error).toBeInstanceOf(HTTPError);
-                expect((error as HTTPError).response.statusCode).toBe(401);
-            }
+            const res = await get(connection, relativePath);
+            expect(res.status).toBe(401);
         }
     });
 });
