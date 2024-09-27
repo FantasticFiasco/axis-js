@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :syringe: Changed
+
+- [BREAKING CHANGE] Deprecate Node.js v19 and below
+
 ### :policeman: Security
 
 - [#806](https://github.com/FantasticFiasco/axis-js/pull/806) Security vulnerability in transient dependency `ip`
