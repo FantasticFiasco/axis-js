@@ -10,7 +10,7 @@ describe('restart request', () => {
             const got = new RestartRequest(connection);
 
             // Assert
-            expect(got.relativePath).toBe('/axis-cgi/restart.cgi');
+            expect(got.relativePath()).toBe('/axis-cgi/restart.cgi');
         });
     });
 });
