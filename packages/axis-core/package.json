@@ -29,11 +29,12 @@
     "./dist"
   ],
   "scripts": {
-    "clean": "rimraf --glob \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "clean": "rimraf ./dist ./coverage",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint --max-warnings=0 . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
     "prepack": "yarn build",
     "preversion": "git add ./CHANGELOG.md",
@@ -51,8 +52,6 @@
     "@types/node": "20.16.5",
     "@types/passport-http": "0.3.11",
     "@types/uuid": "10.0.0",
-    "@typescript-eslint/eslint-plugin": "8.6.0",
-    "@typescript-eslint/parser": "8.6.0",
     "coveralls": "3.1.1",
     "eslint": "9.11.0",
     "express": "4.21.0",
@@ -61,7 +60,8 @@
     "passport-http": "0.3.0",
     "rimraf": "6.0.1",
     "ts-jest": "29.2.5",
-    "typescript": "5.6.2"
+    "typescript": "5.6.2",
+    "typescript-eslint": "8.6.0"
   },
   "resolutions": {
     "minimist": ">=1.2.6"

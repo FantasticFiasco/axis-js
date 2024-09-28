@@ -27,7 +27,7 @@ jobs:
     - run: yarn install --immutable --immutable-cache
     - run: yarn build
     - run: yarn test
-    - run: ESLINT_USE_FLAT_CONFIG=false yarn lint
+    - run: yarn lint
     - run: |
         cd ../..
         yarn install --immutable --immutable-cache
