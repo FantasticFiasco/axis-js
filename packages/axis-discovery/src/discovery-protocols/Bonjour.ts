@@ -70,7 +70,7 @@ export class Bonjour implements IDiscoveryProtocol {
             undefined,
             undefined,
             undefined,
-            undefined
+            undefined,
         );
     }
 }

@@ -15,7 +15,7 @@ export abstract class DeviceRequest {
         /**
          * Gets the connection description to the device.
          */
-        protected readonly connection: Connection
+        protected readonly connection: Connection,
     ) {}
 
     /**

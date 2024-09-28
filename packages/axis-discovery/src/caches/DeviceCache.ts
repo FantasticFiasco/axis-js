@@ -3,7 +3,7 @@ import { Device } from '../Device';
 import { log } from '../logging';
 
 export class DeviceCache {
-    private readonly devices: { [macAddress: string]: Device } = {};
+    private readonly devices: Record<string, Device> = {};
 
     constructor(...devices: Device[]) {
         for (const device of devices) {

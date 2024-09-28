@@ -14,7 +14,7 @@ export abstract class DeviceResponse {
         /**
          * Gets the HTTP response.
          */
-        protected readonly response: string
+        protected readonly response: string,
     ) {}
 
     /**

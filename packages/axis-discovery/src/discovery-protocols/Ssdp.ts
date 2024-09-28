@@ -73,7 +73,7 @@ export class Ssdp implements IDiscoveryProtocol {
             ssdpDevice.modelName,
             ssdpDevice.modelDescription,
             ssdpDevice.modelNumber,
-            ssdpDevice.presentationURL
+            ssdpDevice.presentationURL,
         );
     }
 }

@@ -36,7 +36,7 @@ describe('Mappings', () => {
                 ['169.254.129.36'], // Only link local address
                 'Lobby',
                 80,
-                'ACCC8E270AD8'
+                'ACCC8E270AD8',
             );
 
             // Act
@@ -52,7 +52,7 @@ describe('Mappings', () => {
                 ['192.168.1.102'], // Only address
                 'Lobby',
                 80,
-                'ACCC8E270AD8'
+                'ACCC8E270AD8',
             );
 
             // Act

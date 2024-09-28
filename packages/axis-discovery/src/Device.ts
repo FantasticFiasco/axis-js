@@ -62,6 +62,6 @@ export class Device {
         /**
          * Gets the URL to the web page of the device.
          */
-        readonly presentationURL: string | undefined
+        readonly presentationURL: string | undefined,
     ) {}
 }

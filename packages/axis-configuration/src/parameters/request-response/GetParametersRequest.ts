@@ -11,12 +11,12 @@ export class GetParametersRequest extends DeviceRequest {
     }
 
     public async send(): Promise<GetParametersResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this.get(this.relativePath());
 
         return new GetParametersResponse(response.toString());
     }
 
-    public get relativePath(): string {
+    public relativePath(): string {
         return `/axis-cgi/param.cgi?action=list${Converter.toGroup(this.parameterGroups)}&responseformat=rfc`;
     }
 }

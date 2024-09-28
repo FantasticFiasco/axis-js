@@ -49,7 +49,7 @@ export class Connection {
         /**
          * Gets the options for the connection to the device.
          */
-        public readonly options?: Options
+        public readonly options?: Options,
     ) {}
 
     /**

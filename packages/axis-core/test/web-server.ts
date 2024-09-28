@@ -29,7 +29,7 @@ export class WebServer {
         passport.use(
             new BasicStrategy((username, password, done) => {
                 done(null, username === this.username && password === this.password);
-            })
+            }),
         );
 
         passport.use(
@@ -45,8 +45,8 @@ export class WebServer {
                     }
 
                     done(null, true, this.password);
-                }
-            )
+                },
+            ),
         );
 
         app.get('/guest', this.successResponse);

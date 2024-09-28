@@ -32,7 +32,7 @@ describe('update parameter response', () => {
                 [
                     "# Error: Error setting 'root.Some.Parameter' to 'some value'!",
                     "# Error: Error setting 'root.Some.Other.Parameter' to 'some other value'!",
-                ].join('\n')
+                ].join('\n'),
             );
 
             try {

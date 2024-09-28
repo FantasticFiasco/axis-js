@@ -57,11 +57,11 @@ export class GetUsersResponse extends DeviceResponse {
         return users;
     }
 
-    private parseParameters(): { [name: string]: string[] } {
+    private parseParameters(): Record<string, string[]> {
         // Each line represents a parameter
         const parameters = this.response.split('\n');
 
-        return parameters.reduce<{ [name: string]: string[] }>((result, parameter) => {
+        return parameters.reduce<Record<string, string[]>>((result, parameter) => {
             const match = GetUsersResponse.ParameterSuccessResponse.exec(parameter);
             if (match) {
                 const name = match[1];
