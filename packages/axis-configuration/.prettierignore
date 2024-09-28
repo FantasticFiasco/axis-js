@@ -1,2 +1,5 @@
 # Markdown files
 **/*.md
+
+# Build
+dist/

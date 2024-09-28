@@ -1,0 +1,8 @@
+# Markdown files
+**/*.md
+
+# Build
+dist/
+
+# Vendor
+vendor/
