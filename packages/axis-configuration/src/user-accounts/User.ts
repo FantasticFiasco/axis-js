@@ -30,7 +30,7 @@ export class User {
         /**
          * Gets whether user has access rights for PTZ control.
          */
-        readonly ptz: boolean
+        readonly ptz: boolean,
     ) {
         // Valdate name
         expect.toBeTrue(name.length > 0 && name.length < 15, 'User name must be between 1-14 characters.');

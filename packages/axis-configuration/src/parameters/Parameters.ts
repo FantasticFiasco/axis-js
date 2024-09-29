@@ -24,8 +24,8 @@ export class Parameters {
      * @throws {UnauthorizedError} User is not authorized to perform operation.
      * @throws {RequestError} Request failed.
      */
-    public async get(...parameterGroups: string[]): Promise<{ [name: string]: string }> {
-        expect.toBeTrue(parameterGroups.length > 0, 'At least one parameter group must be specied');
+    public async get(...parameterGroups: string[]): Promise<Record<string, string>> {
+        expect.toBeTrue(parameterGroups.length > 0, 'At least one parameter group must be specified');
 
         const request = new GetParametersRequest(this.connection, ...parameterGroups);
         const response = await request.send();
@@ -43,7 +43,7 @@ export class Parameters {
      * @throws {UnauthorizedError} User is not authorized to perform operation.
      * @throws {RequestError} Request failed.
      */
-    public async update(parameters: { [name: string]: string }): Promise<void> {
+    public async update(parameters: Record<string, string>): Promise<void> {
         expect.toBeTrue(Object.keys(parameters).length > 0, 'At least one parameter must be specified');
 
         const request = new UpdateParametersRequest(this.connection, parameters);

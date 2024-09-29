@@ -1,8 +1,11 @@
 # npm packages
 **/node_modules/*
 
+# build files
+**/dist/*
+
 # yarn logs
 yarn-error.log
 
-# macos files
+# macOS files
 .DS_Store

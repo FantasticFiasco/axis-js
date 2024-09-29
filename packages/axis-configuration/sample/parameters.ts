@@ -37,7 +37,7 @@ const updateParameters = async (parameters: Parameters): Promise<void> => {
     });
 };
 
-const print = (root: { [name: string]: string }) => {
+const print = (root: Record<string, string>) => {
     for (const parameter of Object.keys(root)) {
         console.log(`    ${parameter}=${root[parameter]}`);
     }

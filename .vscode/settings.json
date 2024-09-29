@@ -1,19 +1,18 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "cSpell.words": ["cnonce"],
-    "markdown.extension.toc.levels": "1..3",
-    "yaml.validate": true,
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow": ["/.github/workflows/*"]
-    }
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "cnonce"
+  ],
+  "markdown.extension.toc.levels": "1..3",
+  "yaml.validate": true,
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow": [
+      "/.github/workflows/*"
+    ]
+  }
 }

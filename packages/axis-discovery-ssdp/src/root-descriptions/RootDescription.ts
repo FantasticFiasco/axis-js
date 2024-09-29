@@ -28,7 +28,10 @@ interface Data {
 }
 
 export class RootDescription {
-    private constructor(readonly remoteAddress: string, private readonly rootDescription: Data) {}
+    private constructor(
+        readonly remoteAddress: string,
+        private readonly rootDescription: Data,
+    ) {}
 
     public static parse(remoteAddress: string, xml: string): Promise<RootDescription> {
         return new Promise<RootDescription>((resolve, reject) => {

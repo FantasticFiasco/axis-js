@@ -7,12 +7,12 @@ export class GetUsersRequest extends DeviceRequest {
     }
 
     public async send(): Promise<GetUsersResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this.get(this.relativePath());
 
         return new GetUsersResponse(response.toString());
     }
 
-    public get relativePath(): string {
+    public relativePath(): string {
         return '/axis-cgi/pwdgrp.cgi?action=get';
     }
 }

@@ -14,7 +14,7 @@ describe('Message', () => {
         // Act
         const got = new Message(
             '192.168.1.100',
-            Buffer.from('HTTP/1.1 200 OK\r\n' + ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n')
+            Buffer.from('HTTP/1.1 200 OK\r\n' + ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'),
         );
 
         // Assert

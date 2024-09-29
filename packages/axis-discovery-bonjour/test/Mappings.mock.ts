@@ -33,7 +33,6 @@ export class AxisService extends events.EventEmitter implements bonjour.Service 
         return `axis-${this.macAddress.toLowerCase()}.local`;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     get txt(): object {
         if (this.macAddress) {
             return {

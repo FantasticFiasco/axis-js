@@ -31,7 +31,7 @@ export function mapFromService(service: bonjour.Service): Device | undefined {
 const linkLocalPrefix = '169.254';
 
 function getAddresses(service: unknown): string[] | undefined {
-    const serviceWithAddresses = service as { addresses?: Array<undefined> };
+    const serviceWithAddresses = service as { addresses?: undefined[] };
     if (!serviceWithAddresses.addresses || serviceWithAddresses.addresses instanceof Array === false) {
         return undefined;
     }

@@ -39,7 +39,7 @@ export const clientProvider = (method: string, url: string, username: string, pa
                                 username,
                                 password,
                                 challenge,
-                                challenge.qop === 'auth' ? digest.createCnonce() : undefined
+                                challenge.qop === 'auth' ? digest.createCnonce() : undefined,
                             );
                             break;
 

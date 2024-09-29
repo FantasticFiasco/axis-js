@@ -1,4 +1,4 @@
-import { DeviceResponse, UnknownError } from "axis-core";
+import { DeviceResponse, UnknownError } from 'axis-core';
 
 export class RestartResponse extends DeviceResponse {
     private static readonly SuccessResponse = /restartMessage/i;

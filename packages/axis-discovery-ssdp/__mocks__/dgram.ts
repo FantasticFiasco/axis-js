@@ -31,7 +31,7 @@ class Socket extends EventEmitter {
         _length: number,
         _port?: number,
         _address?: string,
-        callback?: (error: Error | null, bytes: number) => void
+        callback?: (error: Error | null, bytes: number) => void,
     ): void {
         socketSendCallCount++;
         if (callback) {

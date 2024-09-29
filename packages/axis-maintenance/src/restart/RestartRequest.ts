@@ -7,12 +7,12 @@ export class RestartRequest extends DeviceRequest {
     }
 
     public async send(): Promise<RestartResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this.get(this.relativePath());
 
         return new RestartResponse(response.toString());
     }
 
-    public get relativePath(): string {
+    public relativePath(): string {
         return '/axis-cgi/restart.cgi';
     }
 }

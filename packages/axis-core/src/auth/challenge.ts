@@ -47,7 +47,10 @@ const toChallenge = (wwwAuthenticateHeader: string): Challenge => {
 };
 
 class Challenge {
-    constructor(public readonly type: string, private readonly params: Map<string, string>) {}
+    constructor(
+        public readonly type: string,
+        private readonly params: Map<string, string>,
+    ) {}
 
     get = (name: string): string | undefined => {
         return this.params.get(name);

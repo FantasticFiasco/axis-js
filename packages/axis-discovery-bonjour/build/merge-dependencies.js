@@ -10,9 +10,11 @@ function readPackage(directory) {
 function sort(dependencies) {
     const result = {};
 
-    Object.keys(dependencies).sort().forEach(key => {
-        result[key] = dependencies[key];
-      });
+    Object.keys(dependencies)
+        .sort()
+        .forEach((key) => {
+            result[key] = dependencies[key];
+        });
 
     return result;
 }
@@ -24,7 +26,7 @@ const multicastDns = readPackage('vendor/multicast-dns');
 const dependencies = sort({
     ...thisPackage.dependencies,
     ...bonjour.dependencies,
-    ...multicastDns.dependencies
+    ...multicastDns.dependencies,
 });
 
 thisPackage.dependencies = dependencies;

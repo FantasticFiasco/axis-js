@@ -9,7 +9,7 @@ export const DEVICE_WITH_INFORMATION = new Device(
     'AXIS M1014',
     'AXIS M1014 Fixed Network Camera',
     'M1014',
-    'http://192.168.1.102:80'
+    'http://192.168.1.102:80',
 );
 
 export const DEVICE_WITHOUT_INFORMATION = new Device(
@@ -21,7 +21,7 @@ export const DEVICE_WITHOUT_INFORMATION = new Device(
     undefined,
     undefined,
     undefined,
-    undefined
+    undefined,
 );
 
 export const DEVICE_WITHOUT_MAC_ADDRESS = new Device('192.168.1.102', undefined, undefined, '', undefined, undefined, undefined, undefined, undefined);

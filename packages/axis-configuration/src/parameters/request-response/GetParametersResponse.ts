@@ -16,10 +16,10 @@ export class GetParametersResponse extends DeviceResponse {
         // No errors are reported in the response body, thus no action is needed here
     }
 
-    public get parameters(): { [name: string]: string } {
+    public get parameters(): Record<string, string> {
         const parameters = this.response.split('\n');
 
-        return parameters.reduce<{ [name: string]: string }>((result, parameter) => {
+        return parameters.reduce<Record<string, string>>((result, parameter) => {
             if (GetParametersResponse.ErrorResponse.test(parameter)) {
                 return result;
             }

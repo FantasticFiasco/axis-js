@@ -42,6 +42,6 @@ export class Device {
         /**
          * Gets the short description for the end user.
          */
-        readonly friendlyName: string
+        readonly friendlyName: string,
     ) {}
 }
