@@ -345,10 +345,10 @@ iconv-lite@^0.4.24:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-inquirer@11.0.2:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-11.0.2.tgz#5c8383341d1bfb19f24c7844c93692d2e723d8fd"
-  integrity sha512-pnbn3nL+JFrTw/pLhzyE/IQ3+gA3n5JxTAZQDjB6qu4gbjOaiTnpZbxT6HY2DDCT7bzDjTTsd3snRP+B6N//Pg==
+inquirer@11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-11.1.0.tgz#aa540337ae049a4a0ac6bab07f46f4664c4dab0c"
+  integrity sha512-CmLAZT65GG/v30c+D2Fk8+ceP6pxD6RL+hIUOWAltCmeyEqWYwqu9v76q03OvjyZ3AB0C1Ala2stn1z/rMqGEw==
   dependencies:
     "@inquirer/core" "^9.2.1"
     "@inquirer/prompts" "^6.0.1"
