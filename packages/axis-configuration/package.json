@@ -45,7 +45,7 @@
     "axis-core": "1.0.1"
   },
   "devDependencies": {
-    "@types/jest": "29.5.13",
+    "@types/jest": "29.5.14",
     "@types/nock": "11.1.0",
     "@types/node": "20.16.14",
     "@typescript-eslint/eslint-plugin": "8.11.0",
