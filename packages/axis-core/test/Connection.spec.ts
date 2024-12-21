@@ -33,5 +33,16 @@ describe('connection', () => {
             expect(got).toBeTruthy();
             expect(got.options?.agent).toBeTruthy();
         });
+
+        test('should return connection with https reject unauthorized options', () => {
+            // Act
+            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
+                rejectUnauthorized: true,
+            });
+
+            // Assert
+            expect(got).toBeTruthy();
+            expect(got.options?.rejectUnauthorized).toBe(true);
+        });
     });
 });

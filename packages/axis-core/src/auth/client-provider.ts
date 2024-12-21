@@ -1,13 +1,17 @@
 import got, { Agents, Got } from 'got';
 import * as http from 'http';
 import * as https from 'https';
+import { Options } from '../Connection';
 import * as basic from './basic';
 import { parse } from './challenge';
 import * as digest from './digest';
 
-export const clientProvider = (method: string, url: string, username: string, password: string, agent?: http.Agent | https.Agent): Got => {
+export const clientProvider = (method: string, url: string, username: string, password: string, options?: Options): Got => {
     return got.extend({
-        agent: createAgent(agent),
+        agent: createAgent(options?.agent),
+        https: {
+            rejectUnauthorized: options?.rejectUnauthorized ?? true,
+        },
         hooks: {
             afterResponse: [
                 (res, retryWithMergedOptions) => {

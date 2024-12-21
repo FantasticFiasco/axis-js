@@ -9,7 +9,7 @@ import { Response } from './Response';
  */
 export const get = (connection: Connection, relativePath: string): Promise<Response> => {
     const url = connection.url + format(relativePath);
-    return clientProvider('GET', url, connection.username, connection.password, connection?.options?.agent).get<Buffer>(url);
+    return clientProvider('GET', url, connection.username, connection.password, connection.options).get<Buffer>(url);
 };
 
 const format = (relativePath: string): string => {

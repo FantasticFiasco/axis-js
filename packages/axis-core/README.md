@@ -101,6 +101,12 @@ interface Options {
      * The HTTP or HTTPS agent used when opening the connection.
      */
     agent?: http.Agent | https.Agent;
+
+    /**
+     * Whether to reject invalid HTTPS certificates, e.g., expired or
+     * self-signed. Defaults to `true`.
+     */
+    rejectUnauthorized?: boolean;
 }
 ```
 
