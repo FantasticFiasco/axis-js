@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :syringe: Changed
 
-- [BREAKING CHANGE] Deprecate Node.js v19 and below
+- [BREAKING CHANGE] Deprecate Node.js v21 and below
 
 ### :policeman: Security
 
