@@ -21,9 +21,6 @@ export class UserAccounts {
      * Adds a new user.
      * @param user The user to add. Please note that the password must be specified.
      * @throws {UserAlreadyExistsError} User already exists.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
     public async add(user: User): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
@@ -36,8 +33,6 @@ export class UserAccounts {
 
     /**
      * Gets all users.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
     public async getAll(): Promise<User[]> {
         const request = new GetUsersRequest(this.connection);
@@ -51,9 +46,6 @@ export class UserAccounts {
     /**
      * Updates a user.
      * @param user The user to update. Please note that the password must be specified.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
     public async update(user: User): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
@@ -67,9 +59,6 @@ export class UserAccounts {
     /**
      * Removes a user.
      * @param username The name of the user to remove.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
     public async remove(username: string): Promise<void> {
         const request = new RemoveUserRequest(this.connection, username);
