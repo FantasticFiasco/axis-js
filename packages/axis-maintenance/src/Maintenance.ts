@@ -18,9 +18,6 @@ export class Maintenance {
      *
      * The returned promise is resolved when the device accepts the restart request, before
      * disconnecting from the network.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
     public async restart(): Promise<void> {
         const request = new RestartRequest(this.connection);
@@ -35,9 +32,6 @@ export class Maintenance {
      * The returned promise is resolved when the device accepts the factory default request, before
      * disconnecting from the network.
      * @param type The type of factory default.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
     public async factoryDefault(type: FactoryDefaultType): Promise<void> {
         const request = new FactoryDefaultRequest(this.connection, type);

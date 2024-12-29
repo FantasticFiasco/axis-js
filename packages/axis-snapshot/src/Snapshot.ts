@@ -15,8 +15,6 @@ export class Snapshot {
 
     /**
      * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
     public async bmp(options?: SnapshotOptions): Promise<Buffer> {
         const request = new BmpRequest(this.connection, options);
@@ -27,8 +25,6 @@ export class Snapshot {
 
     /**
      * Takes a {link https://en.wikipedia.org/wiki/JPEG|JPEG} snapshot from the camera.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
     public async jpeg(options?: SnapshotOptions): Promise<Buffer> {
         const request = new JpegRequest(this.connection, options);
