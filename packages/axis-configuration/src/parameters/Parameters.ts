@@ -21,8 +21,6 @@ export class Parameters {
      * omitted, all the parameters of the {group} are returned. Wildcard (*) can be used filter
      * parameters. E.g. 'Network.*.FriendlyName' will return the two parameters
      * 'Network.Bonjour.FriendlyName' and 'Network.SSDP.FriendlyName'.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
     public async get(...parameterGroups: string[]): Promise<{ [name: string]: string }> {
         expect.toBeTrue(parameterGroups.length > 0, 'At least one parameter group must be specied');
@@ -40,8 +38,6 @@ export class Parameters {
      * @param parameters An object with parameters named '{group}.{name}' and their corresponding
      * new value.
      * @throws {UpdateParametersError} Updating one or many of the parameters failed.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
     public async update(parameters: { [name: string]: string }): Promise<void> {
         expect.toBeTrue(Object.keys(parameters).length > 0, 'At least one parameter must be specified');
