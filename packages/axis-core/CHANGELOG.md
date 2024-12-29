@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### :syringe: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js v21 and below
+- [BREAKING CHANGE] [#997](https://github.com/FantasticFiasco/axis-js/pull/997) Migrate from using [got](https://github.com/sindresorhus/got) to [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) for all network related operations.
+  - `UnauthorizedError` is removed, and the standard error behaviors of `fetch` are used instead.
+  - `RequestError` is removed, and the standard error behaviors of `fetch` are used instead.
+  - `UnknownError` is removed, and the standard error behaviors of `fetch` are used instead.
 
 ### :syringe: Fixed
 
