@@ -1,10 +1,9 @@
-import * as http from 'http';
-import * as https from 'https';
-import { Connection, Protocol } from '../src';
+import { Connection } from '../src/Connection';
+import { Protocol } from '../src/Protocol';
 
 describe('connection', () => {
     describe('#ctor(protocol, ...)', () => {
-        test('should return connection without options', () => {
+        test('should return connection', () => {
             // Act
             const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
 
@@ -12,26 +11,22 @@ describe('connection', () => {
             expect(got).toBeTruthy();
         });
 
-        test('should return connection with http agent options', () => {
+        test('should return connection with http url', () => {
             // Act
-            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
-                agent: new http.Agent(),
-            });
+            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
 
             // Assert
             expect(got).toBeTruthy();
-            expect(got.options?.agent).toBeTruthy();
+            expect(got.url).toBe('http://1.2.3.4:80');
         });
 
-        test('should return connection with https agent options', () => {
+        test('should return connection with https url', () => {
             // Act
-            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass', {
-                agent: new https.Agent(),
-            });
+            const got = new Connection(Protocol.Https, '1.2.3.4', 80, 'root', 'pass');
 
             // Assert
             expect(got).toBeTruthy();
-            expect(got.options?.agent).toBeTruthy();
+            expect(got.url).toBe('https://1.2.3.4:80');
         });
     });
 });
