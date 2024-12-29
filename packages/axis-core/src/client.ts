@@ -1,6 +1,6 @@
 import { Connection } from './Connection';
-import { parse } from './auth/challenge';
 import * as basic from './auth/basic';
+import { parse } from './auth/challenge';
 import * as digest from './auth/digest';
 
 /**
@@ -8,15 +8,12 @@ import * as digest from './auth/digest';
  * @param connection The connection to the device.
  * @param relativePath The relative path.
  */
-export const get = (connection: Connection, relativePath: string): Promise<Response> => {
-    return send("GET", connection, relativePath);
-};
-
-const send = async (method: string, connection: Connection, relativePath: string): Promise<Response> => {
+export const get = async (connection: Connection, relativePath: string): Promise<Response> => {
+    const method = 'GET';
     const url = connection.url + format(relativePath);
     const options: RequestInit = {
-        method
-    }
+        method,
+    };
 
     let res = await fetch(url, options);
     if (res.status !== 401) {
@@ -32,7 +29,7 @@ const send = async (method: string, connection: Connection, relativePath: string
     switch (challenge.type) {
         case basic.BASIC:
             options.headers = {
-                authorization: basic.createHeader(connection.username, connection.password, challenge)
+                authorization: basic.createHeader(connection.username, connection.password, challenge),
             };
             break;
 
@@ -44,7 +41,8 @@ const send = async (method: string, connection: Connection, relativePath: string
                     connection.username,
                     connection.password,
                     challenge,
-                    challenge.qop === 'auth' ? digest.createCnonce() : undefined)
+                    challenge.qop === 'auth' ? digest.createCnonce() : undefined,
+                ),
             };
             break;
 
