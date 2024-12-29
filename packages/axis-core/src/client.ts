@@ -8,11 +8,8 @@ import * as digest from './auth/digest';
  * @param connection The connection to the device.
  * @param relativePath The relative path.
  */
-export const get = (connection: Connection, relativePath: string): Promise<Response> => {
-    return send('GET', connection, relativePath);
-};
-
-const send = async (method: string, connection: Connection, relativePath: string): Promise<Response> => {
+export const get = async (connection: Connection, relativePath: string): Promise<Response> => {
+    const method = 'GET';
     const url = connection.url + format(relativePath);
     const options: RequestInit = {
         method,
