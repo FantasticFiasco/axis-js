@@ -1,13 +1,25 @@
-import { Connection, get, Protocol } from '../src';
+import { Connection, DeviceRequest, Protocol } from '../src';
 
 const address = process.env.DEVICE_IP ?? '192.168.0.90';
 const username = process.env.DEVICE_USERNAME ?? 'root';
 const password = process.env.DEVICE_PASSWORD ?? 'pass';
 
+class GetProdShortNameRequest extends DeviceRequest {
+    constructor(connection: Connection) {
+        super(connection);
+    }
+
+    public async send(): Promise<Response> {
+        const res = await this.get('/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
+        return res;
+    }
+}
+
 (async () => {
     const connection = new Connection(Protocol.Http, address, 80, username, password);
+    const req = new GetProdShortNameRequest(connection);
 
-    const res: Response = await get(connection, '/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
+    const res = await req.send();
     const body = await res.text();
 
     console.log('Status:', res.status);
