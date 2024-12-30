@@ -23,7 +23,6 @@ class GetProdShortNameRequest extends DeviceRequest {
     const res = await req.send();
     const body = await res.text();
 
-    console.log('Status:', res.status);
-    console.log('Headers:', res.headers);
-    console.log('Body:', body);
+    console.log('Status: ', res.status);
+    console.log('Body:   ', body);
 })();
