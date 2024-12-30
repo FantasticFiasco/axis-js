@@ -18,16 +18,16 @@ export class NotifySocket extends SocketBase {
     }
 
     protected onListening(): void {
-        if (!this.socket) {
+        if (!this._socket) {
             throw new Error('Notify socket has never been started');
         }
 
-        log('NotifySocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
+        log('NotifySocket#onListening - %s:%d', this._socket.address().address, this._socket.address().port);
 
         for (const address of this.addresses) {
             log('NotifySocket#onListening - add membership to %s', address);
             try {
-                this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
+                this._socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
             } catch (error) {
                 log('NotifySocket#onListening - %o', error);
             }
@@ -50,11 +50,11 @@ export class NotifySocket extends SocketBase {
 
     protected bind(): Promise<void> {
         return new Promise<void>((resolve) => {
-            if (!this.socket) {
+            if (!this._socket) {
                 throw new Error('Notify socket has never been started');
             }
 
-            this.socket.bind(SSDP_PORT, undefined, () => resolve());
+            this._socket.bind(SSDP_PORT, undefined, () => resolve());
         });
     }
 }

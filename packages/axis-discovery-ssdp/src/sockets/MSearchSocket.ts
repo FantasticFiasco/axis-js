@@ -26,12 +26,12 @@ export class MSearchSocket extends SocketBase {
         const message = new MSearch().toBuffer();
 
         return new Promise<void>((resolve, reject) => {
-            if (!this.socket) {
+            if (!this._socket) {
                 reject(new Error('Socket has never been started'));
                 return;
             }
 
-            this.socket.send(message, 0, message.length, SSDP_PORT, SSDP_MULTICAST_ADDRESS, (error: Error | null) => {
+            this._socket.send(message, 0, message.length, SSDP_PORT, SSDP_MULTICAST_ADDRESS, (error: Error | null) => {
                 if (error) {
                     log('MSearchSocket#search - %o', error);
                     reject(error);
@@ -43,11 +43,11 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening(): void {
-        if (!this.socket) {
+        if (!this._socket) {
             throw new Error('M-SEARCH socket has never been started');
         }
 
-        log('MSearchSocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
+        log('MSearchSocket#onListening - %s:%d', this._socket.address().address, this._socket.address().port);
     }
 
     protected onMessage(messageBuffer: Buffer, remote: AddressInfo): void {
@@ -62,11 +62,11 @@ export class MSearchSocket extends SocketBase {
 
     protected bind(): Promise<void> {
         return new Promise<void>((resolve) => {
-            if (!this.socket) {
+            if (!this._socket) {
                 throw new Error('M-SEARCH socket has never been started');
             }
 
-            this.socket.bind(undefined, this.address, () => resolve());
+            this._socket.bind(undefined, this.address, () => resolve());
         });
     }
 }
