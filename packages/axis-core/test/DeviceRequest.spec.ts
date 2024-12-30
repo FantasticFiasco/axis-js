@@ -12,7 +12,7 @@ class TestRequest extends DeviceRequest {
     }
 
     public async send(relativePath: string): Promise<Response> {
-        return this.get(relativePath);
+        return this._get(relativePath);
     }
 }
 
