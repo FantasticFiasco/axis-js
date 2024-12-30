@@ -2,11 +2,12 @@ import { Connection, Protocol } from 'axis-core';
 import { FactoryDefaultType, Maintenance } from '../src';
 
 const address = process.env.DEVICE_IP ?? '192.168.0.90';
+const port = Number.parseInt(process.env.DEVICE_PORT ?? '80');
 const username = process.env.DEVICE_USERNAME ?? 'root';
 const password = process.env.DEVICE_PASSWORD ?? 'pass';
 
 (async () => {
-    const connection = new Connection(Protocol.Http, address, 80, username, password);
+    const connection = new Connection(Protocol.Http, address, port, username, password);
     const maintenance = new Maintenance(connection);
 
     // Restart
