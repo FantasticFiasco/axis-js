@@ -2,16 +2,8 @@ import { Connection } from '../src/Connection';
 import { Protocol } from '../src/Protocol';
 
 describe('connection', () => {
-    describe('#ctor(protocol, ...)', () => {
-        test('should return connection', () => {
-            // Act
-            const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
-
-            // Assert
-            expect(got).toBeTruthy();
-        });
-
-        test('should return connection with http url', () => {
+    describe('#url', () => {
+        test('should return http url', () => {
             // Act
             const got = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
 
@@ -20,7 +12,7 @@ describe('connection', () => {
             expect(got.url).toBe('http://1.2.3.4:80');
         });
 
-        test('should return connection with https url', () => {
+        test('should return https url', () => {
             // Act
             const got = new Connection(Protocol.Https, '1.2.3.4', 80, 'root', 'pass');
 
