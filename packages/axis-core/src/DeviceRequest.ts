@@ -11,24 +11,26 @@ export abstract class DeviceRequest {
      * Initializes a new instance of the class.
      * @param connection The connection description to the device.
      */
-    protected constructor(
-        /**
-         * Gets the connection description to the device.
-         */
-        protected readonly connection: Connection,
-    ) {}
+    protected constructor(connection: Connection) {
+        this._connection = connection;
+    }
+
+    /**
+     * Gets the connection description to the device.
+     */
+    protected readonly _connection: Connection;
 
     /**
      * Sends a HTTP GET request to a device.
      * @param relativePath The relative path.
      */
-    protected async get(relativePath: string): Promise<Response> {
-        const res = await this._send('GET', relativePath);
+    protected async _get(relativePath: string): Promise<Response> {
+        const res = await this.#send('GET', relativePath);
         return res;
     }
 
-    private async _send(method: string, relativePath: string): Promise<Response> {
-        const url = this.connection.url + this.format(relativePath);
+    async #send(method: string, relativePath: string): Promise<Response> {
+        const url = this._connection.url + this.format(relativePath);
         const options: RequestInit = {
             method,
         };
@@ -47,7 +49,7 @@ export abstract class DeviceRequest {
         switch (challenge.type) {
             case basic.BASIC:
                 options.headers = {
-                    authorization: basic.createHeader(this.connection.username, this.connection.password, challenge),
+                    authorization: basic.createHeader(this._connection.username, this._connection.password, challenge),
                 };
                 break;
 
@@ -56,8 +58,8 @@ export abstract class DeviceRequest {
                     authorization: digest.createHeader(
                         method,
                         url,
-                        this.connection.username,
-                        this.connection.password,
+                        this._connection.username,
+                        this._connection.password,
                         challenge,
                         challenge.qop === 'auth' ? digest.createCnonce() : undefined,
                     ),

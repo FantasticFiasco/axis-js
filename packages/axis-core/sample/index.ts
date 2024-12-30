@@ -11,7 +11,7 @@ class GetProdShortNameRequest extends DeviceRequest {
     }
 
     public async send(): Promise<Response> {
-        const res = await this.get('/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
+        const res = await this._get('/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
         return res;
     }
 }
