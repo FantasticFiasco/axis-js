@@ -3,13 +3,13 @@ import { Device } from '../Device';
 import { log } from '../logging';
 
 export class DeviceCache {
-    private readonly devices: { [macAddress: string]: Device } = {};
-
     constructor(...devices: Device[]) {
         for (const device of devices) {
             this.devices[device.macAddress] = device;
         }
     }
+
+    private readonly devices: { [macAddress: string]: Device } = {};
 
     public update(device: Device): Device {
         expect.toExist(device.macAddress, `MAC address of device with address ${device.address} is expected`);

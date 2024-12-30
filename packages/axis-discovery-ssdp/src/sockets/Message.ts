@@ -2,11 +2,14 @@
  * Class describing a received SSDP message.
  */
 export class Message {
-    private readonly headers: { [name: string]: string } = {};
-
-    constructor(readonly remoteAddress: string, message: Buffer) {
+    constructor(
+        readonly remoteAddress: string,
+        message: Buffer,
+    ) {
         this.parseHeaders(message);
     }
+
+    private readonly headers: { [name: string]: string } = {};
 
     /**
      * Gets the HTTP method.

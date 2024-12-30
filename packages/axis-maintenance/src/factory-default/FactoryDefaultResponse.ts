@@ -2,12 +2,15 @@ import { DeviceResponse, UnknownError } from 'axis-core';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
 export class FactoryDefaultResponse extends DeviceResponse {
-    private static readonly SuccessResponsePartialType = /factoryMessage/i;
-    private static readonly SuccessResponseHardType = /factoryMessage2/i;
-
-    constructor(response: string, private readonly type: FactoryDefaultType) {
+    constructor(
+        response: string,
+        private readonly type: FactoryDefaultType,
+    ) {
         super(response);
     }
+
+    private static readonly SuccessResponsePartialType = /factoryMessage/i;
+    private static readonly SuccessResponseHardType = /factoryMessage2/i;
 
     public assertSuccess(): void {
         if (this.type === FactoryDefaultType.Partial) {

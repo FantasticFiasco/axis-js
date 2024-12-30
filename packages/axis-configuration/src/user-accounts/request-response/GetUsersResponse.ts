@@ -2,15 +2,15 @@ import { DeviceResponse } from 'axis-core';
 import { AccessRights, User } from '../..';
 
 export class GetUsersResponse extends DeviceResponse {
+    constructor(response: string) {
+        super(response);
+    }
+
     // A parameter has the following format:
     // [NAME]="[VALUE1],[VALUE2]..."
     private static readonly ParameterSuccessResponse = /\s*(\S*)\s*=\s*"(\S*)"\s*/;
 
     private parsedUsers?: User[];
-
-    constructor(response: string) {
-        super(response);
-    }
 
     public assertSuccess(): void {
         // No errors are reported in the response body, thus no action is needed here

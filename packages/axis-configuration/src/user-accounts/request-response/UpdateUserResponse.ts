@@ -1,11 +1,11 @@
 import { DeviceResponse, UnknownError } from 'axis-core';
 
 export class UpdateUserResponse extends DeviceResponse {
-    private static readonly SuccessResponse = /Modified account .*\./;
-
     constructor(response: string) {
         super(response);
     }
+
+    private static readonly SuccessResponse = /Modified account .*\./;
 
     public assertSuccess(): void {
         const body: string | null = this.body;

@@ -16,10 +16,6 @@ interface Events {
  * Class responsible for discovering Axis cameras on the network.
  */
 export class Discovery implements EventEmitter {
-    private readonly eventEmitter = new EventEmitter();
-    private readonly discoveryProtocols: IDiscoveryProtocol[] = [];
-    private readonly deviceCache = new DeviceCache();
-
     /**
      * Initializes a new instance of the class.
      */
@@ -27,6 +23,10 @@ export class Discovery implements EventEmitter {
         this.setup(new Bonjour());
         this.setup(new Ssdp());
     }
+
+    private readonly eventEmitter = new EventEmitter();
+    private readonly discoveryProtocols: IDiscoveryProtocol[] = [];
+    private readonly deviceCache = new DeviceCache();
 
     /**
      * Start listen for device advertisements on all network interface
