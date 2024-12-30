@@ -19,10 +19,6 @@ interface Events {
  * Class responsible for discovering Axis cameras on the network.
  */
 export class Discovery implements EventEmitter {
-    private readonly eventEmitter = new EventEmitter();
-    private readonly options: IOptions;
-    private sockets?: SocketBase[];
-
     /**
      * Initializes a new instance of the class.
      * @param options The SSDP discovery options.
@@ -30,6 +26,10 @@ export class Discovery implements EventEmitter {
     constructor(options?: IOptions) {
         this.options = options || {};
     }
+
+    private readonly eventEmitter = new EventEmitter();
+    private readonly options: IOptions;
+    private sockets?: SocketBase[];
 
     /**
      * Start listen for device advertisements on all network interface

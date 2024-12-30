@@ -2,12 +2,12 @@ import { DeviceResponse, UnknownError } from 'axis-core';
 import { UserAlreadyExistsError } from '../..';
 
 export class AddUserResponse extends DeviceResponse {
-    private static readonly SuccessResponse = /Created account .*\./;
-    private static readonly UserAlreadyExistsResponse = /Error: this user name already exists, consult the system log file/;
-
     constructor(response: string) {
         super(response);
     }
+
+    private static readonly SuccessResponse = /Created account .*\./;
+    private static readonly UserAlreadyExistsResponse = /Error: this user name already exists, consult the system log file/;
 
     public assertSuccess(): void {
         const body: string | null = this.body;
