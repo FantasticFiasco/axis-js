@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [2.0.0-beta.1] - 2025-01-01
+
 ### :syringe: Changed
 
 - [BREAKING CHANGE] Deprecate Node.js v21 and below
