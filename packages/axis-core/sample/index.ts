@@ -7,7 +7,7 @@ const password = process.env.DEVICE_PASSWORD ?? 'pass';
 
 class GetProdShortNameRequest extends DeviceRequest {
     constructor(connection: Connection) {
-        super(connection, fetch);
+        super(connection);
     }
 
     public async send(): Promise<Response> {
