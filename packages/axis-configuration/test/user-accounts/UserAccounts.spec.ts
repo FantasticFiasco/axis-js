@@ -1,5 +1,5 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
-import { Connection, Protocol, RequestError, UnauthorizedError, UnknownError } from 'axis-core';
+import { Connection, Protocol } from 'axis-core';
 import * as nock from 'nock';
 import { AccessRights, User, UserAccounts, UserAlreadyExistsError } from '../../src';
 import { Generate } from './Generate';
@@ -157,7 +157,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -175,7 +175,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });
@@ -307,7 +307,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -323,7 +323,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });
@@ -433,7 +433,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnknownError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -451,7 +451,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -469,7 +469,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });
@@ -502,7 +502,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnknownError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -518,7 +518,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -534,7 +534,7 @@ describe('users', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });

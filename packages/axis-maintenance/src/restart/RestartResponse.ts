@@ -1,4 +1,4 @@
-import { DeviceResponse, UnknownError } from 'axis-core';
+import { DeviceResponse } from 'axis-core';
 
 export class RestartResponse extends DeviceResponse {
     constructor(response: string) {
@@ -17,10 +17,10 @@ export class RestartResponse extends DeviceResponse {
         if (body !== null) {
             body = body.trim();
             if (body) {
-                throw new UnknownError(body);
+                throw new Error(body);
             }
         }
 
-        throw new UnknownError('Request to restart device was not successful');
+        throw new Error('Request to restart device was not successful');
     }
 }
