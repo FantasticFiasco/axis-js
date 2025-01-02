@@ -4,16 +4,25 @@ import { parse } from './auth/challenge';
 import * as digest from './auth/digest';
 
 /**
+ * The fetch function type, allowing us to mock fetch in unit tests.
+ */
+type Fetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
+
+/**
  * Abstract class describing a HTTP request.
  */
 export abstract class DeviceRequest {
     /**
      * Initializes a new instance of the class.
      * @param connection The connection description to the device.
+     * @param fetch The fetch function.
      */
-    protected constructor(connection: Connection) {
+    protected constructor(connection: Connection, fetch: Fetch) {
         this._connection = connection;
+        this.#fetch = fetch;
     }
+
+    readonly #fetch: Fetch;
 
     /**
      * Gets the connection description to the device.
@@ -35,7 +44,7 @@ export abstract class DeviceRequest {
             method,
         };
 
-        let res = await fetch(url, options);
+        let res = await this.#fetch(url, options);
         if (res.status !== 401) {
             return res;
         }
@@ -70,7 +79,7 @@ export abstract class DeviceRequest {
                 return res;
         }
 
-        res = await fetch(url, options);
+        res = await this.#fetch(url, options);
         return res;
     }
 
