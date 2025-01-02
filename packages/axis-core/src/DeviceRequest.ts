@@ -15,14 +15,14 @@ export abstract class DeviceRequest {
     /**
      * Initializes a new instance of the class.
      * @param connection The connection description to the device.
-     * @param fetch The fetch function.
+     * @param f The fetch function. Only specified in unit tests.
      */
-    protected constructor(connection: Connection, fetch: Fetch) {
+    protected constructor(connection: Connection, f: Fetch = fetch) {
         this._connection = connection;
-        this.#fetch = fetch;
+        this.#f = f;
     }
 
-    readonly #fetch: Fetch;
+    readonly #f: Fetch;
 
     /**
      * Gets the connection description to the device.
@@ -44,7 +44,7 @@ export abstract class DeviceRequest {
             method,
         };
 
-        let res = await this.#fetch(url, options);
+        let res = await this.#f(url, options);
         if (res.status !== 401) {
             return res;
         }
@@ -79,7 +79,7 @@ export abstract class DeviceRequest {
                 return res;
         }
 
-        res = await this.#fetch(url, options);
+        res = await this.#f(url, options);
         return res;
     }
 
