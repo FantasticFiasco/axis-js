@@ -7,7 +7,7 @@ export class GetUsersRequest extends DeviceRequest {
     }
 
     public async send(): Promise<GetUsersResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this._get(this.relativePath);
 
         return new GetUsersResponse(response.toString());
     }
