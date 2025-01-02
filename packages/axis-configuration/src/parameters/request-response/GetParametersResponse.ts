@@ -18,7 +18,7 @@ export class GetParametersResponse extends DeviceResponse {
     }
 
     public get parameters(): { [name: string]: string } {
-        const parameters = this.response.split('\n');
+        const parameters = this._response.split('\n');
 
         return parameters.reduce<{ [name: string]: string }>((result, parameter) => {
             if (GetParametersResponse.ErrorResponse.test(parameter)) {

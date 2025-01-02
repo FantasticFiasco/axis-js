@@ -59,7 +59,7 @@ export class GetUsersResponse extends DeviceResponse {
 
     private parseParameters(): { [name: string]: string[] } {
         // Each line represents a parameter
-        const parameters = this.response.split('\n');
+        const parameters = this._response.split('\n');
 
         return parameters.reduce<{ [name: string]: string[] }>((result, parameter) => {
             const match = GetUsersResponse.ParameterSuccessResponse.exec(parameter);
