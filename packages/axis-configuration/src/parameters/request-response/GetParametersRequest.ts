@@ -11,7 +11,7 @@ export class GetParametersRequest extends DeviceRequest {
     private readonly parameterGroups: string[];
 
     public async send(): Promise<GetParametersResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this._get(this.relativePath);
 
         return new GetParametersResponse(response.toString());
     }
