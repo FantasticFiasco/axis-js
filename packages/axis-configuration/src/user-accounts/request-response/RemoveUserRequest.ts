@@ -1,12 +1,13 @@
-import { Connection, DeviceRequest } from 'axis-core';
+import { Connection, DeviceRequest, Fetch } from 'axis-core';
 import { RemoveUserResponse } from './RemoveUserResponse';
 
 export class RemoveUserRequest extends DeviceRequest {
     constructor(
         connection: Connection,
         private readonly username: string,
+        f: Fetch = fetch,
     ) {
-        super(connection);
+        super(connection, f);
     }
 
     public async send(): Promise<RemoveUserResponse> {
