@@ -1,4 +1,4 @@
-import { DeviceResponse, UnknownError } from 'axis-core';
+import { DeviceResponse } from 'axis-core';
 
 export class RemoveUserResponse extends DeviceResponse {
     constructor(response: string) {
@@ -8,18 +8,14 @@ export class RemoveUserResponse extends DeviceResponse {
     private static readonly SuccessResponse = /Removed account .*\./;
 
     public assertSuccess(): void {
-        const body: string | null = this.body;
+        const body: string | null = this._body;
 
         if (body === null) {
-            throw new UnknownError('No HTML in response body');
+            throw new Error('No HTML in response body');
         }
 
-        this.handleUnknownError(body);
-    }
-
-    private handleUnknownError(body: string) {
         if (!RemoveUserResponse.SuccessResponse.test(body)) {
-            throw new UnknownError(body);
+            throw new Error(body);
         }
     }
 }
