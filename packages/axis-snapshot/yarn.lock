@@ -954,10 +954,10 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.13.2.tgz#0aa167216965ac9474ccfa83892cfb6b3e1e52ef"
   integrity sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==
 
-axis-core@2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-2.0.0-beta.1.tgz#e57f06ff8c40a9463e79d88214297ab38608c268"
-  integrity sha512-4XTzeY8G62Ihr6wjwnpzIR7PiNoFkTQ5SEips8O5qaUWKaUqutngulmAz/cMYdszfIrSvlxrhH0J3I1RNXGdGA==
+axis-core@2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-2.0.0-beta.2.tgz#3e2ecfa702ca173dc6f5972134f75ece52d32fcc"
+  integrity sha512-dXLoG7Wjv/eOMN+HqjSU/VHNcMcTXHBl2OPce5BVR/w43yLmiPHW4f5+47nf6l0zhqOhIfxYl3YzIZfuAwEEvQ==
   dependencies:
     cheerio "1.0.0"
     uuid "11.0.3"
