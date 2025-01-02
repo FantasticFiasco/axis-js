@@ -1,6 +1,5 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
 import { Connection, Protocol } from 'axis-core';
-import * as nock from 'nock';
 import { Parameters, UpdateParametersError } from '../../src';
 
 describe('parameters', () => {
