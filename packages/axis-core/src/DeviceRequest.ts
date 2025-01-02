@@ -6,7 +6,7 @@ import * as digest from './auth/digest';
 /**
  * The fetch function type, allowing us to mock fetch in unit tests.
  */
-type Fetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
+export type Fetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
 /**
  * Abstract class describing a HTTP request.
