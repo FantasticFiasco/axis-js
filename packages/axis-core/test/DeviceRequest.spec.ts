@@ -8,7 +8,7 @@ let webServer: WebServer;
 
 class TestRequest extends DeviceRequest {
     constructor(connection: Connection) {
-        super(connection, fetch);
+        super(connection);
     }
 
     public async send(relativePath: string): Promise<Response> {

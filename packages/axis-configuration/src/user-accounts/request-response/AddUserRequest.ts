@@ -1,4 +1,4 @@
-import { Connection, DeviceRequest } from 'axis-core';
+import { Connection, DeviceRequest, Fetch } from 'axis-core';
 import { User } from '../..';
 import { AddUserResponse } from './AddUserResponse';
 import { Converter } from './Converter';
@@ -7,8 +7,9 @@ export class AddUserRequest extends DeviceRequest {
     constructor(
         connection: Connection,
         private readonly user: User,
+        f: Fetch = fetch,
     ) {
-        super(connection);
+        super(connection, f);
     }
 
     public async send(): Promise<AddUserResponse> {
