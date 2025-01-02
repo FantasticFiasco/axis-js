@@ -1,4 +1,3 @@
-import { UnknownError } from 'axis-core';
 import { FactoryDefaultType } from '../../src';
 import { FactoryDefaultResponse } from '../../src/factory-default/FactoryDefaultResponse';
 
@@ -38,7 +37,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -57,7 +56,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
     });
 
@@ -96,7 +95,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -115,7 +114,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
     });
 });

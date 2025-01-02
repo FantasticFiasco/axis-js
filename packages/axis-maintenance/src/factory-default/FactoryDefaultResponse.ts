@@ -1,4 +1,4 @@
-import { DeviceResponse, UnknownError } from 'axis-core';
+import { DeviceResponse } from 'axis-core';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
 export class FactoryDefaultResponse extends DeviceResponse {
@@ -25,7 +25,7 @@ export class FactoryDefaultResponse extends DeviceResponse {
             return;
         }
 
-        this.throwUnknownError();
+        this.throwError();
     }
 
     private assertHardTypeSuccess() {
@@ -33,19 +33,19 @@ export class FactoryDefaultResponse extends DeviceResponse {
             return;
         }
 
-        this.throwUnknownError();
+        this.throwError();
     }
 
-    private throwUnknownError() {
+    private throwError() {
         let body: string | null = this.body;
 
         if (body !== null) {
             body = body.trim();
             if (body) {
-                throw new UnknownError(body);
+                throw new Error(body);
             }
         }
 
-        throw new UnknownError('Request to reset device to factory default was not successful');
+        throw new Error('Request to reset device to factory default was not successful');
     }
 }

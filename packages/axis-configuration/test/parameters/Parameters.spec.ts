@@ -1,5 +1,5 @@
 import { ExpectationError } from '@fantasticfiasco/expect';
-import { Connection, Protocol, RequestError, UnauthorizedError } from 'axis-core';
+import { Connection, Protocol } from 'axis-core';
 import * as nock from 'nock';
 import { Parameters, UpdateParametersError } from '../../src';
 
@@ -22,7 +22,7 @@ describe('parameters', () => {
                 .reply(200, `root.${name}=${value}`);
 
             // Act
-            const got = await parameters.get(name);
+            const got = await parameters.get([name]);
 
             // Assert
             expect(got[name]).toBe(value);
@@ -40,7 +40,7 @@ describe('parameters', () => {
                 .reply(200, `root.${name1}=${value1}\r\nroot.${name2}=${value2}`);
 
             // Act
-            const got = await parameters.get(name1, name2);
+            const got = await parameters.get([name1, name2]);
 
             // Assert
             expect(got[name1]).toBe(value1);
@@ -57,7 +57,7 @@ describe('parameters', () => {
                 .reply(200, ` root.${name} = ${value} `);
 
             // Act
-            const got = await parameters.get(name);
+            const got = await parameters.get([name]);
 
             // Assert
             expect(got[name]).toBe(value);
@@ -75,7 +75,7 @@ describe('parameters', () => {
                 .reply(200, ` root.${name1} = ${value1} \r\n root.${name2} = ${value2} `);
 
             // Act
-            const got = await parameters.get(name1, name2);
+            const got = await parameters.get([name1, name2]);
 
             // Assert
             expect(got[name1]).toBe(value1);
@@ -91,7 +91,7 @@ describe('parameters', () => {
                 .reply(200, `# Error: Error -1 getting param in group '${name}'\r\n`);
 
             // Act
-            const got = await parameters.get(name);
+            const got = await parameters.get([name]);
 
             // Assert
             expect(got[name]).toBeFalsy();
@@ -107,7 +107,7 @@ describe('parameters', () => {
                 .reply(200, `# Error: Error -1 getting param in group '${name1}'\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
 
             // Act
-            const got = await parameters.get(name1, name2);
+            const got = await parameters.get([name1, name2]);
 
             // Assert
             expect(got[name1]).toBeFalsy();
@@ -125,7 +125,7 @@ describe('parameters', () => {
                 .reply(200, `root.${name1}=${value1}\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
 
             // Act
-            const got = await parameters.get(name1, name2);
+            const got = await parameters.get([name1, name2]);
 
             // Assert
             expect(got[name1]).toBe(value1);
@@ -135,7 +135,7 @@ describe('parameters', () => {
         test('should throw exception if no parameter is specified', async () => {
             try {
                 // Act
-                await parameters.get();
+                await parameters.get([]);
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
@@ -151,11 +151,11 @@ describe('parameters', () => {
 
             try {
                 // Act
-                await parameters.get('Network.Bonjour.FriendlyName');
+                await parameters.get(['Network.Bonjour.FriendlyName']);
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -167,11 +167,11 @@ describe('parameters', () => {
 
             try {
                 // Act
-                await parameters.get('Network.Bonjour.FriendlyName');
+                await parameters.get(['Network.Bonjour.FriendlyName']);
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });
@@ -291,7 +291,7 @@ describe('parameters', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(RequestError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
 
@@ -307,7 +307,7 @@ describe('parameters', () => {
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
-                expect(error).toBeInstanceOf(UnauthorizedError);
+                expect(error).toBeInstanceOf(Error);
             }
         });
     });
