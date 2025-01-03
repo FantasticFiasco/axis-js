@@ -2,7 +2,7 @@ import { URL } from 'url';
 import { Connection } from '../src/Connection';
 import { DeviceRequest } from '../src/DeviceRequest';
 import { Protocol } from '../src/Protocol';
-import { WebServer } from './web-server';
+import { WebServer } from './WebServer';
 
 let webServer: WebServer;
 

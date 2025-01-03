@@ -8,19 +8,19 @@ const networkWildcardBonjour = 'Network.*.FriendlyName';
 
 const getParameter = async (parameters: Parameters): Promise<void> => {
     console.log(`> Get parameter '${networkBonjourFriendlyName}'...`);
-    const root = await parameters.get([networkBonjourFriendlyName]);
+    const root = await parameters.get(networkBonjourFriendlyName);
     print(root);
 };
 
 const getParameterGroup = async (parameters: Parameters): Promise<void> => {
     console.log(`> Get parameter group '${networkBonjour}'...`);
-    const root = await parameters.get([networkBonjour]);
+    const root = await parameters.get(networkBonjour);
     print(root);
 };
 
 const getParameterWithWildcard = async (parameters: Parameters): Promise<void> => {
     console.log(`> Get parameter with wildcard '${networkWildcardBonjour}'...`);
-    const root = await parameters.get([networkWildcardBonjour]);
+    const root = await parameters.get(networkWildcardBonjour);
     print(root);
 };
 
