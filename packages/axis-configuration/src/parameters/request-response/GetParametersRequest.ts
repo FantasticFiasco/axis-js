@@ -3,7 +3,7 @@ import { Converter } from './Converter';
 import { GetParametersResponse } from './GetParametersResponse';
 
 export class GetParametersRequest extends DeviceRequest {
-    constructor(connection: Connection, parameterGroups: string[]) {
+    constructor(connection: Connection, ...parameterGroups: string[]) {
         super(connection);
         this.parameterGroups = parameterGroups;
     }
