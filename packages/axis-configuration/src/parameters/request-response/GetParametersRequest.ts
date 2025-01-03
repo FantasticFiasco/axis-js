@@ -1,10 +1,10 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { Converter } from './Converter';
 import { GetParametersResponse } from './GetParametersResponse';
 
 export class GetParametersRequest extends DeviceRequest {
-    constructor(connection: Connection, parameterGroups: string[], f: Fetch = fetch) {
-        super(connection, f);
+    constructor(connection: Connection, parameterGroups: string[]) {
+        super(connection);
         this.parameterGroups = parameterGroups;
     }
 
