@@ -9,7 +9,8 @@ import { Response } from './Response';
  */
 export const get = (connection: Connection, relativePath: string): Promise<Response> => {
     const url = connection.url + format(relativePath);
-    return clientProvider('GET', url, connection.username, connection.password, connection?.options?.agent).get<Buffer>(url);
+    const client = clientProvider('GET', url, connection.username, connection.password, connection?.options?.agent);
+    return client.get(url, { responseType: 'buffer' });
 };
 
 const format = (relativePath: string): string => {

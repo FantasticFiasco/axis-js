@@ -24,6 +24,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got.statusCode).toBe(200);
+        expect(got.body).toBeInstanceOf(Buffer);
         expect(got.body.toString()).toBe('Success');
     });
 
@@ -36,6 +37,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got.statusCode).toBe(200);
+        expect(got.body).toBeInstanceOf(Buffer);
         expect(got.body.toString()).toBe('Success');
     });
 
@@ -48,6 +50,7 @@ describe('#get should', () => {
 
         // Assert
         expect(got.statusCode).toBe(200);
+        expect(got.body).toBeInstanceOf(Buffer);
         expect(got.body.toString()).toBe('Success');
     });
 
