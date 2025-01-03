@@ -1,4 +1,4 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { SnapshotOptions } from '../SnapshotOptions';
 import { toQueryString } from './convert';
 
@@ -6,9 +6,8 @@ export class JpegRequest extends DeviceRequest {
     constructor(
         connection: Connection,
         private readonly options?: SnapshotOptions,
-        f: Fetch = fetch,
     ) {
-        super(connection, f);
+        super(connection);
     }
 
     public async send(): Promise<Buffer> {

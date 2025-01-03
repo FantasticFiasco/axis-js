@@ -1,9 +1,9 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { RestartResponse } from './RestartResponse';
 
 export class RestartRequest extends DeviceRequest {
-    constructor(connection: Connection, f: Fetch = fetch) {
-        super(connection, f);
+    constructor(connection: Connection) {
+        super(connection);
     }
 
     public async send(): Promise<RestartResponse> {

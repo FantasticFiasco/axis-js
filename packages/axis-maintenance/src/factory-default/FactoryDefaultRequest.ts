@@ -1,4 +1,4 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { FactoryDefaultResponse } from './FactoryDefaultResponse';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
@@ -6,9 +6,8 @@ export class FactoryDefaultRequest extends DeviceRequest {
     constructor(
         connection: Connection,
         private readonly type: FactoryDefaultType,
-        f: Fetch = fetch,
     ) {
-        super(connection, f);
+        super(connection);
     }
 
     public async send(): Promise<FactoryDefaultResponse> {
