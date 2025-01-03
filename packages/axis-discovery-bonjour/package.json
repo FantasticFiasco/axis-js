@@ -67,9 +67,5 @@
     "rimraf": "6.0.1",
     "ts-jest": "29.2.5",
     "typescript": "5.7.2"
-  },
-  "resolutions": {
-    "json-schema": ">=0.4.0",
-    "minimist": ">=1.2.6"
   }
 }
