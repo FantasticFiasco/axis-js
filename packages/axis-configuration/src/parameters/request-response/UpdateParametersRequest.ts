@@ -1,9 +1,9 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { UpdateParametersResponse } from './UpdateParametersResponse';
 
 export class UpdateParametersRequest extends DeviceRequest {
-    constructor(connection: Connection, parameters: { [name: string]: string }, f: Fetch = fetch) {
-        super(connection, f);
+    constructor(connection: Connection, parameters: { [name: string]: string }) {
+        super(connection);
         this.parameters = parameters;
     }
 

@@ -1,4 +1,4 @@
-import { Connection, DeviceRequest, Fetch } from 'axis-core';
+import { Connection, DeviceRequest } from 'axis-core';
 import { User } from '../..';
 import { Converter } from './Converter';
 import { UpdateUserResponse } from './UpdateUserResponse';
@@ -7,9 +7,8 @@ export class UpdateUserRequest extends DeviceRequest {
     constructor(
         connection: Connection,
         private readonly user: User,
-        f: Fetch = fetch,
     ) {
-        super(connection, f);
+        super(connection);
     }
 
     public async send(): Promise<UpdateUserResponse> {
