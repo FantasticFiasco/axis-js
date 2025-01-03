@@ -28,7 +28,7 @@ jobs:
     - run: yarn build
     - run: yarn test
     - run: ESLINT_USE_FLAT_CONFIG=false yarn lint
-    - name: publish on tag
+    - name: Publish on tag
       run: |
         pushd ../..
         yarn install --immutable --immutable-cache
