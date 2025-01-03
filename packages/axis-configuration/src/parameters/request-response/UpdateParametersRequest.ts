@@ -2,15 +2,15 @@ import { Connection, DeviceRequest } from 'axis-core';
 import { UpdateParametersResponse } from './UpdateParametersResponse';
 
 export class UpdateParametersRequest extends DeviceRequest {
-    private readonly parameters: { [name: string]: string };
-
     constructor(connection: Connection, parameters: { [name: string]: string }) {
         super(connection);
         this.parameters = parameters;
     }
 
+    private readonly parameters: { [name: string]: string };
+
     public async send(): Promise<UpdateParametersResponse> {
-        const response = await this.get(this.relativePath);
+        const response = await this._get(this.relativePath);
 
         return new UpdateParametersResponse(response.toString());
     }

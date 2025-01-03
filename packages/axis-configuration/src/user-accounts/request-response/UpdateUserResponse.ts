@@ -1,25 +1,21 @@
-import { DeviceResponse, UnknownError } from 'axis-core';
+import { DeviceResponse } from 'axis-core';
 
 export class UpdateUserResponse extends DeviceResponse {
-    private static readonly SuccessResponse = /Modified account .*\./;
-
     constructor(response: string) {
         super(response);
     }
 
+    private static readonly SuccessResponse = /Modified account .*\./;
+
     public assertSuccess(): void {
-        const body: string | null = this.body;
+        const body: string | null = this._body;
 
         if (body === null) {
-            throw new UnknownError('No HTML in response body');
+            throw new Error('No HTML in response body');
         }
 
-        this.handleUnknownError(body);
-    }
-
-    private handleUnknownError(body: string) {
         if (!UpdateUserResponse.SuccessResponse.test(body)) {
-            throw new UnknownError(body);
+            throw new Error(body);
         }
     }
 }

@@ -1,9 +1,20 @@
-import { HTTPError } from 'got';
 import { URL } from 'url';
-import { Connection, get, Protocol } from '../src';
-import { WebServer } from './web-server';
+import { Connection } from '../src/Connection';
+import { DeviceRequest } from '../src/DeviceRequest';
+import { Protocol } from '../src/Protocol';
+import { WebServer } from './WebServer';
 
 let webServer: WebServer;
+
+class TestRequest extends DeviceRequest {
+    constructor(connection: Connection) {
+        super(connection);
+    }
+
+    public async send(relativePath: string): Promise<Response> {
+        return this._get(relativePath);
+    }
+}
 
 beforeAll(async () => {
     webServer = new WebServer();
@@ -14,44 +25,47 @@ afterAll(async () => {
     await webServer.close();
 });
 
-describe('#get should', () => {
+describe('should', () => {
     test('succeed given no authentication', async () => {
         // Arrange
         const { connection, relativePath } = parseUrl(webServer.guestUri, '', '');
+        const req = new TestRequest(connection);
 
         // Act
-        const got = await get(connection, relativePath);
+        const got = await req.send(relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
     test('succeed given basic authentication', async () => {
         // Arrange
         const { connection, relativePath } = parseUrl(webServer.guestUri, webServer.username, webServer.password);
+        const req = new TestRequest(connection);
 
         // Act
-        const got = await get(connection, relativePath);
+        const got = await req.send(relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
     test('succeed given digest authentication', async () => {
         // Arrange
         const { connection, relativePath } = parseUrl(webServer.digestAuthUri, webServer.username, webServer.password);
+        const req = new TestRequest(connection);
 
         // Act
-        const got = await get(connection, relativePath);
+        const got = await req.send(relativePath);
 
         // Assert
-        expect(got.statusCode).toBe(200);
-        expect(got.body.toString()).toBe('Success');
+        expect(got.status).toBe(200);
+        await expect(got.text()).resolves.toBe('Success');
     });
 
-    test('throw error given invalid credentials', async () => {
+    test('return status 401 given invalid credentials', async () => {
         // Arrange
         const testCases: { url: string; username: string; password: string }[] = [
             // Basic auth
@@ -64,16 +78,11 @@ describe('#get should', () => {
 
         for (const { url, username, password } of testCases) {
             const { connection, relativePath } = parseUrl(url, username, password);
+            const req = new TestRequest(connection);
 
             // Act
-            try {
-                await get(connection, relativePath);
-                throw new Error('This exception should not be thrown');
-            } catch (error) {
-                // Assert
-                expect(error).toBeInstanceOf(HTTPError);
-                expect((error as HTTPError).response.statusCode).toBe(401);
-            }
+            const got = await req.send(relativePath);
+            expect(got.status).toBe(401);
         }
     });
 });

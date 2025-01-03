@@ -1,13 +1,16 @@
-import { DeviceResponse, UnknownError } from 'axis-core';
+import { DeviceResponse } from 'axis-core';
 import { FactoryDefaultType } from './FactoryDefaultType';
 
 export class FactoryDefaultResponse extends DeviceResponse {
-    private static readonly SuccessResponsePartialType = /factoryMessage/i;
-    private static readonly SuccessResponseHardType = /factoryMessage2/i;
-
-    constructor(response: string, private readonly type: FactoryDefaultType) {
+    constructor(
+        response: string,
+        private readonly type: FactoryDefaultType,
+    ) {
         super(response);
     }
+
+    private static readonly SuccessResponsePartialType = /factoryMessage/i;
+    private static readonly SuccessResponseHardType = /factoryMessage2/i;
 
     public assertSuccess(): void {
         if (this.type === FactoryDefaultType.Partial) {
@@ -22,7 +25,7 @@ export class FactoryDefaultResponse extends DeviceResponse {
             return;
         }
 
-        this.throwUnknownError();
+        this.throwError();
     }
 
     private assertHardTypeSuccess() {
@@ -30,19 +33,19 @@ export class FactoryDefaultResponse extends DeviceResponse {
             return;
         }
 
-        this.throwUnknownError();
+        this.throwError();
     }
 
-    private throwUnknownError() {
+    private throwError() {
         let body: string | null = this.body;
 
         if (body !== null) {
             body = body.trim();
             if (body) {
-                throw new UnknownError(body);
+                throw new Error(body);
             }
         }
 
-        throw new UnknownError('Request to reset device to factory default was not successful');
+        throw new Error('Request to reset device to factory default was not successful');
     }
 }

@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { AddressInfo, Server } from 'net';
 import * as passport from 'passport';
-import { BasicStrategy, DigestStrategy } from 'passport-http';
+import { DigestStrategy } from 'passport-http';
 
-export class WebServer {
+export class MockDevice {
     private server?: Server;
     private address?: string;
     private port?: number;
@@ -11,26 +11,12 @@ export class WebServer {
     readonly username = 'some-user';
     readonly password = 'some-password';
 
-    get guestUri(): string {
-        return `http://${this.address}:${this.port}/guest`;
-    }
-
-    get basicAuthUri(): string {
-        return `http://${this.address}:${this.port}/basic-auth`;
-    }
-
-    get digestAuthUri(): string {
-        return `http://${this.address}:${this.port}/digest-auth`;
+    get uri(): string {
+        return `http://${this.address}:${this.port}`;
     }
 
     listen(address: string, port: number): Promise<void> {
         const app = express();
-
-        passport.use(
-            new BasicStrategy((username, password, done) => {
-                done(null, username === this.username && password === this.password);
-            })
-        );
 
         passport.use(
             new DigestStrategy(
@@ -45,13 +31,12 @@ export class WebServer {
                     }
 
                     done(null, true, this.password);
-                }
-            )
+                },
+            ),
         );
 
-        app.get('/guest', this.successResponse);
-        app.get('/basic-auth', passport.authenticate('basic', { session: false }), this.successResponse);
-        app.get('/digest-auth', passport.authenticate('digest', { session: false }), this.successResponse);
+        app.get('/axis-cgi/param.cgi', passport.authenticate('digest', { session: false }), this.#paramHandler);
+        app.get('/axis-cgi/pwdgrp.cgi', passport.authenticate('digest', { session: false }), this.#pwdgrpHandler);
 
         return new Promise((resolve) => {
             this.server = app.listen(port, address, () => {
@@ -79,7 +64,11 @@ export class WebServer {
         });
     }
 
-    private successResponse = (_: express.Request, res: express.Response) => {
+    #paramHandler = (_: express.Request, res: express.Response) => {
+        res.send('Success');
+    };
+
+    #pwdgrpHandler = (_: express.Request, res: express.Response) => {
         res.send('Success');
     };
 }

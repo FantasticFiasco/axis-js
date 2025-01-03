@@ -1,4 +1,3 @@
-import { UnknownError } from 'axis-core';
 import { RestartResponse } from '../../src/restart/RestartResponse';
 
 describe('restart response', () => {
@@ -37,7 +36,7 @@ describe('restart response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -56,7 +55,7 @@ describe('restart response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(UnknownError);
+            expect(fn).toThrowError(Error);
         });
     });
 });

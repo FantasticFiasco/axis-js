@@ -4,11 +4,11 @@ import { log } from '../logging';
 import { IDiscoveryProtocol } from './IDiscoveryProtocol';
 
 export class Ssdp implements IDiscoveryProtocol {
-    private readonly discovery: ssdp.Discovery;
-
     constructor() {
         this.discovery = new ssdp.Discovery();
     }
+
+    private readonly discovery: ssdp.Discovery;
 
     public async start(): Promise<void> {
         try {
@@ -73,7 +73,7 @@ export class Ssdp implements IDiscoveryProtocol {
             ssdpDevice.modelName,
             ssdpDevice.modelDescription,
             ssdpDevice.modelNumber,
-            ssdpDevice.presentationURL
+            ssdpDevice.presentationURL,
         );
     }
 }

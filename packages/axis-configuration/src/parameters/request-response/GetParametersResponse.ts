@@ -1,23 +1,24 @@
 import { DeviceResponse } from 'axis-core';
 
 export class GetParametersResponse extends DeviceResponse {
-    // A parameter has the following format:
-    // [NAME]=[VALUE]
-    private static readonly ParameterSuccessResponse = /(?:root\.)?(\S*)\s*=\s*(.*)\s*$/;
-    // An error is described in the following format:
-    // # Error: Error -1 getting param in group '[PARAMETER]'
-    private static readonly ErrorResponse = /# Error:/;
-
     constructor(response: string) {
         super(response);
     }
+
+    // A parameter has the following format:
+    // [NAME]=[VALUE]
+    private static readonly ParameterSuccessResponse = /(?:root\.)?(\S*)\s*=\s*(.*)\s*$/;
+
+    // An error is described in the following format:
+    // # Error: Error -1 getting param in group '[PARAMETER]'
+    private static readonly ErrorResponse = /# Error:/;
 
     public assertSuccess(): void {
         // No errors are reported in the response body, thus no action is needed here
     }
 
     public get parameters(): { [name: string]: string } {
-        const parameters = this.response.split('\n');
+        const parameters = this._response.split('\n');
 
         return parameters.reduce<{ [name: string]: string }>((result, parameter) => {
             if (GetParametersResponse.ErrorResponse.test(parameter)) {
