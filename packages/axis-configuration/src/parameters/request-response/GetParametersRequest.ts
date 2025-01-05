@@ -12,8 +12,9 @@ export class GetParametersRequest extends DeviceRequest {
 
     public async send(): Promise<GetParametersResponse> {
         const response = await this._get(this.relativePath);
+        const body = await response.text();
 
-        return new GetParametersResponse(response.toString());
+        return new GetParametersResponse(body);
     }
 
     public get relativePath(): string {

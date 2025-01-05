@@ -91,10 +91,10 @@ const parseUrl = (url: string, username: string, password: string): { connection
     const { protocol, hostname, port, pathname } = new URL(url);
 
     if (protocol !== 'http:') {
-        throw new Error('Tests are currently not written to support HTTPS');
+        throw new Error('Tests are currently not written to support anything else than HTTP');
     }
 
-    const connection = new Connection(Protocol.Http, hostname, Number(port), username, password);
+    const connection = new Connection(Protocol.Http, hostname, Number.parseInt(port), username, password);
     const relativePath = pathname;
 
     return {
