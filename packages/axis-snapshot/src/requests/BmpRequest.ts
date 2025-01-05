@@ -11,7 +11,7 @@ export class BmpRequest extends DeviceRequest {
     }
 
     public async send(): Promise<Buffer> {
-        const response = await this._get(this.relativePath);
+        const res = await this._get(this.relativePath);
 
         return response;
     }
