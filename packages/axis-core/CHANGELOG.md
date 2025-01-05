@@ -21,8 +21,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - The protected property `connection` has been renamed to `_connection`.
   - The protected function `get` has been renamed to `_get`.
 - [BREAKING CHANGE] [#997](https://github.com/FantasticFiasco/axis-js/pull/997) `DeviceResponse` has been changed accordingly:
-  - The protected property `response` has been renamed to `_response`.
-  - The protected function `body` has been renamed to `_body`.
+  - The class has been renamed broken up into `DeviceResponse` and `DeviceHtmlResponse`, each with their own responsibilities.
+  - The protected property `response` of `DeviceResponse` has been renamed to `_response`.
+  - The protected property `body` of `DeviceHtmlResponse` has been made into a method and renamed to `_body`.
 
 ### :policeman: Security
 
