@@ -7,7 +7,7 @@ export class RestartRequest extends DeviceRequest {
     }
 
     public async send(): Promise<RestartResponse> {
-        const response = await this._get(this.relativePath);
+        const res = await this._get(this.relativePath);
 
         return new RestartResponse(response.toString());
     }

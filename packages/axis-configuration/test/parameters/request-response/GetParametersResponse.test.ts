@@ -4,7 +4,7 @@ describe('get parameter response', () => {
     describe('#parameters should', () => {
         test('return single parameter', () => {
             // Arrange
-            const response = new GetParametersResponse('root.Some.Parameter=some value');
+            const res = new GetParametersResponse('root.Some.Parameter=some value');
 
             // Act
             const got = response.parameters;
@@ -17,7 +17,7 @@ describe('get parameter response', () => {
 
         test('return multiple parameters', () => {
             // Arrange
-            const response = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Other.Parameter=some other value'].join('\n'));
+            const res = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Other.Parameter=some other value'].join('\n'));
 
             // Act
             const got = response.parameters;
@@ -31,7 +31,7 @@ describe('get parameter response', () => {
 
         test('not return parameter with error', () => {
             // Arrange
-            const response = new GetParametersResponse(['root.Some.Parameter=some value', '# Error: some error'].join('\n'));
+            const res = new GetParametersResponse(['root.Some.Parameter=some value', '# Error: some error'].join('\n'));
 
             // Act
             const got = response.parameters;
@@ -44,7 +44,7 @@ describe('get parameter response', () => {
 
         test('not return invalid parameter', () => {
             // Arrange
-            const response = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Invalid.Parameter?some value'].join('\n'));
+            const res = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Invalid.Parameter?some value'].join('\n'));
 
             // Act
             const got = response.parameters;
