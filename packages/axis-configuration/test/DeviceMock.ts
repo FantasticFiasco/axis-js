@@ -3,7 +3,7 @@ import { AddressInfo, Server } from 'net';
 import * as passport from 'passport';
 import { DigestStrategy } from 'passport-http';
 
-export class MockDevice {
+export class DeviceMock {
     private server?: Server;
     private address?: string;
     private port?: number;
@@ -64,8 +64,22 @@ export class MockDevice {
         });
     }
 
-    #paramHandler = (_: express.Request, res: express.Response) => {
-        res.send('Success');
+    #paramHandler = (req: express.Request, res: express.Response) => {
+        switch (req.query.action) {
+            case 'list':
+                const group = req.query.group as string;
+
+                switch (group) {
+                    case 'Network.Bonjour.FriendlyName':
+                        console.log('XXX');
+                        res.send('Network.Bonjour.FriendlyName=Main Entrance');
+                        break;
+                }
+                break;
+
+            default:
+                res.status(400).send();
+        }
     };
 
     #pwdgrpHandler = (_: express.Request, res: express.Response) => {
