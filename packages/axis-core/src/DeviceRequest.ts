@@ -30,7 +30,7 @@ export abstract class DeviceRequest {
     }
 
     async #send(method: string, relativePath: string): Promise<Response> {
-        const url = this._connection.url + this.format(relativePath);
+        const url = this._connection.url + this.#format(relativePath);
         const options: RequestInit = {
             method,
         };
@@ -74,7 +74,7 @@ export abstract class DeviceRequest {
         return res;
     }
 
-    format = (relativePath: string): string => {
+    #format = (relativePath: string): string => {
         if (relativePath.startsWith('/')) {
             return relativePath;
         }
