@@ -20,8 +20,8 @@ export class Maintenance {
      * disconnecting from the network.
      */
     public async restart(): Promise<void> {
-        const request = new RestartRequest(this.connection);
-        const response = await request.send();
+        const req = new RestartRequest(this.connection);
+        const res = await request.send();
 
         response.assertSuccess();
     }
@@ -34,8 +34,8 @@ export class Maintenance {
      * @param type The type of factory default.
      */
     public async factoryDefault(type: FactoryDefaultType): Promise<void> {
-        const request = new FactoryDefaultRequest(this.connection, type);
-        const response = await request.send();
+        const req = new FactoryDefaultRequest(this.connection, type);
+        const res = await request.send();
 
         response.assertSuccess();
     }

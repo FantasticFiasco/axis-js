@@ -5,7 +5,7 @@ describe('update parameter response', () => {
     describe('#assertSuccess should', () => {
         test('succeed given ok response', () => {
             // Arrange
-            const response = new UpdateParametersResponse('OK');
+            const res = new UpdateParametersResponse('OK');
 
             // Act
             response.assertSuccess();
@@ -13,7 +13,7 @@ describe('update parameter response', () => {
 
         test('throw error given updating one parameter fails', () => {
             // Arrange
-            const response = new UpdateParametersResponse("# Error: Error setting 'root.Some.Parameter' to 'some value'!");
+            const res = new UpdateParametersResponse("# Error: Error setting 'root.Some.Parameter' to 'some value'!");
 
             try {
                 // Act
@@ -28,11 +28,11 @@ describe('update parameter response', () => {
 
         test('throw error given updating multiple parameters fail', () => {
             // Arrange
-            const response = new UpdateParametersResponse(
+            const res = new UpdateParametersResponse(
                 [
                     "# Error: Error setting 'root.Some.Parameter' to 'some value'!",
                     "# Error: Error setting 'root.Some.Other.Parameter' to 'some other value'!",
-                ].join('\n')
+                ].join('\n'),
             );
 
             try {

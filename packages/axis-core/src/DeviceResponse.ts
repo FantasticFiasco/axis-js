@@ -16,7 +16,7 @@ export abstract class DeviceResponse {
     protected readonly _response: Response;
 
     /**
-     * Returns void given valid response, otherwise throws an error.
+     * Returns resolved promise given valid response, otherwise a rejected promise.
      */
-    public abstract assertSuccess(): void;
+    public abstract assertSuccess(): Promise<void>;
 }

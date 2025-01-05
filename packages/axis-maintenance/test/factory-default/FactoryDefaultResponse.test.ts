@@ -13,7 +13,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -31,7 +31,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -50,7 +50,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Partial);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -71,7 +71,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -89,7 +89,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -108,7 +108,7 @@ describe('factory default response', () => {
                     </body>
                 </html>`;
 
-            const response = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
+            const res = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
 
             // Act
             const fn = () => response.assertSuccess();

@@ -28,7 +28,7 @@ export const createHeader = (method: string, url: string, username: string, pass
     const ha1 = md5(`${username}:${challenge.realm}:${password}`);
     const ha2 = md5(`${method}:${path}`);
 
-    const response = challenge.qop === 'auth' ? md5(`${ha1}:${challenge.nonce}:00000001:${cnonce}:auth:${ha2}`) : md5(`${ha1}:${challenge.nonce}:${ha2}`);
+    const res = challenge.qop === 'auth' ? md5(`${ha1}:${challenge.nonce}:00000001:${cnonce}:auth:${ha2}`) : md5(`${ha1}:${challenge.nonce}:${ha2}`);
 
     const params: string[] = [`username="${username}"`, `realm="${challenge.realm}"`, `nonce="${challenge.nonce}"`, `uri="${path}"`];
 

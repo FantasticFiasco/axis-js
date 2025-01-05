@@ -11,7 +11,7 @@ export class FactoryDefaultRequest extends DeviceRequest {
     }
 
     public async send(): Promise<FactoryDefaultResponse> {
-        const response = await this._get(this.relativePath);
+        const res = await this._get(this.relativePath);
 
         return new FactoryDefaultResponse(response.toString(), this.type);
     }

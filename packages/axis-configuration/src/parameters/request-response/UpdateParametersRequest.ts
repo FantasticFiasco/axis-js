@@ -10,7 +10,7 @@ export class UpdateParametersRequest extends DeviceRequest {
     private readonly parameters: { [name: string]: string };
 
     public async send(): Promise<UpdateParametersResponse> {
-        const response = await this._get(this.relativePath);
+        const res = await this._get(this.relativePath);
 
         return new UpdateParametersResponse(response.toString());
     }

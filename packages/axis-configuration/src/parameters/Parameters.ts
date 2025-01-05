@@ -11,9 +11,13 @@ import { UpdateParametersRequest } from './request-response/UpdateParametersRequ
 export class Parameters {
     /**
      * Initializes a new instance of the class.
-     * @param connection The connection to the device.
+     * @param #connection The connection to the device.
      */
-    constructor(private readonly connection: Connection) {}
+    constructor(connection: Connection) {
+        this.#connection = connection;
+    }
+
+    readonly #connection: Connection;
 
     /**
      * Gets parameters and their current values.
@@ -25,12 +29,12 @@ export class Parameters {
     public async get(...parameterGroups: string[]): Promise<{ [name: string]: string }> {
         expect.toBeTrue(parameterGroups.length > 0, 'At least one parameter group must be specified');
 
-        const request = new GetParametersRequest(this.connection, ...parameterGroups);
-        const response = await request.send();
+        const req = new GetParametersRequest(this.#connection, ...parameterGroups);
+        const res = await req.send();
 
-        response.assertSuccess();
+        res.assertSuccess();
 
-        return response.parameters;
+        return res.parameters;
     }
 
     /**
@@ -42,9 +46,9 @@ export class Parameters {
     public async update(parameters: { [name: string]: string }): Promise<void> {
         expect.toBeTrue(Object.keys(parameters).length > 0, 'At least one parameter must be specified');
 
-        const request = new UpdateParametersRequest(this.connection, parameters);
-        const response = await request.send();
+        const req = new UpdateParametersRequest(this.#connection, parameters);
+        const res = await req.send();
 
-        response.assertSuccess();
+        res.assertSuccess();
     }
 }

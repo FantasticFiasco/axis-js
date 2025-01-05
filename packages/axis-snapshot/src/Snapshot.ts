@@ -17,8 +17,8 @@ export class Snapshot {
      * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.
      */
     public async bmp(options?: SnapshotOptions): Promise<Buffer> {
-        const request = new BmpRequest(this.connection, options);
-        const response = await request.send();
+        const req = new BmpRequest(this.connection, options);
+        const res = await request.send();
 
         return response;
     }
@@ -27,8 +27,8 @@ export class Snapshot {
      * Takes a {link https://en.wikipedia.org/wiki/JPEG|JPEG} snapshot from the camera.
      */
     public async jpeg(options?: SnapshotOptions): Promise<Buffer> {
-        const request = new JpegRequest(this.connection, options);
-        const response = await request.send();
+        const req = new JpegRequest(this.connection, options);
+        const res = await request.send();
 
         return response;
     }

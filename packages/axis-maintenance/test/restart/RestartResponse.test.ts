@@ -12,7 +12,7 @@ describe('restart response', () => {
                     </body>
                 </html>`;
 
-            const response = new RestartResponse(html);
+            const res = new RestartResponse(html);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -30,7 +30,7 @@ describe('restart response', () => {
                     </body>
                 </html>`;
 
-            const response = new RestartResponse(html);
+            const res = new RestartResponse(html);
 
             // Act
             const fn = () => response.assertSuccess();
@@ -49,7 +49,7 @@ describe('restart response', () => {
                     </body>
                 </html>`;
 
-            const response = new RestartResponse(html);
+            const res = new RestartResponse(html);
 
             // Act
             const fn = () => response.assertSuccess();

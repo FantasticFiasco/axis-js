@@ -12,7 +12,7 @@ export class AddUserRequest extends DeviceRequest {
     }
 
     public async send(): Promise<AddUserResponse> {
-        const response = await this._get(this.relativePath);
+        const res = await this._get(this.relativePath);
 
         return new AddUserResponse(response.toString());
     }

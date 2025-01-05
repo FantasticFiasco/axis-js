@@ -14,7 +14,7 @@ describe('get users response', () => {
     describe('#users should ', () => {
         test('return only root', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT);
+            const res = new GetUsersResponse(ROOT);
 
             // Act
             const got = response.users;
@@ -26,7 +26,7 @@ describe('get users response', () => {
 
         test('return root and John as administrators', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ);
 
             // Act
             const got = response.users;
@@ -38,7 +38,7 @@ describe('get users response', () => {
 
         test('return root and John as administrator without ptz', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ);
 
             // Act
             const got = response.users;
@@ -53,7 +53,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as operator', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ);
 
             // Act
             const got = response.users;
@@ -65,7 +65,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as operator without ptz', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ);
 
             // Act
             const got = response.users;
@@ -77,7 +77,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as viewer', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ);
 
             // Act
             const got = response.users;
@@ -89,7 +89,7 @@ describe('get users response', () => {
 
         test('return root as administrator and John as viewer without ptz', () => {
             // Arrange
-            const response = new GetUsersResponse(ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ);
+            const res = new GetUsersResponse(ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ);
 
             // Act
             const got = response.users;

@@ -1,7 +1,7 @@
 import { DeviceResponse } from 'axis-core';
 
 export class GetParametersResponse extends DeviceResponse {
-    constructor(response: string) {
+    constructor(response: Response) {
         super(response);
     }
 

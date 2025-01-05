@@ -25,8 +25,8 @@ export class UserAccounts {
     public async add(user: User): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
-        const request = new AddUserRequest(this.connection, user);
-        const response = await request.send();
+        const req = new AddUserRequest(this.connection, user);
+        const res = await request.send();
 
         response.assertSuccess();
     }
@@ -35,8 +35,8 @@ export class UserAccounts {
      * Gets all users.
      */
     public async getAll(): Promise<User[]> {
-        const request = new GetUsersRequest(this.connection);
-        const response = await request.send();
+        const req = new GetUsersRequest(this.connection);
+        const res = await request.send();
 
         response.assertSuccess();
 
@@ -50,8 +50,8 @@ export class UserAccounts {
     public async update(user: User): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
-        const request = new UpdateUserRequest(this.connection, user);
-        const response = await request.send();
+        const req = new UpdateUserRequest(this.connection, user);
+        const res = await request.send();
 
         response.assertSuccess();
     }
@@ -61,8 +61,8 @@ export class UserAccounts {
      * @param username The name of the user to remove.
      */
     public async remove(username: string): Promise<void> {
-        const request = new RemoveUserRequest(this.connection, username);
-        const response = await request.send();
+        const req = new RemoveUserRequest(this.connection, username);
+        const res = await request.send();
 
         response.assertSuccess();
     }
