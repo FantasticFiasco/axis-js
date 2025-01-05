@@ -13,8 +13,10 @@ export class GetParametersResponse extends DeviceResponse {
     // # Error: Error -1 getting param in group '[PARAMETER]'
     private static readonly ErrorResponse = /# Error:/;
 
-    public assertSuccess(): void {
-        // No errors are reported in the response body, thus no action is needed here
+    public async assertSuccess(): Promise<void> {
+        if (this._response.ok) {
+            return;
+        }
     }
 
     public get parameters(): { [name: string]: string } {
