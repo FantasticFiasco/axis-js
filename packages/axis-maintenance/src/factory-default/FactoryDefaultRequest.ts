@@ -13,7 +13,7 @@ export class FactoryDefaultRequest extends DeviceRequest {
     public async send(): Promise<FactoryDefaultResponse> {
         const res = await this._get(this.relativePath);
 
-        return new FactoryDefaultResponse(response.toString(), this.type);
+        return new FactoryDefaultResponse(res, this.type);
     }
 
     public get relativePath(): string {

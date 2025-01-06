@@ -2,7 +2,7 @@ import { DeviceResponse } from 'axis-core';
 import { AccessRights, User } from '../..';
 
 export class GetUsersResponse extends DeviceResponse {
-    constructor(response: string) {
+    constructor(response: Response) {
         super(response);
     }
 
@@ -10,33 +10,35 @@ export class GetUsersResponse extends DeviceResponse {
     // [NAME]="[VALUE1],[VALUE2]..."
     private static readonly ParameterSuccessResponse = /\s*(\S*)\s*=\s*"(\S*)"\s*/;
 
-    private parsedUsers?: User[];
+    #parsedUsers?: User[];
 
-    public assertSuccess(): void {
-        // No errors are reported in the response body, thus no action is needed here
+    public async assertSuccess(): Promise<void> {
+        if (!this._response.ok) {
+            throw new Error(`Failed to get users: ${this._response.statusText}`);
+        }
     }
 
-    public get users(): User[] {
-        if (this.parsedUsers === undefined) {
-            this.parsedUsers = this.parse();
+    public async users(): Promise<User[]> {
+        if (this.#parsedUsers === undefined) {
+            this.#parsedUsers = await this.#parse();
         }
 
-        return this.parsedUsers;
+        return this.#parsedUsers;
     }
 
-    private parse(): User[] {
-        const parameters = this.parseParameters();
+    async #parse(): Promise<User[]> {
+        const parameters = await this.#parseParameters();
 
-        const administrators = parameters['admin'];
-        const operators = parameters['operator'];
-        const viewers = parameters['viewer'];
+        const administrators = parameters.get('admin') ?? [];
+        const operators = parameters.get('operator') ?? [];
+        const viewers = parameters.get('viewer') ?? [];
 
         // Users with PTZ control
-        const usersWithPtz = parameters['ptz'];
+        const usersWithPtz = parameters.get('ptz') ?? [];
 
         const users: User[] = [];
 
-        for (const userName of parameters['digusers']) {
+        for (const userName of parameters.get('digusers') ?? []) {
             let accessRights: AccessRights | undefined;
 
             if (administrators.includes(userName)) {
@@ -57,20 +59,24 @@ export class GetUsersResponse extends DeviceResponse {
         return users;
     }
 
-    private parseParameters(): { [name: string]: string[] } {
-        // Each line represents a parameter
-        const parameters = this._response.split('\n');
+    async #parseParameters(): Promise<Map<string, string[]>> {
+        const parameters = new Map<string, string[]>();
 
-        return parameters.reduce<{ [name: string]: string[] }>((result, parameter) => {
-            const match = GetUsersResponse.ParameterSuccessResponse.exec(parameter);
+        const text = await this._response.text();
+
+        // Each line represents a parameter
+        const lines = text.split('\n');
+
+        for (const line of lines) {
+            const match = GetUsersResponse.ParameterSuccessResponse.exec(line);
             if (match) {
                 const name = match[1];
-                const values = match[2].split(',');
+                const values = match[2].split(',').filter((value) => value.length > 0);
 
-                result[name] = values.filter((value) => value.length > 0);
+                parameters.set(name, values);
             }
+        }
 
-            return result;
-        }, {});
+        return parameters;
     }
 }

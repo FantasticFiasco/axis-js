@@ -2,57 +2,57 @@ import { GetParametersResponse } from '../../../src/parameters/request-response/
 
 describe('get parameter response', () => {
     describe('#parameters should', () => {
-        test('return single parameter', () => {
+        test('return single parameter', async () => {
             // Arrange
-            const res = new GetParametersResponse('root.Some.Parameter=some value');
+            const res = new GetParametersResponse(new Response('root.Some.Parameter=some value'));
 
             // Act
-            const got = response.parameters;
+            await res.assertSuccess();
+            const got = await res.parameters();
 
             // Assert
-            expect(got).toStrictEqual({
-                'Some.Parameter': 'some value',
-            });
+            expect(got).toStrictEqual(new Map<string, string>([['Some.Parameter', 'some value']]));
         });
 
-        test('return multiple parameters', () => {
+        test('return multiple parameters', async () => {
             // Arrange
-            const res = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Other.Parameter=some other value'].join('\n'));
+            const res = new GetParametersResponse(new Response(['root.Some.Parameter=some value', 'root.Some.Other.Parameter=some other value'].join('\n')));
 
             // Act
-            const got = response.parameters;
+            await res.assertSuccess();
+            const got = await res.parameters();
 
             // Assert
-            expect(got).toStrictEqual({
-                'Some.Parameter': 'some value',
-                'Some.Other.Parameter': 'some other value',
-            });
+            expect(got).toStrictEqual(
+                new Map<string, string>([
+                    ['Some.Parameter', 'some value'],
+                    ['Some.Other.Parameter', 'some other value'],
+                ]),
+            );
         });
 
-        test('not return parameter with error', () => {
+        test('not return parameter with error', async () => {
             // Arrange
-            const res = new GetParametersResponse(['root.Some.Parameter=some value', '# Error: some error'].join('\n'));
+            const res = new GetParametersResponse(new Response(['root.Some.Parameter=some value', '# Error: some error'].join('\n')));
 
             // Act
-            const got = response.parameters;
+            await res.assertSuccess();
+            const got = await res.parameters();
 
             // Assert
-            expect(got).toStrictEqual({
-                'Some.Parameter': 'some value',
-            });
+            expect(got).toStrictEqual(new Map<string, string>([['Some.Parameter', 'some value']]));
         });
 
-        test('not return invalid parameter', () => {
+        test('not return invalid parameter', async () => {
             // Arrange
-            const res = new GetParametersResponse(['root.Some.Parameter=some value', 'root.Some.Invalid.Parameter?some value'].join('\n'));
+            const res = new GetParametersResponse(new Response(['root.Some.Parameter=some value', 'root.Some.Invalid.Parameter?some value'].join('\n')));
 
             // Act
-            const got = response.parameters;
+            await res.assertSuccess();
+            const got = await res.parameters();
 
             // Assert
-            expect(got).toStrictEqual({
-                'Some.Parameter': 'some value',
-            });
+            expect(got).toStrictEqual(new Map<string, string>([['Some.Parameter', 'some value']]));
         });
     });
 });

@@ -3,21 +3,21 @@ import { UpdateParametersResponse } from '../../../src/parameters/request-respon
 
 describe('update parameter response', () => {
     describe('#assertSuccess should', () => {
-        test('succeed given ok response', () => {
+        test('succeed given ok response', async () => {
             // Arrange
-            const res = new UpdateParametersResponse('OK');
+            const res = new UpdateParametersResponse(new Response('OK'));
 
             // Act
-            response.assertSuccess();
+            await res.assertSuccess();
         });
 
-        test('throw error given updating one parameter fails', () => {
+        test('throw error given updating one parameter fails', async () => {
             // Arrange
-            const res = new UpdateParametersResponse("# Error: Error setting 'root.Some.Parameter' to 'some value'!");
+            const res = new UpdateParametersResponse(new Response("# Error: Error setting 'root.Some.Parameter' to 'some value'!"));
 
             try {
                 // Act
-                response.assertSuccess();
+                await res.assertSuccess();
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert
@@ -26,18 +26,20 @@ describe('update parameter response', () => {
             }
         });
 
-        test('throw error given updating multiple parameters fail', () => {
+        test('throw error given updating multiple parameters fail', async () => {
             // Arrange
             const res = new UpdateParametersResponse(
-                [
-                    "# Error: Error setting 'root.Some.Parameter' to 'some value'!",
-                    "# Error: Error setting 'root.Some.Other.Parameter' to 'some other value'!",
-                ].join('\n'),
+                new Response(
+                    [
+                        "# Error: Error setting 'root.Some.Parameter' to 'some value'!",
+                        "# Error: Error setting 'root.Some.Other.Parameter' to 'some other value'!",
+                    ].join('\n'),
+                ),
             );
 
             try {
                 // Act
-                response.assertSuccess();
+                await res.assertSuccess();
                 throw new Error('This exception should not be thrown');
             } catch (error) {
                 // Assert

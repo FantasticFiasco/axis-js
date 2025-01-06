@@ -2,7 +2,7 @@ import { DeviceResponse } from 'axis-core';
 import { UpdateParametersError } from '../..';
 
 export class UpdateParametersResponse extends DeviceResponse {
-    constructor(response: string) {
+    constructor(response: Response) {
         super(response);
     }
 
@@ -14,12 +14,18 @@ export class UpdateParametersResponse extends DeviceResponse {
     // # Error: Error setting '[PARAMETER]' to '[VALUE]'!
     private static readonly ParameterErrorResponse = /# Error: Error setting '(.*)' to '(.*)'!/;
 
-    public assertSuccess(): void {
-        if (UpdateParametersResponse.SuccessResponse.test(this._response)) {
+    public async assertSuccess(): Promise<void> {
+        if (!this._response.ok) {
+            throw new Error(`Failed to update parameters: ${this._response.statusText}`);
+        }
+
+        const text = await this._response.text();
+
+        if (UpdateParametersResponse.SuccessResponse.test(text)) {
             return;
         }
 
-        const parameterErrors = this._response.split('\n');
+        const parameterErrors = text.split('\n');
 
         const parameterErrorNames = parameterErrors.reduce<string[]>((result, parameter) => {
             const match = UpdateParametersResponse.ParameterErrorResponse.exec(parameter);

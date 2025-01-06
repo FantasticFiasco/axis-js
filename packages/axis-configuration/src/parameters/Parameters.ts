@@ -26,15 +26,16 @@ export class Parameters {
      * parameters. E.g. 'Network.*.FriendlyName' will return the two parameters
      * 'Network.Bonjour.FriendlyName' and 'Network.SSDP.FriendlyName'.
      */
-    public async get(...parameterGroups: string[]): Promise<{ [name: string]: string }> {
+    public async get(...parameterGroups: string[]): Promise<Map<string, string>> {
         expect.toBeTrue(parameterGroups.length > 0, 'At least one parameter group must be specified');
 
         const req = new GetParametersRequest(this.#connection, ...parameterGroups);
         const res = await req.send();
 
-        res.assertSuccess();
+        await res.assertSuccess();
 
-        return res.parameters;
+        const parameters = await res.parameters();
+        return parameters;
     }
 
     /**
@@ -43,12 +44,12 @@ export class Parameters {
      * new value.
      * @throws {UpdateParametersError} Updating one or many of the parameters failed.
      */
-    public async update(parameters: { [name: string]: string }): Promise<void> {
+    public async update(parameters: Map<string, string>): Promise<void> {
         expect.toBeTrue(Object.keys(parameters).length > 0, 'At least one parameter must be specified');
 
         const req = new UpdateParametersRequest(this.#connection, parameters);
         const res = await req.send();
 
-        res.assertSuccess();
+        await res.assertSuccess();
     }
 }

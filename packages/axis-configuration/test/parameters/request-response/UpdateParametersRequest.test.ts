@@ -7,9 +7,7 @@ describe('update parameters request', () => {
     describe('#url', () => {
         test('should return URL when updating single parameter', () => {
             // Arrange
-            const parameters = {
-                'Network.Bonjour.FriendlyName': 'Lobby',
-            };
+            const parameters = new Map<string, string>([['Network.Bonjour.FriendlyName', 'Lobby']]);
 
             // Act
             const got = new UpdateParametersRequest(connection, parameters);
@@ -20,10 +18,10 @@ describe('update parameters request', () => {
 
         test('should return URL when updating multiple parameters', () => {
             // Arrange
-            const parameters = {
-                'Network.Bonjour.FriendlyName': 'Lobby',
-                'Network.UPnP.FriendlyName': 'Lobby',
-            };
+            const parameters = new Map<string, string>([
+                ['Network.Bonjour.FriendlyName', 'Lobby'],
+                ['Network.UPnP.FriendlyName', 'Lobby'],
+            ]);
 
             // Act
             const got = new UpdateParametersRequest(connection, parameters);
