@@ -32,7 +32,7 @@ var port = function (cb) {
   })
 }
 
-var test = function (name, fn) {
+var test = function (name, fn()) {
   tape(name, function (t) {
     port(function (p) {
       fn(Bonjour({ ip: '127.0.0.1', port: p, multicast: false }), t)
