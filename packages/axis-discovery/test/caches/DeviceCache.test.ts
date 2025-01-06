@@ -55,7 +55,7 @@ describe('DeviceCache', () => {
             const fn = () => subject.update(DEVICE_WITHOUT_MAC_ADDRESS);
 
             // Assert
-            expect(fn).toThrowError();
+            expect(fn()).toThrow();
         });
     });
 });

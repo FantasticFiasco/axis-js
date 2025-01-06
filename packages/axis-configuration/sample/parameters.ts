@@ -40,8 +40,8 @@ const updateParameters = async (parameters: Parameters): Promise<void> => {
 };
 
 const print = (root: Map<string, string>) => {
-    for (const parameter of Object.keys(root)) {
-        console.log(`    ${parameter}=${root.get(parameter)}`);
+    for (const [name, value] of root.entries()) {
+        console.log(`    ${name}=${value}`);
     }
 };
 
