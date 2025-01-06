@@ -12,7 +12,7 @@ export class RemoveUserRequest extends DeviceRequest {
     public async send(): Promise<RemoveUserResponse> {
         const res = await this._get(this.relativePath);
 
-        return new RemoveUserResponse(response.toString());
+        return new RemoveUserResponse(res);
     }
 
     public get relativePath(): string {

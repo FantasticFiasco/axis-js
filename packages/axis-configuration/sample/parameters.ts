@@ -26,20 +26,22 @@ const getParameterWithWildcard = async (parameters: Parameters): Promise<void> =
 
 const updateParameter = async (parameters: Parameters): Promise<void> => {
     console.log(`> Update parameter '${networkBonjourFriendlyName}'...`);
-    await parameters.update({ [networkBonjourFriendlyName]: 'New name' });
+    await parameters.update(new Map<string, string>([[networkBonjourFriendlyName, 'New name']]));
 };
 
 const updateParameters = async (parameters: Parameters): Promise<void> => {
     console.log(`> Update parameters '${networkBonjourFriendlyName}' and '${networkUpnpFriendlyName}'...`);
-    await parameters.update({
-        [networkBonjourFriendlyName]: 'Even newer name',
-        [networkUpnpFriendlyName]: 'Even newer name',
-    });
+    await parameters.update(
+        new Map<string, string>([
+            [networkBonjourFriendlyName, 'Even newer name'],
+            [networkUpnpFriendlyName, 'Even newer name'],
+        ]),
+    );
 };
 
-const print = (root: { [name: string]: string }) => {
+const print = (root: Map<string, string>) => {
     for (const parameter of Object.keys(root)) {
-        console.log(`    ${parameter}=${root[parameter]}`);
+        console.log(`    ${parameter}=${root.get(parameter)}`);
     }
 };
 

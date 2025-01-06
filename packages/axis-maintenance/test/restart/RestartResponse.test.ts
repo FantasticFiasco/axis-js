@@ -15,7 +15,7 @@ describe('restart response', () => {
             const res = new RestartResponse(html);
 
             // Act
-            const fn = () => response.assertSuccess();
+            const fn = () => res.assertSuccess();
 
             // Assert
             expect(fn).not.toThrowError();
@@ -33,7 +33,7 @@ describe('restart response', () => {
             const res = new RestartResponse(html);
 
             // Act
-            const fn = () => response.assertSuccess();
+            const fn = () => res.assertSuccess();
 
             // Assert
             expect(fn).toThrowError(Error);
@@ -52,7 +52,7 @@ describe('restart response', () => {
             const res = new RestartResponse(html);
 
             // Act
-            const fn = () => response.assertSuccess();
+            const fn = () => res.assertSuccess();
 
             // Assert
             expect(fn).toThrowError(Error);

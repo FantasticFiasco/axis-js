@@ -111,7 +111,7 @@ describe('factory default response', () => {
             const res = new FactoryDefaultResponse(html, FactoryDefaultType.Hard);
 
             // Act
-            const fn = () => response.assertSuccess();
+            const fn = () => res.assertSuccess();
 
             // Assert
             expect(fn).toThrowError(Error);
