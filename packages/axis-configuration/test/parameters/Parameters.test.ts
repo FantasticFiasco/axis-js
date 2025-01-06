@@ -30,7 +30,7 @@ describe('#get', () => {
         const got = await parameters.get(name);
 
         // Assert
-        expect(got[name]).toBe(value);
+        expect(got).toBe(new Map<string, string>([[name, value]]));
     });
 
     // test('should get multiple parameters', async () => {

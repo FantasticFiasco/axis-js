@@ -2,23 +2,22 @@ import { Connection, DeviceRequest } from 'axis-core';
 import { UpdateParametersResponse } from './UpdateParametersResponse';
 
 export class UpdateParametersRequest extends DeviceRequest {
-    constructor(connection: Connection, parameters: { [name: string]: string }) {
+    constructor(connection: Connection, parameters: Map<string, string>) {
         super(connection);
         this.parameters = parameters;
     }
 
-    private readonly parameters: { [name: string]: string };
+    private readonly parameters: Map<string, string>;
 
     public async send(): Promise<UpdateParametersResponse> {
         const res = await this._get(this.relativePath);
-
-        return new UpdateParametersResponse(response.toString());
+        return new UpdateParametersResponse(res);
     }
 
     public get relativePath(): string {
-        const parameterArguments = Object.keys(this.parameters)
+        const parameterArguments = Array.from(this.parameters.keys())
             .map((name) => {
-                return name + '=' + this.parameters[name];
+                return name + '=' + this.parameters.get(name);
             })
             .join('&');
 

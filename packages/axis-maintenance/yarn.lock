@@ -954,10 +954,10 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.13.2.tgz#0aa167216965ac9474ccfa83892cfb6b3e1e52ef"
   integrity sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==
 
-axis-core@2.0.0-beta.8:
-  version "2.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-2.0.0-beta.8.tgz#996591f2042ea9ed45c2b5f522a359baf6425742"
-  integrity sha512-arQCtqZKU20v22wz/Ci3QOuEcOlKoCtBnvENtfXvhxxcsIA4oeP9mJEFHFBc0UQrXcAW0s9Ycmzll+JmN9c1vw==
+axis-core@2.0.0-beta.6:
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-2.0.0-beta.6.tgz#59ac4b83423ce3b862eae1515951f9d0f8fe13c0"
+  integrity sha512-6ydChQRDUlqVHlHVFU5q6KYhxnKSf1Vnp32gN8Rpidx7wNftOfkAFCAGO0ucieaYGZVmsyvpd+v2k9Jr2LRQLA==
   dependencies:
     uuid "11.0.3"
 
