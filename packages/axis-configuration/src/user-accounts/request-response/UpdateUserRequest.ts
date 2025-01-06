@@ -14,7 +14,7 @@ export class UpdateUserRequest extends DeviceRequest {
     public async send(): Promise<UpdateUserResponse> {
         const res = await this._get(this.relativePath);
 
-        return new UpdateUserResponse(response.toString());
+        return new UpdateUserResponse(res);
     }
 
     public get relativePath(): string {

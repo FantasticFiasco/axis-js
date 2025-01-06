@@ -9,7 +9,7 @@ export class GetUsersRequest extends DeviceRequest {
     public async send(): Promise<GetUsersResponse> {
         const res = await this._get(this.relativePath);
 
-        return new GetUsersResponse(response.toString());
+        return new GetUsersResponse(res);
     }
 
     public get relativePath(): string {

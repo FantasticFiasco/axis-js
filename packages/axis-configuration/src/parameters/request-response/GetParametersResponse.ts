@@ -14,27 +14,30 @@ export class GetParametersResponse extends DeviceResponse {
     private static readonly ErrorResponse = /# Error:/;
 
     public async assertSuccess(): Promise<void> {
-        if (this._response.ok) {
-            return;
+        if (!this._response.ok) {
+            throw new Error(`Failed to get parameters: ${this._response.statusText}`);
         }
     }
 
-    public get parameters(): { [name: string]: string } {
-        const parameters = this._response.split('\n');
+    public async parameters(): Promise<Map<string, string>> {
+        const parameters = new Map<string, string>();
 
-        return parameters.reduce<{ [name: string]: string }>((result, parameter) => {
-            if (GetParametersResponse.ErrorResponse.test(parameter)) {
-                return result;
+        const text = await this._response.text();
+        const lines = text.split('\n');
+
+        for (const line of lines) {
+            if (GetParametersResponse.ErrorResponse.test(line)) {
+                continue;
             }
 
-            const match = GetParametersResponse.ParameterSuccessResponse.exec(parameter);
+            const match = GetParametersResponse.ParameterSuccessResponse.exec(line);
             if (match) {
                 const name = match[1];
                 const value = match[2].trim();
-                result[name] = value;
+                parameters.set(name, value);
             }
+        }
 
-            return result;
-        }, {});
+        return parameters;
     }
 }
