@@ -19,7 +19,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).not.toThrowError();
+            expect(fn()).not.toThrow();
         });
 
         test('should throw exception given error response without body', () => {
@@ -37,7 +37,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -56,7 +56,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
     });
 
@@ -77,7 +77,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).not.toThrowError();
+            expect(fn()).not.toThrow();
         });
 
         test('should throw exception given error response without body', () => {
@@ -95,7 +95,7 @@ describe('factory default response', () => {
             const fn = () => response.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -114,7 +114,7 @@ describe('factory default response', () => {
             const fn = () => res.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
     });
 });

@@ -64,7 +64,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.addListener('hello', fn);
+        const self = discovery.addListener('hello', fn());
         discovery.emit('hello', mockedDevice());
 
         // Assert
@@ -78,7 +78,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.on('hello', fn);
+        const self = discovery.on('hello', fn());
         discovery.emit('hello', mockedDevice());
 
         // Assert
@@ -92,7 +92,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.once('hello', fn);
+        const self = discovery.once('hello', fn());
         discovery.emit('hello', mockedDevice());
         discovery.emit('hello', mockedDevice());
 
@@ -107,7 +107,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.addListener('hello', fn).removeListener('hello', fn);
+        const self = discovery.addListener('hello', fn()).removeListener('hello', fn());
         discovery.emit('hello', mockedDevice());
 
         // Assert
@@ -121,7 +121,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.on('hello', fn).off('hello', fn);
+        const self = discovery.on('hello', fn()).off('hello', fn());
         discovery.emit('hello', mockedDevice());
 
         // Assert
@@ -135,7 +135,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery.on('hello', fn).removeAllListeners('hello');
+        const self = discovery.on('hello', fn()).removeAllListeners('hello');
         discovery.emit('hello', mockedDevice());
 
         // Assert
@@ -164,7 +164,7 @@ describe('Discovery', () => {
         const expected = 2;
 
         // Act
-        const got = discovery.on('hello', fn).on('hello', fn).listenerCount('hello');
+        const got = discovery.on('hello', fn()).on('hello', fn()).listenerCount('hello');
 
         // Assert
         expect(got).toBe(expected);
@@ -229,7 +229,7 @@ describe('Discovery', () => {
             const fn = jest.fn();
 
             // Act
-            const got = discovery.on('hello', fn).eventNames();
+            const got = discovery.on('hello', fn()).eventNames();
 
             // Assert
             expect([...got]).toStrictEqual(['hello']);
@@ -241,7 +241,7 @@ describe('Discovery', () => {
             const fn = jest.fn();
 
             // Act
-            const got = discovery.on('hello', fn).on('goodbye', fn).eventNames();
+            const got = discovery.on('hello', fn()).on('goodbye', fn()).eventNames();
 
             // Assert
             expect([...got]).toStrictEqual(['hello', 'goodbye']);

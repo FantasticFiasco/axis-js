@@ -18,7 +18,7 @@ describe('restart response', () => {
             const fn = () => res.assertSuccess();
 
             // Assert
-            expect(fn).not.toThrowError();
+            expect(fn()).not.toThrow();
         });
 
         test('should throw exception given error response without body', () => {
@@ -36,7 +36,7 @@ describe('restart response', () => {
             const fn = () => res.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
 
         test('should throw exception given error response with body', () => {
@@ -55,7 +55,7 @@ describe('restart response', () => {
             const fn = () => res.assertSuccess();
 
             // Assert
-            expect(fn).toThrowError(Error);
+            expect(fn()).toThrow(Error);
         });
     });
 });
