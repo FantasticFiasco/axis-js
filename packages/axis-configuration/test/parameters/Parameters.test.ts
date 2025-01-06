@@ -1,3 +1,4 @@
+import { ExpectationError } from '@fantasticfiasco/expect';
 import { Connection, Protocol } from 'axis-core';
 import { Parameters } from '../../src';
 import { DeviceMock } from '../DeviceMock';
@@ -22,131 +23,94 @@ describe('#get', () => {
         const name = 'Network.Bonjour.FriendlyName';
         const value = 'Main Entrance';
 
-        // nock(connection.url)
-        //     .get(/param.cgi\?action=list/)
-        //     .reply(200, `root.${name}=${value}`);
+        // Act
+        const got = await parameters.get(name);
+
+        // Assert
+        const want = new Map<string, string>([[name, value]]);
+        expect(got).toStrictEqual(want);
+    });
+
+    test('should get multiple parameters', async () => {
+        // Arrange
+        const connection = createConnection();
+        const parameters = new Parameters(connection);
+
+        const name1 = 'Network.Bonjour.FriendlyName';
+        const value1 = 'Main Entrance';
+        const name2 = 'Network.Bonjour.Enabled';
+        const value2 = 'yes';
+
+        // Act
+        const got = await parameters.get(name1, name2);
+
+        // Assert
+        const want = new Map<string, string>([
+            [name1, value1],
+            [name2, value2],
+        ]);
+        expect(got).toStrictEqual(want);
+    });
+
+    test('should not get single unknown parameter', async () => {
+        // Arrange
+        const connection = createConnection();
+        const parameters = new Parameters(connection);
+
+        const name = 'Unknown.Parameter';
 
         // Act
         const got = await parameters.get(name);
 
         // Assert
-        expect(got).toBe(new Map<string, string>([[name, value]]));
+        const want = new Map<string, string>();
+        expect(got).toStrictEqual(want);
     });
 
-    // test('should get multiple parameters', async () => {
-    //     // Arrange
-    //     const name1 = 'Network.Bonjour.FriendlyName';
-    //     const value1 = 'Main Entrance';
-    //     const name2 = 'Network.Bonjour.Enabled';
-    //     const value2 = 'yes';
+    test('should not get multiple unknown parameters', async () => {
+        // Arrange
+        const connection = createConnection();
+        const parameters = new Parameters(connection);
 
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, `root.${name1}=${value1}\r\nroot.${name2}=${value2}`);
+        const name1 = 'Unknown.Parameter1';
+        const name2 = 'Unknown.Parameter2';
 
-    //     // Act
-    //     const got = await parameters.get(name1, name2);
+        // Act
+        const got = await parameters.get(name1, name2);
 
-    //     // Assert
-    //     expect(got[name1]).toBe(value1);
-    //     expect(got[name2]).toBe(value2);
-    // });
+        // Assert
+        const want = new Map<string, string>();
+        expect(got).toStrictEqual(want);
+    });
 
-    // test('should trim single parameter', async () => {
-    //     // Arrange
-    //     const name = 'Network.Bonjour.FriendlyName';
-    //     const value = 'Main Entrance';
+    test('should get a mixture of known and unknown parameters', async () => {
+        // Arrange
+        const connection = createConnection();
+        const parameters = new Parameters(connection);
 
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, ` root.${name} = ${value} `);
+        const name1 = 'Network.Bonjour.FriendlyName';
+        const value1 = 'Main Entrance';
+        const name2 = 'Unknown.Parameter';
 
-    //     // Act
-    //     const got = await parameters.get(name);
+        // Act
+        const got = await parameters.get(name1, name2);
 
-    //     // Assert
-    //     expect(got[name]).toBe(value);
-    // });
+        // Assert
+        const want = new Map<string, string>([[name1, value1]]);
+        expect(got).toStrictEqual(want);
+    });
 
-    // test('should trim multiple parameters', async () => {
-    //     // Arrange
-    //     const name1 = 'Network.Bonjour.FriendlyName';
-    //     const value1 = 'Main Entrance';
-    //     const name2 = 'Network.Bonjour.Enabled';
-    //     const value2 = 'yes';
+    test('should throw exception if no parameter is specified', async () => {
+        // Arrange
+        const connection = createConnection();
+        const parameters = new Parameters(connection);
 
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, ` root.${name1} = ${value1} \r\n root.${name2} = ${value2} `);
+        // Act
+        const fn = () => parameters.get();
 
-    //     // Act
-    //     const got = await parameters.get(name1, name2);
-
-    //     // Assert
-    //     expect(got[name1]).toBe(value1);
-    //     expect(got[name2]).toBe(value2);
-    // });
-
-    // test('should not get single unknown parameter', async () => {
-    //     // Arrange
-    //     const name = 'Unknown.Parameter';
-
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, `# Error: Error -1 getting param in group '${name}'\r\n`);
-
-    //     // Act
-    //     const got = await parameters.get(name);
-
-    //     // Assert
-    //     expect(got[name]).toBeFalsy();
-    // });
-
-    // test('should not get multiple unknown parameters', async () => {
-    //     // Arrange
-    //     const name1 = 'Unknown.Parameter1';
-    //     const name2 = 'Unknown.Parameter2';
-
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, `# Error: Error -1 getting param in group '${name1}'\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
-
-    //     // Act
-    //     const got = await parameters.get(name1, name2);
-
-    //     // Assert
-    //     expect(got[name1]).toBeFalsy();
-    //     expect(got[name2]).toBeFalsy();
-    // });
-
-    // test('should get a mixture of known and unknown parameters', async () => {
-    //     // Arrange
-    //     const name1 = 'Network.Bonjour.FriendlyName';
-    //     const value1 = 'Main Entrance';
-    //     const name2 = 'Unknown.Parameter';
-
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(200, `root.${name1}=${value1}\r\n# Error: Error -1 getting param in group '${name2}'\r\n`);
-
-    //     // Act
-    //     const got = await parameters.get(name1, name2);
-
-    //     // Assert
-    //     expect(got[name1]).toBe(value1);
-    //     expect(got[name2]).toBeFalsy();
-    // });
-
-    // test('should throw exception if no parameter is specified', async () => {
-    //     try {
-    //         // Act
-    //         await parameters.get();
-    //         throw new Error('This exception should not be thrown');
-    //     } catch (error) {
-    //         // Assert
-    //         expect(error).toBeInstanceOf(ExpectationError);
-    //     }
-    // });
+        // Assert
+        await expect(fn).rejects.toBeInstanceOf(ExpectationError);
+    });
 
     // test('should throw exception if device is unresponsive', async () => {
     //     // Arrange
@@ -164,21 +128,16 @@ describe('#get', () => {
     //     }
     // });
 
-    // test('should throw exception if user is unauthorized', async () => {
-    //     // Arrange
-    //     // nock(connection.url)
-    //     //     .get(/param.cgi\?action=list/)
-    //     //     .reply(401);
+    test('should throw exception if user is unauthorized', async () => {
+        // Arrange
+        const connection = createConnection('wrong-password');
+        const parameters = new Parameters(connection);
 
-    //     try {
-    //         // Act
-    //         await parameters.get('Network.Bonjour.FriendlyName');
-    //         throw new Error('This exception should not be thrown');
-    //     } catch (error) {
-    //         // Assert
-    //         expect(error).toBeInstanceOf(Error);
-    //     }
-    // });
+        const fn = () => parameters.get('Network.Bonjour.FriendlyName');
+
+        // Assert
+        await expect(fn).rejects.toBeInstanceOf(Error);
+    });
 });
 
 // describe('#update', () => {
@@ -320,13 +279,13 @@ describe('#get', () => {
 //     });
 // });
 
-const createConnection = (): Connection => {
+const createConnection = (password: string | undefined = undefined): Connection => {
     const { protocol, hostname, port } = new URL(device.uri);
 
     if (protocol !== 'http:') {
         throw new Error('Tests are currently not written to support anything else than HTTP');
     }
 
-    const connection = new Connection(Protocol.Http, hostname, Number.parseInt(port), device.username, device.password);
+    const connection = new Connection(Protocol.Http, hostname, Number.parseInt(port), device.username, password ?? device.password);
     return connection;
 };

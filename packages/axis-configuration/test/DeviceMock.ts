@@ -67,19 +67,35 @@ export class DeviceMock {
     #paramHandler = (req: express.Request, res: express.Response) => {
         switch (req.query.action) {
             case 'list':
-                const group = req.query.group as string;
-
-                switch (group) {
-                    case 'Network.Bonjour.FriendlyName':
-                        console.log('XXX');
-                        res.send('Network.Bonjour.FriendlyName=Main Entrance');
-                        break;
-                }
+                this.#listParameters(req, res);
                 break;
 
             default:
                 res.status(400).send();
         }
+    };
+
+    #listParameters = (req: express.Request, res: express.Response) => {
+        const responseLines: string[] = [];
+
+        const group = req.query.group as string;
+        const parameters = group.split(',');
+
+        for (const parameter of parameters) {
+            switch (parameter) {
+                case 'Network.Bonjour.FriendlyName':
+                    responseLines.push('Network.Bonjour.FriendlyName=Main Entrance');
+                    break;
+                case 'Network.Bonjour.Enabled':
+                    responseLines.push('Network.Bonjour.Enabled=yes');
+                    break;
+                default:
+                    responseLines.push(`# Error: Error -1 getting param in group '${parameter}'`);
+                    break;
+            }
+        }
+
+        res.send(responseLines.join('\r\n'));
     };
 
     #pwdgrpHandler = (_: express.Request, res: express.Response) => {
