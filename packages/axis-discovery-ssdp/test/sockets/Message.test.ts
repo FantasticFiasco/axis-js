@@ -14,7 +14,7 @@ describe('Message', () => {
         // Act
         const got = new Message(
             '192.168.1.100',
-            Buffer.from('HTTP/1.1 200 OK\r\n' + ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n')
+            Buffer.from('HTTP/1.1 200 OK\r\n' + ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'),
         );
 
         // Assert
@@ -51,7 +51,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.location).toThrowError();
+            expect(() => got.location).toThrow();
         });
 
         test('#usn should fail if missing', () => {
@@ -59,7 +59,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.usn).toThrowError();
+            expect(() => got.usn).toThrow();
         });
     });
 
@@ -85,7 +85,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.location).toThrowError();
+            expect(() => got.location).toThrow();
         });
 
         test('#usn', () => {
@@ -101,7 +101,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.usn).toThrowError();
+            expect(() => got.usn).toThrow();
         });
 
         test('#nt', () => {
@@ -117,7 +117,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.nt).toThrowError();
+            expect(() => got.nt).toThrow();
         });
 
         test('#nts', () => {
@@ -133,7 +133,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.nts).toThrowError();
+            expect(() => got.nts).toThrow();
         });
     });
 });

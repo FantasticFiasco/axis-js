@@ -45,7 +45,7 @@ export class Parameters {
      * @throws {UpdateParametersError} Updating one or many of the parameters failed.
      */
     public async update(parameters: Map<string, string>): Promise<void> {
-        expect.toBeTrue(Object.keys(parameters).length > 0, 'At least one parameter must be specified');
+        expect.toBeTrue(parameters.size > 0, 'At least one parameter must be specified');
 
         const req = new UpdateParametersRequest(this.#connection, parameters);
         const res = await req.send();

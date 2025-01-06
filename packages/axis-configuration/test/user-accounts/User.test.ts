@@ -9,7 +9,7 @@ describe('users', () => {
             const fn = () => new User(Generate.string(0), 'secret', AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
 
         test('should throw exception if to long', () => {
@@ -17,7 +17,7 @@ describe('users', () => {
             const fn = () => new User(Generate.string(15), 'secret', AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
 
         test('should throw exception if containing unsupported characters', () => {
@@ -25,7 +25,7 @@ describe('users', () => {
             const fn = () => new User('Joe-', 'secret', AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
     });
 
@@ -35,7 +35,7 @@ describe('users', () => {
             const fn = () => new User('Joe', Generate.string(0), AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
 
         test('should throw exception if to long', () => {
@@ -43,7 +43,7 @@ describe('users', () => {
             const fn = () => new User('Joe', Generate.string(65), AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
 
         test('should throw exception if containing unsupported characters', () => {
@@ -51,7 +51,7 @@ describe('users', () => {
             const fn = () => new User('Joe', `secret-${String.fromCharCode(31)}`, AccessRights.Viewer, false);
 
             // Assert
-            expect(fn).toThrowError(ExpectationError);
+            expect(fn()).toThrow(ExpectationError);
         });
     });
 });

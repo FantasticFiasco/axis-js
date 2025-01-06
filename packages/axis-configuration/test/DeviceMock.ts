@@ -4,15 +4,20 @@ import * as passport from 'passport';
 import { DigestStrategy } from 'passport-http';
 
 export class DeviceMock {
-    private server?: Server;
-    private address?: string;
-    private port?: number;
+    #server?: Server;
+    #address?: string;
+    #port?: number;
+
+    readonly #parameters = new Map<string, string>([
+        ['Network.Bonjour.FriendlyName', 'Main Entrance'],
+        ['Network.Bonjour.Enabled', 'yes'],
+    ]);
 
     readonly username = 'some-user';
     readonly password = 'some-password';
 
     get uri(): string {
-        return `http://${this.address}:${this.port}`;
+        return `http://${this.#address}:${this.#port}`;
     }
 
     listen(address: string, port: number): Promise<void> {
@@ -39,9 +44,9 @@ export class DeviceMock {
         app.get('/axis-cgi/pwdgrp.cgi', passport.authenticate('digest', { session: false }), this.#pwdgrpHandler);
 
         return new Promise((resolve) => {
-            this.server = app.listen(port, address, () => {
-                this.address = (this.server?.address() as AddressInfo).address;
-                this.port = (this.server?.address() as AddressInfo).port;
+            this.#server = app.listen(port, address, () => {
+                this.#address = (this.#server?.address() as AddressInfo).address;
+                this.#port = (this.#server?.address() as AddressInfo).port;
 
                 resolve();
             });
@@ -50,10 +55,10 @@ export class DeviceMock {
 
     close(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (!this.server) {
+            if (!this.#server) {
                 reject('Express server is not defined');
             } else {
-                this.server.close((err) => {
+                this.#server.close((err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -70,6 +75,10 @@ export class DeviceMock {
                 this.#listParameters(req, res);
                 break;
 
+            case 'update':
+                this.#updateParameters(req, res);
+                break;
+
             default:
                 res.status(400).send();
         }
@@ -79,23 +88,37 @@ export class DeviceMock {
         const responseLines: string[] = [];
 
         const group = req.query.group as string;
-        const parameters = group.split(',');
+        const names = group.split(',');
 
-        for (const parameter of parameters) {
-            switch (parameter) {
-                case 'Network.Bonjour.FriendlyName':
-                    responseLines.push('Network.Bonjour.FriendlyName=Main Entrance');
-                    break;
-                case 'Network.Bonjour.Enabled':
-                    responseLines.push('Network.Bonjour.Enabled=yes');
-                    break;
-                default:
-                    responseLines.push(`# Error: Error -1 getting param in group '${parameter}'`);
-                    break;
+        for (const name of names) {
+            const value = this.#parameters.get(name);
+
+            if (value) {
+                responseLines.push(`${name}=${value}`);
+            } else {
+                responseLines.push(`# Error: Error -1 getting param in group '${name}'`);
             }
         }
 
         res.send(responseLines.join('\r\n'));
+    };
+
+    #updateParameters = (req: express.Request, res: express.Response) => {
+        const responseLines: string[] = [];
+
+        for (const [name, value] of Object.entries(req.query)) {
+            if (name === 'action') {
+                continue;
+            }
+
+            if (this.#parameters.has(name)) {
+                this.#parameters.set(name, value as string);
+            } else {
+                responseLines.push(`# Error: Error setting '${name}' to '${value}'!\r\n`);
+            }
+        }
+
+        res.send(responseLines.length === 0 ? 'OK' : responseLines.join('\r\n'));
     };
 
     #pwdgrpHandler = (_: express.Request, res: express.Response) => {
