@@ -2,12 +2,12 @@ import { AccessRights, User } from '../../../src';
 import { GetUsersResponse } from '../../../src/user-accounts/request-response/GetUsersResponse';
 import {
     ROOT,
-    ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ,
-    ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ,
-    ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ,
-    ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ,
-    ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ,
-    ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ,
+    ROOT_AND_ADMIN_WITHOUT_PTZ,
+    ROOT_AND_ADMIN_WITH_PTZ,
+    ROOT_AND_OPERATOR_WITHOUT_PTZ,
+    ROOT_AND_OPERATOR_WITH_PTZ,
+    ROOT_AND_VIEWER_WITHOUT_PTZ,
+    ROOT_AND_VIEWER_WITH_PTZ,
 } from './GetUsersResponse.mock';
 
 describe('get users response', () => {
@@ -25,9 +25,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root and John as administrators', async () => {
+        test('return root and admin with ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_ADMIN_WITH_PTZ));
 
             // Act
             await res.assertSuccess();
@@ -38,9 +38,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root and John as administrator without ptz', async () => {
+        test('return root and admin without ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_ADMIN_WITHOUT_PTZ));
 
             // Act
             await res.assertSuccess();
@@ -51,9 +51,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root as administrator and John as operator', async () => {
+        test('return root and operator with ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_OPERATOR_WITH_PTZ));
 
             // Act
             await res.assertSuccess();
@@ -64,9 +64,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root as administrator and John as operator without ptz', async () => {
+        test('return root and operator without ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_OPERATOR_WITHOUT_PTZ));
 
             // Act
             await res.assertSuccess();
@@ -77,9 +77,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root as administrator and John as viewer', async () => {
+        test('return root and viewer with ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_VIEWER_WITH_PTZ));
 
             // Act
             await res.assertSuccess();
@@ -90,9 +90,9 @@ describe('get users response', () => {
             expect(got).toStrictEqual(want);
         });
 
-        test('return root as administrator and John as viewer without ptz', async () => {
+        test('return root and viewer without ptz', async () => {
             // Arrange
-            const res = new GetUsersResponse(new Response(ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ));
+            const res = new GetUsersResponse(new Response(ROOT_AND_VIEWER_WITHOUT_PTZ));
 
             // Act
             await res.assertSuccess();
