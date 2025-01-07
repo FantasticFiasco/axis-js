@@ -153,7 +153,7 @@ streamcontrol=""
 nogroup=""
 digusers="root"`;
 
-export const ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ = `root=""
+export const ROOT_AND_ADMIN_WITH_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
@@ -308,7 +308,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ = `root=""
+export const ROOT_AND_ADMIN_WITHOUT_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
@@ -463,7 +463,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ = `root=""
+export const ROOT_AND_OPERATOR_WITH_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
@@ -618,7 +618,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ = `root=""
+export const ROOT_AND_OPERATOR_WITHOUT_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
@@ -773,7 +773,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ = `root=""
+export const ROOT_AND_VIEWER_WITH_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
@@ -928,7 +928,7 @@ streamcontrol=""
 nogroup=""
 digusers="root,John"`;
 
-export const ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ = `root=""
+export const ROOT_AND_VIEWER_WITHOUT_PTZ = `root=""
 daemon=""
 bin=""
 sys=""
