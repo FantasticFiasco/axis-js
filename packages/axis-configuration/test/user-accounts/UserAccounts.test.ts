@@ -1,140 +1,118 @@
+import { ExpectationError } from '@fantasticfiasco/expect';
 import { Connection, Protocol } from 'axis-core';
-import { AccessRights, User, UserAccounts } from '../../src';
+import { AccessRights, User, UserAccounts, UserAlreadyExistsError } from '../../src';
+import { DeviceMock } from '../DeviceMock';
+
+var device: DeviceMock;
+
+beforeAll(async () => {
+    device = new DeviceMock();
+    await device.listen('127.0.0.1', 0);
+});
+
+afterAll(async () => {
+    await device.close();
+});
 
 describe('users', () => {
-    const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
-    const userAccounts = new UserAccounts(connection);
-
-    afterEach(() => {
-        // nock.cleanAll();
-    });
-
     describe('#add', () => {
         test('should add user with viewer access', async () => {
             // Arrange
-            const user = new User('Joe', 'secret', AccessRights.Viewer, false);
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-            // const scope = nock(connection.url)
-            //     .get(/pwdgrp.cgi\?action=add/)
-            //     .reply(200, Generate.html(`Created account ${user.name}.`));
+            const user = new User('new', 'secret', AccessRights.Viewer, false);
 
             // Act
             await userAccounts.add(user);
-
-            // Assert
-            // expect(scope.isDone()).toBe(true);
         });
 
-        // test('should add user with viewer and PTZ access', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Viewer, true);
+        test('should add user with viewer and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        //     // const scope = nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html(`Created account ${user.name}.`));
+            const user = new User('new', 'secret', AccessRights.Viewer, true);
 
-        //     // Act
-        //     await userAccounts.add(user);
+            // Act
+            await userAccounts.add(user);
+        });
 
-        //     // Assert
-        //     // expect(scope.isDone()).toBe(true);
-        // });
+        test('should add user with operator access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        // test('should add user with operator access', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Operator, false);
+            const user = new User('new', 'secret', AccessRights.Operator, false);
 
-        //     // const scope = nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html(`Created account ${user.name}.`));
+            // Act
+            await userAccounts.add(user);
+        });
 
-        //     // Act
-        //     await userAccounts.add(user);
+        test('should add user with operator and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        //     // Assert
-        //     // expect(scope.isDone()).toBe(true);
-        // });
+            const user = new User('new', 'secret', AccessRights.Operator, true);
 
-        // test('should add user with operator and PTZ access', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Operator, true);
+            // Act
+            await userAccounts.add(user);
+        });
 
-        //     // const scope = nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html(`Created account ${user.name}.`));
+        test('should add user with administrator access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        //     // Act
-        //     await userAccounts.add(user);
+            const user = new User('new', 'secret', AccessRights.Administrator, false);
 
-        //     // Assert
-        //     // expect(scope.isDone()).toBe(true);
-        // });
+            // Act
+            await userAccounts.add(user);
+        });
 
-        // test('should add user with administrator access', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Administrator, false);
+        test('should add user with administrator and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        //     // const scope = nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html(`Created account ${user.name}.`));
+            const user = new User('new', 'secret', AccessRights.Administrator, true);
 
-        //     // Act
-        //     await userAccounts.add(user);
+            // Act
+            await userAccounts.add(user);
+        });
 
-        //     // Assert
-        //     // expect(scope.isDone()).toBe(true);
-        // });
+        test('should throw exception if password is omitted', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        // test('should add user with administrator and PTZ access', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Administrator, true);
+            const user = new User('new', undefined, AccessRights.Viewer, false);
 
-        //     // const scope = nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html(`Created account ${user.name}.`));
+            // Act
+            const fn = () => userAccounts.add(user);
 
-        //     // Act
-        //     await userAccounts.add(user);
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(ExpectationError);
+        });
 
-        //     // Assert
-        //     // expect(scope.isDone()).toBe(true);
-        // });
+        test('should throw exception if user already exists', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
 
-        // test('should throw exception if password is omitted', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', undefined, AccessRights.Viewer, false);
+            const user = new User('root', 'secret', AccessRights.Viewer, false);
 
-        //     try {
-        //         // Act
-        //         await userAccounts.add(user);
-        //         throw new Error('This exception should not be thrown');
-        //     } catch (error) {
-        //         // Assert
-        //         expect(error).toBeInstanceOf(ExpectationError);
-        //     }
-        // });
+            // Act
+            const fn = () => userAccounts.add(user);
 
-        // test('should throw exception if user already exists', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Viewer, false);
-
-        //     // nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(200, Generate.html('Error: this user name already exists, consult the system log file'));
-
-        //     try {
-        //         // Act
-        //         await userAccounts.add(user);
-        //         throw new Error('This exception should not be thrown');
-        //     } catch (error) {
-        //         // Assert
-        //         expect(error).toBeInstanceOf(UserAlreadyExistsError);
-        //     }
-        // });
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(UserAlreadyExistsError);
+        });
 
         // test('should throw exception if device is unresponsive', async () => {
         //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Viewer, false);
+        //     const user = new User('new', 'secret', AccessRights.Viewer, false);
 
         //     // nock(connection.url)
         //     //     .get(/pwdgrp.cgi\?action=add/)
@@ -150,381 +128,240 @@ describe('users', () => {
         //     }
         // });
 
-        // test('should throw exception if user is unauthorized', async () => {
-        //     // Arrange
-        //     const user = new User('Joe', 'secret', AccessRights.Viewer, false);
+        test('should throw exception if user is unauthorized', async () => {
+            // Arrange
+            const connection = createConnection('wrong-password');
+            const userAccounts = new UserAccounts(connection);
 
-        //     // nock(connection.url)
-        //     //     .get(/pwdgrp.cgi\?action=add/)
-        //     //     .reply(401);
+            const user = new User('new', 'secret', AccessRights.Viewer, false);
 
-        //     try {
-        //         // Act
-        //         await userAccounts.add(user);
-        //         throw new Error('This exception should not be thrown');
-        //     } catch (error) {
-        //         // Assert
-        //         expect(error).toBeInstanceOf(Error);
-        //     }
-        // });
+            // Act
+            const fn = () => userAccounts.add(user);
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
     });
 
-    // describe('#getAll', () => {
-    //     test('should get user with viewer access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_VIEWER_WITHOUT_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Viewer);
-    //         expect(got[1].ptz).toBe(false);
-    //     });
-
-    //     test('should get user with viewer and PTZ access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_VIEWER_WITH_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Viewer);
-    //         expect(got[1].ptz).toBe(true);
-    //     });
-
-    //     test('should get user with operator access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_OPERATOR_WITHOUT_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Operator);
-    //         expect(got[1].ptz).toBe(false);
-    //     });
-
-    //     test('should get user with operator and PTZ access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_OPERATOR_WITH_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Operator);
-    //         expect(got[1].ptz).toBe(true);
-    //     });
-
-    //     test('should get user with administrator access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_ADMINISTRATOR_WITHOUT_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[1].ptz).toBe(false);
-    //     });
-
-    //     test('should get user with administrator and PTZ access', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(200, ROOT_AND_JOHN_THE_ADMINISTRATOR_WITH_PTZ);
-
-    //         // Act
-    //         const got = await userAccounts.getAll();
-
-    //         // Assert
-    //         expect(got.length).toBe(2);
-    //         expect(got[0].name).toBe('root');
-    //         expect(got[0].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[0].ptz).toBe(true);
-    //         expect(got[1].name).toBe('John');
-    //         expect(got[1].accessRights).toBe(AccessRights.Administrator);
-    //         expect(got[1].ptz).toBe(true);
-    //     });
-
-    //     test('should throw exception if device is unresponsive', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.getAll();
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-
-    //     test('should throw exception if user is unauthorized', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=get/)
-    //         //     .reply(401);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.getAll();
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-    // });
-
-    // describe('#update', () => {
-    //     test('should update user with viewer access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Viewer, false);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should update user with viewer and PTZ access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Viewer, true);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should update user with operator access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Operator, false);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should update user with operator and PTZ access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Operator, true);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should update user with administrator access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Administrator, false);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should update user with administrator and PTZ access', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Administrator, true);
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html(`Modified account ${user.name}.`));
-
-    //         // Act
-    //         await userAccounts.update(user);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should throw exception if user does not exist', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Viewer, false);
-
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(200, Generate.html('Error: consult the system log file.'));
-
-    //         try {
-    //             // Act
-    //             await userAccounts.update(user);
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-
-    //     test('should throw exception if device is unresponsive', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Viewer, false);
-
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.update(user);
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-
-    //     test('should throw exception if user is unauthorized', async () => {
-    //         // Arrange
-    //         const user = new User('Joe', 'secret', AccessRights.Viewer, false);
-
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=update/)
-    //         //     .reply(401);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.update(user);
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-    // });
-
-    // describe('#remove', () => {
-    //     test('should remove user', async () => {
-    //         // Arrange
-    //         const username = 'Joe';
-
-    //         // const scope = nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=remove/)
-    //         //     .reply(200, Generate.html(`Removed account ${username}.`));
-
-    //         // Act
-    //         await userAccounts.remove(username);
-
-    //         // Assert
-    //         // expect(scope.isDone()).toBe(true);
-    //     });
-
-    //     test('should throw exception if user does not exist', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=remove/)
-    //         //     .reply(200, Generate.html('Error: consult the system log file.'));
-
-    //         try {
-    //             // Act
-    //             await userAccounts.remove('Joe');
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-
-    //     test('should throw exception if device is unresponsive', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=remove/)
-    //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.remove('Joe');
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-
-    //     test('should throw exception if user is unauthorized', async () => {
-    //         // Arrange
-    //         // nock(connection.url)
-    //         //     .get(/pwdgrp.cgi\?action=remove/)
-    //         //     .reply(401);
-
-    //         try {
-    //             // Act
-    //             await userAccounts.remove('Joe');
-    //             throw new Error('This exception should not be thrown');
-    //         } catch (error) {
-    //             // Assert
-    //             expect(error).toBeInstanceOf(Error);
-    //         }
-    //     });
-    // });
+    describe('#getAll', () => {
+        test('should get users', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            // Act
+            const got = await userAccounts.getAll();
+
+            // Assert
+            const want = [
+                new User('root', undefined, AccessRights.Administrator, true),
+                new User('admin', undefined, AccessRights.Administrator, false),
+                new User('adminptz', undefined, AccessRights.Administrator, true),
+                new User('operator', undefined, AccessRights.Operator, false),
+                new User('operatorptz', undefined, AccessRights.Operator, true),
+                new User('viewer', undefined, AccessRights.Viewer, false),
+                new User('viewerptz', undefined, AccessRights.Viewer, true),
+            ];
+            expect(got).toStrictEqual(want);
+        });
+
+        //     test('should throw exception if device is unresponsive', async () => {
+        //         // Arrange
+        //         // nock(connection.url)
+        //         //     .get(/pwdgrp.cgi\?action=get/)
+        //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
+        //         try {
+        //             // Act
+        //             await userAccounts.getAll();
+        //             throw new Error('This exception should not be thrown');
+        //         } catch (error) {
+        //             // Assert
+        //             expect(error).toBeInstanceOf(Error);
+        //         }
+        //     });
+        test('should throw exception if user is unauthorized', async () => {
+            // Arrange
+            const connection = createConnection('wrong-password');
+            const userAccounts = new UserAccounts(connection);
+
+            // Act
+            const fn = () => userAccounts.getAll();
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
+    });
+
+    describe('#update', () => {
+        test('should update user with viewer access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Viewer, false);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should update user with viewer and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Viewer, true);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should update user with operator access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Operator, false);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should update user with operator and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Operator, true);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should update user with administrator access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Administrator, false);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should update user with administrator and PTZ access', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Administrator, true);
+
+            // Act
+            await userAccounts.update(user);
+        });
+
+        test('should throw exception if user does not exist', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('new', 'secret', AccessRights.Viewer, false);
+
+            // Act
+            const fn = () => userAccounts.update(user);
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
+
+        //     test('should throw exception if device is unresponsive', async () => {
+        //         // Arrange
+        //         const user = new User('root', 'secret', AccessRights.Viewer, false);
+        //         // nock(connection.url)
+        //         //     .get(/pwdgrp.cgi\?action=update/)
+        //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
+        //         try {
+        //             // Act
+        //             await userAccounts.update(user);
+        //             throw new Error('This exception should not be thrown');
+        //         } catch (error) {
+        //             // Assert
+        //             expect(error).toBeInstanceOf(Error);
+        //         }
+        //     });
+
+        test('should throw exception if user is unauthorized', async () => {
+            // Arrange
+            const connection = createConnection('wrong-password');
+            const userAccounts = new UserAccounts(connection);
+
+            const user = new User('root', 'secret', AccessRights.Viewer, false);
+
+            // Act
+            const fn = () => userAccounts.update(user);
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
+    });
+
+    describe('#remove', () => {
+        test('should remove user', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            // Act
+            await userAccounts.remove('root');
+        });
+
+        test('should throw exception if user does not exist', async () => {
+            // Arrange
+            const connection = createConnection();
+            const userAccounts = new UserAccounts(connection);
+
+            // Act
+            const fn = () => userAccounts.remove('new');
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
+
+        //     test('should throw exception if device is unresponsive', async () => {
+        //         // Arrange
+        //         // nock(connection.url)
+        //         //     .get(/pwdgrp.cgi\?action=remove/)
+        //         //     .replyWithError(`Error: connect ETIMEDOUT ${connection.address}:${connection.port}`);
+        //         try {
+        //             // Act
+        //             await userAccounts.remove('root');
+        //             throw new Error('This exception should not be thrown');
+        //         } catch (error) {
+        //             // Assert
+        //             expect(error).toBeInstanceOf(Error);
+        //         }
+        //     });
+
+        test('should throw exception if user is unauthorized', async () => {
+            // Arrange
+            const connection = createConnection('wrong-password');
+            const userAccounts = new UserAccounts(connection);
+
+            // Act
+            const fn = () => userAccounts.remove('root');
+
+            // Assert
+            await expect(fn()).rejects.toBeInstanceOf(Error);
+        });
+    });
 });
+
+const createConnection = (password: string | undefined = undefined): Connection => {
+    const { protocol, hostname, port } = new URL(device.uri);
+
+    if (protocol !== 'http:') {
+        throw new Error('Tests are currently not written to support anything else than HTTP');
+    }
+
+    const connection = new Connection(Protocol.Http, hostname, Number.parseInt(port), device.username, password ?? device.password);
+    return connection;
+};
