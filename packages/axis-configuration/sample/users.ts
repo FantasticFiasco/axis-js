@@ -34,10 +34,16 @@ export const run = async (connection: Connection): Promise<void> => {
 
     const userAccounts = new UserAccounts(connection);
 
+    await list(userAccounts);
+
     await add(userAccounts);
+    await list(userAccounts);
+
     await update(userAccounts);
     await list(userAccounts);
+
     await remove(userAccounts);
+    await list(userAccounts);
 
     console.log();
 };
