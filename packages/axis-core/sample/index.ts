@@ -13,14 +13,14 @@ class GetProdShortNameRequest extends DeviceRequest {
     }
 }
 
-const handler = async (res: Response): Promise<{ name: string; value: string }> => {
+const responseHandler = async (res: Response): Promise<{ name: string; value: string }> => {
     if (!res.ok) {
         throw new Error(`Request failed with status ${res.status} ${res.statusText}`);
     }
 
     const contentType = res.headers.get('content-type');
     if (contentType !== 'text/plain') {
-        throw new Error(`Invalid content type: ${contentType}`);
+        throw new Error(`Response with invalid content type: ${contentType}`);
     }
 
     const text = await res.text();
@@ -31,10 +31,11 @@ const handler = async (res: Response): Promise<{ name: string; value: string }> 
 
 (async () => {
     const connection = new Connection(Protocol.Http, address, port, username, password);
+
     const req = new GetProdShortNameRequest(connection);
     const res = await fetch(req);
 
-    const { name, value } = await handler(res);
+    const { name, value } = await responseHandler(res);
 
     console.log(`Status:     ${res.status}`);
     console.log(`Parameter:  ${name}=${value}`);
