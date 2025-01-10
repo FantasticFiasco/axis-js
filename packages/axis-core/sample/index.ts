@@ -24,7 +24,7 @@ const handler = async (res: Response): Promise<{ name: string; value: string }> 
     }
 
     const text = await res.text();
-    const [name, value] = text.split('=');
+    const [name, value] = text.trim().split('=');
 
     return { name, value };
 };
