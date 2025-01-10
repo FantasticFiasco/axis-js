@@ -99,10 +99,10 @@ describe('#createHeader should', () => {
         };
 
         // Act
-        const fn = () => createHeader('GET', '/some/path/', 'root', 'pass', challenge);
+        const fn = () => createHeader('GET', '/some/path/', 'root', 'pass', challenge, undefined);
 
         // Assert
-        expect(fn()).toThrow();
+        expect(fn).toThrow();
     });
 });
 
