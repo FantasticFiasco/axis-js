@@ -1,6 +1,6 @@
 import { Connection, DeviceRequest } from 'axis-core';
 import * as cheerio from 'cheerio';
-import { User, UserAlreadyExistsError } from '../..';
+import { User, UserAlreadyExistsError } from '..';
 import { Converter } from './Converter';
 
 export class AddUserRequest extends DeviceRequest {
@@ -19,7 +19,8 @@ export const handleAddUser = async (res: Response): Promise<void> => {
         throw new Error(`Failed to handle add user response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/html') {
         throw new Error(`Failed to handle add user response, invalid content type: ${contentType}`);
     }

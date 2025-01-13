@@ -103,6 +103,7 @@ export class DeviceMock {
             }
         }
 
+        res.setHeader('content-type', 'text/plain');
         res.send(responseLines.join('\r\n'));
     };
 
@@ -121,6 +122,7 @@ export class DeviceMock {
             }
         }
 
+        res.setHeader('content-type', 'text/plain');
         res.send(responseLines.length === 0 ? 'OK' : responseLines.join('\r\n'));
     };
 
@@ -150,6 +152,8 @@ export class DeviceMock {
     #addUser = (req: express.Request, res: express.Response) => {
         const user = req.query.user as string;
 
+        res.setHeader('content-type', 'text/html');
+
         if (this.#users.has(user)) {
             res.send(Generate.html('Error: this user name already exists, consult the system log file'));
         } else {
@@ -159,6 +163,8 @@ export class DeviceMock {
 
     #updateUser = (req: express.Request, res: express.Response) => {
         const user = req.query.user as string;
+
+        res.setHeader('content-type', 'text/html');
 
         if (this.#users.has(user)) {
             res.send(Generate.html(`Modified account ${user}.`));
@@ -170,6 +176,8 @@ export class DeviceMock {
     #removeUser = (req: express.Request, res: express.Response) => {
         const user = req.query.user as string;
 
+        res.setHeader('content-type', 'text/html');
+
         if (this.#users.has(user)) {
             res.send(Generate.html(`Removed account ${user}.`));
         } else {
@@ -178,6 +186,8 @@ export class DeviceMock {
     };
 
     #getUsers = (_: express.Request, res: express.Response) => {
+        res.setHeader('content-type', 'text/plain');
+
         res.send(`root=""
 daemon=""
 bin=""

@@ -1,7 +1,7 @@
 import * as expect from '@fantasticfiasco/expect';
 import { Connection, fetchBuilder } from 'axis-core';
-import { GetParametersRequest, handleGetParameters } from './request-response/GetParameters';
-import { handleUpdateParameters, UpdateParametersRequest } from './request-response/UpdateParameters';
+import { GetParametersRequest, handleGetParameters } from './GetParameters';
+import { handleUpdateParameters, UpdateParametersRequest } from './UpdateParameters';
 
 const fetch = fetchBuilder(global.fetch);
 
