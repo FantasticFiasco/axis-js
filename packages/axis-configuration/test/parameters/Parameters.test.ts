@@ -24,7 +24,7 @@ describe('#get', () => {
         const value = 'Main Entrance';
 
         // Act
-        const got = await parameters.get(name);
+        const got = await parameters.get([name]);
 
         // Assert
         const want = new Map<string, string>([[name, value]]);
@@ -42,7 +42,7 @@ describe('#get', () => {
         const value2 = 'yes';
 
         // Act
-        const got = await parameters.get(name1, name2);
+        const got = await parameters.get([name1, name2]);
 
         // Assert
         const want = new Map<string, string>([
@@ -58,7 +58,7 @@ describe('#get', () => {
         const parameters = new Parameters(connection);
 
         // Act
-        const got = await parameters.get('Unknown.Parameter');
+        const got = await parameters.get(['Unknown.Parameter']);
 
         // Assert
         const want = new Map<string, string>();
@@ -71,7 +71,7 @@ describe('#get', () => {
         const parameters = new Parameters(connection);
 
         // Act
-        const got = await parameters.get('Unknown.Parameter1', 'Unknown.Parameter2');
+        const got = await parameters.get(['Unknown.Parameter1', 'Unknown.Parameter2']);
 
         // Assert
         const want = new Map<string, string>();
@@ -88,7 +88,7 @@ describe('#get', () => {
         const name2 = 'Unknown.Parameter';
 
         // Act
-        const got = await parameters.get(name1, name2);
+        const got = await parameters.get([name1, name2]);
 
         // Assert
         const want = new Map<string, string>([[name1, value1]]);
@@ -101,7 +101,7 @@ describe('#get', () => {
         const parameters = new Parameters(connection);
 
         // Act
-        const fn = () => parameters.get();
+        const fn = () => parameters.get([]);
 
         // Assert
         await expect(fn()).rejects.toBeInstanceOf(ExpectationError);
@@ -128,7 +128,7 @@ describe('#get', () => {
         const connection = createConnection('wrong-password');
         const parameters = new Parameters(connection);
 
-        const fn = () => parameters.get('Network.Bonjour.FriendlyName');
+        const fn = () => parameters.get(['Network.Bonjour.FriendlyName']);
 
         // Assert
         await expect(fn()).rejects.toBeInstanceOf(Error);

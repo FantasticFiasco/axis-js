@@ -1,10 +1,12 @@
 import * as expect from '@fantasticfiasco/expect';
-import { Connection } from 'axis-core';
+import { Connection, fetchBuilder } from 'axis-core';
 import { User } from '..';
-import { AddUserRequest } from './request-response/AddUserRequest';
-import { GetUsersRequest } from './request-response/GetUsersRequest';
-import { RemoveUserRequest } from './request-response/RemoveUserRequest';
-import { UpdateUserRequest } from './request-response/UpdateUserRequest';
+import { AddUserRequest, handleAddUser } from './request-response/AddUser';
+import { GetUsersRequest, handleGetUsers } from './request-response/GetUsers';
+import { handleRemoveUser, RemoveUserRequest } from './request-response/RemoveUser';
+import { handleUpdateUser, UpdateUserRequest } from './request-response/UpdateUser';
+
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for adding a new user account with password and group membership, modify the
@@ -20,51 +22,53 @@ export class UserAccounts {
     /**
      * Adds a new user.
      * @param user The user to add. Please note that the password must be specified.
+     * @param init The object containing any custom settings that you want to apply to the request.
      * @throws {UserAlreadyExistsError} User already exists.
      */
-    public async add(user: User): Promise<void> {
+    public async add(user: User, init?: RequestInit): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
         const req = new AddUserRequest(this.connection, user);
-        const res = await req.send();
+        const res = await fetch(req, init);
 
-        await res.assertSuccess();
+        await handleAddUser(res);
     }
 
     /**
      * Gets all users.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async getAll(): Promise<User[]> {
+    public async getAll(init?: RequestInit): Promise<User[]> {
         const req = new GetUsersRequest(this.connection);
-        const res = await req.send();
+        const res = await fetch(req, init);
 
-        await res.assertSuccess();
-
-        const users = await res.users();
+        const users = await handleGetUsers(res);
         return users;
     }
 
     /**
      * Updates a user.
      * @param user The user to update. Please note that the password must be specified.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async update(user: User): Promise<void> {
+    public async update(user: User, init?: RequestInit): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
         const req = new UpdateUserRequest(this.connection, user);
-        const res = await req.send();
+        const res = await fetch(req, init);
 
-        await res.assertSuccess();
+        await handleUpdateUser(res);
     }
 
     /**
      * Removes a user.
      * @param username The name of the user to remove.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async remove(username: string): Promise<void> {
+    public async remove(username: string, init?: RequestInit): Promise<void> {
         const req = new RemoveUserRequest(this.connection, username);
-        const res = await req.send();
+        const res = await fetch(req, init);
 
-        await res.assertSuccess();
+        await handleRemoveUser(res);
     }
 }
