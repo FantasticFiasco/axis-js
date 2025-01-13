@@ -1,6 +1,6 @@
 import { Connection, DeviceRequest } from 'axis-core';
 import * as cheerio from 'cheerio';
-import { User } from '../..';
+import { User } from '..';
 import { Converter } from './Converter';
 
 export class UpdateUserRequest extends DeviceRequest {
@@ -15,7 +15,8 @@ export const handleUpdateUser = async (res: Response): Promise<void> => {
         throw new Error(`Failed to handle update user response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/html') {
         throw new Error(`Failed to handle update user response, invalid content type: ${contentType}`);
     }

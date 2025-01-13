@@ -12,7 +12,8 @@ export const handleRemoveUser = async (res: Response): Promise<void> => {
         throw new Error(`Failed to handle remove user response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/html') {
         throw new Error(`Failed to handle remove user response, invalid content type: ${contentType}`);
     }

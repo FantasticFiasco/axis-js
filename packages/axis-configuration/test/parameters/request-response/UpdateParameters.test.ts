@@ -1,6 +1,6 @@
 import { Connection, Protocol } from 'axis-core';
 import { UpdateParametersError } from '../../../src';
-import { handleUpdateParameters, UpdateParametersRequest } from '../../../src/parameters/request-response/UpdateParameters';
+import { handleUpdateParameters, UpdateParametersRequest } from '../../../src/parameters/UpdateParameters';
 
 describe('update parameters request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

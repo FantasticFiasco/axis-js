@@ -1,10 +1,10 @@
 import * as expect from '@fantasticfiasco/expect';
 import { Connection, fetchBuilder } from 'axis-core';
 import { User } from '..';
-import { AddUserRequest, handleAddUser } from './request-response/AddUser';
-import { GetUsersRequest, handleGetUsers } from './request-response/GetUsers';
-import { handleRemoveUser, RemoveUserRequest } from './request-response/RemoveUser';
-import { handleUpdateUser, UpdateUserRequest } from './request-response/UpdateUser';
+import { AddUserRequest, handleAddUser } from './AddUser';
+import { GetUsersRequest, handleGetUsers } from './GetUsers';
+import { handleRemoveUser, RemoveUserRequest } from './RemoveUser';
+import { handleUpdateUser, UpdateUserRequest } from './UpdateUser';
 
 const fetch = fetchBuilder(global.fetch);
 

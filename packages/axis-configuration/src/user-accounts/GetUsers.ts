@@ -1,6 +1,6 @@
 import { Connection, DeviceRequest } from 'axis-core';
-import { AccessRights } from '../AccessRights';
-import { User } from '../User';
+import { AccessRights } from './AccessRights';
+import { User } from './User';
 
 export class GetUsersRequest extends DeviceRequest {
     constructor(connection: Connection) {
@@ -13,8 +13,9 @@ export const handleGetUsers = async (res: Response): Promise<User[]> => {
         throw new Error(`Failed to handle get users response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
-    if (contentType !== 'text/html') {
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
+    if (contentType !== 'text/plain') {
         throw new Error(`Failed to handle get users response, invalid content type: ${contentType}`);
     }
 

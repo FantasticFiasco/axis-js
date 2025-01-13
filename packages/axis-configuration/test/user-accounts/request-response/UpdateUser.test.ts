@@ -1,6 +1,6 @@
 import { Connection, Protocol } from 'axis-core';
 import { AccessRights, User } from '../../../src';
-import { UpdateUserRequest } from '../../../src/user-accounts/request-response/UpdateUser';
+import { UpdateUserRequest } from '../../../src/user-accounts/UpdateUser';
 
 describe('update user request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

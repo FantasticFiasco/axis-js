@@ -12,7 +12,8 @@ export const handleGetParameters = async (res: Response): Promise<Map<string, st
         throw new Error(`Failed to handle get parameters response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/plain') {
         throw new Error(`Failed to handle get parameters response, invalid content type: ${contentType}`);
     }
