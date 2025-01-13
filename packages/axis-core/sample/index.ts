@@ -18,7 +18,8 @@ const responseHandler = async (res: Response): Promise<{ name: string; value: st
         throw new Error(`Request failed with status ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/plain') {
         throw new Error(`Response with invalid content type: ${contentType}`);
     }

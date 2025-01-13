@@ -1,5 +1,5 @@
 import { Connection, Protocol } from 'axis-core';
-import { GetParametersRequest, handleGetParameters } from '../../../src/parameters/request-response/GetParameters';
+import { GetParametersRequest, handleGetParameters } from '../../../src/parameters/GetParameters';
 
 describe('get parameters request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

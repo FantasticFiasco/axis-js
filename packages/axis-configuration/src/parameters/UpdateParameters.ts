@@ -1,5 +1,5 @@
 import { Connection, DeviceRequest } from 'axis-core';
-import { UpdateParametersError } from '../UpdateParametersError';
+import { UpdateParametersError } from './UpdateParametersError';
 
 export class UpdateParametersRequest extends DeviceRequest {
     constructor(connection: Connection, parameters: Map<string, string>) {
@@ -18,7 +18,8 @@ export const handleUpdateParameters = async (res: Response): Promise<void> => {
         throw new Error(`Failed to handle update parameters response: ${res.status} ${res.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
     if (contentType !== 'text/plain') {
         throw new Error(`Failed to handle update parameters response, invalid content type: ${contentType}`);
     }

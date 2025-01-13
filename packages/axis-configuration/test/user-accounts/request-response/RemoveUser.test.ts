@@ -1,5 +1,5 @@
 import { Connection, Protocol } from 'axis-core';
-import { RemoveUserRequest } from '../../../src/user-accounts/request-response/RemoveUser';
+import { RemoveUserRequest } from '../../../src/user-accounts/RemoveUser';
 
 describe('remove user request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');

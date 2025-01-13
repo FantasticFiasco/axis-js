@@ -1,6 +1,6 @@
 import { Connection, Protocol } from 'axis-core';
 import { AccessRights, User } from '../../../src';
-import { GetUsersRequest, handleGetUsers } from '../../../src/user-accounts/request-response/GetUsers';
+import { GetUsersRequest, handleGetUsers } from '../../../src/user-accounts/GetUsers';
 import {
     ROOT,
     ROOT_AND_ADMIN_WITHOUT_PTZ,
