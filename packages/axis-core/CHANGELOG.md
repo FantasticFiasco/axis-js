@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - [BREAKING CHANGE] Deprecate Node.js v21 and below
 
+### :syringe: Fixed
+
+- [#994](https://github.com/FantasticFiasco/axis-js/pull/994) Fix issue with `get` function not returning the correct response type. (contribution by [@spinda](https://github.com/spinda))
+
 ### :policeman: Security
 
 - Security vulnerability in transient dependency `http-cache-semantics`
