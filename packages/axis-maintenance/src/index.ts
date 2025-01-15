@@ -1,2 +1,2 @@
-export * from './factory-default';
+export * from './FactoryDefaultType';
 export * from './Maintenance';

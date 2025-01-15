@@ -52,6 +52,6 @@ describe('#parse should', () => {
         const fn = () => parse('Invalid realm="test"');
 
         // Assert
-        expect(fn).toThrow();
+        expect(fn).toThrow(Error);
     });
 });

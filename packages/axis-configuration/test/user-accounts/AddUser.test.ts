@@ -1,9 +1,9 @@
 import { Connection, Protocol } from 'axis-core';
-import { AccessRights, User } from '../../../src';
-import { AddUserRequest } from '../../../src/user-accounts/AddUser';
+import { AccessRights, User } from '../../src';
+import { AddUserRequest } from '../../src/user-accounts/AddUser';
 
 describe('add user request', () => {
-    const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
+    const connection = new Connection(Protocol.Http, '1.2.3.4', 1234, 'root', 'pass');
 
     test('should return URL when adding user with viewer access', () => {
         // Arrange
@@ -13,7 +13,9 @@ describe('add user request', () => {
         const got = new AddUserRequest(connection, user);
 
         // Assert
-        expect(got.url).toBe(`http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer&comment=${user.name}`);
+        expect(got.url).toBe(
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer&comment=${user.name}`,
+        );
     });
 
     test('should return URL when adding user with viewer access and PTZ control', () => {
@@ -25,7 +27,7 @@ describe('add user request', () => {
 
         // Assert
         expect(got.url).toBe(
-            `http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz&comment=${user.name}`,
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=viewer:ptz&comment=${user.name}`,
         );
     });
 
@@ -38,7 +40,7 @@ describe('add user request', () => {
 
         // Assert
         expect(got.url).toBe(
-            `http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer&comment=${user.name}`,
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer&comment=${user.name}`,
         );
     });
 
@@ -51,7 +53,7 @@ describe('add user request', () => {
 
         // Assert
         expect(got.url).toBe(
-            `http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz&comment=${user.name}`,
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=operator:viewer:ptz&comment=${user.name}`,
         );
     });
 
@@ -64,7 +66,7 @@ describe('add user request', () => {
 
         // Assert
         expect(got.url).toBe(
-            `http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer&comment=${user.name}`,
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer&comment=${user.name}`,
         );
     });
 
@@ -77,7 +79,7 @@ describe('add user request', () => {
 
         // Assert
         expect(got.url).toBe(
-            `http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz&comment=${user.name}`,
+            `http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=add&user=${user.name}&pwd=${user.password}&grp=users&sgrp=admin:operator:viewer:ptz&comment=${user.name}`,
         );
     });
 });

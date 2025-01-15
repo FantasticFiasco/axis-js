@@ -1,6 +1,6 @@
 import { Connection, Protocol } from 'axis-core';
-import { AccessRights, User } from '../../../src';
-import { GetUsersRequest, handleGetUsers } from '../../../src/user-accounts/GetUsers';
+import { AccessRights, User } from '../../src';
+import { GetUsersRequest, handleGetUsers } from '../../src/user-accounts/GetUsers';
 import {
     ROOT,
     ROOT_AND_ADMIN_WITHOUT_PTZ,
@@ -12,14 +12,14 @@ import {
 } from './GetUsers.mock';
 
 describe('get users request', () => {
-    const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
+    const connection = new Connection(Protocol.Http, '1.2.3.4', 1234, 'root', 'pass');
 
     test('should return URL when getting all users', () => {
         // Act
         const got = new GetUsersRequest(connection);
 
         // Assert
-        expect(got.url).toBe('http://1.2.3.4/axis-cgi/pwdgrp.cgi?action=get');
+        expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/pwdgrp.cgi?action=get');
     });
 });
 
