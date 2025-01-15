@@ -104,7 +104,7 @@ describe('#get', () => {
         const fn = () => parameters.get([]);
 
         // Assert
-        await expect(fn()).rejects.toBeInstanceOf(ExpectationError);
+        await expect(fn()).rejects.toThrow(ExpectationError);
     });
 
     // test('should throw exception if device is unresponsive', async () => {
@@ -131,7 +131,7 @@ describe('#get', () => {
         const fn = () => parameters.get(['Network.Bonjour.FriendlyName']);
 
         // Assert
-        await expect(fn()).rejects.toBeInstanceOf(Error);
+        await expect(fn()).rejects.toThrow(Error);
     });
 });
 
@@ -169,7 +169,7 @@ describe('#update', () => {
         const fn = () => parameters.update(new Map<string, string>([[name, 'Value']]));
 
         // Assert
-        await expect(fn()).rejects.toStrictEqual(new UpdateParametersError([name]));
+        await expect(fn()).rejects.toThrow(new UpdateParametersError([name]));
     });
 
     test('should not update multiple unknown parameters', async () => {
@@ -190,7 +190,7 @@ describe('#update', () => {
             );
 
         // Assert
-        await expect(fn()).rejects.toStrictEqual(new UpdateParametersError([name1, name2]));
+        await expect(fn()).rejects.toThrow(new UpdateParametersError([name1, name2]));
     });
 
     test('should update a mixture of known and unknown parameters', async () => {
@@ -210,7 +210,7 @@ describe('#update', () => {
             );
 
         // Assert
-        await expect(fn()).rejects.toStrictEqual(new UpdateParametersError([name]));
+        await expect(fn()).rejects.toThrow(new UpdateParametersError([name]));
     });
 
     test('should throw exception if no parameters are specified', async () => {
@@ -222,7 +222,7 @@ describe('#update', () => {
         const fn = () => parameters.update(new Map<string, string>());
 
         // Assert
-        await expect(fn()).rejects.toBeInstanceOf(ExpectationError);
+        await expect(fn()).rejects.toThrow(ExpectationError);
     });
 
     //     test('should throw exception if device is unresponsive', async () => {
@@ -249,7 +249,7 @@ describe('#update', () => {
         const fn = () => parameters.update(new Map<string, string>([['Network.Bonjour.FriendlyName', 'Main Entrance']]));
 
         // Arrange
-        await expect(fn()).rejects.toBeInstanceOf(Error);
+        await expect(fn()).rejects.toThrow(Error);
     });
 });
 

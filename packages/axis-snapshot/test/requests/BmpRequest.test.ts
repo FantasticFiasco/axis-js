@@ -3,7 +3,7 @@ import { SnapshotOptions } from '../../src';
 import { BmpRequest } from '../../src/requests/BmpRequest';
 
 describe('get parameters request', () => {
-    const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
+    const connection = new Connection(Protocol.Http, '1.2.3.4', 1234, 'root', 'pass');
 
     describe('#url', () => {
         test('should return URL without options', () => {

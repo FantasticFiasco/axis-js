@@ -1,7 +1,9 @@
-import { Connection } from 'axis-core';
-import { FactoryDefaultType } from './factory-default';
-import { FactoryDefaultRequest } from './factory-default/FactoryDefaultRequest';
-import { RestartRequest } from './restart/RestartRequest';
+import { Connection, fetchBuilder } from 'axis-core';
+import { FactoryDefaultRequest, handleFactoryDefault } from './FactoryDefault';
+import { FactoryDefaultType } from './FactoryDefaultType';
+import { handleRestart, RestartRequest } from './Restart';
+
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for running maintenance operations on devices from Axis Communication.
@@ -18,12 +20,13 @@ export class Maintenance {
      *
      * The returned promise is resolved when the device accepts the restart request, before
      * disconnecting from the network.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async restart(): Promise<void> {
+    public async restart(init?: RequestInit): Promise<void> {
         const req = new RestartRequest(this.connection);
-        const res = await request.send();
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
+        await handleRestart(res);
     }
 
     /**
@@ -32,11 +35,12 @@ export class Maintenance {
      * The returned promise is resolved when the device accepts the factory default request, before
      * disconnecting from the network.
      * @param type The type of factory default.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async factoryDefault(type: FactoryDefaultType): Promise<void> {
+    public async factoryDefault(type: FactoryDefaultType, init?: RequestInit): Promise<void> {
         const req = new FactoryDefaultRequest(this.connection, type);
-        const res = await request.send();
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
+        await handleFactoryDefault(res, type);
     }
 }

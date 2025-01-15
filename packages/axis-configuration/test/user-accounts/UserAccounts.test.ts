@@ -93,7 +93,7 @@ describe('users', () => {
             const fn = () => userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(ExpectationError);
+            await expect(fn()).rejects.toThrow(ExpectationError);
         });
 
         test('should throw exception if user already exists', async () => {
@@ -107,7 +107,7 @@ describe('users', () => {
             const fn = () => userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(UserAlreadyExistsError);
+            await expect(fn()).rejects.toThrow(UserAlreadyExistsError);
         });
 
         // test('should throw exception if device is unresponsive', async () => {
@@ -139,7 +139,7 @@ describe('users', () => {
             const fn = () => userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
     });
 
@@ -188,7 +188,7 @@ describe('users', () => {
             const fn = () => userAccounts.getAll();
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
     });
 
@@ -270,7 +270,7 @@ describe('users', () => {
             const fn = () => userAccounts.update(user);
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
 
         //     test('should throw exception if device is unresponsive', async () => {
@@ -300,7 +300,7 @@ describe('users', () => {
             const fn = () => userAccounts.update(user);
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
     });
 
@@ -323,7 +323,7 @@ describe('users', () => {
             const fn = () => userAccounts.remove('new');
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
 
         //     test('should throw exception if device is unresponsive', async () => {
@@ -350,7 +350,7 @@ describe('users', () => {
             const fn = () => userAccounts.remove('root');
 
             // Assert
-            await expect(fn()).rejects.toBeInstanceOf(Error);
+            await expect(fn()).rejects.toThrow(Error);
         });
     });
 });

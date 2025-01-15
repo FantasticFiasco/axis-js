@@ -1,9 +1,9 @@
 import { Connection, Protocol } from 'axis-core';
-import { UpdateParametersError } from '../../../src';
-import { handleUpdateParameters, UpdateParametersRequest } from '../../../src/parameters/UpdateParameters';
+import { UpdateParametersError } from '../../src';
+import { handleUpdateParameters, UpdateParametersRequest } from '../../src/parameters/UpdateParameters';
 
 describe('update parameters request', () => {
-    const connection = new Connection(Protocol.Http, '1.2.3.4', 80, 'root', 'pass');
+    const connection = new Connection(Protocol.Http, '1.2.3.4', 1234, 'root', 'pass');
 
     test('should return URL when updating single parameter', () => {
         // Arrange
@@ -13,7 +13,7 @@ describe('update parameters request', () => {
         const got = new UpdateParametersRequest(connection, parameters);
 
         // Assert
-        expect(got.url).toBe('http://1.2.3.4/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby');
+        expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby');
     });
 
     test('should return URL when updating multiple parameters', () => {
@@ -27,7 +27,7 @@ describe('update parameters request', () => {
         const got = new UpdateParametersRequest(connection, parameters);
 
         // Assert
-        expect(got.url).toBe('http://1.2.3.4/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby');
+        expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/param.cgi?action=update&Network.Bonjour.FriendlyName=Lobby&Network.UPnP.FriendlyName=Lobby');
     });
 });
 
@@ -45,9 +45,9 @@ describe('handle update parameter should', () => {
         const res = new Response("# Error: Error setting 'root.Some.Parameter' to 'some value'!");
 
         // Act
-        const fn = handleUpdateParameters(res);
+        const fn = () => handleUpdateParameters(res);
 
-        expect(fn).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter']));
+        expect(fn()).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter']));
     });
 
     test('throw error given updating multiple parameters fail', async () => {
@@ -59,9 +59,9 @@ describe('handle update parameter should', () => {
         );
 
         // Act
-        const fn = handleUpdateParameters(res);
+        const fn = () => handleUpdateParameters(res);
 
         // Assert
-        expect(fn).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter', 'root.Some.Other.Parameter']));
+        expect(fn()).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter', 'root.Some.Other.Parameter']));
     });
 });
