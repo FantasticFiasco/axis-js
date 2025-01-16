@@ -3,12 +3,12 @@
     "extends": ["github>FantasticFiasco/renovate-config"],
     "packageRules": [
         {
-            "matchPackagePatterns": ["eslint"],
-            "groupName": "ESLint packages"
+            "groupName": "ESLint packages",
+            "matchPackageNames": ["/eslint/"]
         },
         {
-            "matchPackagePatterns": ["jest"],
-            "groupName": "Jest packages"
+            "groupName": "Jest packages",
+            "matchPackageNames": ["/jest/"]
         }
     ],
     "ignoreDeps": ["array-flatten", "dns-packet", "standard"]
