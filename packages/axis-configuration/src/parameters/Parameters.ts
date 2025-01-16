@@ -3,7 +3,7 @@ import { Connection, fetchBuilder } from 'axis-core';
 import { GetParametersRequest, handleGetParameters } from './GetParameters';
 import { handleUpdateParameters, UpdateParametersRequest } from './UpdateParameters';
 
-const fetch = fetchBuilder(global.fetch);
+export let fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible getting and setting non-dynamic parameter values. Non-dynamic parameters are

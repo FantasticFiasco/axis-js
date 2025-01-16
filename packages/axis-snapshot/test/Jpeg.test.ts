@@ -1,17 +1,17 @@
 import { Connection, Protocol } from 'axis-core';
-import { SnapshotOptions } from '../../src';
-import { BmpRequest } from '../../src/requests/BmpRequest';
+import { SnapshotOptions } from '../src';
+import { JpegRequest } from '../src/Jpeg';
 
-describe('get parameters request', () => {
+describe('jpeg request', () => {
     const connection = new Connection(Protocol.Http, '1.2.3.4', 1234, 'root', 'pass');
 
     describe('#url', () => {
         test('should return URL without options', () => {
             // Act
-            const got = new BmpRequest(connection);
+            const got = new JpegRequest(connection);
 
             // Assert
-            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp');
+            expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/jpg/image.cgi');
         });
 
         test('should return URL with empty options', () => {
@@ -19,10 +19,10 @@ describe('get parameters request', () => {
             const options: SnapshotOptions = {};
 
             // Act
-            const got = new BmpRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp');
+            expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/jpg/image.cgi');
         });
 
         test('should return URL with falsy JavaScript values', () => {
@@ -34,10 +34,10 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const got = new BmpRequest(connection, options);
+            const got = new JpegRequest(connection, options);
 
             // Assert
-            expect(got.relativePath).toBe('/axis-cgi/bitmap/image.bmp?compression=0&rotation=0&squarepixel=0');
+            expect(got.url).toBe('http://1.2.3.4:1234/axis-cgi/jpg/image.cgi?compression=0&rotation=0&squarepixel=0');
         });
 
         test('should return URL with single option', () => {
@@ -54,10 +54,10 @@ describe('get parameters request', () => {
 
             for (const { options, wantQueryString } of testCases) {
                 // Act
-                const got = new BmpRequest(connection, options);
+                const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
+                expect(got.url).toBe(`http://1.2.3.4:1234/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
@@ -73,10 +73,10 @@ describe('get parameters request', () => {
 
             for (const { options, wantQueryString } of testCases) {
                 // Act
-                const got = new BmpRequest(connection, options);
+                const got = new JpegRequest(connection, options);
 
                 // Assert
-                expect(got.relativePath).toBe(`/axis-cgi/bitmap/image.bmp?${wantQueryString}`);
+                expect(got.url).toBe(`http://1.2.3.4:1234/axis-cgi/jpg/image.cgi?${wantQueryString}`);
             }
         });
 
@@ -87,10 +87,10 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const got = new BmpRequest(connection, options);
+            const fn = () => new JpegRequest(connection, options);
 
             // Assert
-            expect(() => got.relativePath).toThrow();
+            expect(fn).toThrow();
         });
 
         test('should throw error when palette option is an empty string', () => {
@@ -100,10 +100,10 @@ describe('get parameters request', () => {
             };
 
             // Act
-            const got = new BmpRequest(connection, options);
+            const fn = () => new JpegRequest(connection, options);
 
             // Assert
-            expect(() => got.relativePath).toThrow();
+            expect(fn).toThrow();
         });
     });
 });
