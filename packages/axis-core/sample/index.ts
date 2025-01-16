@@ -5,7 +5,7 @@ const port = Number.parseInt(process.env.DEVICE_PORT ?? '80');
 const username = process.env.DEVICE_USERNAME ?? 'root';
 const password = process.env.DEVICE_PASSWORD ?? 'pass';
 
-export let fetch = fetchBuilder(global.fetch);
+const fetch = fetchBuilder(global.fetch);
 
 class GetProdShortNameRequest extends DeviceRequest {
     constructor(connection: Connection) {

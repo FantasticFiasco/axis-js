@@ -3,7 +3,7 @@ import { FactoryDefaultRequest, handleFactoryDefault } from './FactoryDefault';
 import { FactoryDefaultType } from './FactoryDefaultType';
 import { handleRestart, RestartRequest } from './Restart';
 
-export let fetch = fetchBuilder(global.fetch);
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for running maintenance operations on devices from Axis Communication.
