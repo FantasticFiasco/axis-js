@@ -1,6 +1,6 @@
 {
   "name": "axis-snapshot",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "A Node.js library written in TypeScript capable of getting snapshots from Axis Communication cameras.",
   "keywords": [
     "axis",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
-    "axis-core": "1.0.1"
+    "axis-core": "2.0.0"
   },
   "devDependencies": {
     "@types/jest": "29.5.14",
