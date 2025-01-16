@@ -62,14 +62,14 @@ export class Message {
             throw new Error('SSDP message is not specifying the method.');
         }
 
-        this.headers.set('method', method);
+        headers.set('method', method);
 
         for (const line of lines) {
             const indexOfValueSeparator = line.indexOf(':');
             const name = line.slice(0, indexOfValueSeparator).trim();
-            const value = line.slice(indexOfValueSeparator + 1, line.length).trim();
+            const value = line.slice(indexOfValueSeparator + 1).trim();
 
-            this.headers.set(name, value);
+            headers.set(name, value);
         }
 
         return headers;
