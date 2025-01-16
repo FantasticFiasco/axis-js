@@ -3,7 +3,7 @@ import { Connection, Protocol } from 'axis-core';
 import { Parameters, UpdateParametersError } from '../../src';
 import { DeviceMock } from '../DeviceMock';
 
-var device: DeviceMock;
+let device: DeviceMock;
 
 beforeAll(async () => {
     device = new DeviceMock();
