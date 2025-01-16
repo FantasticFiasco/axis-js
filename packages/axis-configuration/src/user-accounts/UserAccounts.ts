@@ -6,7 +6,7 @@ import { GetUsersRequest, handleGetUsers } from './GetUsers';
 import { handleRemoveUser, RemoveUserRequest } from './RemoveUser';
 import { handleUpdateUser, UpdateUserRequest } from './UpdateUser';
 
-export let fetch = fetchBuilder(global.fetch);
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for adding a new user account with password and group membership, modify the
