@@ -5,7 +5,7 @@ import { fetchBuilder } from '../src/fetch-builder';
 import { Protocol } from '../src/Protocol';
 import { WebServer } from './WebServer';
 
-export let fetch = fetchBuilder(global.fetch);
+const fetch = fetchBuilder(global.fetch);
 
 let webServer: WebServer;
 

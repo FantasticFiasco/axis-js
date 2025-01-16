@@ -3,7 +3,7 @@ import { BmpRequest, handleBmp } from './Bmp';
 import { handleJpeg, JpegRequest } from './Jpeg';
 import { SnapshotOptions } from './SnapshotOptions';
 
-export let fetch = fetchBuilder(global.fetch);
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for getting snapshots from a camera.
