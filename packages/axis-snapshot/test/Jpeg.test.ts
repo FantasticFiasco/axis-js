@@ -90,7 +90,7 @@ describe('jpeg request', () => {
             const fn = () => new JpegRequest(connection, options);
 
             // Assert
-            expect(fn).toThrow();
+            expect(fn).toThrow(Error);
         });
 
         test('should throw error when palette option is an empty string', () => {
@@ -103,7 +103,7 @@ describe('jpeg request', () => {
             const fn = () => new JpegRequest(connection, options);
 
             // Assert
-            expect(fn).toThrow();
+            expect(fn).toThrow(Error);
         });
     });
 });
