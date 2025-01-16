@@ -25,16 +25,19 @@ export class Device {
          * Gets the address.
          */
         readonly address: string,
+
         /**
          * Gets the link local address.
          * For more information regarding link local addresses, please see
          * [Wikipedia]{@link https://wikipedia.org/wiki/Link-local_address}.
          */
         readonly linkLocalAddress: string | undefined,
+
         /**
          * Gets the port.
          */
         readonly port: number | undefined,
+
         /**
          * Gets the MAC address. In most situations this is identical to the
          * serial number. The exceptions are the Axis products which bundle
@@ -43,25 +46,30 @@ export class Device {
          * the same MAC address.
          */
         readonly macAddress: string,
+
         /**
          * Gets the short description for the end user.
          */
         readonly friendlyName: string | undefined,
+
         /**
          * Gets the model name.
          */
         readonly modelName: string | undefined,
+
         /**
          * Gets the long model description for the end user.
          */
         readonly modelDescription: string | undefined,
+
         /**
          * Gets the model number.
          */
         readonly modelNumber: string | undefined,
+
         /**
          * Gets the URL to the web page of the device.
          */
-        readonly presentationURL: string | undefined
+        readonly presentationURL: string | undefined,
     ) {}
 }

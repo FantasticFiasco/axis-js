@@ -4,11 +4,11 @@ import { log } from '../logging';
 import { IDiscoveryProtocol } from './IDiscoveryProtocol';
 
 export class Bonjour implements IDiscoveryProtocol {
-    private readonly discovery: bonjour.Discovery;
-
     constructor() {
         this.discovery = new bonjour.Discovery();
     }
+
+    private readonly discovery: bonjour.Discovery;
 
     public start(): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ export class Bonjour implements IDiscoveryProtocol {
             undefined,
             undefined,
             undefined,
-            undefined
+            undefined,
         );
     }
 }

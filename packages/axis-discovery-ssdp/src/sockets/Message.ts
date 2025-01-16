@@ -2,17 +2,26 @@
  * Class describing a received SSDP message.
  */
 export class Message {
-    private readonly headers: { [name: string]: string } = {};
-
-    constructor(readonly remoteAddress: string, message: Buffer) {
-        this.parseHeaders(message);
+    constructor(
+        readonly remoteAddress: string,
+        message: Buffer,
+    ) {
+        this.headers = this.parseHeaders(message);
     }
+
+    private readonly headers: Map<string, string>;
 
     /**
      * Gets the HTTP method.
      */
     get method(): string {
-        return this.headers['method'];
+        const method = this.headers.get('method');
+
+        if (!method) {
+            throw new Error('Method is not specified.');
+        }
+
+        return method;
     }
 
     /**
@@ -43,27 +52,31 @@ export class Message {
         return this.getHeaderValue('NTS');
     }
 
-    private parseHeaders(message: Buffer) {
-        const headers = message.toString().trim().split('\r\n');
+    private parseHeaders(message: Buffer): Map<string, string> {
+        const headers = new Map<string, string>();
 
-        const method = headers.shift();
+        const lines = message.toString().trim().split('\r\n');
+
+        const method = lines.shift();
         if (method === undefined) {
             throw new Error('SSDP message is not specifying the method.');
         }
 
-        this.headers['method'] = method;
+        headers.set('method', method);
 
-        for (const header of headers) {
-            const indexOfValueSeparator = header.indexOf(':');
-            const name = header.slice(0, indexOfValueSeparator).trim();
-            const value = header.slice(indexOfValueSeparator + 1, header.length).trim();
+        for (const line of lines) {
+            const indexOfValueSeparator = line.indexOf(':');
+            const name = line.slice(0, indexOfValueSeparator).trim();
+            const value = line.slice(indexOfValueSeparator + 1).trim();
 
-            this.headers[name] = value;
+            headers.set(name, value);
         }
+
+        return headers;
     }
 
     private getHeaderValue(headerName: string): string {
-        const headerValue = this.headers[headerName];
+        const headerValue = this.headers.get(headerName);
 
         if (!headerValue) {
             throw new Error(`Header with name ${headerName} does not exist.`);
