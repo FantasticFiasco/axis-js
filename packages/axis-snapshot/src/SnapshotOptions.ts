@@ -10,12 +10,14 @@ export interface SnapshotOptions {
      * Remarks: You can always use the npm package axis-configuration to read parameters.
      */
     resolution?: string;
+
     /**
      * Selects the video source (1...n, "quad"). If omitted the default value camera 1 is used.
      * This argument is only valid for Axis products with more than one video source. That is
      * cameras with multiple view areas and video encoders with multiple video channels.
      */
     camera?: number | 'quad';
+
     /**
      * Adjusts the compression level (0...100) of the image. Higher values correspond to higher
      * compression, that is lower quality and smaller image size. Note: This value is internally
@@ -123,6 +125,7 @@ export interface SnapshotOptions {
         | 98
         | 99
         | 100;
+
     /**
      * Rotate the image clockwise (0, 90, 180, 270). The number of rotation alternatives in an Axis
      * product is defined by the parameter Properties.Image.Rotation.
@@ -130,6 +133,7 @@ export interface SnapshotOptions {
      * Remarks: You can always use the npm package axis-configuration to read parameters.
      */
     rotation?: 0 | 90 | 180 | 270;
+
     /**
      * The color palette to use in thermal cameras. Applicable if
      * Properties.Image.Palette.StreamPalette=yes or does not exist. See the
@@ -137,6 +141,7 @@ export interface SnapshotOptions {
      * for more information.
      */
     palette?: string;
+
     /**
      * Enable/disable (1, 0) square pixel (aspect ratio) correction. If the parameter is set to 1
      * the Axis product will adjusts the aspect ratio to make it appear as intended.

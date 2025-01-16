@@ -1,9 +1,6 @@
 import { Connection, Protocol } from 'axis-core';
-import * as fs from 'fs';
-import { promisify } from 'util';
+import { writeFile } from 'fs/promises';
 import { Snapshot } from '../src';
-
-const writeFile = promisify(fs.writeFile);
 
 const address = process.env.DEVICE_IP ?? '192.168.0.90';
 const port = Number.parseInt(process.env.DEVICE_PORT ?? '80');

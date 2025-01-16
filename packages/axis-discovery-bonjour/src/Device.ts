@@ -21,16 +21,19 @@ export class Device {
          * Gets the address.
          */
         readonly address: string,
+
         /**
          * Gets the link local address.
          * For more information regarding link local addresses, please see
          * [Wikipedia]{@link https://wikipedia.org/wiki/Link-local_address}.
          */
         readonly linkLocalAddress: string,
+
         /**
          * Gets the port.
          */
         readonly port: number,
+
         /**
          * Gets the MAC address. In most situations this is identical to the
          * serial number. The exceptions are the Axis products which bundle
@@ -39,9 +42,10 @@ export class Device {
          * the same MAC address.
          */
         readonly macAddress: string,
+
         /**
          * Gets the short description for the end user.
          */
-        readonly friendlyName: string
+        readonly friendlyName: string,
     ) {}
 }
