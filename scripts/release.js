@@ -7,7 +7,6 @@ import { basename, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { add, commit, createAnnotatedTag, pushCommitsAndTags } from './git.js';
 import { fatal } from './log.js';
-import { exec } from './process.js';
 
 const packagePrompt = async () => {
     // A package is defined by the following criteria:
@@ -69,24 +68,6 @@ const updatePackageVersion = async (packageFilePath) => {
     return newVersion;
 };
 
-/**
- * @param {string} filePath
- */
-const updateChangelog = async (filePath) => {
-    const { openChangelog } = await inquirer.prompt({
-        type: 'confirm',
-        name: 'openChangelog',
-        message: 'Do we need to update CHANGELOG.md?',
-    });
-
-    if (!openChangelog) {
-        return;
-    }
-
-    const editor = process.platform === 'win32' ? 'notepad' : process.env.EDITOR || 'vim';
-    await exec(`${editor} ${filePath}`);
-};
-
 const main = async () => {
     const p = await packagePrompt();
 
@@ -95,7 +76,6 @@ const main = async () => {
     await add(packageFilePath);
 
     const changelogFilePath = join(p.dir, 'CHANGELOG.md');
-    await updateChangelog(changelogFilePath);
     await add(changelogFilePath);
 
     await commit(`release ${p.name}@${newVersion}`);
