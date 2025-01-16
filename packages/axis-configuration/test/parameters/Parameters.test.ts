@@ -101,10 +101,10 @@ describe('#get', () => {
         const parameters = new Parameters(connection);
 
         // Act
-        const fn = () => parameters.get([]);
+        const got = parameters.get([]);
 
         // Assert
-        await expect(fn()).rejects.toThrow(ExpectationError);
+        await expect(got).rejects.toThrow(ExpectationError);
     });
 
     // test('should throw exception if device is unresponsive', async () => {
@@ -128,10 +128,10 @@ describe('#get', () => {
         const connection = createConnection('wrong-password');
         const parameters = new Parameters(connection);
 
-        const fn = () => parameters.get(['Network.Bonjour.FriendlyName']);
+        const got = parameters.get(['Network.Bonjour.FriendlyName']);
 
         // Assert
-        await expect(fn()).rejects.toThrow(Error);
+        await expect(got).rejects.toThrow(Error);
     });
 });
 
@@ -166,10 +166,10 @@ describe('#update', () => {
 
         const name = 'Unknown.Parameter';
 
-        const fn = () => parameters.update(new Map<string, string>([[name, 'Value']]));
+        const got = parameters.update(new Map<string, string>([[name, 'Value']]));
 
         // Assert
-        await expect(fn()).rejects.toThrow(new UpdateParametersError([name]));
+        await expect(got).rejects.toThrow(new UpdateParametersError([name]));
     });
 
     test('should not update multiple unknown parameters', async () => {
@@ -181,16 +181,15 @@ describe('#update', () => {
         const name2 = 'Unknown.Parameter2';
 
         // Act
-        const fn = () =>
-            parameters.update(
-                new Map<string, string>([
-                    [name1, 'Value1'],
-                    [name2, 'Value2'],
-                ]),
-            );
+        const got = parameters.update(
+            new Map<string, string>([
+                [name1, 'Value1'],
+                [name2, 'Value2'],
+            ]),
+        );
 
         // Assert
-        await expect(fn()).rejects.toThrow(new UpdateParametersError([name1, name2]));
+        await expect(got).rejects.toThrow(new UpdateParametersError([name1, name2]));
     });
 
     test('should update a mixture of known and unknown parameters', async () => {
@@ -201,16 +200,15 @@ describe('#update', () => {
         const name = 'Unknown.Parameter';
 
         // Act
-        const fn = () =>
-            parameters.update(
-                new Map<string, string>([
-                    ['Network.Bonjour.FriendlyName', 'Main Entrance'],
-                    [name, 'Value'],
-                ]),
-            );
+        const got = parameters.update(
+            new Map<string, string>([
+                ['Network.Bonjour.FriendlyName', 'Main Entrance'],
+                [name, 'Value'],
+            ]),
+        );
 
         // Assert
-        await expect(fn()).rejects.toThrow(new UpdateParametersError([name]));
+        await expect(got).rejects.toThrow(new UpdateParametersError([name]));
     });
 
     test('should throw exception if no parameters are specified', async () => {
@@ -219,10 +217,10 @@ describe('#update', () => {
         const parameters = new Parameters(connection);
 
         // Act
-        const fn = () => parameters.update(new Map<string, string>());
+        const got = parameters.update(new Map<string, string>());
 
         // Assert
-        await expect(fn()).rejects.toThrow(ExpectationError);
+        await expect(got).rejects.toThrow(ExpectationError);
     });
 
     //     test('should throw exception if device is unresponsive', async () => {
@@ -246,10 +244,10 @@ describe('#update', () => {
         const connection = createConnection('wrong-password');
         const parameters = new Parameters(connection);
 
-        const fn = () => parameters.update(new Map<string, string>([['Network.Bonjour.FriendlyName', 'Main Entrance']]));
+        const got = parameters.update(new Map<string, string>([['Network.Bonjour.FriendlyName', 'Main Entrance']]));
 
         // Arrange
-        await expect(fn()).rejects.toThrow(Error);
+        await expect(got).rejects.toThrow(Error);
     });
 });
 

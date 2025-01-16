@@ -50,10 +50,10 @@ describe('restart response', () => {
         });
 
         // Act
-        const fn = () => handleRestart(res);
+        const got = handleRestart(res);
 
         // Assert
-        await expect(fn()).rejects.toThrow(Error);
+        await expect(got).rejects.toThrow(Error);
     });
 
     test('should throw exception given error response with body', async () => {
@@ -73,9 +73,9 @@ describe('restart response', () => {
         });
 
         // Act
-        const fn = () => handleRestart(res);
+        const got = handleRestart(res);
 
         // Assert
-        await expect(fn()).rejects.toThrow(Error);
+        await expect(got).rejects.toThrow(Error);
     });
 });

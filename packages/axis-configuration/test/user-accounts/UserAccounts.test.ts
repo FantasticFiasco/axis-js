@@ -90,10 +90,10 @@ describe('users', () => {
             const user = new User('new', undefined, AccessRights.Viewer, false);
 
             // Act
-            const fn = () => userAccounts.add(user);
+            const got = userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toThrow(ExpectationError);
+            await expect(got).rejects.toThrow(ExpectationError);
         });
 
         test('should throw exception if user already exists', async () => {
@@ -104,10 +104,10 @@ describe('users', () => {
             const user = new User('root', 'secret', AccessRights.Viewer, false);
 
             // Act
-            const fn = () => userAccounts.add(user);
+            const got = userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toThrow(UserAlreadyExistsError);
+            await expect(got).rejects.toThrow(UserAlreadyExistsError);
         });
 
         // test('should throw exception if device is unresponsive', async () => {
@@ -136,10 +136,10 @@ describe('users', () => {
             const user = new User('new', 'secret', AccessRights.Viewer, false);
 
             // Act
-            const fn = () => userAccounts.add(user);
+            const got = userAccounts.add(user);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 
@@ -185,10 +185,10 @@ describe('users', () => {
             const userAccounts = new UserAccounts(connection);
 
             // Act
-            const fn = () => userAccounts.getAll();
+            const got = userAccounts.getAll();
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 
@@ -267,10 +267,10 @@ describe('users', () => {
             const user = new User('new', 'secret', AccessRights.Viewer, false);
 
             // Act
-            const fn = () => userAccounts.update(user);
+            const got = userAccounts.update(user);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
 
         //     test('should throw exception if device is unresponsive', async () => {
@@ -297,10 +297,10 @@ describe('users', () => {
             const user = new User('root', 'secret', AccessRights.Viewer, false);
 
             // Act
-            const fn = () => userAccounts.update(user);
+            const got = userAccounts.update(user);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 
@@ -320,10 +320,10 @@ describe('users', () => {
             const userAccounts = new UserAccounts(connection);
 
             // Act
-            const fn = () => userAccounts.remove('new');
+            const got = userAccounts.remove('new');
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
 
         //     test('should throw exception if device is unresponsive', async () => {
@@ -347,10 +347,10 @@ describe('users', () => {
             const userAccounts = new UserAccounts(connection);
 
             // Act
-            const fn = () => userAccounts.remove('root');
+            const got = userAccounts.remove('root');
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 });

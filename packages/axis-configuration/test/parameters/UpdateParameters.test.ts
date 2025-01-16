@@ -45,9 +45,9 @@ describe('handle update parameter should', () => {
         const res = new Response("# Error: Error setting 'root.Some.Parameter' to 'some value'!");
 
         // Act
-        const fn = () => handleUpdateParameters(res);
+        const got = handleUpdateParameters(res);
 
-        expect(fn()).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter']));
+        expect(got).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter']));
     });
 
     test('throw error given updating multiple parameters fail', async () => {
@@ -59,9 +59,9 @@ describe('handle update parameter should', () => {
         );
 
         // Act
-        const fn = () => handleUpdateParameters(res);
+        const got = handleUpdateParameters(res);
 
         // Assert
-        expect(fn()).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter', 'root.Some.Other.Parameter']));
+        expect(got).rejects.toThrow(new UpdateParametersError(['root.Some.Parameter', 'root.Some.Other.Parameter']));
     });
 });
