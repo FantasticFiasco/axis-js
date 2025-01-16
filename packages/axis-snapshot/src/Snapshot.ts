@@ -1,7 +1,9 @@
-import { Connection } from 'axis-core';
-import { BmpRequest } from './requests/BmpRequest';
-import { JpegRequest } from './requests/JpegRequest';
+import { Connection, fetchBuilder } from 'axis-core';
+import { BmpRequest, handleBmp } from './Bmp';
+import { handleJpeg, JpegRequest } from './Jpeg';
 import { SnapshotOptions } from './SnapshotOptions';
+
+export let fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for getting snapshots from a camera.
@@ -15,21 +17,27 @@ export class Snapshot {
 
     /**
      * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.
+     * @param options The BMP snapshot options.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async bmp(options?: SnapshotOptions): Promise<Buffer> {
+    public async bmp(options?: SnapshotOptions, init?: RequestInit): Promise<Buffer> {
         const req = new BmpRequest(this.connection, options);
-        const res = await request.send();
+        const res = await fetch(req, init);
 
-        return response;
+        const blob = await handleBmp(res);
+        return blob;
     }
 
     /**
      * Takes a {link https://en.wikipedia.org/wiki/JPEG|JPEG} snapshot from the camera.
+     * @param options The Jpeg snapshot options.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async jpeg(options?: SnapshotOptions): Promise<Buffer> {
+    public async jpeg(options?: SnapshotOptions, init?: RequestInit): Promise<Buffer> {
         const req = new JpegRequest(this.connection, options);
-        const res = await request.send();
+        const res = await fetch(req, init);
 
-        return response;
+        const blob = await handleJpeg(res);
+        return blob;
     }
 }

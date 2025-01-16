@@ -6,10 +6,12 @@ export enum AccessRights {
      * Viewer access rights.
      */
     Viewer,
+
     /**
      * Operator and viewer access rights.
      */
     Operator,
+
     /**
      * Administrator, operator and viewer access rights.
      */

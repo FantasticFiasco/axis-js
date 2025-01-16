@@ -17,18 +17,22 @@ export class Connection {
          * Gets the protocol to use when creating the connection.
          */
         public readonly protocol: Protocol,
+
         /**
          * Gets the address or hostname of the device.
          */
         public readonly address: string,
+
         /**
          * Gets the port of the device.
          */
         public readonly port: number,
+
         /**
          * Gets the username.
          */
         public readonly username: string,
+
         /**
          * Gets the password.
          */

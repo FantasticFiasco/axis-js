@@ -1,5 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
-import { SnapshotOptions } from '../SnapshotOptions';
+import { SnapshotOptions } from './SnapshotOptions';
 
 export function toQueryString(options?: SnapshotOptions): string | null {
     expect.toBeTrue(options?.resolution === undefined || options.resolution.length > 0, 'resolution cannot be an empty string');

@@ -15,6 +15,7 @@ export enum FactoryDefaultType {
      * factory default it is restarted as part of this function.
      */
     Partial,
+
     /**
      * All settings, including the IP addresses, are set to their factory default values. After the
      * Axis product has been reset to factory default it is restarted as part of this function.
