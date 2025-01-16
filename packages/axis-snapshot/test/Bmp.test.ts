@@ -89,7 +89,7 @@ describe('bmp request', () => {
         const fn = () => new BmpRequest(connection, options);
 
         // Assert
-        expect(fn).toThrow();
+        expect(fn).toThrow(Error);
     });
 
     test('should throw error when palette option is an empty string', () => {
@@ -102,6 +102,6 @@ describe('bmp request', () => {
         const fn = () => new BmpRequest(connection, options);
 
         // Assert
-        expect(fn).toThrow();
+        expect(fn).toThrow(Error);
     });
 });

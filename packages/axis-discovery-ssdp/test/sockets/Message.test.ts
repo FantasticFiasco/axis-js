@@ -51,7 +51,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.location).toThrow();
+            expect(() => got.location).toThrow(Error);
         });
 
         test('#usn should fail if missing', () => {
@@ -59,7 +59,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.usn).toThrow();
+            expect(() => got.usn).toThrow(Error);
         });
     });
 
@@ -85,7 +85,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.location).toThrow();
+            expect(() => got.location).toThrow(Error);
         });
 
         test('#usn', () => {
@@ -101,7 +101,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.usn).toThrow();
+            expect(() => got.usn).toThrow(Error);
         });
 
         test('#nt', () => {
@@ -117,7 +117,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.nt).toThrow();
+            expect(() => got.nt).toThrow(Error);
         });
 
         test('#nts', () => {
@@ -133,7 +133,7 @@ describe('Message', () => {
             const got = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            expect(() => got.nts).toThrow();
+            expect(() => got.nts).toThrow(Error);
         });
     });
 });
