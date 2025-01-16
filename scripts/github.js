@@ -25,7 +25,6 @@ export const createRelease = async (githubToken, owner, repo, tagName, packageNa
         repo,
         tag_name: tagName,
         name: `${packageName} release v${version}`,
-        body: 'TODO',
         draft: true,
     });
 
