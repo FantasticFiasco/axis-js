@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-## [5.0.0] - 2025-01-16
+## [5.0.1] - 2025-01-16
 
 ### :syringe: Changed
 
