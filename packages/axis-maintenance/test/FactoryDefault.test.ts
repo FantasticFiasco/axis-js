@@ -64,10 +64,10 @@ describe('factory default response', () => {
             });
 
             // Act
-            const fn = () => handleFactoryDefault(res, FactoryDefaultType.Partial);
+            const got = handleFactoryDefault(res, FactoryDefaultType.Partial);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
 
         test('should throw exception given error response with body', async () => {
@@ -87,10 +87,10 @@ describe('factory default response', () => {
             });
 
             // Act
-            const fn = () => handleFactoryDefault(res, FactoryDefaultType.Partial);
+            const got = handleFactoryDefault(res, FactoryDefaultType.Partial);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 
@@ -131,10 +131,10 @@ describe('factory default response', () => {
             });
 
             // Act
-            const fn = () => handleFactoryDefault(res, FactoryDefaultType.Hard);
+            const got = handleFactoryDefault(res, FactoryDefaultType.Hard);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
 
         test('should throw exception given error response with body', async () => {
@@ -154,10 +154,10 @@ describe('factory default response', () => {
             });
 
             // Act
-            const fn = () => handleFactoryDefault(res, FactoryDefaultType.Hard);
+            const got = handleFactoryDefault(res, FactoryDefaultType.Hard);
 
             // Assert
-            await expect(fn()).rejects.toThrow(Error);
+            await expect(got).rejects.toThrow(Error);
         });
     });
 });
