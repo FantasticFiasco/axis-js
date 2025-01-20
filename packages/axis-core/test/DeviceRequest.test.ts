@@ -1,5 +1,4 @@
-import { Connection, Protocol } from '../src';
-import { DeviceRequest } from '../src/DeviceRequest';
+import { Connection, DeviceRequest, Protocol } from '../src';
 
 class TestDeviceRequest extends DeviceRequest {
     constructor(connection: Connection, relativePath: string) {
