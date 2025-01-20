@@ -1,8 +1,5 @@
 import { URL } from 'url';
-import { Connection } from '../src/Connection';
-import { DeviceRequest } from '../src/DeviceRequest';
-import { fetchBuilder } from '../src/fetch-builder';
-import { Protocol } from '../src/Protocol';
+import { Connection, DeviceRequest, Protocol, fetchBuilder } from '../src/';
 import { WebServer } from './WebServer';
 
 const fetch = fetchBuilder(global.fetch);
