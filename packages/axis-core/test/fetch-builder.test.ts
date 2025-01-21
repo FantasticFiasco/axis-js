@@ -37,7 +37,7 @@ describe('should', () => {
 
     test('succeed given basic authentication', async () => {
         // Arrange
-        const { connection, relativePath } = parseUrl(webServer.guestUri, webServer.username, webServer.password);
+        const { connection, relativePath } = parseUrl(webServer.basicAuthUri, webServer.username, webServer.password);
         const req = new TestDeviceRequest(connection, relativePath);
 
         // Act
