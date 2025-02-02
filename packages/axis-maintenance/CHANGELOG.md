@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :syringe: Changed
+
+- `Connection` and `Protocol` are now exported from this package, meaning you don't have to import them from `axis-core`.
+
 ## [5.0.1] - 2025-01-16
 
 ### :syringe: Changed
