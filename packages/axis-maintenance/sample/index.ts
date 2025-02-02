@@ -1,5 +1,4 @@
-import { Connection, Protocol } from 'axis-core';
-import { FactoryDefaultType, Maintenance } from '../src';
+import { Connection, FactoryDefaultType, Maintenance, Protocol } from '../src';
 
 const address = process.env.DEVICE_IP ?? '192.168.0.90';
 const port = Number.parseInt(process.env.DEVICE_PORT ?? '80');

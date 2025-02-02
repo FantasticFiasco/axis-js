@@ -1,6 +1,5 @@
-import { Connection, Protocol } from 'axis-core';
 import { writeFile } from 'fs/promises';
-import { Snapshot } from '../src';
+import { Connection, Protocol, Snapshot } from '../src';
 
 const address = process.env.DEVICE_IP ?? '192.168.0.90';
 const port = Number.parseInt(process.env.DEVICE_PORT ?? '80');

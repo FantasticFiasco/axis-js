@@ -1,5 +1,4 @@
-import { Connection } from 'axis-core';
-import { AccessRights, User, UserAccounts } from '../src';
+import { AccessRights, Connection, User, UserAccounts } from '../src';
 
 // John has viewer access rights and PTZ control
 const userToAdd = new User('John', 'D2fK$xFpBaxtH@RQ5j', AccessRights.Viewer, true);
