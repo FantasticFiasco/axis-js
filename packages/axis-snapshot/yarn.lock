@@ -961,12 +961,12 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.13.2.tgz#0aa167216965ac9474ccfa83892cfb6b3e1e52ef"
   integrity sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==
 
-axis-core@2.0.0-beta.9:
-  version "2.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-2.0.0-beta.9.tgz#d316ae170bf2c9deeb08af9cc0069f0434bd927d"
-  integrity sha512-6GfNGF8svGWz/vYvdTdiZEELnvCf8WOTW3q34ud8/bSYknndYVvG7QClAQw8eGyj/mAZyMoZO95WCorW6f27cg==
+axis-core@3.0.0-beta.1:
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-3.0.0-beta.1.tgz#3e39925af9d227d65a462a0fefa59f8dade60779"
+  integrity sha512-LF8Qbc4TaWcTDTddzYaRYH3ER8YrAkoGh8FZgOylRpqOO6IoBRHZC1DCpD+eaePwR/KTb+LWK4HmhlW1kP2yzw==
   dependencies:
-    uuid "11.0.3"
+    uuid "11.0.5"
 
 babel-jest@^29.7.0:
   version "29.7.0"
@@ -3095,10 +3095,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-uuid@11.0.3:
-  version "11.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.3.tgz#248451cac9d1a4a4128033e765d137e2b2c49a3d"
-  integrity sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==
+uuid@11.0.5:
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.5.tgz#07b46bdfa6310c92c3fb3953a8720f170427fc62"
+  integrity sha512-508e6IcKLrhxKdBbcA2b4KQZlLVp2+J5UwQ6F7Drckkc5N9ZJwFa4TgWtsww9UG8fGHbm6gbV19TdM5pQ4GaIA==
 
 uuid@^3.3.2:
   version "3.4.0"
