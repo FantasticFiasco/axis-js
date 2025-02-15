@@ -5,7 +5,7 @@ export interface IHttpClient {
     /**
      * Send GET request over the network.
      * @param url Fully qualified URL.
-     * @returns Promise with response body.
+     * @returns Promise with response.
      */
-    get(url: string): Promise<string>;
+    get(url: string): Promise<Response>;
 }

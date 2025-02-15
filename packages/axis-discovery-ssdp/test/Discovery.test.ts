@@ -249,10 +249,6 @@ describe('Discovery', () => {
     });
 });
 
-// A bit of 'the chicken and the egg' here. We are forced to dynamically import 'Discovery', since
-// importing the class will trigger 'got' to load, and that will, down the line, trigger a call to
-// 'os.networkInterfaces()' which in these tests is a mocked package, and which hasn't been
-// initialized before the imports are executed.
 const createDiscovery = async () => {
     const module = await import('../src/Discovery');
     return new module.Discovery();
