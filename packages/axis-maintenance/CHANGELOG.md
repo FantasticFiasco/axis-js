@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :syringe: Changed
 
+- [BREAKING CHANGE] [#997](https://github.com/FantasticFiasco/axis-js/pull/997) With the [stabilization of the Fetch API in Node.js v21](https://nodejs.org/docs/latest-v21.x/api/globals.html#fetch), this package now uses the Fetch API instead of [got](https://github.com/sindresorhus/got). As a consequence, the following breaking changes where introduced:
+  - `Connection` class - The `options` property has been removed.
+  - `UnauthorizedError` error - Removed and replaced by the Fetch API's error handling.
+  - `RequestError` error - Removed and replaced by the Fetch API's error handling.
+  - `UnknownError` error - Removed and replaced by the Fetch API's error handling.
 - `Connection` and `Protocol` are now exported from this package, meaning you don't have to import them from `axis-core`.
 
 ## [5.0.1] - 2025-01-16
