@@ -1,10 +1,12 @@
 import * as expect from '@fantasticfiasco/expect';
-import { Connection } from 'axis-core';
+import { Connection, fetchBuilder } from 'axis-core';
 import { User } from '..';
-import { AddUserRequest } from './request-response/AddUserRequest';
-import { GetUsersRequest } from './request-response/GetUsersRequest';
-import { RemoveUserRequest } from './request-response/RemoveUserRequest';
-import { UpdateUserRequest } from './request-response/UpdateUserRequest';
+import { AddUserRequest, handleAddUser } from './AddUser';
+import { GetUsersRequest, handleGetUsers } from './GetUsers';
+import { handleRemoveUser, RemoveUserRequest } from './RemoveUser';
+import { handleUpdateUser, UpdateUserRequest } from './UpdateUser';
+
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for adding a new user account with password and group membership, modify the
@@ -20,61 +22,53 @@ export class UserAccounts {
     /**
      * Adds a new user.
      * @param user The user to add. Please note that the password must be specified.
+     * @param init The object containing any custom settings that you want to apply to the request.
      * @throws {UserAlreadyExistsError} User already exists.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
-    public async add(user: User): Promise<void> {
+    public async add(user: User, init?: RequestInit): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
-        const request = new AddUserRequest(this.connection, user);
-        const response = await request.send();
+        const req = new AddUserRequest(this.connection, user);
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
+        await handleAddUser(res);
     }
 
     /**
      * Gets all users.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async getAll(): Promise<User[]> {
-        const request = new GetUsersRequest(this.connection);
-        const response = await request.send();
+    public async getAll(init?: RequestInit): Promise<User[]> {
+        const req = new GetUsersRequest(this.connection);
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
-
-        return response.users;
+        const users = await handleGetUsers(res);
+        return users;
     }
 
     /**
      * Updates a user.
      * @param user The user to update. Please note that the password must be specified.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async update(user: User): Promise<void> {
+    public async update(user: User, init?: RequestInit): Promise<void> {
         expect.toExist(user.password, 'Password must be specified.');
 
-        const request = new UpdateUserRequest(this.connection, user);
-        const response = await request.send();
+        const req = new UpdateUserRequest(this.connection, user);
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
+        await handleUpdateUser(res);
     }
 
     /**
      * Removes a user.
      * @param username The name of the user to remove.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async remove(username: string): Promise<void> {
-        const request = new RemoveUserRequest(this.connection, username);
-        const response = await request.send();
+    public async remove(username: string, init?: RequestInit): Promise<void> {
+        const req = new RemoveUserRequest(this.connection, username);
+        const res = await fetch(req, init);
 
-        response.assertSuccess();
+        await handleRemoveUser(res);
     }
 }

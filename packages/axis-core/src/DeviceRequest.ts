@@ -1,41 +1,29 @@
-import * as got from 'got';
-import { get } from './client';
 import { Connection } from './Connection';
-import { RequestError, UnauthorizedError } from './errors';
 
 /**
- * Abstract class describing a HTTP request.
+ * Abstract class describing a HTTP(S) request sent to an Axis device.
  */
-export abstract class DeviceRequest {
+export abstract class DeviceRequest extends Request {
     /**
      * Initializes a new instance of the class.
-     * @param connection The connection description to the device.
+     * @param connection The connection to the device.
+     * @param relativePath The relative path.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    protected constructor(
-        /**
-         * Gets the connection description to the device.
-         */
-        protected readonly connection: Connection
-    ) {}
+    protected constructor(connection: Connection, relativePath: string, init?: RequestInit) {
+        super(connection.url + relativePath, init);
+
+        this.username = connection.username;
+        this.password = connection.password;
+    }
 
     /**
-     * Sends a HTTP GET request to a device.
-     * @param relativePath The relative path.
+     * Gets the username.
      */
-    protected async get(relativePath: string): Promise<Buffer> {
-        try {
-            const res = await get(this.connection, relativePath);
-            return res.body;
-        } catch (error) {
-            if (error instanceof got.HTTPError && error.response.statusCode === 401) {
-                throw new UnauthorizedError();
-            }
-            if (error instanceof got.RequestError) {
-                throw new RequestError(error, error.message, error.code);
-            }
+    public readonly username: string;
 
-            // Fallback
-            throw error;
-        }
-    }
+    /**
+     * Gets the password.
+     */
+    public readonly password: string;
 }

@@ -1,7 +1,9 @@
-import { Connection } from 'axis-core';
-import { BmpRequest } from './requests/BmpRequest';
-import { JpegRequest } from './requests/JpegRequest';
+import { Connection, fetchBuilder } from 'axis-core';
+import { BmpRequest, handleBmp } from './Bmp';
+import { handleJpeg, JpegRequest } from './Jpeg';
 import { SnapshotOptions } from './SnapshotOptions';
+
+const fetch = fetchBuilder(global.fetch);
 
 /**
  * Class responsible for getting snapshots from a camera.
@@ -15,25 +17,27 @@ export class Snapshot {
 
     /**
      * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
+     * @param options The BMP snapshot options.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async bmp(options?: SnapshotOptions): Promise<Buffer> {
-        const request = new BmpRequest(this.connection, options);
-        const response = await request.send();
+    public async bmp(options?: SnapshotOptions, init?: RequestInit): Promise<Buffer> {
+        const req = new BmpRequest(this.connection, options);
+        const res = await fetch(req, init);
 
-        return response;
+        const blob = await handleBmp(res);
+        return blob;
     }
 
     /**
      * Takes a {link https://en.wikipedia.org/wiki/JPEG|JPEG} snapshot from the camera.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
+     * @param options The Jpeg snapshot options.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    public async jpeg(options?: SnapshotOptions): Promise<Buffer> {
-        const request = new JpegRequest(this.connection, options);
-        const response = await request.send();
+    public async jpeg(options?: SnapshotOptions, init?: RequestInit): Promise<Buffer> {
+        const req = new JpegRequest(this.connection, options);
+        const res = await fetch(req, init);
 
-        return response;
+        const blob = await handleJpeg(res);
+        return blob;
     }
 }

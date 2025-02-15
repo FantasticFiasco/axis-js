@@ -1,2 +1,4 @@
-export * from './factory-default';
+export { Connection, Protocol } from 'axis-core';
+
+export * from './FactoryDefaultType';
 export * from './Maintenance';
