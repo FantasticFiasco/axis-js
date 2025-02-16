@@ -38,7 +38,6 @@
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "coverage": "jest --coverage && coveralls < coverage/lcov.info",
     "prepack": "yarn build",
     "preversion": "git add ./CHANGELOG.md",
     "postversion": "git push --follow-tags"
