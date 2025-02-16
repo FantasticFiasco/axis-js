@@ -24,32 +24,37 @@ A Node.js library written in TypeScript capable of configuring [Axis Communicati
 ## Super simple to use
 
 ```typescript
-const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'root', '32naJzkJdZ!7*HK&Dz');
+const connection = new Connection(Protocol.Http, '<ip address>', 80, '<username>', '<password>');
 
 //// Parameters
 const parameters = new Parameters(connection);
-let root: { [name: string]: string };
 
 // Get parameter
-root = await parameters.get('Network.Bonjour.FriendlyName');
+let root = await parameters.get(['Network.Bonjour.FriendlyName']);
 // => { 'Network.Bonjour.FriendlyName': 'Some name' }
 
 // Get parameters using wildcard
-root = await parameters.get('Network.*.FriendlyName');
+root = await parameters.get(['Network.*.FriendlyName']);
 // => { 'Network.Bonjour.FriendlyName': 'Some name', 'Network.UPnP.FriendlyName': 'Some name' }
 
 // Get parameter group
-root = await parameters.get('Network.Bonjour');
+root = await parameters.get(['Network.Bonjour']);
 // => { 'Network.Bonjour.FriendlyName': 'Some name', 'Network.Bonjour.Enabled': 'yes' }
 
 // Update parameter
-await parameters.update({ 'Network.Bonjour.FriendlyName': 'Some new name' });
+await parameters.update(
+  new Map<string, string>([
+    ['Network.Bonjour.FriendlyName': 'Some new name'],
+  ])
+);
 
 // Update parameters
-await parameters.update({
-    'Network.Bonjour.FriendlyName': 'Some new name',
-    'Network.UPnP.FriendlyName': 'Some new name'
-});
+await parameters.update(
+  new Map<string, string>([
+    ['Network.Bonjour.FriendlyName': 'Some new name'],
+    ['Network.UPnP.FriendlyName': 'Some new name'],
+  ])
+);
 
 //// Users
 const userAccounts = new UserAccounts(connection);
@@ -59,7 +64,7 @@ const users = await userAccounts.getAll();
 // => [ User { name: 'root', password: undefined, accessRights: 2, ptz: true } ]
 
 // Add user account
-const user = new User('John', 'D2fK$xFpBaxtH@RQ5j', AccessRights.Viewer, true);
+const user = new User('<username>', '<password>', AccessRights.Viewer, true);
 await userAccounts.add(user);
 
 // Update user account
@@ -106,20 +111,18 @@ class Parameters {
      * omitted, all the parameters of the {group} are returned. Wildcard (*) can be used filter
      * parameters. E.g. 'Network.*.FriendlyName' will return the two parameters
      * 'Network.Bonjour.FriendlyName' and 'Network.SSDP.FriendlyName'.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    get(...parameterGroups: string[]): Promise<{ [name: string]: string }>;
+    get(parameterGroups: string[], init?: RequestInit): Promise<Map<string, string>>
 
     /**
      * Updates parameters with new values.
      * @param parameters An object with parameters named '{group}.{name}' and their corresponding
      * new value.
+     * @param init The object containing any custom settings that you want to apply to the request.
      * @throws {UpdateParametersError} Updating one or many of the parameters failed.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
      */
-    update(parameters: { [name: string]: string }): Promise<void>;
+    update(parameters: Map<string, string>, init?: RequestInit): Promise<void>
 }
 ```
 
@@ -140,37 +143,30 @@ class UserAccounts {
     /**
      * Adds a new user.
      * @param user The user to add. Please note that the password must be specified.
+     * @param init The object containing any custom settings that you want to apply to the request.
      * @throws {UserAlreadyExistsError} User already exists.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
      */
-    add(user: User): Promise<void>;
+    add(user: User, init?: RequestInit): Promise<void>
 
     /**
      * Gets all users.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    getAll(): Promise<User[]>;
+    getAll(init?: RequestInit): Promise<User[]>
 
     /**
      * Updates a user.
      * @param user The user to update. Please note that the password must be specified.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    update(user: User): Promise<void>;
+    update(user: User, init?: RequestInit): Promise<void>
 
     /**
      * Removes a user.
      * @param username The name of the user to remove.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    remove(username: string): Promise<void>;
+    remove(username: string, init?: RequestInit): Promise<void>
 }
 ```
 
