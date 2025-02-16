@@ -20,7 +20,7 @@ A Node.js library written in TypeScript capable of running maintenance operation
 ## Super simple to use
 
 ```typescript
-const connection = new Connection(Protocol.Http, '192.168.1.102', 80, 'root', '32naJzkJdZ!7*HK&Dz');
+const connection = new Connection(Protocol.Http, '<ip address>', 80, '<username>', '<password>');
 const maintenance = new Maintenance(connection);
 
 // Restart
@@ -57,11 +57,9 @@ class Maintenance {
      *
      * The returned promise is resolved when the device accepts the restart request, before
      * disconnecting from the network.
-     * @throws {UnauthorizedError} User is not authorized to perform operation.
-     * @throws {RequestError} Request failed.
-     * @throws {UnknownError} Error cause is unknown.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    restart(): Promise<void>;
+    restart(init?: RequestInit): Promise<void>
 
     /**
      * Resets the Axis device to factory default.
@@ -69,7 +67,33 @@ class Maintenance {
      * The returned promise is resolved when the device accepts the factory default request, before
      * disconnecting from the network.
      * @param type The type of factory default.
+     * @param init The object containing any custom settings that you want to apply to the request.
      */
-    factoryDefault(type: FactoryDefaultType): Promise<void>;
+    factoryDefault(type: FactoryDefaultType, init?: RequestInit): Promise<void>
+}
+
+enum FactoryDefaultType {
+    /**
+     * All settings, except the following, are set to their factory default values:
+     *
+     * - The boot protocol (Network.BootProto)
+     * - The static IP address (Network.IPAddress)
+     * - The default router (Network.DefaultRouter)
+     * - The subnet mask (Network.SubnetMask)
+     * - The broadcast IP address (Network.Broadcast)
+     * - The system time
+     * - The IEEE 802.1X settings
+     *
+     * Since these parameters are not reset the Axis product can be accessed on the same address.
+     * This is especially important when using NAT router. After the Axis product has been reset to
+     * factory default it is restarted as part of this function.
+     */
+    Partial,
+
+    /**
+     * All settings, including the IP addresses, are set to their factory default values. After the
+     * Axis product has been reset to factory default it is restarted as part of this function.
+     */
+    Hard,
 }
 ```
