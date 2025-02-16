@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
-    "axis-core": "3.0.0-beta.1",
+    "axis-core": "3.0.0",
     "cheerio": "1.0.0"
   },
   "devDependencies": {

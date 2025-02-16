@@ -941,10 +941,10 @@ async@^3.2.3:
   resolved "https://registry.yarnpkg.com/async/-/async-3.2.6.tgz#1b0728e14929d51b85b449b7f06e27c1145e38ce"
   integrity sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==
 
-axis-core@3.0.0-beta.1:
-  version "3.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-3.0.0-beta.1.tgz#3e39925af9d227d65a462a0fefa59f8dade60779"
-  integrity sha512-LF8Qbc4TaWcTDTddzYaRYH3ER8YrAkoGh8FZgOylRpqOO6IoBRHZC1DCpD+eaePwR/KTb+LWK4HmhlW1kP2yzw==
+axis-core@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/axis-core/-/axis-core-3.0.0.tgz#0848e525e6ac961488159e72e7c1603a187ec135"
+  integrity sha512-GNRMfeQNNwx+BOwO7o1EljPsbwnKEZTlgBX8BWfqI4wGRhsfNtfJbEI2v8cgsrxjmZF8aiixXdKF9LeLuLhgQQ==
   dependencies:
     uuid "11.0.5"
 
