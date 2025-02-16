@@ -14,19 +14,56 @@ A Node.js library written in TypeScript containing shared behavior for the other
 - [Installation](#installation)
 - [API](#api)
   - [`Connection`](#connection)
-  - [`get`](#get)
+  - [`fetchBuilder`](#fetchbuilder)
 
 ---
 
 ## Super simple to use
 
 ```typescript
-const connection = new Connection(Protocol.Http, '<ip address>', 80, 'root', '<password>');
-const res: Response = await get(connection, '/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
+// fetchBuilder is building a version of fetch that can handle the
+// authentication protocols used by Axis devices.
+const fetch = fetchBuilder(global.fetch);
 
-console.log('Status code:', res.statusCode);
-console.log('Headers:', res.headers);
-console.log('Body:', res.body);
+// This package is exporting utility classes and methods. In this case we rely
+// on DeviceRequest to build a request that is reading the product short name.
+class GetProdShortNameRequest extends DeviceRequest {
+    constructor(connection: Connection) {
+        super(connection, '/axis-cgi/param.cgi?action=list&group=Brand.ProdShortName');
+    }
+}
+
+// This is a custom response handler that reads the response body and extracts
+// the parameter name and value from the text.
+const responseHandler = async (res: Response): Promise<{ name: string; value: string }> => {
+    if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status} ${res.statusText}`);
+    }
+
+    // text/plain;charset=UTF-8
+    const contentType = res.headers.get('content-type')?.split(';')[0];
+    if (contentType !== 'text/plain') {
+        throw new Error(`Response with invalid content type: ${contentType}`);
+    }
+
+    const text = await res.text();
+    const [name, value] = text.trim().split('=');
+
+    return { name, value };
+};
+
+// This code is creating a connection to a device and sending a request to read
+// the product short name. The response is then handled by the custom response
+// handler.
+const connection = new Connection(Protocol.Http, '<ip address>', 80, '<username>', '<password>');
+
+const req = new GetProdShortNameRequest(connection);
+const res = await fetch(req);
+
+const { name, value } = await responseHandler(res);
+
+console.log(`Status:     ${res.status}`);
+console.log(`Parameter:  ${name}=${value}`);
 ```
 
 ## Installation
@@ -74,11 +111,6 @@ class Connection {
     readonly password: string;
 
     /**
-     * Gets the options for the connection to the device.
-     */
-    readonly options?: Options | undefined;
-
-    /**
      * Gets the url.
      */
     get url(): string;
@@ -95,39 +127,15 @@ enum Protocol {
      */
     Https = 1
 }
-
-interface Options {
-    /**
-     * The HTTP or HTTPS agent used when opening the connection.
-     */
-    agent?: http.Agent | https.Agent;
-}
 ```
 
-### `get`
+### `fetchBuilder`
 
-The function `get` sends a HTTP GET request over the network to a camera described by the `connection` parameter.
-
-The function automatically authenticates with the camera using either [Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) or [Digest access authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), depending on the camera configuration.
+The `fetchBuilder` function builds a version of `fetch` that can authenticates with the camera using either [Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) or [Digest access authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), depending on the camera configuration.
 
 ```typescript
-const get: (connection: Connection, relativePath: string) => Promise<Response>;
+type Fetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
+type DeviceFetch = (input: DeviceRequest, init?: RequestInit) => Promise<Response>;
 
-interface Response {
-    /**
-     * The HTTP status code.
-     */
-    statusCode: number;
-
-    /**
-     * The response headers.
-     */
-    headers: NodeJS.Dict<string | string[]>;
-
-    /**
-     * The response body.
-     */
-    body: Buffer;
-}
-
+const fetchBuilder = (fetch: Fetch): DeviceFetch
 ```
