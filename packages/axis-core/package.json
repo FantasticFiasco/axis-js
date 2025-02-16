@@ -30,7 +30,7 @@
     "src/**/*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf --glob \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\" ./coverage",
+    "clean": "rimraf --glob \"./+(sample|src|test)/**/*.+(d.ts|d.ts.map|js|js.map)\"",
     "build": "yarn clean && tsc",
     "start": "yarn build && node ./sample/index.js",
     "test": "jest",

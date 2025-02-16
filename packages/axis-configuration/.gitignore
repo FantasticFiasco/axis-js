@@ -15,6 +15,3 @@ test/**/*.js
 # Node
 **/npm-*.log*
 **/*.tgz
-
-# Code coverage
-coverage
