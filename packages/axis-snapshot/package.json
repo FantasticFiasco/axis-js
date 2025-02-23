@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
-    "axis-core": "3.0.0"
+    "axis-core": "3.0.1"
   },
   "devDependencies": {
     "@types/jest": "29.5.14",
