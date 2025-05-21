@@ -46,7 +46,7 @@
   "dependencies": {
     "@fantasticfiasco/expect": "1.1.0",
     "array-flatten": "^2.1.0",
-    "debug": "4.4.0",
+    "debug": "4.4.1",
     "deep-equal": "^2.0.0",
     "dns-equal": "^1.0.0",
     "dns-packet": "^1.0.1",
