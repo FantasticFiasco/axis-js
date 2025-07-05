@@ -8,6 +8,6 @@
     "@octokit/rest": "21.1.1",
     "@types/node": "22.15.33",
     "inquirer": "12.6.3",
-    "prettier": "3.6.0"
+    "prettier": "3.6.2"
   }
 }
