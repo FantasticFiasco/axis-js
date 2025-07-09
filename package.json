@@ -7,7 +7,7 @@
   "devDependencies": {
     "@octokit/rest": "21.1.1",
     "@types/node": "22.16.0",
-    "inquirer": "12.6.3",
+    "inquirer": "12.7.0",
     "prettier": "3.6.2"
   }
 }
