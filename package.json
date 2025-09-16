@@ -5,7 +5,7 @@
     "release": "node ./scripts/release.js"
   },
   "devDependencies": {
-    "@octokit/rest": "21.1.1",
+    "@octokit/rest": "22.0.0",
     "@types/node": "22.18.1",
     "inquirer": "12.9.4",
     "prettier": "3.6.2"
